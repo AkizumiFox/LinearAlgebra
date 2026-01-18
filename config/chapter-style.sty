@@ -1,0 +1,200 @@
+% Chapter and Section Styling Package
+% Matching the reference template exactly
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{chapter-style}[2025/01/17 Chapter and Section Styling]
+
+% Package option for book mode
+\newif\if@bookmode
+\DeclareOption{bookmode}{\@bookmodetrue}
+\ProcessOptions\relax
+
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{anyfontsize}
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+
+% Color definitions for headers
+\definecolor{chaptercolor}{RGB}{40,40,40}
+\definecolor{chaptershadow}{RGB}{80,80,80}
+\definecolor{sectioncolor}{RGB}{60,60,60}
+
+\makeatletter
+
+% ======================================================================================
+% PREVENT PAGE BREAKS (BOOK MODE ONLY)
+% ======================================================================================
+\if@bookmode
+% Stop Quarto from forcing page breaks between chapters (files)
+\let\originclude\include
+\renewcommand{\include}[1]{\input{#1}}
+
+% Global page break control
+\AtBeginDocument{
+  \let\realclearpage\clearpage
+  \let\realcleardoublepage\cleardoublepage
+  
+  % Force page break after TOC
+  \let\oldmainmatter\mainmatter
+  \renewcommand{\mainmatter}{\oldmainmatter\realclearpage}
+  
+  % Force page break before Part
+  \let\titlesecpart\part
+  \renewcommand{\part}[1]{\realclearpage\titlesecpart{#1}}
+  
+  % Disable clearpage globally for everything else in the body
+  \renewcommand{\clearpage}{\par}
+  \renewcommand{\cleardoublepage}{\par}
+}
+
+\def\@endpart{}
+\fi
+
+% ======================================================================================
+% NUMBERING FORMAT
+% ======================================================================================
+% Initialize part to -1 ONLY if not already set by Lua or in standalone mode
+\@ifundefined{thestandalone}{
+  \setcounter{part}{-1}
+}{}
+
+% Display Level 0 (Banner)
+\renewcommand{\thepart}{\arabic{part}}
+% Display Level 1 (Section box)
+\renewcommand{\thechapter}{\thepart.\arabic{chapter}}
+% Display Level 2 (Sub-header)
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+
+% Ensure theorem numbering Level0.Level1.Serial
+\AtBeginDocument{%
+  % Robust redefinition of theorem numbering to Level0.Level1.Serial
+  % We use counters directly to avoid template conflicts
+  \@ifundefined{c@theorem}{}{%
+    \renewcommand{\thetheorem}{\arabic{part}.\arabic{chapter}.\arabic{theorem}}%
+    \@addtoreset{theorem}{chapter}%
+  }%
+  \@ifundefined{c@definition}{}{%
+    \renewcommand{\thedefinition}{\arabic{part}.\arabic{chapter}.\arabic{definition}}%
+    \@addtoreset{definition}{chapter}%
+  }%
+  \@ifundefined{c@lemma}{}{%
+    \renewcommand{\thelemma}{\arabic{part}.\arabic{chapter}.\arabic{lemma}}%
+    \@addtoreset{lemma}{chapter}%
+  }%
+  \@ifundefined{c@corollary}{}{%
+    \renewcommand{\thecorollary}{\arabic{part}.\arabic{chapter}.\arabic{corollary}}%
+    \@addtoreset{corollary}{chapter}%
+  }%
+  \@ifundefined{c@proposition}{}{%
+    \renewcommand{\theproposition}{\arabic{part}.\arabic{chapter}.\arabic{proposition}}%
+    \@addtoreset{proposition}{chapter}%
+  }%
+}
+
+% ======================================================================================
+% HELPERS
+% ======================================================================================
+\newcommand{\chapterboxheight}{3cm}
+
+% ======================================================================================
+% LEVEL 0: PART / BANNER
+% ======================================================================================
+\titleclass{\part}{straight}
+\titleformat{\part}[block]
+{\Huge\bfseries}
+{}
+{0pt}
+{%
+  \ifnum\value{part}<0
+    #1%
+  \else
+    % Numbered Chapter Banner
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[fill=white] (-5cm, 0pt) rectangle (\paperwidth+5cm, 10cm);
+        \fill[fill=chaptershadow] (0pt,-18pt) rectangle (\paperwidth, \chapterboxheight);
+        \fill[fill=chaptercolor] (-16pt,0) rectangle (\paperwidth, \chapterboxheight);
+        \node[anchor=west,yshift=55pt,xshift=-6pt] {\color{white}Chapter \thepart};
+        \node[anchor=west,xshift=4pt,yshift=18pt] {\color{white}\Huge\bfseries #1};
+    \end{tikzpicture}%
+    \vspace{\chapterboxheight}%
+    \markboth{CHAPTER \thepart. \MakeUppercase{#1}}{CHAPTER \thepart. \MakeUppercase{#1}}%
+  \fi
+}
+\titlespacing*{\part}{0pt}{80pt}{40pt}
+
+% ======================================================================================
+% LEVEL 1: CHAPTER / SECTION BOX
+% ======================================================================================
+\titleclass{\chapter}{straight}
+\titleformat{\chapter}[block]
+{\normalfont\Large\bfseries}
+{}
+{0pt}
+{%
+  \ifnum\value{part}<0
+    #1%
+  \else
+    \colorbox{sectioncolor}{\color{white}\,\thechapter\,}\quad#1%
+  \fi
+}
+\titlespacing*{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+% Handle numberless
+\titleformat{name=\chapter,numberless}[block]
+{\normalfont\Large\bfseries}
+{}
+{0pt}
+{#1}
+
+% ======================================================================================
+% LEVEL 2: SECTION
+% ======================================================================================
+\titleformat{\section}
+{\normalfont\large\bfseries}
+{\thesection}{1em}{#1}
+\titlespacing*{\section}{0pt}{2.5ex plus 0.5ex minus 0.2ex}{1.5ex plus 0.2ex}
+
+% ======================================================================================
+% TOC SPACING & COUNTER FIXES
+% ======================================================================================
+\RequirePackage{tocloft}
+\@addtoreset{chapter}{part}
+\@addtoreset{section}{chapter}
+
+\setlength{\cftpartnumwidth}{2.5em}
+\setlength{\cftchapnumwidth}{3.5em}
+\setlength{\cftsecnumwidth}{4.5em}
+
+\setlength{\cftchapindent}{1.5em}
+\setlength{\cftsecindent}{3.0em}
+
+% ======================================================================================
+% TYPOGRAPHY
+% ======================================================================================
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+% ======================================================================================
+% HEADER/FOOTER
+% ======================================================================================
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{\leftmark}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\makeatother
+
+% ======================================================================================
+% SPEED ALIASES
+% ======================================================================================
+\gdef \x {\vx}
+\gdef \y {\vy}
+\gdef \z {\vz}
+\gdef \v {\vv}
+\gdef \w {\vw}
+\gdef \b {\vb}
+
+\input

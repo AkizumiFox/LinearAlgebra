@@ -1,0 +1,88 @@
+\if@quartoenv
+\AtBeginDocument{%
+    % ==========================================================================
+    % COUNTER CONFIGURATION (chapter.section.counter format)
+    % ==========================================================================
+    % Theorem numbering format is handled in config/chapter-style.sty
+    
+    % Other environments: conjecture, example, exercise, solution, remark, algorithm - no numbers
+    % Create a custom theorem style that shows no number (not even a space for it)
+    % Note: space above is 3pt to match numbered theorem spacing (box provides innertopmargin)
+    \newtheoremstyle{unnumbered}%
+        {7pt}% space above (small, box provides most padding)
+        {0pt}% space below
+        {\normalfont}% body font
+        {}% indent
+        {\bfseries}% theorem head font
+        {.}% punctuation after theorem head
+        { }% space after theorem head (single space)
+        {\thmname{#1}\thmnote{ \normalfont(#3)}}% theorem head spec (no number)
+    %
+    % Redefine BOTH the regular and "ref" versions of unnumbered environments
+    \makeatletter
+    \@ifundefined{example}{}{%
+        \let\oldexample\example
+        \let\endoldexample\endexample
+        \theoremstyle{unnumbered}%
+        \newtheorem*{exampleunnumbered}{Example}%
+        \renewenvironment{example}{\exampleunnumbered}{\endexampleunnumbered}%
+    }%
+    \@ifundefined{exercise}{}{%
+        \let\oldexercise\exercise
+        \let\endoldexercise\endexercise
+        \theoremstyle{unnumbered}%
+        \newtheorem*{exerciseunnumbered}{Exercise}%
+        \renewenvironment{exercise}{\exerciseunnumbered}{\endexerciseunnumbered}%
+    }%
+    \@ifundefined{conjecture}{}{%
+        \let\oldconjecture\conjecture
+        \let\endoldconjecture\endconjecture
+        \theoremstyle{unnumbered}%
+        \newtheorem*{conjectureunnumbered}{Conjecture}%
+        \renewenvironment{conjecture}{\conjectureunnumbered}{\endconjectureunnumbered}%
+    }%
+    % Algorithm keeps its own independent counter (not unnumbered, not shared)
+    \@ifundefined{c@algorithm}{}{\renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}}%
+    \@ifundefined{c@algorithm}{}{\@removefromreset{algorithm}{section}\@addtoreset{algorithm}{chapter}}%
+    % Note: remark and solution may already be unnumbered (*) in Quarto, check if needed
+    %
+    % Redefine the "ref" versions (for cross-referenced environments)
+    \@ifundefined{refremark}{}{%
+        \let\oldrefremark\refremark
+        \let\oldrefremark\endrefremark
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refremarkunnumbered}{Remark}%
+        \renewenvironment{refremark}{\refremarkunnumbered}{\endrefremarkunnumbered}%
+    }%
+    \@ifundefined{refsolution}{}{%
+        \let\oldrefsolution\refsolution
+        \let\oldrefsolution\endrefsolution
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refsolutionunnumbered}{Solution}%
+        \renewenvironment{refsolution}{\refsolutionunnumbered}{\endrefsolutionunnumbered}%
+    }%
+    \@ifundefined{refconjecture}{}{%
+        \let\oldrefconjecture\refconjecture
+        \let\oldrefconjecture\endrefconjecture
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refconjectureunnumbered}{Conjecture}%
+        \renewenvironment{refconjecture}{\refconjectureunnumbered}{\endrefconjectureunnumbered}%
+    }%
+    \@ifundefined{refexample}{}{%
+        \let\oldrefexample\refexample
+        \let\oldrefexample\endrefexample
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refexampleunnumbered}{Example}%
+        \renewenvironment{refexample}{\refexampleunnumbered}{\endrefexampleunnumbered}%
+    }%
+    \@ifundefined{refexercise}{}{%
+        \let\oldrefexercise\refexercise
+        \let\oldrefexercise\endexercise
+        \theoremstyle{unnumbered}%
+        \newtheorem*{refexerciseunnumbered}{Exercise}%
+        \renewenvironment{refexercise}{\refexerciseunnumbered}{\endrefexerciseunnumbered}%
+    }%
+    % refalgorithm keeps its own independent counter
+    \@ifundefined{c@refalgorithm}{}{\renewcommand{\therefalgorithm}{\thechapter.\arabic{refalgorithm}}}%
+    \@ifundefined{c@refalgorithm}{}{\@removefromreset{refalgorithm}{section}\@addtoreset{refalgorithm}{chapter}}%
+    \makeatother

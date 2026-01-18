@@ -1,0 +1,85 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 1
+section-number: 5
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Bases
+
+We have reached what many consider the "Goldilocks Zone" of Linear Algebra.
+
+If a set is too small, it won't span the whole space—you'll be left with points you can't reach. If a set is too large, it will be linearly dependent—you'll have redundant vectors cluttering your workspace. A **basis** is a set that is "just right." It is large enough to build everything, but small enough that every piece is essential.
+
+Because a basis has no redundancy, it gives us something incredible: a **unique address system**. In an abstract vector space, it's hard to tell someone where a vector is. But once we pick a basis, every vector can be described by a unique list of numbers—its coordinates. A basis is the bridge that allows us to turn abstract geometry into concrete arithmetic.
+
+::: {#def-basis}
+## Basis
+
+A subset \( B \) of a vector space \( V \) is called a **basis** for \( V \) if:
+
+1. \( B \) is linearly independent;
+2. \( B \) spans \( V \).
+:::
+
+::: {#exm-standard-bases}
+## Standard Bases
+
+- The **standard basis** for \( F^n \) is \( \{ \ve_1, \ve_2, \dots, \ve_n \} \), where \( \ve_i \) has a 1 in the \( i \)-th position and 0 elsewhere.
+- The standard basis for \( F[x]_{\leq n} \) is \( \{ 1, x, x^2, \dots, x^n \} \).
+- The standard basis for \( M_{m \times n}(F) \) is the set of matrices \( \mE_{ij} \) having a 1 at entry \( (i,j) \) and 0 elsewhere.
+:::
+
+## Unique Representation and Coordinates
+
+The most important property of a basis is that every vector in the space has a unique "address" relative to it.
+
+::: {#thm-unique-representation}
+## Unique Representation
+
+Let \( B = \{ \vv_1, \dots, \vv_n \} \) be a basis for \( V \). Then every vector \( \vv \in V \) can be written as a linear combination of elements in \( B \) in **exactly one way**.
+:::
+
+::: {.proof}
+Since \( B \) spans \( V \), there exist scalars \( a_i \) such that \( \vv = \sum a_i \vv_i \). Suppose there is another representation \( \vv = \sum b_i \vv_i \). Then:
+\[
+	\vzero = \vv - \vv = \sum a_i \vv_i - \sum b_i \vv_i = \sum (a_i - b_i) \vv_i.
+\]
+Since \( B \) is linearly independent, we must have \( a_i - b_i = 0 \) for all \( i \), meaning \( a_i = b_i \).
+:::
+
+::: {#def-coordinates}
+## Coordinates
+
+Let \( B = \{ \vv_1, \dots, \vv_n \} \) be an **ordered** basis for \( V \). For any \( \vv \in V \), the unique scalars \( c_1, \dots, c_n \) such that \( \vv = \sum c_i \vv_i \) are called the **coordinates** of \( \vv \) with respect to \( B \). We write this as a column vector:
+\[
+	[\vv]_B = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}.
+\]
+:::
+
+::: {.remark}
+The map \( \vv \mapsto [\vv]_B \) provides a way to treat any abstract \( n \)-dimensional vector space as if it were simply \( F^n \). This is the power of a basis.
+:::

@@ -1,0 +1,88 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 0
+section-number: 1
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Sets and Notation
+
+We begin by defining the standard sets of numbers used throughout this book.
+
+::: {#def-common-number-sets}
+## Common Number Sets
+
+We use the following notation for common sets of numbers:
+
+- \( \nN \): The set of natural numbers \( \{1, 2, 3, \ldots\} \).
+- \( \nZ \): The set of integers \( \{\ldots, -2, -1, 0, 1, 2, \ldots\} \).
+- \( \nQ \): The set of rational numbers.
+- \( \nR \): The set of real numbers.
+- \( \nC \): The set of complex numbers.
+:::
+
+::: {#def-cartesian-product}
+## Cartesian Product
+
+Let \( A \) and \( B \) be sets. The **Cartesian product** of \( A \) and \( B \), denoted \( A \times B \), is the set of all ordered pairs:
+\[
+	A \times B = \{(a, b) : a \in A, b \in B\}
+\]
+More generally, for sets \( A_1, A_2, \ldots, A_n \), the Cartesian product is:
+\[
+	A_1 \times A_2 \times \cdots \times A_n = \{(a_1, a_2, \ldots, a_n) : a_i \in A_i \text{ for } i = 1, 2, \ldots, n\}
+\]
+:::
+
+::: {#def-n-tuple}
+## \( n \)-Tuple
+
+An **\( n \)-tuple** is an ordered list of \( n \) elements. For a set \( A \), the set of all \( n \)-tuples with entries from \( A \) is denoted:
+\[
+	A^n = \underbrace{A \times A \times \cdots \times A}_{n \text{ times}} = \{(a_1, a_2, \ldots, a_n) : a_i \in A \text{ for } i = 1, 2, \ldots, n\}
+\]
+:::
+
+::: {#exm-n-tuples}
+## \( n \)-Tuples
+
+Here are examples of \( n \)-tuples from various sets:
+
+1. \( \nR^2 \): The Cartesian plane. Elements include \( (0, 0) \), \( (1, 2) \), \( (-3, \pi) \), \( (\sqrt{2}, -5.7) \).
+
+2. \( \nR^3 \): 3-dimensional space. Elements include \( (1, 0, 0) \), \( (1, 2, 3) \), \( (-1, \pi, e) \).
+
+3. \( \nZ^2 \): Pairs of integers. Elements include \( (0, 0) \), \( (1, -2) \), \( (5, 7) \). Note that \( (\frac{1}{2}, 3) \notin \nZ^2 \).
+
+4. \( \nC^2 \): Pairs of complex numbers. Elements include \( (1+i, 2-3i) \), \( (i, 0) \), \( (3, 4) \).
+
+5. \( \{0, 1\}^3 \): Binary 3-tuples. This set has exactly 8 elements:
+   \[
+	\{0,1\}^3 = \{(0,0,0), (0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0), (1,1,1)\}
+\]
+
+In general, if \( A \) is a finite set with \( |A| = k \) elements, then \( A^n \) has \( k^n \) elements.
+:::

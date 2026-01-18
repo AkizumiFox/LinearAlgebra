@@ -1,0 +1,19 @@
+---
+chapter-number: 0
+---
+
+# Preliminary
+
+This chapter covers the essential background needed for the study of linear algebra. Feel free to skip sections that you are already familiar with. In addition to the following knowledge, basic knowledge of logic and proof techniques is recommended, including:
+
+- Direct proof
+- Proof by contradiction
+- Proof by induction
+- Proof by contrapositive
+- Proof by cases (exhaustion)
+- Constructive proof (constructive existence)
+- Non-constructive existence proof
+- Uniqueness proof
+- Proof of equivalence (iff proof)
+- Disproof by counterexample
+- Pigeonhole principle

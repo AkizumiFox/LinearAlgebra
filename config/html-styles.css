@@ -1,0 +1,559 @@
+/* ==========================================================================
+   Linear Algebra Notes - LaTeX-inspired Quarto Theme
+   ========================================================================== */
+
+/* --- Web Fonts --- */
+/* STIX Two Text - designed to match MathJax math fonts */
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+/* Fallback heading font */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* ==========================================================================
+   Base Typography
+   ========================================================================== */
+
+:root {
+  /* Color palette */
+  --text-color: #2c2c2c;
+  --text-muted: #5a5a5a;
+  --heading-color: #1a1a1a;
+  --link-color: #1a5fb4;
+  --border-color: #d4d4d4;
+  --bg-subtle: #fafafa;
+  
+  /* Typography scale */
+  --font-body: 'STIX Two Text', 'Times New Roman', serif;
+  --font-heading: 'STIX Two Text', 'Source Sans 3', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  
+  /* Spacing */
+  --content-width: 44rem;
+  --line-height: 1.3;
+  --paragraph-spacing: 1em;
+}
+
+/* Main content area */
+body, 
+#quarto-content,
+#quarto-content main,
+#quarto-content .content,
+.content, main, article, .quarto-section-identifier {
+  font-family: var(--font-body) !important;
+  font-size: 1.2rem !important;
+  font-weight: 400;
+  line-height: var(--line-height);
+  color: var(--text-color);
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Text spacing - applied globally */
+body {
+  letter-spacing: -0.02em;
+  word-spacing: 0.12em;
+}
+
+/* Constrain content width for readability */
+#quarto-content main {
+  max-width: var(--content-width);
+}
+
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--heading-color);
+  font-weight: 600;
+  margin-top: 1.75em;
+  margin-bottom: 0.6em;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.4em;
+  margin-top: 1em;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin-top: 2em;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Paragraphs and Text
+   ========================================================================== */
+
+p {
+  margin-bottom: var(--paragraph-spacing);
+  text-align: justify;
+  hyphens: auto;
+  font-weight: 400;
+}
+
+/* Make text weight match MathJax */
+p, li, span, div {
+  -webkit-text-stroke: 0;
+}
+
+/* First paragraph after heading - no indent */
+h1 + p, h2 + p, h3 + p, h4 + p {
+  text-indent: 0;
+}
+
+/* Strong and emphasis */
+strong, b {
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Lists - Clean and Spacious
+   ========================================================================== */
+
+ul, ol {
+  margin-top: 0.75em;
+  margin-bottom: 1.25em;
+  padding-left: 1.75em;
+}
+
+li {
+  margin-bottom: 0.6em;
+  line-height: 1.65;
+}
+
+/* Nested lists */
+li > ul, li > ol {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* Tight lists inside environments */
+.theorem li, .definition li, .example li, .exercise li,
+.lemma li, .corollary li, .proposition li {
+  margin-bottom: 0.5em;
+}
+
+/* Custom bullet styling */
+ul {
+  list-style-type: disc;
+}
+
+ul ul {
+  list-style-type: circle;
+}
+
+ul ul ul {
+  list-style-type: square;
+}
+
+/* Ordered list styling */
+ol {
+  list-style-type: decimal;
+}
+
+ol ol {
+  list-style-type: lower-alpha;
+}
+
+ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* ==========================================================================
+   Mathematics - Better Integration
+   ========================================================================== */
+
+/* Display math */
+.math.display, mjx-container[display="true"] {
+  display: block;
+  margin: -0.1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.1em 0;
+  scrollbar-width: none; /* Firefox: hide scrollbar */
+  -ms-overflow-style: none; /* IE/Edge: hide scrollbar */
+}
+
+/* WebKit: hide scrollbar by default */
+.math.display::-webkit-scrollbar,
+mjx-container[display="true"]::-webkit-scrollbar {
+  height: 0;
+  display: none;
+}
+
+/* Allow long equations to scale down slightly if needed */
+mjx-container[display="true"] {
+  max-width: 100%;
+}
+
+/* Inline math */
+.math.inline, mjx-container[display="false"] {
+  font-size: 1em;
+}
+
+/* Align math text size */
+mjx-container {
+  font-size: 100% !important;
+}
+
+/* ==========================================================================
+   Theorem Environments - Refined Style
+   ========================================================================== */
+
+/* Base style for all theorem-like environments */
+.theorem, .lemma, .corollary, .proposition, .conjecture,
+.definition, .example, .exercise {
+  padding: 0.9rem 1.1rem;
+  margin: 1.25rem 0;
+  border-radius: 3px;
+  border-left: 3px solid;
+  font-style: normal;
+  background-color: var(--bg-subtle);
+  box-shadow: none;
+}
+
+/* Content inside environments */
+.theorem p, .lemma p, .corollary p, .proposition p, .conjecture p,
+.definition p, .example p, .exercise p {
+  font-style: normal;
+  margin-bottom: 0.75em;
+  text-align: left;
+}
+
+.theorem p:last-child, .lemma p:last-child, .corollary p:last-child,
+.proposition p:last-child, .conjecture p:last-child,
+.definition p:last-child, .example p:last-child, .exercise p:last-child {
+  margin-bottom: 0;
+}
+
+/* Environment titles */
+.theorem-title, .lemma-title, .corollary-title, .proposition-title,
+.conjecture-title, .definition-title, .example-title, .exercise-title,
+.algorithm-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-style: normal;
+}
+
+/* --- Color Scheme (Subtle, Academic) --- */
+
+/* Theorem - Blue */
+.theorem {
+  background-color: #f0f5ff;
+  border-left-color: #3b6eda;
+}
+
+/* Lemma - Warm Gold */
+.lemma {
+  background-color: #fef9e7;
+  border-left-color: #d4a017;
+}
+
+/* Corollary - Teal */
+.corollary {
+  background-color: #e8f6f5;
+  border-left-color: #17a2a2;
+}
+
+/* Proposition - Indigo */
+.proposition {
+  background-color: #ededfa;
+  border-left-color: #5c5cb8;
+}
+
+/* Conjecture - Purple */
+.conjecture {
+  background-color: #f5eefa;
+  border-left-color: #8e44ad;
+}
+
+/* Definition - Rose */
+.definition {
+  background-color: #fdf2f4;
+  border-left-color: #c94c6c;
+}
+
+/* Example - Green */
+.example {
+  background-color: #eef7ee;
+  border-left-color: #3a8a3a;
+}
+
+/* Exercise - Orange */
+.exercise {
+  background-color: #fef5ea;
+  border-left-color: #d97706;
+}
+
+/* ==========================================================================
+   Proof, Remark, Solution - Minimal Style
+   ========================================================================== */
+
+.solution, .remark, .proof, .algorithm {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 2px solid #9ca3af;
+  background-color: transparent;
+  color: var(--text-body);
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.proof .proof-title,
+.solution .proof-title,
+.remark .proof-title {
+  font-family: var(--font-body);
+  font-weight: normal;
+  font-style: italic;
+  font-size: inherit;
+  display: inline;
+  margin-right: 0.5em;
+}
+
+/* Hide original content for solution and remark, replace with clean titles */
+.solution .proof-title,
+.remark .proof-title {
+  font-size: 0;
+  visibility: hidden;
+}
+.solution .proof-title::before {
+  content: "Solution. ";
+  font-size: 1.2rem;
+  font-style: italic;
+  visibility: visible;
+}
+.remark .proof-title::before {
+  content: "Remark. ";
+  font-size: 1.2rem;
+  font-style: italic;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+a:hover {
+  border-bottom-color: var(--link-color);
+}
+
+/* Cross-references */
+a.quarto-xref {
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Code and Preformatted Text
+   ========================================================================== */
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: #f3f4f6;
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+table {
+  width: 100%;
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.65em 1em;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  background-color: var(--bg-subtle);
+  border-bottom-width: 2px;
+}
+
+/* ==========================================================================
+   Blockquotes
+   ========================================================================== */
+
+blockquote {
+  margin: 1.5em 0;
+  padding: 0.75em 1.5em;
+  border-left: 3px solid var(--border-color);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Tooltips (Tippy.js)
+   ========================================================================== */
+
+.tippy-box[data-theme="quarto"] {
+  max-width: 550px !important;
+  background-color: #ffffff !important;
+  border: 1px solid #d4d4d4 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+  border-radius: 4px !important;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+
+.tippy-box[data-theme="quarto"] .tippy-content {
+  padding: 10px 14px !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  line-height: 1.6;
+}
+
+.tippy-content .math.display {
+  display: block !important;
+  margin: 0.5em 0 !important;
+}
+
+.tippy-content p {
+  margin: 0 0 0.5em 0 !important;
+}
+
+.tippy-content p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.tippy-box[data-theme="quarto"] .tippy-arrow::before {
+  border-bottom-color: #ffffff !important;
+  border-top-color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Sidebar and Navigation
+   ========================================================================== */
+
+#quarto-sidebar {
+  font-family: var(--font-heading);
+}
+
+.sidebar-title {
+  font-weight: 700;
+}
+
+.sidebar-item-text {
+  font-size: 0.9rem;
+}
+
+/* Fix PDF link clickability in right sidebar */
+#quarto-margin-sidebar {
+  position: relative;
+  z-index: 1000 !important;
+}
+
+#quarto-margin-sidebar * {
+  pointer-events: auto !important;
+}
+
+/* Prevent main content from overlapping sidebar */
+#quarto-content {
+  position: relative;
+  z-index: 1;
+}
+
+.page-columns {
+  overflow: visible !important;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  body {
+    font-size: 11pt;
+  }
+  
+  .theorem, .definition, .example, .lemma, .corollary,
+  .proposition, .conjecture, .exercise {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --line-height: 1.55;
+  }
+  
+  .content, main, article {
+    font-size: 0.9rem;
+  }
+  
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.15rem; }
+  h3 { font-size: 1rem; }
+  
+  .theorem, .lemma, .corollary, .proposition, .conjecture,
+  .definition, .example, .exercise {
+    padding: 0.75rem;
+    margin: 1rem 0;
+  }
+  
+  p {
+    text-align: left;
+    hyphens: none;
+  }
+}

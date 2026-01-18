@@ -1,0 +1,355 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 0
+section-number: 5
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Matrices
+
+::: {#def-matrix}
+## Matrix
+
+An \( m \times n \) **matrix** over a field \( F \) is a rectangular array of elements from \( F \) arranged in \( m \) rows and \( n \) columns:
+\[
+	\A = \begin{bmatrix}
+	    a_{11} & a_{12} & \cdots & a_{1n} \\
+	    a_{21} & a_{22} & \cdots & a_{2n} \\
+	    \vdots & \vdots & \ddots & \vdots \\
+	    a_{m1} & a_{m2} & \cdots & a_{mn}
+	\end{bmatrix}.
+\]
+:::
+
+::: {.remark}
+\( M_{m \times n}(F) \) is the set of all matrices of size \( m \times n \) and have entries in \( F \). In the above definition, we can write \( \A \in M_{m \times n}(F) \).
+
+Moreover, when \( m = n \), we abbreviate \( M_{m \times n}(F) \) to \( M_n(F) \).
+:::
+
+::: {#exm-matrices}
+## Matrices
+
+Here are some examples of matrices:
+\[
+	\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \in M_2(\nR), \quad
+	\begin{bmatrix} 1 & 0 & -1 \\ 2 & 5 & 3 \end{bmatrix} \in M_{2 \times 3}(\nR), \quad
+	\begin{bmatrix} i & 1+i \\ 0 & 2-i \end{bmatrix} \in M_2(\nC).
+\]
+:::
+
+## Special Matrices
+
+::: {#def-zero-matrix}
+## Zero Matrix
+
+The **zero matrix** \( \O \in M_{m \times n}(F) \) is the matrix with all entries equal to zero:
+\[
+	\O = \begin{bmatrix}
+	    0 & 0 & \cdots & 0 \\
+	    0 & 0 & \cdots & 0 \\
+	    \vdots & \vdots & \ddots & \vdots \\
+	    0 & 0 & \cdots & 0
+	\end{bmatrix}.
+\]
+:::
+
+::: {#def-identity-matrix}
+## Identity Matrix
+
+The **identity matrix** \( \I_n \in M_n(F) \) is the \( n \times n \) square matrix with \( 1 \)s on the diagonal and \( 0 \)s elsewhere:
+\[
+	\I_n = \begin{bmatrix}
+	    1 & 0 & \cdots & 0 \\
+	    0 & 1 & \cdots & 0 \\
+	    \vdots & \vdots & \ddots & \vdots \\
+	    0 & 0 & \cdots & 1
+	\end{bmatrix}.
+\]
+When the size is clear from context, we simply write \( \I \).
+:::
+
+::: {#def-transpose}
+## Transpose
+
+Let \( \A = (a_{ij}) \in M_{m \times n}(F) \). The **transpose** of \( \A \), denoted \( \A\T \), is the \( n \times m \) matrix obtained by swapping rows and columns:
+\[
+	(\A\T)_{ij} = a_{ji}.
+\]
+Visually, the rows of \( \A \) become the columns of \( \A\T \):
+\[
+	\begin{bmatrix} a & b & c \\ d & e & f \end{bmatrix}\T = \begin{bmatrix} a & d \\ b & e \\ c & f \end{bmatrix}.
+\]
+:::
+
+::: {#def-symmetric-matrix}
+## Symmetric Matrix
+
+A square matrix \( \A \in M_n(F) \) is **symmetric** if \( \A = \A\T \). This means it is symmetric across its main diagonal:
+\[
+	\A = \begin{bmatrix}
+	    a_{11} & a_{12} & \cdots & a_{1n} \\
+	    a_{12} & a_{22} & \cdots & a_{2n} \\
+	    \vdots & \vdots & \ddots & \vdots \\
+	    a_{1n} & a_{2n} & \cdots & a_{nn}
+	\end{bmatrix}.
+\]
+:::
+
+::: {#def-diagonal-matrix}
+## Diagonal Matrix
+
+A square matrix \( \A \in M_n(F) \) is **diagonal** if all entries off the main diagonal are zero:
+\[
+	\A = \begin{bmatrix}
+	    d_1 & 0 & \cdots & 0 \\
+	    0 & d_2 & \cdots & 0 \\
+	    \vdots & \vdots & \ddots & \vdots \\
+	    0 & 0 & \cdots & d_n
+	\end{bmatrix}.
+\]
+We often write \( \A = \diag(d_1, d_2, \ldots, d_n) \).
+:::
+
+::: {#def-upper-triangular}
+## Upper Triangular Matrix
+
+A square matrix \( \A \in M_n(F) \) is **upper triangular** if all entries below the main diagonal are zero:
+\[
+	\A = \begin{bmatrix}
+	    a_{11} & a_{12} & \cdots & a_{1n} \\
+	    0 & a_{22} & \cdots & a_{2n} \\
+	    \vdots & \vdots & \ddots & \vdots \\
+	    0 & 0 & \cdots & a_{nn}
+	\end{bmatrix}.
+\]
+:::
+
+::: {#exm-zero-identity}
+## Zero and Identity Matrices
+
+\[
+	\O_{2 \times 3} = \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}, \quad
+	\I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad
+	\I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}.
+\]
+:::
+
+::: {#exm-special-matrices}
+## Examples of Special Matrices
+
+- **Transpose:** \( \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}\T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix} \).
+- **Symmetric:** \( \begin{bmatrix} 1 & 2 & 3 \\ 2 & 4 & 5 \\ 3 & 5 & 6 \end{bmatrix} \) is symmetric since \( a_{ij} = a_{ji} \).
+- **Diagonal:** \( \diag(3, -1, 0) = \begin{bmatrix} 3 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{bmatrix} \).
+- **Upper Triangular:** \( \begin{bmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{bmatrix} \).
+:::
+
+## Matrix Addition
+
+::: {#def-matrix-addition}
+## Matrix Addition
+
+Let \( \A = (a_{ij}) \) and \( \B = (b_{ij}) \) be matrices in \( M_{m \times n}(F) \). Their **sum** \( \A + \B \) is the matrix \( \C = (c_{ij}) \in M_{m \times n}(F) \) where:
+\[
+	c_{ij} = a_{ij} + b_{ij}.
+\]
+:::
+
+::: {#def-additive-inverse}
+## Additive Inverse
+
+The **additive inverse** (or **negation**) of a matrix \( \A = (a_{ij}) \in M_{m \times n}(F) \) is the matrix \( -\A = (-a_{ij}) \in M_{m \times n}(F) \).
+:::
+
+::: {#exm-matrix-addition}
+## Matrix Addition
+
+Let \( \A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \) and \( \B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} \). Then:
+\[
+	\A + \B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} + \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}
+	= \begin{bmatrix} 1+5 & 2+6 \\ 3+7 & 4+8 \end{bmatrix}
+	= \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}.
+\]
+:::
+
+::: {#thm-matrix-addition-properties}
+## Properties of Matrix Addition
+
+Let \( \A, \B, \C \in M_{m \times n}(F) \). Then:
+
+1. \( \A + \B = \B + \A \) (Commutativity)
+2. \( (\A + \B) + \C = \A + (\B + \C) \) (Associativity)
+3. \( \A + \O = \A \) (Additive identity)
+4. \( \A + (-\A) = \O \) (Additive inverse)
+:::
+
+::: {.proof}
+We prove commutativity. Let \( \A = (a_{ij}) \) and \( \B = (b_{ij}) \). Then:
+\[
+	(\A + \B)_{ij} = a_{ij} + b_{ij} = b_{ij} + a_{ij} = (\B + \A)_{ij}
+\]
+where the second equality uses commutativity of addition in the underlying field. Since this holds for all \( i, j \), we have \( \A + \B = \B + \A \).
+
+The remaining properties follow similarly.
+:::
+
+## Matrix Multiplication
+
+::: {#def-matrix-multiplication}
+## Matrix Multiplication
+
+Let \( \A = (a_{ij}) \in M_{m \times n}(F) \) and \( \B = (b_{jk}) \in M_{n \times p}(F) \). Their **product** \( \A\B \) is the matrix \( \C = (c_{ik}) \in M_{m \times p}(F) \) where:
+\[
+	c_{ik} = \sum_{j=1}^{n} a_{ij} b_{jk}
+\]
+In other words, the \( (i, k) \)-entry of \( \A\B \) is the dot product of the \( i \)-th row of \( \A \) with the \( k \)-th column of \( \B \).
+:::
+
+::: {#exm-matrix-multiplication}
+## Matrix Multiplication
+
+Let \( \A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \in M_2(\nR) \) and \( \B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} \in M_2(\nR) \). We compute \( \A\B \) entry by entry:
+\begin{align*}
+    (\A\B)_{11} &= (1)(5) + (2)(7) = 5 + 14 = 19 \\
+    (\A\B)_{12} &= (1)(6) + (2)(8) = 6 + 16 = 22 \\
+    (\A\B)_{21} &= (3)(5) + (4)(7) = 15 + 28 = 43 \\
+    (\A\B)_{22} &= (3)(6) + (4)(8) = 18 + 32 = 50
+\end{align*}
+Therefore:
+\[
+	\A\B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}
+\]
+:::
+
+::: {#exm-matrix-multiplication-dimensions}
+## Matrix Multiplication with Different Dimensions
+
+Let \( \A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} \in M_{2 \times 3}(\nR) \) and \( \B = \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \in M_{3 \times 1}(\nR) \). The product \( \A\B \in M_{2 \times 1}(\nR) \):
+\[
+	\A\B = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}
+	= \begin{bmatrix} (1)(1) + (2)(0) + (3)(-1) \\ (4)(1) + (5)(0) + (6)(-1) \end{bmatrix}
+	= \begin{bmatrix} 1 + 0 - 3 \\ 4 + 0 - 6 \end{bmatrix}
+	= \begin{bmatrix} -2 \\ -2 \end{bmatrix}
+\]
+Note that \( \B\A \) is **not defined** since the number of columns of \( \B \) (which is 1) does not equal the number of rows of \( \A \) (which is 2).
+:::
+
+::: {#thm-matrix-multiplication-properties}
+## Properties of Matrix Multiplication
+
+Let \( \A, \B, \C \) be matrices of compatible dimensions. Then:
+
+1. \( (\A\B)\C = \A(\B\C) \) (Associativity)
+2. \( \A(\B + \C) = \A\B + \A\C \) (Left distributivity)
+3. \( (\A + \B)\C = \A\C + \B\C \) (Right distributivity)
+4. \( \A\I = \I\A = \A \) (Multiplicative identity)
+:::
+
+::: {.proof}
+We prove associativity. Let \( \A \) be \( m \times n \), \( \B \) be \( n \times p \), and \( \C \) be \( p \times q \). For any entry \( (i, \ell) \):
+\begin{align*}
+    ((\A\B)\C)_{i\ell} &= \sum_{k=1}^{p} (\A\B)_{ik} c_{k\ell} = \sum_{k=1}^{p} \left( \sum_{j=1}^{n} a_{ij} b_{jk} \right) c_{k\ell} \\
+    &= \sum_{k=1}^{p} \sum_{j=1}^{n} a_{ij} b_{jk} c_{k\ell} = \sum_{j=1}^{n} \sum_{k=1}^{p} a_{ij} b_{jk} c_{k\ell} \\
+    &= \sum_{j=1}^{n} a_{ij} \left( \sum_{k=1}^{p} b_{jk} c_{k\ell} \right) = \sum_{j=1}^{n} a_{ij} (\B\C)_{j\ell} \\
+    &= (\A(\B\C))_{i\ell}
+\end{align*}
+:::
+
+::: {.remark}
+Matrix multiplication is **not** commutative in general. That is, \( \A\B \neq \B\A \) even when both products are defined.
+:::
+
+## Scalar Multiplication
+
+::: {#def-scalar-multiplication}
+## Scalar Multiplication
+
+Let \( \A = (a_{ij}) \in M_{m \times n}(F) \) and \( c \in F \) be a scalar. The **scalar multiple** \( c\A \) is the matrix in \( M_{m \times n}(F) \) with entries \( (ca_{ij}) \).
+:::
+
+## Trace of a Matrix
+
+::: {#def-trace}
+## Trace
+
+Let \( \A = (a_{ij}) \in M_n(F) \) be a square matrix. The **trace** of \( \A \), denoted \( \tr(\A) \), is the sum of the entries on its main diagonal:
+\[
+	\tr(\A) = \sum_{i=1}^n a_{ii} = a_{11} + a_{22} + \cdots + a_{nn}.
+\]
+:::
+
+::: {#exm-trace}
+## Trace
+
+Let \( \A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \). Then \( \tr(\A) = 1 + 5 + 9 = 15 \).
+:::
+
+## Properties of Transpose and Trace
+
+::: {#thm-transpose-properties}
+## Properties of Transpose
+
+Let \( \A, \B \) be matrices of compatible sizes and \( c \in F \). Then:
+
+1. \( (\A\T)\T = \A \)
+2. \( (\A + \B)\T = \A\T + \B\T \)
+3. \( (c\A)\T = c\A\T \)
+4. \( (\A\B)\T = \B\T\A\T \) (Reversal rule)
+:::
+
+::: {.proof}
+We prove the reversal rule \( (\A\B)\T = \B\T\A\T \). Let \( \A \in M_{m \times n}(F) \) and \( \B \in M_{n \times p}(F) \).
+\[
+	((\A\B)\T)_{ij} = (\A\B)_{ji} = \sum_{k=1}^n a_{jk} b_{ki}
+\]
+Now consider \( \B\T\A\T \). Its \( (i, j) \)-entry is:
+\[
+	(\B\T\A\T)_{ij} = \sum_{k=1}^n (\B\T)_{ik} (\A\T)_{kj} = \sum_{k=1}^n b_{ki} a_{jk} = \sum_{k=1}^n a_{jk} b_{ki}
+\]
+Since the entries are equal for all \( i, j \), we have \( (\A\B)\T = \B\T\A\T \).
+:::
+
+::: {#thm-trace-properties}
+## Properties of Trace
+
+Let \( \A, \B \in M_n(F) \) and \( c \in F \). Then:
+
+1. \( \tr(\A + \B) = \tr(\A) + \tr(\B) \)
+2. \( \tr(c\A) = c\tr(\A) \)
+3. \( \tr(\A\T) = \tr(\A) \)
+4. \( \tr(\A\B) = \tr(\B\A) \) (Cyclic property)
+:::
+
+::: {.proof}
+We prove \( \tr(\A\B) = \tr(\B\A) \).
+\[
+	\tr(\A\B) = \sum_{i=1}^n (\A\B)_{ii} = \sum_{i=1}^n \left( \sum_{j=1}^n a_{ij} b_{ji} \right)
+\]
+Rearranging the summation:
+\[
+	\tr(\A\B) = \sum_{j=1}^n \sum_{i=1}^n b_{ji} a_{ij} = \sum_{j=1}^n (\B\A)_{jj} = \tr(\B\A).
+\]
+:::

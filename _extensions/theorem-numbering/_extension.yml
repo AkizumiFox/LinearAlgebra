@@ -1,0 +1,6 @@
+title: Theorem Numbering
+author: Custom
+version: 1.0.0
+contributes:
+  filters:
+    - theorem-numbering.lua

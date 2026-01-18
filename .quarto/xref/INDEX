@@ -1,0 +1,44 @@
+{
+  "index.qmd": {
+    "index.html": "ac10fde6"
+  },
+  "src/ch00-foundations/index.qmd": {
+    "index.html": "56d9ce06"
+  },
+  "src/ch00-foundations/01-sets-and-notation.qmd": {
+    "01-sets-and-notation.html": "674362e9"
+  },
+  "src/ch00-foundations/02-functions.qmd": {
+    "02-functions.html": "17c6fd72"
+  },
+  "src/ch00-foundations/03-polynomials.qmd": {
+    "03-polynomials.html": "cd6b8c6a"
+  },
+  "src/ch00-foundations/04-fields.qmd": {
+    "04-fields.html": "ac019c63"
+  },
+  "src/ch00-foundations/05-matrices.qmd": {
+    "05-matrices.html": "8b1457c0"
+  },
+  "src/ch01-vector-spaces/index.qmd": {
+    "index.html": "781a9bf2"
+  },
+  "src/ch01-vector-spaces/01-vector-spaces.qmd": {
+    "01-vector-spaces.html": "65be9f38"
+  },
+  "src/ch01-vector-spaces/02-subspaces.qmd": {
+    "02-subspaces.html": "a7625e14"
+  },
+  "src/ch01-vector-spaces/03-span.qmd": {
+    "03-span.html": "133df233"
+  },
+  "src/ch01-vector-spaces/04-independence.qmd": {
+    "04-independence.html": "90325158"
+  },
+  "src/ch01-vector-spaces/05-basis.qmd": {
+    "05-basis.html": "cd1c68e0"
+  },
+  "src/ch01-vector-spaces/06-dimension.qmd": {
+    "06-dimension.html": "e534ee6d"
+  }
+}

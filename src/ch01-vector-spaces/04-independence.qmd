@@ -1,0 +1,165 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 1
+section-number: 4
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Linear Independence
+
+A spanning set is like a toolbox that is guaranteed to have every tool you need. But a messy toolbox might have three different hammers that all do the same thing. In mathematics, as in engineering, we value **efficiency**.
+
+If one of the vectors in your spanning set can already be built using the others, then that vector is "dead weight"—it isn't helping you reach any new territory. We call such a set *linearly dependent*.
+
+In this section, we search for the "cleanest" possible sets. We want to know: "Is every vector in this collection actually contributing something unique, or is someone just coasting on the work of the others?"
+
+::: {#def-linear-independence}
+## Linear Independence
+
+A subset \( S \) of a vector space \( V \) is said to be **linearly independent** if for any distinct vectors \( \vv_1, \vv_2, \dots, \vv_n \in S \), the only solution to the equation:
+\[
+	a_1 \vv_1 + a_2 \vv_2 + \dots + a_n \vv_n = \vzero
+\]
+is the trivial solution \( a_1 = a_2 = \dots = a_n = 0 \).
+
+If there exists a non-trivial solution (where at least one \( a_i \neq 0 \)), then \( S \) is said to be **linearly dependent**.
+:::
+
+::: {.remark}
+Geometrically, in \( \nR^2 \), two vectors are linearly dependent if and only if they lie on the same line through the origin (one is a multiple of the other). In \( \nR^3 \), three vectors are linearly dependent if and only if they lie on the same plane through the origin.
+:::
+
+::: {#exm-linear-independence}
+## Examples of Linear Independence
+
+1. Let \( S_1 = \{(1, 2, 3), (4, 5, 6)\} \subseteq \nR^3 \). To check linear independence, suppose
+   \[
+	a(1, 2, 3) + b(4, 5, 6) = (0, 0, 0) \implies \begin{cases} a + 4b = 0 \\ 2a + 5b = 0 \\ 3a + 6b = 0 \end{cases}
+\]
+   The first two equations give \( a = -4b \) and \( 2(-4b) + 5b = 0 \implies -3b = 0 \). Thus \( a = b = 0 \), so \( S_1 \) is **linearly independent**.
+
+2. Let \( S_2 = \{(1, 2, 3), (4, 5, 6), (7, 8, 9)\} \subseteq \nR^3 \). Note that
+   \[
+	(1, 2, 3) - 2(4, 5, 6) + (7, 8, 9) = (1-8+7, 2-10+8, 3-12+9) = (0, 0, 0).
+\]
+   Since there exists a non-trivial solution, \( S_2 \) is **linearly dependent**.
+
+3. Consider \( \{2x + 1, x^2 + 3\} \) in \( \nR[x]_{\leq 2} \). Suppose
+   \[
+	a(2x + 1) + b(x^2 + 3) = 0 \implies bx^2 + 2ax + (a + 3b) = 0.
+\]
+   Comparing coefficients of \( x^2, x, 1 \), we have \( b = 0 \), \( 2a = 0 \), and \( a + 3b = 0 \). This implies \( a = b = 0 \), so the set is **linearly independent**.
+
+4. Consider \( \{ \sin x, \cos x, e^x \} \) in \( D(\nR) \). Suppose for all \( x \in \nR \):
+   \[
+	a \sin x + b \cos x + c e^x = 0.
+\]
+   Setting \( x = 0 \) gives \( b + c = 0 \). Setting \( x = \pi \) gives \( -b + c e^\pi = 0 \). Adding these gives \( c(1 + e^\pi) = 0 \), so \( c = 0 \) and hence \( b = 0 \). Finally, setting \( x = \pi/2 \) gives \( a + c e^{\pi/2} = 0 \implies a = 0 \). Thus, the set is **linearly independent**.
+:::
+
+::: {#thm-linear-dependence-lemma}
+## Linear Dependence Lemma
+
+\( \left\{ \vv_1, \vv_2, \dots, \vv_m \right\} \) is linearly dependent if and only if either \( \vv_1 = \vzero \) or for some \( r \), \( \vv_r \) is a linear combination of \( \left\{ \vv_1, \vv_2, \dots, \vv_{r - 1} \right\} \).
+:::
+
+::: {.proof}
+\( (\Rightarrow) \)
+Suppose \( S = \left\{ \vv_1, \dots, \vv_m \right\} \) is linearly dependent.
+Then there exist \( a_1, \dots, a_m \in F \), not all zero, such that
+\[
+	a_1 \vv_1 + \cdots + a_m \vv_m = \vzero .
+\]
+Let \( r \) be the largest index such that \( a_r \neq 0 \). Then
+\[
+	a_1 \vv_1 + \cdots + a_{r-1} \vv_{r-1} + a_r \vv_r = \vzero .
+\]
+So
+\[
+	a_r \vv_r = -\left( a_1 \vv_1 + \cdots + a_{r-1} \vv_{r-1} \right),
+\]
+and dividing by \( a_r \) gives
+\[
+	\vv_r = -\frac{a_1}{a_r}\vv_1 - \cdots - \frac{a_{r-1}}{a_r}\vv_{r-1}.
+\]
+Hence \( \vv_r \) is a linear combination of \( \left\{ \vv_1, \dots, \vv_{r-1} \right\} \).
+(If \( r=1 \), this says \( a_1 \vv_1 = \vzero \) with \( a_1 \neq 0 \), so \( \vv_1 = \vzero \).)
+
+\( (\Leftarrow) \)
+We prove by cases:
+
+- If \( \vv_1 = \vzero \), then
+  \[
+	1 \cdot \vv_1 + 0 \cdot \vv_2 + \cdots + 0 \cdot \vv_m = \vzero ,
+\]
+  with coefficients not all zero, so \( S \) is linearly dependent.
+
+- If for some \( r \) we have \( \vv_r \) is a linear combination of \( \left\{ \vv_1, \dots, \vv_{r-1} \right\} \),
+  then there exist scalars \( c_1, \dots, c_{r-1} \in F \) such that
+  \[
+	\vv_r = c_1 \vv_1 + \cdots + c_{r-1} \vv_{r-1}.
+\]
+  Move everything to one side:
+  \[
+	c_1 \vv_1 + \cdots + c_{r-1} \vv_{r-1} - 1 \cdot \vv_r = \vzero .
+\]
+  Extending coefficients by zeros for \( \vv_{r+1}, \dots, \vv_m \), we get a nontrivial linear combination of
+  \( \vv_1, \dots, \vv_m \) equal to \( \vzero \), so \( S \) is linearly dependent.
+:::
+
+::: {.remark}
+The above theorem can be paraphrased to:
+A set \( S = \{ \vv_1, \dots, \vv_n \} \) with \( n \geq 2 \) is linearly dependent if and only if at least one vector in \( S \) can be written as a linear combination of the others.
+:::
+
+## The Redundant Members
+
+Having the last remark in mind, we can develop an intuition that says linear independence of a set is equivalent to requiring the set containing no "redundant members." Next we want to develop the intuition saying that throwing away these "redundant members" will not change the linear span.
+
+::: {#thm-span-preservation}
+## Span Preservation
+
+Let \( S = \{ \vv_1, \dots, \vv_m, \vw \} \subseteq V \). If \( \vw \in \Span \{ \vv_1, \dots, \vv_m \} \), then
+\[
+	\Span(S) = \Span \{ \vv_1, \dots, \vv_m \}.
+\]
+:::
+
+::: {.proof}
+Let \( W = \Span \{ \vv_1, \dots, \vv_m \} \) and \( W' = \Span(S) \).
+Since \( \{ \vv_1, \dots, \vv_m \} \subseteq S \), it is clear that \( W \subseteq W' \).
+
+For the reverse inclusion, let \( \vv \in W' \). Then \( \vv \) is a linear combination of vectors in \( S \):
+\[
+	\vv = a_1 \vv_1 + \dots + a_m \vv_m + b \vw
+\]
+for some scalars \( a_i, b \). Since \( \vw \in W \), there exist scalars \( c_1, \dots, c_m \) such that \( \vw = c_1 \vv_1 + \dots + c_m \vv_m \). Substituting this into the expression for \( \vv \):
+\[
+	\vv = a_1 \vv_1 + \dots + a_m \vv_m + b(c_1 \vv_1 + \dots + c_m \vv_m) = (a_1 + bc_1)\vv_1 + \dots + (a_m + bc_m)\vv_m.
+\]
+Thus \( \vv \) is a linear combination of \( \vv_1, \dots, \vv_m \), so \( \vv \in W \). This shows \( W' \subseteq W \).
+Hence \( W' = W \).
+:::

@@ -1,0 +1,286 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 1
+section-number: 1
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Vector Spaces
+
+Why do we bother with a list of eight axioms? To a student first encountering Linear Algebra, this can feel like a bureaucratic exercise in "checking boxes." However, there is a profound beauty hidden in this formality.
+
+In our preliminary chapter, we saw three very different worlds: the world of geometric arrows (\( \nR^n \)), the world of functions (\( F[x] \)), and the world of matrices (\( M_{m \times n} \)). On the surface, an arrow is not a polynomial, and a polynomial is not a matrix. But if you squint, they all behave the same: you can add them, and you can scale them.
+
+By defining a **Vector Space** through these axioms, we are choosing to ignore what the objects *are* and focus entirely on how they *act*. If we prove a theorem using only these eight axioms, that theorem becomes a "universal law" that applies to arrows, functions, and matrices all at once. This is the power of abstraction: solve the problem once, and you solve it for every universe that obeys these rules.
+
+::: {#def-vector-space}
+## Vector Space
+
+A set \( V \) over a field \( F \) with two operations: addition \( + \) and scalar multiplication \( \cdot \)
+\[
+	+ : V \times V \to V, \quad  \cdot : F \times V \to V
+\]
+such that satisfy the following axioms for all \( \vv_1, \vv_2, \vv_3 \in V \) and \( \alpha, \beta \in F \):
+
+(VS1) \( \vv_1 + \vv_2 = \vv_2 + \vv_1 \)
+
+(VS2) \( (\vv_1 + \vv_2) + \vv_3 = \vv_1 + (\vv_2 + \vv_3) \)
+
+(VS3) There exists \( \vzero \in V \) such that \( \vv_1 + \vzero = \vv_1 \)
+
+(VS4) There exists \( \vv_1' \in V \) such that \( \vv_1 + \vv_1' = \vzero \)
+
+(VS5) \( \alpha(\vv_1 + \vv_2) = \alpha\vv_1 + \alpha\vv_2 \)
+
+(VS6) \( (\alpha+\beta)\vv_1 = \alpha\vv_1 + \beta\vv_1 \)
+
+(VS7) \( \alpha(\beta\vv_1) = (\alpha\beta)\vv_1 \)
+
+(VS8) \( 1\vv_1 = \vv_1 \)
+:::
+
+::: {.remark}
+Instead of writing \( (V, +, \cdot) \) is a vector space over \( F \), we usually simplify it to \( V \) is a vector space over \( F \), or even just \( V \) is a vector space if the context is clear.
+:::
+
+::: {.remark}
+We sometimes will abuse the name and refer to \( \vzero = \vzero_V \in V \) as the "zero vector" of the vector space \( V \). Readers should not confuse \( \vzero_V \) with the zero scalar \( 0 = 0_F \in F \) from the field \( F \).
+:::
+
+::: {#exm-vector-spaces}
+## Examples of Vector Spaces
+
+1. Most defaultly, \( F^n \) with the usual operations of \( + \) and \( \cdot \) is a vector space over \( F \).
+
+2. Working with polynomials is common too: \( F[x] \) with the usual operations of \( + \) and \( \cdot \) is a vector space over \( F \).
+
+3. Let \( \sD \) be any open interval. Let
+   \[
+	C(\sD) \coloneqq \left\{ f: \sD \to \nR: f \text{ is continuous} \right\}.
+\]
+   Then \( C(\sD) \) is a vector space over \( \nR \). The zero vector of this vector space is given by the zero polynomial \( (x \mapsto 0) \).
+
+4. Let \( F \) be any field and fix \( n \in \nN \). Then \( M_n(F) \) is a vector space over \( F \).
+
+5. The set \( V = \mathbb{R}_{>0} \) of positive real numbers forms a vector space over \( F = \mathbb{R} \) under the following operations: for \( x, y \in V \) and \( \alpha \in F \), define
+   \[
+	    x \oplus y \coloneqq xy, \quad \alpha \odot x \coloneqq x^\alpha = e^{\alpha \log x}.
+    \]
+   Under these operations, the zero vector is \( \vzero = 1 \), and the additive inverse of \( x \) is \( x^{-1} \).
+
+You can check if addition and scalar multiplication make sense and follow all axioms of vector spaces.
+:::
+
+::: {#exm-q-adjoin-sqrt2}
+## \( \nQ \) Adjoin \( \sqrt{2} \)
+
+We verify that \( \nQ(\sqrt{2}) \coloneqq \left\{  a + b \sqrt{2} : a, b \in \nQ  \right\} \) is a vector space over \( \nQ \) by checking all eight axioms. Let \( \vv_1 = a_1 + b_1\sqrt{2} \), \( \vv_2 = a_2 + b_2\sqrt{2} \), \( \vv_3 = a_3 + b_3\sqrt{2} \in \nQ(\sqrt{2}) \) and \( \alpha, \beta \in \nQ \).
+
+(VS1) \( \vv_1 + \vv_2 = (a_1 + a_2) + (b_1 + b_2)\sqrt{2} = (a_2 + a_1) + (b_2 + b_1)\sqrt{2} = \vv_2 + \vv_1 \).
+
+(VS2) \( (\vv_1 + \vv_2) + \vv_3 = (a_1 + a_2 + a_3) + (b_1 + b_2 + b_3)\sqrt{2} = \vv_1 + (\vv_2 + \vv_3) \).
+
+(VS3) The element \( \vzero = 0 + 0\sqrt{2} = 0 \in \nQ(\sqrt{2}) \) satisfies \( \vv_1 + \vzero = (a_1 + 0) + (b_1 + 0)\sqrt{2} = \vv_1 \).
+
+(VS4) For \( \vv_1 = a_1 + b_1\sqrt{2} \), define \( -\vv_1 \coloneqq (-a_1) + (-b_1)\sqrt{2} \in \nQ(\sqrt{2}) \). Then \( \vv_1 + (-\vv_1) = (a_1 - a_1) + (b_1 - b_1)\sqrt{2} = \vzero \).
+
+(VS5) \( \alpha(\vv_1 + \vv_2) = \alpha(a_1 + a_2) + \alpha(b_1 + b_2)\sqrt{2} = (\alpha a_1 + \alpha a_2) + (\alpha b_1 + \alpha b_2)\sqrt{2} = \alpha\vv_1 + \alpha\vv_2 \).
+
+(VS6) \( (\alpha + \beta)\vv_1 = (\alpha + \beta)a_1 + (\alpha + \beta)b_1\sqrt{2} = (\alpha a_1 + \beta a_1) + (\alpha b_1 + \beta b_1)\sqrt{2} = \alpha\vv_1 + \beta\vv_1 \).
+
+(VS7) \( \alpha(\beta\vv_1) = \alpha(\beta a_1 + \beta b_1\sqrt{2}) = \alpha\beta a_1 + \alpha\beta b_1\sqrt{2} = (\alpha\beta)\vv_1 \).
+
+(VS8) \( 1 \cdot \vv_1 = 1 \cdot a_1 + 1 \cdot b_1\sqrt{2} = a_1 + b_1\sqrt{2} = \vv_1 \).
+
+Thus \( \nQ(\sqrt{2}) \) is a vector space over \( \nQ \).
+:::
+
+::: {#def-vectors-scalars}
+## Vectors and Scalars
+
+Let \( V \) be a vector space over \( F \). Then the elements of \( V \) are called **vectors**, and the elements of \( F \) are called **scalars**.
+
+Additionally, \( \vzero \in V \) is called the **zero vector**, and \( (\vv_1') \) in **(VS4)** is called the **inverse element** of \( \vv_1 \).
+:::
+
+::: {#thm-left-cancellation}
+## Left Cancellation Law
+
+Let \( V \) be a vector space over \( F \), let \( \vu, \vv_1, \vv_2 \in V \). If \( \vu + \vv_1 = \vu + \vv_2 \), then \( \vv_1 = \vv_2 \).
+:::
+
+::: {.proof}
+Let \( \vu' \) be an inverse of \( \vu \).
+\begin{align*}
+\vu + \vv_1 &= \vu + \vv_2 & \text{(given)} \\
+\vu' + (\vu + \vv_1) &= \vu' + (\vu + \vv_2) & \text{(add } \vu' \text{ to both sides)} \\
+(\vu' + \vu) + \vv_1 &= (\vu' + \vu) + \vv_2 & \text{(by VS2)} \\
+\vzero + \vv_1 &= \vzero + \vv_2 & \text{(by VS4)} \\
+\vv_1 &= \vv_2 & \text{(by VS3)}
+\end{align*}
+:::
+
+::: {#thm-right-cancellation}
+## Right Cancellation Law
+
+Let \( V \) be a vector space over \( F \), let \( \vu, \vv_1, \vv_2 \in V \). If \( \vv_1 + \vu = \vv_2 + \vu \), then \( \vv_1 = \vv_2 \).
+:::
+
+::: {.proof}
+Since we have \( \vu + \vv_1 = \vu + \vv_2 \implies \vv_1 = \vv_2 \), applying **(VS1)** to it gives \( \vv_1 + \vu = \vv_2 + \vu \implies \vv_1 = \vv_2 \).
+:::
+
+::: {#thm-zero-unique}
+## Zero Vector is Unique
+
+Let \( V \) be a vector space over \( F \). The zero vector \( \vzero \in V \) is unique.
+:::
+
+::: {.proof}
+Suppose that there are two vectors \( \vzero_1, \vzero_2 \).
+\begin{align*}
+\vzero_1 + \vzero_2 &= \vzero_2 + \vzero_1 & \text{(by VS1)} \\
+\vzero_1 &= \vzero_2 & \text{(by VS3)}
+\end{align*}
+:::
+
+::: {#thm-inverse-unique}
+## Additive Inverse is Unique
+
+Let \( V \) be a vector space over \( F \). Then for every \( \vv \in V \), its additive inverse described in **(VS4)**, which is \( \vv' \), is unique.
+:::
+
+::: {.proof}
+Let \( \vv_1', \vv_2' \) both be inverses of \( \vv \). Then
+\begin{align*}
+\vv_1' &= \vv_1' + \vzero & \text{(by VS3)} \\
+&= \vv_1' + (\vv + \vv_2') & \text{(by VS4)} \\
+&= (\vv_1' + \vv) + \vv_2' & \text{(by VS2)} \\
+&= \vzero + \vv_2' & \text{(by VS4)} \\
+&= \vv_2' & \text{(by VS3)}
+\end{align*}
+:::
+
+::: {#def-additive-inverse-notation}
+## Notation of Additive Inverse
+
+The unique inverse of a vector \( \vv \in V \), for a vector space \( V \) over \( F \), will be denoted as \( -\vv \).
+:::
+
+::: {#thm-zero-scalar-mult}
+## Zero Scalar Annihilates
+
+Let \( \vv \in V \) for a vector space \( V \) over \( F \). Then \( 0 \cdot \vv = \vzero \).
+:::
+
+::: {.proof}
+Let \( \vw = 0 \cdot \vv \). We show that \( \vw = \vzero \).
+\begin{align*}
+\vw + \vw &= 0 \cdot \vv + 0 \cdot \vv \\
+&= (0 + 0) \cdot \vv & \text{(by VS6)} \\
+&= 0 \cdot \vv & \text{(arithmetic in } F \text{)} \\
+&= \vw \\
+(\vw + \vw) + (-\vw) &= \vw + (-\vw) & \text{(add } -\vw \text{ to both sides)} \\
+\vw + (\vw + (-\vw)) &= \vzero & \text{(by VS2, VS4)} \\
+\vw + \vzero &= \vzero & \text{(by VS4)} \\
+\vw &= \vzero & \text{(by VS3)}
+\end{align*}
+:::
+
+::: {#thm-negation-scalar}
+## Negation as Scalar Multiplication
+
+Let \( V \) be a vector space over \( F \) and \( \vv \in V \) be any vector. Then \( -\vv = (-1) \cdot \vv \).
+:::
+
+::: {.proof}
+We show that \( (-1) \cdot \vv \) is an additive inverse of \( \vv \):
+\begin{align*}
+\vv + (-1) \cdot \vv &= 1 \cdot \vv + (-1) \cdot \vv & \text{(by VS8)} \\
+&= (1 + (-1)) \cdot \vv & \text{(by VS6)} \\
+&= 0 \cdot \vv & \text{(arithmetic in } F \text{)} \\
+&= \vzero & \text{(by @thm-zero-scalar-mult)}
+\end{align*}
+Since \( (-1) \cdot \vv \) is an additive inverse of \( \vv \), by uniqueness we have \( -\vv = (-1) \cdot \vv \).
+:::
+
+::: {#thm-negative-scalar-dist}
+## Negative Scalar Distribution
+
+Let \( V \) be a vector space over \( F \). For any \( \alpha \in F \) and \( \vv \in V \), we have \( (-\alpha)\vv = -(\alpha\vv) \).
+:::
+
+::: {.proof}
+We show that \( (-\alpha)\vv \) is an additive inverse of \( \alpha\vv \):
+\begin{align*}
+\alpha\vv + (-\alpha)\vv &= (\alpha + (-\alpha))\vv & \text{(by VS6)} \\
+&= 0 \cdot \vv & \text{(arithmetic in } F \text{)} \\
+&= \vzero & \text{(by @thm-zero-scalar-mult)}
+\end{align*}
+Since \( (-\alpha)\vv \) is an additive inverse of \( \alpha\vv \), by uniqueness we have \( (-\alpha)\vv = -(\alpha\vv) \).
+:::
+
+::: {#thm-scalar-zero-vector}
+## Scalar Multiplication by Zero Vector
+
+Let \( V \) be a vector space over \( F \). For any scalar \( \alpha \in F \), we have \( \alpha\vzero = \vzero \).
+:::
+
+::: {.proof}
+Let \( \vw = \alpha\vzero \). We show that \( \vw = \vzero \).
+\begin{align*}
+\vw &= \alpha\vzero \\
+&= \alpha(\vzero + \vzero) & \text{(by VS3)} \\
+&= \alpha\vzero + \alpha\vzero & \text{(by VS5)} \\
+&= \vw + \vw \\
+\vw + (-\vw) &= (\vw + \vw) + (-\vw) & \text{(add } -\vw \text{ to both sides)} \\
+\vzero &= \vw + (\vw + (-\vw)) & \text{(by VS4, VS2)} \\
+\vzero &= \vw + \vzero & \text{(by VS4)} \\
+\vzero &= \vw & \text{(by VS3)}
+\end{align*}
+:::
+
+::: {#thm-zero-product}
+## Zero Product Law
+
+Let \( V \) be a vector space over \( F \), \( \vv \in V \), and \( \alpha \in F \). If \( \alpha\vv = \vzero \), then either \( \alpha = 0 \) or \( \vv = \vzero \).
+:::
+
+::: {.proof}
+Suppose \( \alpha\vv = \vzero \). We consider two cases:
+
+- **Case \( \alpha = 0 \):** Then the statement holds.
+
+- **Case \( \alpha \neq 0 \):** Since \( F \) is a field, \( \alpha \) has a multiplicative inverse \( \alpha^{-1} \).
+  \begin{align*}
+  \alpha\vv &= \vzero & \text{(given)} \\
+  \alpha^{-1}(\alpha\vv) &= \alpha^{-1}\vzero & \text{(multiply by } \alpha^{-1} \text{)} \\
+  (\alpha^{-1}\alpha)\vv &= \vzero & \text{(by VS7 and previous Theorem)} \\
+  1 \cdot \vv &= \vzero & \text{(field inverse property)} \\
+  \vv &= \vzero & \text{(by VS8)}
+  \end{align*}
+  Thus, if \( \alpha \neq 0 \), we must have \( \vv = \vzero \).
+:::
