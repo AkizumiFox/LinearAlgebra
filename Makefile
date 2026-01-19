@@ -137,6 +137,9 @@ pdfs:
 	printf '%s\n' '          \setlist[customenum,1]{label=\customenumprefix\arabic*, itemsep=1.2em}' >> "$$TEMPLATE_DIR/config.yml"; \
 	printf '%s\n' '          \newcommand{\customenumprefix}{}' >> "$$TEMPLATE_DIR/config.yml"; \
 	printf '%s\n' '          \usepackage{../../config/chapter-style}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "    include-before-body:" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "      - text: |" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "          \mainmatter" >> "$$TEMPLATE_DIR/config.yml"; \
 	\
 	\
 	cp -r config "$$TEMPLATE_DIR/"; \
