@@ -43,11 +43,7 @@ Let \( f: A \to B \) be a function.
 
 - \( f \) is **injective** (one-to-one) if \( f(a_1) = f(a_2) \) implies \( a_1 = a_2 \).
 - \( f \) is **surjective** (onto) if for every \( b \in B \), there exists \( a \in A \) such that \( f(a) = b \).
-- \( f \) is **bijective** if it is both injective and surjective.
-
-$$
-\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
-$$
+- \( f \) is **bijective** if it is both injective and surjective
 :::
 
 ::: {#exm-injective-surjective-bijective}
