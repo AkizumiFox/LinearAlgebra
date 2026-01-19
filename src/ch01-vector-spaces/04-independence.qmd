@@ -39,9 +39,9 @@ In this section, we search for the "cleanest" possible sets. We want to know: "I
 ::: {#def-linear-independence}
 ## Linear Independence
 
-A subset \( S \) of a vector space \( V \) is said to be **linearly independent** if for any distinct vectors \( \vv_1, \vv_2, \dots, \vv_n \in S \), the only solution to the equation:
+A subset \( S \) of a vector space \( V \) is said to be **linearly independent** if for any distinct vectors \( \v_1, \v_2, \dots, \v_n \in S \), the only solution to the equation:
 \[
-	a_1 \vv_1 + a_2 \vv_2 + \dots + a_n \vv_n = \vzero
+	a_1 \v_1 + a_2 \v_2 + \dots + a_n \v_n = \mathbf{0}
 \]
 is the trivial solution \( a_1 = a_2 = \dots = a_n = 0 \).
 
@@ -83,56 +83,56 @@ Geometrically, in \( \nR^2 \), two vectors are linearly dependent if and only if
 ::: {#thm-linear-dependence-lemma}
 ## Linear Dependence Lemma
 
-\( \left\{ \vv_1, \vv_2, \dots, \vv_m \right\} \) is linearly dependent if and only if either \( \vv_1 = \vzero \) or for some \( r \), \( \vv_r \) is a linear combination of \( \left\{ \vv_1, \vv_2, \dots, \vv_{r - 1} \right\} \).
+\( \left\{ \v_1, \v_2, \dots, \v_m \right\} \) is linearly dependent if and only if either \( \v_1 = \mathbf{0} \) or for some \( r \), \( \v_r \) is a linear combination of \( \left\{ \v_1, \v_2, \dots, \v_{r - 1} \right\} \).
 :::
 
 ::: {.proof}
 \( (\Rightarrow) \)
-Suppose \( S = \left\{ \vv_1, \dots, \vv_m \right\} \) is linearly dependent.
+Suppose \( S = \left\{ \v_1, \dots, \v_m \right\} \) is linearly dependent.
 Then there exist \( a_1, \dots, a_m \in F \), not all zero, such that
 \[
-	a_1 \vv_1 + \cdots + a_m \vv_m = \vzero .
+	a_1 \v_1 + \cdots + a_m \v_m = \mathbf{0} .
 \]
 Let \( r \) be the largest index such that \( a_r \neq 0 \). Then
 \[
-	a_1 \vv_1 + \cdots + a_{r-1} \vv_{r-1} + a_r \vv_r = \vzero .
+	a_1 \v_1 + \cdots + a_{r-1} \v_{r-1} + a_r \v_r = \mathbf{0} .
 \]
 So
 \[
-	a_r \vv_r = -\left( a_1 \vv_1 + \cdots + a_{r-1} \vv_{r-1} \right),
+	a_r \v_r = -\left( a_1 \v_1 + \cdots + a_{r-1} \v_{r-1} \right),
 \]
 and dividing by \( a_r \) gives
 \[
-	\vv_r = -\frac{a_1}{a_r}\vv_1 - \cdots - \frac{a_{r-1}}{a_r}\vv_{r-1}.
+	\v_r = -\frac{a_1}{a_r}\v_1 - \cdots - \frac{a_{r-1}}{a_r}\v_{r-1}.
 \]
-Hence \( \vv_r \) is a linear combination of \( \left\{ \vv_1, \dots, \vv_{r-1} \right\} \).
-(If \( r=1 \), this says \( a_1 \vv_1 = \vzero \) with \( a_1 \neq 0 \), so \( \vv_1 = \vzero \).)
+Hence \( \v_r \) is a linear combination of \( \left\{ \v_1, \dots, \v_{r-1} \right\} \).
+(If \( r=1 \), this says \( a_1 \v_1 = \mathbf{0} \) with \( a_1 \neq 0 \), so \( \v_1 = \mathbf{0} \).)
 
 \( (\Leftarrow) \)
 We prove by cases:
 
-- If \( \vv_1 = \vzero \), then
+- If \( \v_1 = \mathbf{0} \), then
   \[
-	1 \cdot \vv_1 + 0 \cdot \vv_2 + \cdots + 0 \cdot \vv_m = \vzero ,
+	1 \cdot \v_1 + 0 \cdot \v_2 + \cdots + 0 \cdot \v_m = \mathbf{0} ,
 \]
   with coefficients not all zero, so \( S \) is linearly dependent.
 
-- If for some \( r \) we have \( \vv_r \) is a linear combination of \( \left\{ \vv_1, \dots, \vv_{r-1} \right\} \),
+- If for some \( r \) we have \( \v_r \) is a linear combination of \( \left\{ \v_1, \dots, \v_{r-1} \right\} \),
   then there exist scalars \( c_1, \dots, c_{r-1} \in F \) such that
   \[
-	\vv_r = c_1 \vv_1 + \cdots + c_{r-1} \vv_{r-1}.
+	\v_r = c_1 \v_1 + \cdots + c_{r-1} \v_{r-1}.
 \]
   Move everything to one side:
   \[
-	c_1 \vv_1 + \cdots + c_{r-1} \vv_{r-1} - 1 \cdot \vv_r = \vzero .
+	c_1 \v_1 + \cdots + c_{r-1} \v_{r-1} - 1 \cdot \v_r = \mathbf{0} .
 \]
-  Extending coefficients by zeros for \( \vv_{r+1}, \dots, \vv_m \), we get a nontrivial linear combination of
-  \( \vv_1, \dots, \vv_m \) equal to \( \vzero \), so \( S \) is linearly dependent.
+  Extending coefficients by zeros for \( \v_{r+1}, \dots, \v_m \), we get a nontrivial linear combination of
+  \( \v_1, \dots, \v_m \) equal to \( \mathbf{0} \), so \( S \) is linearly dependent.
 :::
 
 ::: {.remark}
 The above theorem can be paraphrased to:
-A set \( S = \{ \vv_1, \dots, \vv_n \} \) with \( n \geq 2 \) is linearly dependent if and only if at least one vector in \( S \) can be written as a linear combination of the others.
+A set \( S = \{ \v_1, \dots, \v_n \} \) with \( n \geq 2 \) is linearly dependent if and only if at least one vector in \( S \) can be written as a linear combination of the others.
 :::
 
 ## The Redundant Members
@@ -142,24 +142,24 @@ Having the last remark in mind, we can develop an intuition that says linear ind
 ::: {#thm-span-preservation}
 ## Span Preservation
 
-Let \( S = \{ \vv_1, \dots, \vv_m, \vw \} \subseteq V \). If \( \vw \in \Span \{ \vv_1, \dots, \vv_m \} \), then
+Let \( S = \{ \v_1, \dots, \v_m, \w \} \subseteq V \). If \( \w \in \Span \{ \v_1, \dots, \v_m \} \), then
 \[
-	\Span(S) = \Span \{ \vv_1, \dots, \vv_m \}.
+	\Span(S) = \Span \{ \v_1, \dots, \v_m \}.
 \]
 :::
 
 ::: {.proof}
-Let \( W = \Span \{ \vv_1, \dots, \vv_m \} \) and \( W' = \Span(S) \).
-Since \( \{ \vv_1, \dots, \vv_m \} \subseteq S \), it is clear that \( W \subseteq W' \).
+Let \( W = \Span \{ \v_1, \dots, \v_m \} \) and \( W' = \Span(S) \).
+Since \( \{ \v_1, \dots, \v_m \} \subseteq S \), it is clear that \( W \subseteq W' \).
 
-For the reverse inclusion, let \( \vv \in W' \). Then \( \vv \) is a linear combination of vectors in \( S \):
+For the reverse inclusion, let \( \v \in W' \). Then \( \v \) is a linear combination of vectors in \( S \):
 \[
-	\vv = a_1 \vv_1 + \dots + a_m \vv_m + b \vw
+	\v = a_1 \v_1 + \dots + a_m \v_m + b \w
 \]
-for some scalars \( a_i, b \). Since \( \vw \in W \), there exist scalars \( c_1, \dots, c_m \) such that \( \vw = c_1 \vv_1 + \dots + c_m \vv_m \). Substituting this into the expression for \( \vv \):
+for some scalars \( a_i, b \). Since \( \w \in W \), there exist scalars \( c_1, \dots, c_m \) such that \( \w = c_1 \v_1 + \dots + c_m \v_m \). Substituting this into the expression for \( \v \):
 \[
-	\vv = a_1 \vv_1 + \dots + a_m \vv_m + b(c_1 \vv_1 + \dots + c_m \vv_m) = (a_1 + bc_1)\vv_1 + \dots + (a_m + bc_m)\vv_m.
+	\v = a_1 \v_1 + \dots + a_m \v_m + b(c_1 \v_1 + \dots + c_m \v_m) = (a_1 + bc_1)\v_1 + \dots + (a_m + bc_m)\v_m.
 \]
-Thus \( \vv \) is a linear combination of \( \vv_1, \dots, \vv_m \), so \( \vv \in W \). This shows \( W' \subseteq W \).
+Thus \( \v \) is a linear combination of \( \v_1, \dots, \v_m \), so \( \v \in W \). This shows \( W' \subseteq W \).
 Hence \( W' = W \).
 :::

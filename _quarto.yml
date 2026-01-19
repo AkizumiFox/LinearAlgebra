@@ -48,7 +48,7 @@ format:
     theme: cosmo
     toc: true
     number-sections: true
-    code-tools: true
+    code-tools: false
     html-math-method: mathjax
     css: config/html-styles.css
     include-after-body:
@@ -258,38 +258,8 @@ format:
               // ==========================================
               // 4. Fix tooltip (hover preview) numbering
               // ==========================================
-              // Use MutationObserver to watch for tooltip elements
-              var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                  mutation.addedNodes.forEach(function(node) {
-                    if (node.nodeType === Node.ELEMENT_NODE) {
-                      // Check if this is a tippy tooltip container
-                      var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-                      if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-                        tippyContent = node;
-                      }
-                      if (tippyContent) {
-                        fixTooltipContent(tippyContent);
-                      }
-                      // Also check children for tippy-content
-                      if (node.querySelectorAll) {
-                        node.querySelectorAll('.tippy-content').forEach(function(tc) {
-                          fixTooltipContent(tc);
-                        });
-                      }
-                    }
-                  });
-                });
-              });
+              // (Moved to global scope below to handle outside of fetch and with safety checks)
               
-              observer.observe(document.body, { childList: true, subtree: true });
-            
-              // Fallback: Aggressive poll to fix existing tooltips
-              setInterval(function() {
-                document.querySelectorAll('.tippy-content').forEach(function(tc) {
-                   fixTooltipContent(tc);
-                });
-              }, 100);
             })
             .catch(function(err) {
               console.log('Could not load theorem map:', err);
@@ -301,18 +271,33 @@ format:
           
           // MOVED OUTSIDE FETCH:
           // Use MutationObserver for robust tooltip handling
+          
+          // Track modal state
+          var isModalOpen = false;
+          
+          // Bootstrap 5 modal events
+          document.addEventListener('show.bs.modal', function () { isModalOpen = true; });
+          document.addEventListener('hidden.bs.modal', function () { isModalOpen = false; });
+          
           var observer = new MutationObserver(function(mutations) {
+             // Optimization: Don't run if a modal is open (prevents freezing code-tools)
+             if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+             
              mutations.forEach(function(mutation) {
                mutation.addedNodes.forEach(function(node) {
                  if (node.nodeType === Node.ELEMENT_NODE) {
-                   var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-                   if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-                     tippyContent = node;
-                   }
-                   if (tippyContent) fixTooltipContent(tippyContent);
-                   
-                   if (node.querySelectorAll) {
-                     node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+                   // Targeted check: is this a tippy tooltip or does it contain one?
+                   if (node.classList && node.classList.contains('tippy-box')) {
+                     var tc = node.querySelector('.tippy-content');
+                     if (tc) fixTooltipContent(tc);
+                   } else if (node.classList && node.classList.contains('tippy-content')) {
+                     fixTooltipContent(node);
+                   } else if (node.querySelectorAll) {
+                     // Only query if the node is a likely container for tooltips
+                     // This avoids scanning massive blocks of code/text
+                     if (node.classList && (node.classList.contains('tippy-box') || node.id === 'quarto-ref-popover')) {
+                       node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+                     }
                    }
                  }
                });
@@ -320,22 +305,32 @@ format:
           });
           observer.observe(document.body, { childList: true, subtree: true });
             
-          // Aggressive Fallback
+          // Fallback - Pause during modals
           setInterval(function() {
-             document.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
-          }, 100);
+             if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+             
+             document.querySelectorAll('.tippy-content:not([data-numbering-fixed])').forEach(function(tc) { 
+               fixTooltipContent(tc); 
+             });
+          }, 500);
 
           // Function to fix numbering in tooltip content
           function fixTooltipContent(tooltipContent) {
-            // Remove dataset check aka FORCE FIX every time
-            // tooltipContent.dataset.numberingFixed = 'true'; 
+            if (!tooltipContent || tooltipContent.dataset.numberingFixed) return;
+            
+            // Mark as fixed BEFORE modifying to prevent infinite mutation loops
+            tooltipContent.dataset.numberingFixed = 'true'; 
             
             // Find theorem-title elements in tooltip
             var titles = tooltipContent.querySelectorAll('.theorem-title strong, .theorem-title');
             titles.forEach(function(title) {
               // Just strip the number entirely: "Theorem 9.1 (Name)" -> "Theorem (Name)"
               // Regex matches space + number pattern (e.g. " 9.1", " 1.2.3")
-              title.innerHTML = title.innerHTML.replace(/\s+\d+(\.\d+)*/, '');
+              var originalHTML = title.innerHTML;
+              var newHTML = originalHTML.replace(/\s+\d+(\.\d+)*/, '');
+              if (newHTML !== originalHTML) {
+                title.innerHTML = newHTML;
+              }
             });
           }
         });

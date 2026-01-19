@@ -35,9 +35,9 @@ In the previous section, we studied subspaces. A natural question arises: given 
 ::: {#def-linear-combination}
 ## Linear Combination
 
-Let \( V \) be a vector space over \( F \), \( S = \{ \vv_1, \vv_2, \dots, \vv_m \} \) be a subset of \( V \). Then the expression
+Let \( V \) be a vector space over \( F \), \( S = \{ \v_1, \v_2, \dots, \v_m \} \) be a subset of \( V \). Then the expression
 \[
-	a_1 \vv_1 + a_2 \vv_2 + \cdots + a_m \vv_m
+	a_1 \v_1 + a_2 \v_2 + \cdots + a_m \v_m
 \]
 is called a **linear combination** of \( S \).
 The scalars \( a_i \) are called the **coefficients** of the linear combination.
@@ -62,7 +62,7 @@ The scalars \( a_i \) are called the **coefficients** of the linear combination.
 
 Let \( S \) be a subset of a vector space \( V \) over \( F \). The **span** of \( S \), denoted by \( \Span_F(S) \), is the set of all linear combinations of finite subsets of elements of \( S \).
 
-If \( S = \{ \vv_1, \vv_2, \dots, \vv_n \} \), then \( \Span_F(S) = \{ a_1 \vv_1 + a_2 \vv_2 + \dots + a_n \vv_n : a_i \in F \} \). By convention, \( \Span_F(\varnothing) = \{ \vzero \} \).
+If \( S = \{ \v_1, \v_2, \dots, \v_n \} \), then \( \Span_F(S) = \{ a_1 \v_1 + a_2 \v_2 + \dots + a_n \v_n : a_i \in F \} \). By convention, \( \Span_F(\varnothing) = \{ \mathbf{0} \} \).
 :::
 
 ::: {.remark}
@@ -78,9 +78,9 @@ The span of any subset \( S \subseteq V \) is a subspace of \( V \). Moreover, i
 ::: {.proof}
 Let \( W = \Span(S) \).
 
-- **Zero vector:** Since \( \Span(\varnothing) = \{ \vzero \} \), and for non-empty \( S \), taking all coefficients as zero gives \( \vzero \), we have \( \vzero \in W \).
-- **Addition:** Let \( \vx, \vy \in W \). Then \( \vx = \sum a_i \vv_i \) and \( \vy = \sum b_i \vv_i \). Their sum \( \vx + \vy = \sum (a_i + b_i) \vv_i \) is also a linear combination of elements in \( S \), so \( \vx + \vy \in W \).
-- **Scalar multiplication:** For any \( c \in F \), \( c\vx = \sum (ca_i) \vv_i \in W \).
+- **Zero vector:** Since \( \Span(\varnothing) = \{ \mathbf{0} \} \), and for non-empty \( S \), taking all coefficients as zero gives \( \mathbf{0} \), we have \( \mathbf{0} \in W \).
+- **Addition:** Let \( \x, \y \in W \). Then \( \x = \sum a_i \v_i \) and \( \y = \sum b_i \v_i \). Their sum \( \x + \y = \sum (a_i + b_i) \v_i \) is also a linear combination of elements in \( S \), so \( \x + \y \in W \).
+- **Scalar multiplication:** For any \( c \in F \), \( c\x = \sum (ca_i) \v_i \in W \).
 
 To see it is the smallest subspace, note that any subspace containing \( S \) must be closed under addition and scalar multiplication, and thus must contain all linear combinations of elements in \( S \).
 :::

@@ -39,17 +39,17 @@ In this section, we prove the most important technical result of the chapter: th
 ::: {#thm-sift}
 ## Sifting Method
 
-Let \( S = \{ \vv_1, \vv_2, \dots, \vv_m \} \) be a subset of \( V \). Then there exists a subset \( S' \subseteq S \) such that:
+Let \( S = \{ \v_1, \v_2, \dots, \v_m \} \) be a subset of \( V \). Then there exists a subset \( S' \subseteq S \) such that:
 
 1. \( S' \) is linearly independent, and
 2. \( \Span(S') = \Span(S) \).
 :::
 
 ::: {.proof}
-For each \( r = 1, 2, \dots, m \), we check whether \( \vv_r \) is a linear combination of the previous terms \( \vv_1, \vv_2, \dots, \vv_{r-1} \). We:
+For each \( r = 1, 2, \dots, m \), we check whether \( \v_r \) is a linear combination of the previous terms \( \v_1, \v_2, \dots, \v_{r-1} \). We:
 
-1. Keep \( \vv_r \) in \( S' \) if \( \vv_r \) is not a linear combination of \( \vv_1, \vv_2, \dots, \vv_{r-1} \) (not redundant);
-2. Remove \( \vv_r \) from \( S' \) if \( \vv_r \) is a linear combination of \( \vv_1, \vv_2, \dots, \vv_{r-1} \) (redundant).
+1. Keep \( \v_r \) in \( S' \) if \( \v_r \) is not a linear combination of \( \v_1, \v_2, \dots, \v_{r-1} \) (not redundant);
+2. Remove \( \v_r \) from \( S' \) if \( \v_r \) is a linear combination of \( \v_1, \v_2, \dots, \v_{r-1} \) (redundant).
 
 After this process, we obtain a subset \( S' \) in which no element is a linear combination of the preceding members anymore. Therefore, by @thm-linear-dependence-lemma, \( S' \) is linearly independent. Moreover, according to @thm-span-preservation, removing "redundant members" from \( S \) does not change its linear span. Therefore, we have \( \Span(S') = \Span(S) \).
 :::
@@ -63,22 +63,22 @@ This method becomes our "new weapon" in linear algebra proofs. Whenever we encou
 ::: {#exm-sifting}
 ## Sifting Example
 
-Consider \( S = \{ \vv_1, \vv_2, \vv_3, \vv_4, \vv_5, \vv_6 \} \) in \( \nR^3 \) where:
+Consider \( S = \{ \v_1, \v_2, \v_3, \v_4, \v_5, \v_6 \} \) in \( \nR^3 \) where:
 \begin{align*}
-\vv_1 &= (1, 1, 1), & \vv_2 &= (2, 2, 2), & \vv_3 &= (1, 0, 0), \\
-\vv_4 &= (3, 2, 2), & \vv_5 &= (1, 1, 0), & \vv_6 &= (0, 0, 1).
+\v_1 &= (1, 1, 1), & \v_2 &= (2, 2, 2), & \v_3 &= (1, 0, 0), \\
+\v_4 &= (3, 2, 2), & \v_5 &= (1, 1, 0), & \v_6 &= (0, 0, 1).
 \end{align*}
 
 We apply the sifting method:
 
-- \( \vv_1 \neq \vzero \), so \( \vv_1 \) is kept.
-- \( \vv_2 = 2\vv_1 \), so \( \vv_2 \) is removed.
-- \( \vv_3 \) is not a linear combination of \( \vv_1 \), so \( \vv_3 \) is kept.
-- \( \vv_4 = 2\vv_1 + 1\vv_3 \), so \( \vv_4 \) is removed.
-- Suppose \( \vv_5 = a\vv_1 + b\vv_3 \). Then \( (1, 1, 0) = (a + b, a, a) \), which gives \( a = 0 \) and \( a + b = 1 \), so \( b = 1 \). But then the second coordinate gives \( 1 = a = 0 \), which is a contradiction. So \( \vv_5 \) is not a linear combination of \( \vv_1, \vv_3 \). Hence, \( \vv_5 \) is kept.
-- Since \( \dim(\nR^3) = 3 \), any four vectors cannot be linearly independent. Therefore, \( \vv_6 \) must be a linear combination of \( \vv_1, \vv_3, \vv_5 \). So \( \vv_6 \) is removed.
+- \( \v_1 \neq \mathbf{0} \), so \( \v_1 \) is kept.
+- \( \v_2 = 2\v_1 \), so \( \v_2 \) is removed.
+- \( \v_3 \) is not a linear combination of \( \v_1 \), so \( \v_3 \) is kept.
+- \( \v_4 = 2\v_1 + 1\v_3 \), so \( \v_4 \) is removed.
+- Suppose \( \v_5 = a\v_1 + b\v_3 \). Then \( (1, 1, 0) = (a + b, a, a) \), which gives \( a = 0 \) and \( a + b = 1 \), so \( b = 1 \). But then the second coordinate gives \( 1 = a = 0 \), which is a contradiction. So \( \v_5 \) is not a linear combination of \( \v_1, \v_3 \). Hence, \( \v_5 \) is kept.
+- Since \( \dim(\nR^3) = 3 \), any four vectors cannot be linearly independent. Therefore, \( \v_6 \) must be a linear combination of \( \v_1, \v_3, \v_5 \). So \( \v_6 \) is removed.
 
-The sifted set is \( S' = \{ \vv_1, \vv_3, \vv_5 \} = \{ (1, 1, 1), (1, 0, 0), (1, 1, 0) \} \), which is linearly independent and spans the same space as \( S \).
+The sifted set is \( S' = \{ \v_1, \v_3, \v_5 \} = \{ (1, 1, 1), (1, 0, 0), (1, 1, 0) \} \), which is linearly independent and spans the same space as \( S \).
 :::
 
 ::: {#thm-steinitz}
@@ -86,40 +86,40 @@ The sifted set is \( S' = \{ \vv_1, \vv_3, \vv_5 \} = \{ (1, 1, 1), (1, 0, 0), (
 
 Let \( V \) be a vector space over \( F \). Suppose:
 
-- \( G = \{ \vv_1, \vv_2, \dots, \vv_n \} \) spans \( V \);
-- \( L = \{ \vu_1, \vu_2, \dots, \vu_m \} \) is linearly independent.
+- \( G = \{ \v_1, \v_2, \dots, \v_n \} \) spans \( V \);
+- \( L = \{ \u_1, \u_2, \dots, \u_m \} \) is linearly independent.
 
 Then \( m \leq n \).
 :::
 
 ::: {.proof}
-The strategy is to insert the vectors from \( L \) one-by-one into \( G \) and "sift" the resulting set to maintain the spanning property. We rely on the fact that if we add a vector \( \vw \) to a spanning set \( S \), the set \( \{ \vw \} \cup S \) becomes linearly dependent, allowing us to remove a redundant vector (by @thm-span-preservation).
+The strategy is to insert the vectors from \( L \) one-by-one into \( G \) and "sift" the resulting set to maintain the spanning property. We rely on the fact that if we add a vector \( \w \) to a spanning set \( S \), the set \( \{ \w \} \cup S \) becomes linearly dependent, allowing us to remove a redundant vector (by @thm-span-preservation).
 
-Consider the first step. We form the set \( B_1 \) by inserting \( \vu_1 \) into \( G \):
+Consider the first step. We form the set \( B_1 \) by inserting \( \u_1 \) into \( G \):
 \[
-	B_1 = \{ \vu_1, \vv_1, \dots, \vv_n \}.
+	B_1 = \{ \u_1, \v_1, \dots, \v_n \}.
 \]
-Since \( G \) spans \( V \), \( B_1 \) is linearly dependent. By applying the sifting process (@thm-sift), we can remove a vector to obtain a new spanning set \( G_1 \). Since \( L \) is linearly independent, \( \vu_1 \neq \vzero \), so the removed vector must be some \( \vv_i \). Thus:
+Since \( G \) spans \( V \), \( B_1 \) is linearly dependent. By applying the sifting process (@thm-sift), we can remove a vector to obtain a new spanning set \( G_1 \). Since \( L \) is linearly independent, \( \u_1 \neq \mathbf{0} \), so the removed vector must be some \( \v_i \). Thus:
 \[
-	G_1 = \{ \vu_1 \} \cup S_1,
+	G_1 = \{ \u_1 \} \cup S_1,
 \]
 where \( S_1 \) is a subset of \( G \) with size \( n-1 \).
 
 Now, consider the general step. Suppose we have successfully exchanged \( k \) vectors such that the set
 \[
-	G_k = \{ \vu_1, \dots, \vu_k \} \cup S_k
+	G_k = \{ \u_1, \dots, \u_k \} \cup S_k
 \]
-spans \( V \), where \( S_k \subset G \) contains \( n-k \) vectors. We insert the next vector \( \vu_{k+1} \) to form:
+spans \( V \), where \( S_k \subset G \) contains \( n-k \) vectors. We insert the next vector \( \u_{k+1} \) to form:
 \[
-	B_{k+1} = \{ \vu_{k+1} \} \cup G_k.
+	B_{k+1} = \{ \u_{k+1} \} \cup G_k.
 \]
-Since \( G_k \) is a spanning set, \( \vu_{k+1} \) depends on the vectors in \( G_k \), making \( B_{k+1} \) dependent. We must remove a vector to restore the spanning property. We cannot remove any of the \( \vu_i \)'s, as this would imply a linear dependence relation exclusively among elements of \( L \), contradicting the hypothesis that \( L \) is linearly independent. Therefore, we must remove some \( \vv_j \) from \( S_k \).
+Since \( G_k \) is a spanning set, \( \u_{k+1} \) depends on the vectors in \( G_k \), making \( B_{k+1} \) dependent. We must remove a vector to restore the spanning property. We cannot remove any of the \( \u_i \)'s, as this would imply a linear dependence relation exclusively among elements of \( L \), contradicting the hypothesis that \( L \) is linearly independent. Therefore, we must remove some \( \v_j \) from \( S_k \).
 
-This process generates a sequence of subsets of remaining \( \vv \)'s:
+This process generates a sequence of subsets of remaining \( \v \)'s:
 \[
 	n = |G| > |S_1| > |S_2| > \dots > |S_m| \geq 0.
 \]
-Since we are able to perform this exchange \( m \) times (once for each \( \vu \in L \)), we must have started with enough \( \vv \)'s to accommodate every removal. Therefore, \( n \geq m \).
+Since we are able to perform this exchange \( m \) times (once for each \( \u \in L \)), we must have started with enough \( \v \)'s to accommodate every removal. Therefore, \( n \geq m \).
 :::
 
 ## Consequences of the Replacement Theorem
@@ -144,7 +144,7 @@ Thus \( n = m \).
 ::: {#def-dimension}
 ## Dimension
 
-A vector space \( V \) over \( F \) is called **finite-dimensional** if it has a finite basis. The **dimension** of \( V \), denoted \( \dim_F (V) \), is the number of vectors in any basis for \( V \). By convention, \( \dim_F (\{\vzero\}) = 0 \).
+A vector space \( V \) over \( F \) is called **finite-dimensional** if it has a finite basis. The **dimension** of \( V \), denoted \( \dim_F (V) \), is the number of vectors in any basis for \( V \). By convention, \( \dim_F (\{\mathbf{0}\}) = 0 \).
 :::
 
 ::: {.remark}
@@ -193,7 +193,7 @@ Let \( V \) be a finite-dimensional vector space and \( S \) be a linearly indep
 :::
 
 ::: {.proof}
-Since \( V \) is finite-dimensional, it has a finite basis \( B = \{ \vv_1, \dots, \vv_n \} \). Consider the set \( S \cup B \). Since \( B \) spans \( V \), \( S \cup B \) also spans \( V \). We apply the Sifting Method (@thm-sift) to the ordered set formed by listing the elements of \( S \) first, followed by the elements of \( B \).
+Since \( V \) is finite-dimensional, it has a finite basis \( B = \{ \v_1, \dots, \v_n \} \). Consider the set \( S \cup B \). Since \( B \) spans \( V \), \( S \cup B \) also spans \( V \). We apply the Sifting Method (@thm-sift) to the ordered set formed by listing the elements of \( S \) first, followed by the elements of \( B \).
 
 The Sifting Method will keep all elements of \( S \) because \( S \) is linearly independent. It then proceeds to examine each element of \( B \), keeping those that are not in the span of the vectors already kept. The resulting subset \( S' \) spans \( \Span(S \cup B) = V \) and is linearly independent by construction. Thus, \( S' \) is a basis for \( V \) that contains \( S \).
 :::
@@ -220,11 +220,11 @@ then \( W = V \).
 :::
 
 ::: {.proof}
-If we show \( V \subseteq W \) then we are done. Suppose for contradiction that \( V \nsubseteq W \). That means there exists some \( \vv \in V \) that \( \vv \notin W \).
+If we show \( V \subseteq W \) then we are done. Suppose for contradiction that \( V \nsubseteq W \). That means there exists some \( \v \in V \) that \( \v \notin W \).
 
-Let \( S = \{ \vw_1, \dots, \vw_n \} \) be a basis of \( W \), (consequently, \( \dim_F (W) = n \)). Since \( \vv \notin W \), we have \( \vv \notin \Span(S) \).
+Let \( S = \{ \w_1, \dots, \w_n \} \) be a basis of \( W \), (consequently, \( \dim_F (W) = n \)). Since \( \v \notin W \), we have \( \v \notin \Span(S) \).
 
-That would mean that \( S' = \{ \vw_1, \dots, \vw_n, \vv \} \) is linearly independent in \( V \). By Replacement Theorem, we have
+That would mean that \( S' = \{ \w_1, \dots, \w_n, \v \} \) is linearly independent in \( V \). By Replacement Theorem, we have
 \[
 	\underbrace{|S'|}_{\text{size of lin. indep. set}} \leq \dim_F (V),
 \]

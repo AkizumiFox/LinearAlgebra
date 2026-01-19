@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -294,7 +259,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/ch00-foundations/index.html">Preliminary</a></li><li class="breadcrumb-item"><a href="../../src/ch00-foundations/05-matrices.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Matrices</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Matrices</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Matrices</span></h1>
 </div>
 
 
@@ -313,177 +278,176 @@ window.Quarto = {
 
 <div style="display:none">
 $$
-\def\nR{\mathbb{R}}
-\def\nC{\mathbb{C}}
-\def\nN{\mathbb{N}}
-\def\nZ{\mathbb{Z}}
-\def\nQ{\mathbb{Q}}
-\def\nF{\mathbb{F}}
-\def\nP{\mathbb{P}}
-\def\nE{\mathbb{E}}
-\def\sA{\mathcal{A}}
-\def\sB{\mathcal{B}}
-\def\sC{\mathcal{C}}
-\def\sD{\mathcal{D}}
-\def\sE{\mathcal{E}}
-\def\sF{\mathcal{F}}
-\def\sG{\mathcal{G}}
-\def\sH{\mathcal{H}}
-\def\sL{\mathcal{L}}
-\def\sM{\mathcal{M}}
-\def\sN{\mathcal{N}}
-\def\sO{\mathcal{O}}
-\def\sP{\mathcal{P}}
-\def\sS{\mathcal{S}}
-\def\sT{\mathcal{T}}
-\def\sX{\mathcal{X}}
-\def\sY{\mathcal{Y}}
-\def\va{\mathbf{a}}
-\def\vb{\mathbf{b}}
-\def\vc{\mathbf{c}}
-\def\vd{\mathbf{d}}
-\def\ve{\mathbf{e}}
-\def\vf{\mathbf{f}}
-\def\vg{\mathbf{g}}
-\def\vh{\mathbf{h}}
-\def\vi{\mathbf{i}}
-\def\vj{\mathbf{j}}
-\def\vk{\mathbf{k}}
-\def\vl{\mathbf{l}}
-\def\vm{\mathbf{m}}
-\def\vn{\mathbf{n}}
-\def\vo{\mathbf{o}}
-\def\vp{\mathbf{p}}
-\def\vq{\mathbf{q}}
-\def\vr{\mathbf{r}}
-\def\vs{\mathbf{s}}
-\def\vt{\mathbf{t}}
-\def\vu{\mathbf{u}}
-\def\vv{\mathbf{v}}
-\def\vw{\mathbf{w}}
-\def\vx{\mathbf{x}}
-\def\vy{\mathbf{y}}
-\def\vz{\mathbf{z}}
-\def\mA{\mathbf{A}}
-\def\mB{\mathbf{B}}
-\def\mC{\mathbf{C}}
-\def\mD{\mathbf{D}}
-\def\mE{\mathbf{E}}
-\def\mF{\mathbf{F}}
-\def\mG{\mathbf{G}}
-\def\mH{\mathbf{H}}
-\def\mI{\mathbf{I}}
-\def\mJ{\mathbf{J}}
-\def\mK{\mathbf{K}}
-\def\mL{\mathbf{L}}
-\def\mM{\mathbf{M}}
-\def\mN{\mathbf{N}}
-\def\mO{\mathbf{O}}
-\def\mP{\mathbf{P}}
-\def\mQ{\mathbf{Q}}
-\def\mR{\mathbf{R}}
-\def\mS{\mathbf{S}}
-\def\mT{\mathbf{T}}
-\def\mU{\mathbf{U}}
-\def\mV{\mathbf{V}}
-\def\mW{\mathbf{W}}
-\def\mX{\mathbf{X}}
-\def\mY{\mathbf{Y}}
-\def\mZ{\mathbf{Z}}
-\def\A{\mathbf{A}}
-\def\B{\mathbf{B}}
-\def\C{\mathbf{C}}
-\def\D{\mathbf{D}}
-\def\E{\mathbf{E}}
-\def\F{\mathbf{F}}
-\def\G{\mathbf{G}}
-\def\H{\mathbf{H}}
-\def\I{\mathbf{I}}
-\def\J{\mathbf{J}}
-\def\K{\mathbf{K}}
-\def\L{\mathbf{L}}
-\def\M{\mathbf{M}}
-\def\N{\mathbf{N}}
-\def\O{\mathbf{O}}
-\def\P{\mathbf{P}}
-\def\Q{\mathbf{Q}}
-\def\R{\mathbf{R}}
-\def\S{\mathbf{S}}
-\def\T{^\top}
-\def\U{\mathbf{U}}
-\def\V{\mathbf{V}}
-\def\W{\mathbf{W}}
-\def\X{\mathbf{X}}
-\def\Y{\mathbf{Y}}
-\def\Z{\mathbf{Z}}
-\def\valpha{\boldsymbol{\alpha}}
-\def\vbeta{\boldsymbol{\beta}}
-\def\vgamma{\boldsymbol{\gamma}}
-\def\vdelta{\boldsymbol{\delta}}
-\def\vepsilon{\boldsymbol{\epsilon}}
-\def\vzeta{\boldsymbol{\zeta}}
-\def\veta{\boldsymbol{\eta}}
-\def\vtheta{\boldsymbol{\theta}}
-\def\viota{\boldsymbol{\iota}}
-\def\vkappa{\boldsymbol{\kappa}}
-\def\vlambda{\boldsymbol{\lambda}}
-\def\vmu{\boldsymbol{\mu}}
-\def\vnu{\boldsymbol{\nu}}
-\def\vxi{\boldsymbol{\xi}}
-\def\vpi{\boldsymbol{\pi}}
-\def\vrho{\boldsymbol{\rho}}
-\def\vsigma{\boldsymbol{\sigma}}
-\def\vtau{\boldsymbol{\tau}}
-\def\vupsilon{\boldsymbol{\upsilon}}
-\def\vphi{\boldsymbol{\phi}}
-\def\vchi{\boldsymbol{\chi}}
-\def\vpsi{\boldsymbol{\psi}}
-\def\vomega{\boldsymbol{\omega}}
-\def\vGamma{\boldsymbol{\Gamma}}
-\def\vDelta{\boldsymbol{\Delta}}
-\def\vTheta{\boldsymbol{\Theta}}
-\def\vLambda{\boldsymbol{\Lambda}}
-\def\vXi{\boldsymbol{\Xi}}
-\def\vPi{\boldsymbol{\Pi}}
-\def\vSigma{\boldsymbol{\Sigma}}
-\def\vUpsilon{\boldsymbol{\Upsilon}}
-\def\vPhi{\boldsymbol{\Phi}}
-\def\vPsi{\boldsymbol{\Psi}}
-\def\vOmega{\boldsymbol{\Omega}}
-\def\ra{\mathbf{a}}
-\def\rb{\mathbf{b}}
-\def\rc{\mathbf{c}}
-\def\rd{\mathbf{d}}
-\def\re{\mathbf{e}}
-\def\rf{\mathbf{f}}
-\def\rg{\mathbf{g}}
-\def\rh{\mathbf{h}}
-\def\ri{\mathbf{i}}
-\def\rj{\mathbf{j}}
-\def\rk{\mathbf{k}}
-\def\rl{\mathbf{l}}
-\def\rm{\mathbf{m}}
-\def\rn{\mathbf{n}}
-\def\ro{\mathbf{o}}
-\def\rp{\mathbf{p}}
-\def\rq{\mathbf{q}}
-\def\rr{\mathbf{r}}
-\def\rs{\mathbf{s}}
-\def\rt{\mathbf{t}}
-\def\ru{\mathbf{u}}
-\def\rv{\mathbf{v}}
-\def\rw{\mathbf{w}}
-\def\rx{\mathbf{x}}
-\def\ry{\mathbf{y}}
-\def\rz{\mathbf{z}}
-\def\vzero{\mathbf{0}}
-\def\vone{\mathbf{1}}
-\def\Ev{\mathbb{E}}
+% ======================================================================================
+% MATHEMATICAL NOTATION SHORTCUTS
+% ======================================================================================
+% This file contains convenient mathematical notation shortcuts for academic documents
+% Author: Tzu-You Lin
+% ======================================================================================
+
+% General sets
+\def \sA {\mathcal{A}}
+\def \sB {\mathcal{B}}
+\def \sC {\mathcal{C}}
+\def \sD {\mathcal{D}}
+\def \sE {\mathcal{E}}
+\def \sF {\mathcal{F}}
+\def \sG {\mathcal{G}}
+\def \sH {\mathcal{H}}
+\def \sI {\mathcal{I}}
+\def \sJ {\mathcal{J}}
+\def \sK {\mathcal{K}}
+\def \sL {\mathcal{L}}
+\def \sM {\mathcal{M}}
+\def \sN {\mathcal{N}}
+\def \sO {\mathcal{O}}
+\def \sP {\mathcal{P}}
+\def \sQ {\mathcal{Q}}
+\def \sR {\mathcal{R}}
+\def \sS {\mathcal{S}}
+\def \sT {\mathcal{T}}
+\def \sU {\mathcal{U}}
+\def \sV {\mathcal{V}}
+\def \sW {\mathcal{W}}
+\def \sX {\mathcal{X}}
+\def \sY {\mathcal{Y}}
+\def \sZ {\mathcal{Z}}
+
+% Number sets
+\def \nA {\mathbb{A}}
+\def \nB {\mathbb{B}}
+\def \nC {\mathbb{C}}
+\def \nD {\mathbb{D}}
+\def \nE {\mathbb{E}}
+\def \nF {\mathbb{F}}
+\def \nG {\mathbb{G}}
+\def \nH {\mathbb{H}}
+\def \nI {\mathbb{I}}
+\def \nJ {\mathbb{J}}
+\def \nK {\mathbb{K}}
+\def \nL {\mathbb{L}}
+\def \nM {\mathbb{M}}
+\def \nN {\mathbb{N}}
+\def \nO {\mathbb{O}}
+\def \nP {\mathbb{P}}
+\def \nQ {\mathbb{Q}}
+\def \nR {\mathbb{R}}
+\def \nS {\mathbb{S}}
+\def \nT {\mathbb{T}}
+\def \nU {\mathbb{U}}
+\def \nV {\mathbb{V}}
+\def \nW {\mathbb{W}}
+\def \nX {\mathbb{X}}
+\def \nY {\mathbb{Y}}
+\def \nZ {\mathbb{Z}}
+
+\def \a {\mathbf{a}}
+\def \b {\mathbf{b}}
+\def \c {\mathbf{c}}
+\def \d {\mathbf{d}}
+\def \e {\mathbf{e}}
+\def \f {\mathbf{f}}
+\def \g {\mathbf{g}}
+\def \h {\mathbf{h}}
+\def \i {\mathbf{i}}
+\def \j {\mathbf{j}}
+\def \k {\mathbf{k}}
+\def \l {\mathbf{l}}
+\def \m {\mathbf{m}}
+\def \n {\mathbf{n}}
+\def \o {\mathbf{o}}
+\def \p {\mathbf{p}}
+\def \q {\mathbf{q}}
+\def \r {\mathbf{r}}
+\def \s {\mathbf{s}}
+\def \t {\mathbf{t}}
+\def \u {\mathbf{u}}
+\def \v {\mathbf{v}}
+\def \w {\mathbf{w}}
+\def \x {\mathbf{x}}
+\def \y {\mathbf{y}}
+\def \z {\mathbf{z}}
+\def \A {\mathbf{A}}
+\def \B {\mathbf{B}}
+\def \C {\mathbf{C}}
+\def \D {\mathbf{D}}
+\def \E {\mathbf{E}}
+\def \F {\mathbf{F}}
+\def \G {\mathbf{G}}
+\def \H {\mathbf{H}}
+\def \I {\mathbf{I}}
+\def \J {\mathbf{J}}
+\def \K {\mathbf{K}}
+\def \L {\mathbf{L}}
+\def \M {\mathbf{M}}
+\def \N {\mathbf{N}}
+\def \O {\mathbf{O}}
+\def \P {\mathbf{P}}
+\def \Q {\mathbf{Q}}
+\def \R {\mathbf{R}}
+\def \S {\mathbf{S}}
+\def \T {\mathbf{T}}
+\def \U {\mathbf{U}}
+\def \V {\mathbf{V}}
+\def \W {\mathbf{W}}
+\def \X {\mathbf{X}}
+\def \Y {\mathbf{Y}}
+\def \Z {\mathbf{Z}}
+
+\def \0 {\mathbf{0}}
+\def \1 {\mathbf{1}}
+
+% vector and matrix notation
+\def \valpha {\bm{\upalpha}}
+\def \vbeta {\bm{\upbeta}}
+\def \vgamma {\bm{\upgamma}}
+\def \vdelta {\bm{\updelta}}
+\def \vepsilon {\bm{\upepsilon}}
+\def \vzeta {\bm{\upzeta}}
+\def \veta {\bm{\upeta}}
+\def \vtheta {\bm{\uptheta}}
+\def \viota {\bm{\upiota}}
+\def \vkappa {\bm{\upkappa}}
+\def \vlambda {\bm{\uplambda}}
+\def \vmu {\bm{\upmu}}
+\def \vnu {\bm{\upnu}}
+\def \vxi {\bm{\upxi}}
+\def \vpi {\bm{\uppi}}
+\def \vrho {\bm{\uprho}}
+\def \vsigma {\bm{\upsigma}}
+\def \vtau {\bm{\uptau}}
+\def \vupsilon {\bm{\upupsilon}}
+\def \vphi {\bm{\upphi}}
+\def \vchi {\bm{\upchi}}
+\def \vpsi {\bm{\uppsi}}
+\def \vomega {\bm{\upomega}}
+\def \vvarepsilon {\bm{\upvarepsilon}}
+\def \vvartheta {\bm{\upvartheta}}
+\def \vvarpi {\bm{\upvarpi}}
+\def \vvarrho {\bm{\upvarrho}}
+\def \vvarsigma {\bm{\upvarsigma}}
+\def \vvarphi {\bm{\upvarphi}}
+\def \vGamma {\bm{\Gamma}}
+\def \vDelta {\bm{\Delta}}
+\def \vTheta {\bm{\Theta}}
+\def \vLambda {\bm{\Lambda}}
+\def \vXi {\bm{\Xi}}
+\def \vPi {\bm{\Pi}}
+\def \vSigma {\bm{\Sigma}}
+\def \vUpsilon {\bm{\Upsilon}}
+\def \vPhi {\bm{\Phi}}
+\def \vPsi {\bm{\Psi}}
+\def \vOmega {\bm{\Omega}}
+
+% Probability
+\def\Ev{\operatorname*{\mathbb{E}}}
 \def\Pr{\operatorname{Pr}}
-\def\Var{\operatorname{Var}}
-\def\Cov{\operatorname{Cov}}
-\def\Cor{\operatorname{Cor}}
-\def\Corr{\operatorname{Corr}}
+\def\Var{\operatorname*{Var}}
+\def\Cov{\operatorname*{Cov}}
+\def\Cor{\operatorname*{Cor}}
+\def\Corr{\operatorname*{Corr}}
+
+% Distributions
 \def\distBern{\operatorname{Ber}}
 \def\distBin{\operatorname{Bin}}
 \def\distGeom{\operatorname{Geo}}
@@ -493,98 +457,209 @@ $$
 \def\distUnif{\operatorname{Unif}}
 \def\distExp{\operatorname{Exp}}
 \def\distGamma{\operatorname{Gamma}}
-\def\distN{\mathcal{N}}
+\def\distN{\operatorname{\mathcal{N}}}
 \def\distBeta{\operatorname{Beta}}
 \def\distCauchy{\operatorname{Cauchy}}
+\def\distLognormal{\operatorname{Lognormal}}
+\def\distWeibull{\operatorname{Weibull}}
+\def\distPareto{\operatorname{Pareto}}
 \def\distDir{\operatorname{Dir}}
 \def\distMult{\operatorname{Mult}}
 \def\distWishart{\operatorname{Wishart}}
+\def\distInvWishart{\operatorname{InvWishart}}
+
+% Linear algebra
 \def\tr{\operatorname{tr}}
-\def\trace{\operatorname{tr}}
 \def\rank{\operatorname{rank}}
 \def\nullity{\operatorname{nullity}}
-\def\Span{\operatorname{span}}
 \def\spn{\operatorname{span}}
+\def\Span{\operatorname{span}}
 \def\col{\operatorname{col}}
 \def\row{\operatorname{row}}
 \def\nul{\operatorname{nul}}
+\def\ker{\operatorname{ker}}
 \def\img{\operatorname{img}}
+\def\adj{\operatorname{adj}}
 \def\diag{\operatorname{diag}}
-\def\dd{\mathrm{d}}
-\def\transpose{^\top}
-\def\inv{^{-1}}
-\def\abs#1{\left\lvert#1\right\rvert}
-\def\norm#1{\left\lVert#1\right\rVert}
-\def\floor#1{\left\lfloor#1\right\rfloor}
-\def\ceil#1{\left\lceil#1\right\rceil}
-\def\inner#1#2{\langle #1, #2 \rangle}
-\def\lcm{\operatorname{lcm}}
-\def\im{\operatorname{im}}
-\def\sgn{\operatorname{sgn}}
-\def\argmax{\operatorname{argmax}}
-\def\argmin{\operatorname{argmin}}
-\def\softmax{\operatorname{softmax}}
-\def\x{\vx}
-\def\y{\vy}
-\def\z{\vz}
-\def\w{\vw}
-\def\u{\vu}
-\def\e{\ve}
-\def\ba{\mathbf{a}}
-\def\bb{\mathbf{b}}
-\def\bc{\mathbf{c}}
-\def\bd{\mathbf{d}}
-\def\be{\mathbf{e}}
-\def\bff{\mathbf{f}}
-\def\bg{\mathbf{g}}
-\def\bh{\mathbf{h}}
-\def\bi{\mathbf{i}}
-\def\bj{\mathbf{j}}
-\def\bk{\mathbf{k}}
-\def\bl{\mathbf{l}}
-\def\bm{\mathbf{m}}
-\def\bn{\mathbf{n}}
-\def\bo{\mathbf{o}}
-\def\bp{\mathbf{p}}
-\def\bq{\mathbf{q}}
-\def\br{\mathbf{r}}
-\def\bs{\mathbf{s}}
-\def\bt{\mathbf{t}}
-\def\bu{\mathbf{u}}
-\def\bv{\mathbf{v}}
-\def\bw{\mathbf{w}}
-\def\bx{\mathbf{x}}
-\def\by{\mathbf{y}}
-\def\bz{\mathbf{z}}
-\def\bA{\mathbf{A}}
-\def\bB{\mathbf{B}}
-\def\bC{\mathbf{C}}
-\def\bD{\mathbf{D}}
-\def\bE{\mathbf{E}}
-\def\bF{\mathbf{F}}
-\def\bG{\mathbf{G}}
-\def\bH{\mathbf{H}}
-\def\bI{\mathbf{I}}
-\def\bJ{\mathbf{J}}
-\def\bK{\mathbf{K}}
-\def\bL{\mathbf{L}}
-\def\bM{\mathbf{M}}
-\def\bN{\mathbf{N}}
-\def\bO{\mathbf{O}}
-\def\bP{\mathbf{P}}
-\def\bQ{\mathbf{Q}}
-\def\bR{\mathbf{R}}
-\def\bS{\mathbf{S}}
-\def\bT{\mathbf{T}}
-\def\bU{\mathbf{U}}
-\def\bV{\mathbf{V}}
-\def\bW{\mathbf{W}}
-\def\bX{\mathbf{X}}
-\def\bY{\mathbf{Y}}
-\def\bZ{\mathbf{Z}}
-\def\bSigma{\mathbf{\Sigma}}
-\def\bLambda{\mathbf{\Lambda}}
-\def\bOmega{\mathbf{\Omega}}
+
+\def \dd {\mathrm{d}}
+
+% ======================================================================================
+% NUMBER SETS
+% ======================================================================================
+
+% ======================================================================================
+% VECTOR NOTATION
+% ======================================================================================
+
+% Bold lowercase vectors
+\def\a{\mathbf{a}}
+\def\b{\mathbf{b}}
+\def\c{\mathbf{c}}
+\def\d{\mathbf{d}}
+\def\e{\mathbf{e}}
+\def\f{\mathbf{f}}
+\def\g{\mathbf{g}}
+\def\h{\mathbf{h}}
+\def\i{\mathbf{i}}
+\def\j{\mathbf{j}}
+\def\k{\mathbf{k}}
+\def\l{\mathbf{l}}
+\def\m{\mathbf{m}}
+\def\n{\mathbf{n}}
+\def\p{\mathbf{p}}
+\def\q{\mathbf{q}}
+\def\r{\mathbf{r}}
+\def\s{\mathbf{s}}
+\def\t{\mathbf{t}}
+\def\u{\mathbf{u}}
+\def\v{\mathbf{v}}
+\def\w{\mathbf{w}}
+\def\x{\mathbf{x}}
+\def\y{\mathbf{y}}
+\def\z{\mathbf{z}}
+
+% ======================================================================================
+% CALLIGRAPHIC NOTATION
+% ======================================================================================
+
+% Calligraphic letters for sets, spaces, etc.
+\def\cA{\mathcal{A}}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cE{\mathcal{E}}
+\def\cF{\mathcal{F}}
+\def\cG{\mathcal{G}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cJ{\mathcal{J}}
+\def\cK{\mathcal{K}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cQ{\mathcal{Q}}
+\def\cR{\mathcal{R}}
+\def\cS{\mathcal{S}}
+\def\cT{\mathcal{T}}
+\def\cU{\mathcal{U}}
+\def\cV{\mathcal{V}}
+\def\cW{\mathcal{W}}
+\def\cX{\mathcal{X}}
+\def\cY{\mathcal{Y}}
+\def\cZ{\mathcal{Z}}
+
+% ======================================================================================
+% SPECIAL MATHEMATICAL OPERATORS
+% ======================================================================================
+
+% Differential operator
+\newcommand*{\diff}{\mathop{}\:\!\mathrm d}
+
+% Inner product notation
+\newcommand\ip[2]{\ensuremath{\langle#1,#2\rangle}}
+
+% Definition equals
+\newcommand{\defeq}{\stackrel{\smash{\textnormal{\tiny def}}}{=}}
+
+% ======================================================================================
+% QUANTUM MECHANICS NOTATION
+% ======================================================================================
+
+% Dirac notation
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\braket}[2]{\langle #1 | #2 \rangle}
+\newcommand{\ketbra}[2]{| #1 \rangle\langle #2 |}
+
+% Expectation value
+\newcommand{\expect}[1]{\langle #1 \rangle}
+
+% ======================================================================================
+% ANALYSIS AND CALCULUS
+% ======================================================================================
+
+% Partial derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+% Total derivatives
+\newcommand{\td}[2]{\frac{d #1}{d #2}}
+\newcommand{\tdd}[2]{\frac{d^2 #1}{d #2^2}}
+
+% Limits
+\newcommand{\limi}[1]{\lim_{#1 \to \infty}}
+\newcommand{\limz}[1]{\lim_{#1 \to 0}}
+
+% ======================================================================================
+% LINEAR ALGEBRA
+% ======================================================================================
+
+% Matrix operations
+\newcommand{\tr}{\text{tr}}              % Trace
+\newcommand{\rank}{\text{rank}}          % Rank
+\newcommand{\nullity}{\text{nullity}}    % Nullity
+\newcommand{\spn}{\text{span}}           % Span (renamed to avoid conflict)
+\newcommand{\col}{\text{col}}            % Column space
+\newcommand{\row}{\text{row}}            % Row space
+\newcommand{\nul}{\text{nul}}            % Null space
+
+% Vector operations
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+% ======================================================================================
+% PROBABILITY AND STATISTICS
+% ======================================================================================
+
+% Probability notation
+\newcommand{\Prob}[1]{\mathbb{P}\left( #1 \right)}
+\newcommand{\Exp}[1]{\mathbb{E}\left[ #1 \right]}
+\newcommand{\Var}[1]{\text{Var}\left( #1 \right)}
+\newcommand{\Cov}[2]{\text{Cov}\left( #1, #2 \right)}
+
+% Distributions
+\newcommand{\Normal}[2]{\mathcal{N}\left( #1, #2 \right)}
+\newcommand{\Uniform}[2]{\text{Uniform}\left( #1, #2 \right)}
+
+% ======================================================================================
+% SET THEORY
+% ======================================================================================
+
+% Set operations
+\newcommand{\powerset}[1]{\mathcal{P}\left( #1 \right)}
+\newcommand{\card}[1]{\left| #1 \right|}
+
+% ======================================================================================
+% TOPOLOGY
+% ======================================================================================
+
+% Topology notation
+\newcommand{\interior}[1]{\text{int}\left( #1 \right)}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\boundary}[1]{\partial #1}
+
+% ======================================================================================
+% CONVENIENCE SHORTCUTS
+% ======================================================================================
+
+% Blackboard bold shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}
+
+% Calligraphic shortcuts
+\newcommand{\cl}[1]{\mathcal{#1}}
+
+% Bold shortcuts
+\newcommand{\bm}[1]{\mathbf{#1}}
+
+% Roman (upright) text in math mode
+\newcommand{\rom}[1]{\mathrm{#1}}
+
+% ======================================================================================
+% COMMON MATHEMATICAL CONSTANTS
+% ======================================================================================
 $$
 </div>
 <div id="def-matrix" class="theorem definition">
@@ -816,8 +891,6 @@ $$
 </div>
 
 
-<!-- -->
-
 </section>
 
 </main> <!-- /main -->
@@ -891,57 +964,6 @@ $$
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -1283,363 +1305,7 @@ $$
         <span class="nav-page-text">Vector Spaces and Dimensions</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">from:</span><span class="co"> markdown+tex_math_single_backslash</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">chapter-number:</span><span class="co"> 0</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">section-number:</span><span class="co"> 5</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - latex-environment</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - chapter-number</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - theorem-numbering</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    documentclass: extbook</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    classoption: [13.5pt, a4paper, oneside, openany]</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    colorlinks: true</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    linkcolor: "blue"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    urlcolor: "blue"</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    pdf-engine: lualatex</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    linestretch: 1.1</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry: [margin=1.2in]</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">      text: |</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage[quartoenv]{../../config/latex-template}</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">        \directlua{require("../../config/strip-numbers")}</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{enumitem}</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">        \setlist{itemsep=1.2em, parsep=0pt}</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{../../config/chapter-style}</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../../config/macros.qmd &gt;}}</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># Matrices</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>::: {#def-matrix}</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>An <span class="sc">\(</span> m \times n <span class="sc">\)</span> **matrix** over a field <span class="sc">\(</span> F <span class="sc">\)</span> is a rectangular array of elements from <span class="sc">\(</span> F <span class="sc">\)</span> arranged in <span class="sc">\(</span> m <span class="sc">\)</span> rows and <span class="sc">\(</span> n <span class="sc">\)</span> columns:</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    \A = \begin{bmatrix}</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} <span class="sc">\\</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} <span class="sc">\\</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        \vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    \end{bmatrix}.</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>::: {.remark}</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="sc">\(</span> M_{m \times n}(F) <span class="sc">\)</span> is the set of all matrices of size <span class="sc">\(</span> m \times n <span class="sc">\)</span> and have entries in <span class="sc">\(</span> F <span class="sc">\)</span>. In the above definition, we can write <span class="sc">\(</span> \A \in M_{m \times n}(F) <span class="sc">\)</span>.</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>Moreover, when <span class="sc">\(</span> m = n <span class="sc">\)</span>, we abbreviate <span class="sc">\(</span> M_{m \times n}(F) <span class="sc">\)</span> to <span class="sc">\(</span> M_n(F) <span class="sc">\)</span>.</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>::: {#exm-matrices}</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrices</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>Here are some examples of matrices:</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    \begin{bmatrix} 1 &amp; 2 <span class="sc">\\</span> 3 &amp; 4 \end{bmatrix} \in M_2(\nR), \quad</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    \begin{bmatrix} 1 &amp; 0 &amp; -1 <span class="sc">\\</span> 2 &amp; 5 &amp; 3 \end{bmatrix} \in M_{2 \times 3}(\nR), \quad</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    \begin{bmatrix} i &amp; 1+i <span class="sc">\\</span> 0 &amp; 2-i \end{bmatrix} \in M_2(\nC).</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Special Matrices</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>::: {#def-zero-matrix}</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zero Matrix</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>The **zero matrix** <span class="sc">\(</span> \O \in M_{m \times n}(F) <span class="sc">\)</span> is the matrix with all entries equal to zero:</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    \O = \begin{bmatrix}</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>        0 &amp; 0 &amp; \cdots &amp; 0 <span class="sc">\\</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        0 &amp; 0 &amp; \cdots &amp; 0 <span class="sc">\\</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>        \vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>        0 &amp; 0 &amp; \cdots &amp; 0</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    \end{bmatrix}.</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>::: {#def-identity-matrix}</span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Identity Matrix</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>The **identity matrix** <span class="sc">\(</span> \I_n \in M_n(F) <span class="sc">\)</span> is the <span class="sc">\(</span> n \times n <span class="sc">\)</span> square matrix with <span class="sc">\(</span> 1 <span class="sc">\)</span>s on the diagonal and <span class="sc">\(</span> 0 <span class="sc">\)</span>s elsewhere:</span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    \I_n = \begin{bmatrix}</span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>        1 &amp; 0 &amp; \cdots &amp; 0 <span class="sc">\\</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>        0 &amp; 1 &amp; \cdots &amp; 0 <span class="sc">\\</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>        \vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        0 &amp; 0 &amp; \cdots &amp; 1</span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    \end{bmatrix}.</span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>When the size is clear from context, we simply write <span class="sc">\(</span> \I <span class="sc">\)</span>.</span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>::: {#def-transpose}</span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Transpose</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = (a_{ij}) \in M_{m \times n}(F) <span class="sc">\)</span>. The **transpose** of <span class="sc">\(</span> \A <span class="sc">\)</span>, denoted <span class="sc">\(</span> \A\T <span class="sc">\)</span>, is the <span class="sc">\(</span> n \times m <span class="sc">\)</span> matrix obtained by swapping rows and columns:</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>    (\A\T)_{ij} = a_{ji}.</span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>Visually, the rows of <span class="sc">\(</span> \A <span class="sc">\)</span> become the columns of <span class="sc">\(</span> \A\T <span class="sc">\)</span>:</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>    \begin{bmatrix} a &amp; b &amp; c <span class="sc">\\</span> d &amp; e &amp; f \end{bmatrix}\T = \begin{bmatrix} a &amp; d <span class="sc">\\</span> b &amp; e <span class="sc">\\</span> c &amp; f \end{bmatrix}.</span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>::: {#def-symmetric-matrix}</span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## Symmetric Matrix</span></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>A square matrix <span class="sc">\(</span> \A \in M_n(F) <span class="sc">\)</span> is **symmetric** if <span class="sc">\(</span> \A = \A\T <span class="sc">\)</span>. This means it is symmetric across its main diagonal:</span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>    \A = \begin{bmatrix}</span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>        a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} <span class="sc">\\</span></span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>        a_{12} &amp; a_{22} &amp; \cdots &amp; a_{2n} <span class="sc">\\</span></span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>        \vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>        a_{1n} &amp; a_{2n} &amp; \cdots &amp; a_{nn}</span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>    \end{bmatrix}.</span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>::: {#def-diagonal-matrix}</span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Diagonal Matrix</span></span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>A square matrix <span class="sc">\(</span> \A \in M_n(F) <span class="sc">\)</span> is **diagonal** if all entries off the main diagonal are zero:</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>    \A = \begin{bmatrix}</span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>        d_1 &amp; 0 &amp; \cdots &amp; 0 <span class="sc">\\</span></span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        0 &amp; d_2 &amp; \cdots &amp; 0 <span class="sc">\\</span></span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>        \vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>        0 &amp; 0 &amp; \cdots &amp; d_n</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>    \end{bmatrix}.</span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>We often write <span class="sc">\(</span> \A = \diag(d_1, d_2, \ldots, d_n) <span class="sc">\)</span>.</span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>::: {#def-upper-triangular}</span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="fu">## Upper Triangular Matrix</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>A square matrix <span class="sc">\(</span> \A \in M_n(F) <span class="sc">\)</span> is **upper triangular** if all entries below the main diagonal are zero:</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    \A = \begin{bmatrix}</span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>        a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} <span class="sc">\\</span></span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>        0 &amp; a_{22} &amp; \cdots &amp; a_{2n} <span class="sc">\\</span></span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>        \vdots &amp; \vdots &amp; \ddots &amp; \vdots <span class="sc">\\</span></span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>        0 &amp; 0 &amp; \cdots &amp; a_{nn}</span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    \end{bmatrix}.</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>::: {#exm-zero-identity}</span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zero and Identity Matrices</span></span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>    \O_{2 \times 3} = \begin{bmatrix} 0 &amp; 0 &amp; 0 <span class="sc">\\</span> 0 &amp; 0 &amp; 0 \end{bmatrix}, \quad</span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>    \I_2 = \begin{bmatrix} 1 &amp; 0 <span class="sc">\\</span> 0 &amp; 1 \end{bmatrix}, \quad</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>    \I_3 = \begin{bmatrix} 1 &amp; 0 &amp; 0 <span class="sc">\\</span> 0 &amp; 1 &amp; 0 <span class="sc">\\</span> 0 &amp; 0 &amp; 1 \end{bmatrix}.</span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>::: {#exm-special-matrices}</span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Examples of Special Matrices</span></span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Transpose:** <span class="sc">\(</span> \begin{bmatrix} 1 &amp; 2 &amp; 3 <span class="sc">\\</span> 4 &amp; 5 &amp; 6 \end{bmatrix}\T = \begin{bmatrix} 1 &amp; 4 <span class="sc">\\</span> 2 &amp; 5 <span class="sc">\\</span> 3 &amp; 6 \end{bmatrix} <span class="sc">\)</span>.</span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Symmetric:** <span class="sc">\(</span> \begin{bmatrix} 1 &amp; 2 &amp; 3 <span class="sc">\\</span> 2 &amp; 4 &amp; 5 <span class="sc">\\</span> 3 &amp; 5 &amp; 6 \end{bmatrix} <span class="sc">\)</span> is symmetric since <span class="sc">\(</span> a_{ij} = a_{ji} <span class="sc">\)</span>.</span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Diagonal:** <span class="sc">\(</span> \diag(3, -1, 0) = \begin{bmatrix} 3 &amp; 0 &amp; 0 <span class="sc">\\</span> 0 &amp; -1 &amp; 0 <span class="sc">\\</span> 0 &amp; 0 &amp; 0 \end{bmatrix} <span class="sc">\)</span>.</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Upper Triangular:** <span class="sc">\(</span> \begin{bmatrix} 1 &amp; 2 &amp; 3 <span class="sc">\\</span> 0 &amp; 4 &amp; 5 <span class="sc">\\</span> 0 &amp; 0 &amp; 6 \end{bmatrix} <span class="sc">\)</span>.</span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix Addition</span></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>::: {#def-matrix-addition}</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix Addition</span></span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = (a_{ij}) <span class="sc">\)</span> and <span class="sc">\(</span> \B = (b_{ij}) <span class="sc">\)</span> be matrices in <span class="sc">\(</span> M_{m \times n}(F) <span class="sc">\)</span>. Their **sum** <span class="sc">\(</span> \A + \B <span class="sc">\)</span> is the matrix <span class="sc">\(</span> \C = (c_{ij}) \in M_{m \times n}(F) <span class="sc">\)</span> where:</span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>    c_{ij} = a_{ij} + b_{ij}.</span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>::: {#def-additive-inverse}</span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additive Inverse</span></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>The **additive inverse** (or **negation**) of a matrix <span class="sc">\(</span> \A = (a_{ij}) \in M_{m \times n}(F) <span class="sc">\)</span> is the matrix <span class="sc">\(</span> -\A = (-a_{ij}) \in M_{m \times n}(F) <span class="sc">\)</span>.</span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>::: {#exm-matrix-addition}</span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix Addition</span></span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = \begin{bmatrix} 1 &amp; 2 <span class="sc">\\</span> 3 &amp; 4 \end{bmatrix} <span class="sc">\)</span> and <span class="sc">\(</span> \B = \begin{bmatrix} 5 &amp; 6 <span class="sc">\\</span> 7 &amp; 8 \end{bmatrix} <span class="sc">\)</span>. Then:</span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>    \A + \B = \begin{bmatrix} 1 &amp; 2 <span class="sc">\\</span> 3 &amp; 4 \end{bmatrix} + \begin{bmatrix} 5 &amp; 6 <span class="sc">\\</span> 7 &amp; 8 \end{bmatrix}</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>    = \begin{bmatrix} 1+5 &amp; 2+6 <span class="sc">\\</span> 3+7 &amp; 4+8 \end{bmatrix}</span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>    = \begin{bmatrix} 6 &amp; 8 <span class="sc">\\</span> 10 &amp; 12 \end{bmatrix}.</span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>::: {#thm-matrix-addition-properties}</span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties of Matrix Addition</span></span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A, \B, \C \in M_{m \times n}(F) <span class="sc">\)</span>. Then:</span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="sc">\(</span> \A + \B = \B + \A <span class="sc">\)</span> (Commutativity)</span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="sc">\(</span> (\A + \B) + \C = \A + (\B + \C) <span class="sc">\)</span> (Associativity)</span>
-<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="sc">\(</span> \A + \O = \A <span class="sc">\)</span> (Additive identity)</span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="sc">\(</span> \A + (-\A) = \O <span class="sc">\)</span> (Additive inverse)</span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>We prove commutativity. Let <span class="sc">\(</span> \A = (a_{ij}) <span class="sc">\)</span> and <span class="sc">\(</span> \B = (b_{ij}) <span class="sc">\)</span>. Then:</span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>    (\A + \B)_{ij} = a_{ij} + b_{ij} = b_{ij} + a_{ij} = (\B + \A)_{ij}</span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>where the second equality uses commutativity of addition in the underlying field. Since this holds for all <span class="sc">\(</span> i, j <span class="sc">\)</span>, we have <span class="sc">\(</span> \A + \B = \B + \A <span class="sc">\)</span>.</span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>The remaining properties follow similarly.</span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix Multiplication</span></span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>::: {#def-matrix-multiplication}</span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix Multiplication</span></span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = (a_{ij}) \in M_{m \times n}(F) <span class="sc">\)</span> and <span class="sc">\(</span> \B = (b_{jk}) \in M_{n \times p}(F) <span class="sc">\)</span>. Their **product** <span class="sc">\(</span> \A\B <span class="sc">\)</span> is the matrix <span class="sc">\(</span> \C = (c_{ik}) \in M_{m \times p}(F) <span class="sc">\)</span> where:</span>
-<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>    c_{ik} = \sum_{j=1}^{n} a_{ij} b_{jk}</span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>In other words, the <span class="sc">\(</span> (i, k) <span class="sc">\)</span>-entry of <span class="sc">\(</span> \A\B <span class="sc">\)</span> is the dot product of the <span class="sc">\(</span> i <span class="sc">\)</span>-th row of <span class="sc">\(</span> \A <span class="sc">\)</span> with the <span class="sc">\(</span> k <span class="sc">\)</span>-th column of <span class="sc">\(</span> \B <span class="sc">\)</span>.</span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>::: {#exm-matrix-multiplication}</span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix Multiplication</span></span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = \begin{bmatrix} 1 &amp; 2 <span class="sc">\\</span> 3 &amp; 4 \end{bmatrix} \in M_2(\nR) <span class="sc">\)</span> and <span class="sc">\(</span> \B = \begin{bmatrix} 5 &amp; 6 <span class="sc">\\</span> 7 &amp; 8 \end{bmatrix} \in M_2(\nR) <span class="sc">\)</span>. We compute <span class="sc">\(</span> \A\B <span class="sc">\)</span> entry by entry:</span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
-<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>    (\A\B)_{11} &amp;= (1)(5) + (2)(7) = 5 + 14 = 19 <span class="sc">\\</span></span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>    (\A\B)_{12} &amp;= (1)(6) + (2)(8) = 6 + 16 = 22 <span class="sc">\\</span></span>
-<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>    (\A\B)_{21} &amp;= (3)(5) + (4)(7) = 15 + 28 = 43 <span class="sc">\\</span></span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>    (\A\B)_{22} &amp;= (3)(6) + (4)(8) = 18 + 32 = 50</span>
-<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
-<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>Therefore:</span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>    \A\B = \begin{bmatrix} 1 &amp; 2 <span class="sc">\\</span> 3 &amp; 4 \end{bmatrix} \begin{bmatrix} 5 &amp; 6 <span class="sc">\\</span> 7 &amp; 8 \end{bmatrix} = \begin{bmatrix} 19 &amp; 22 <span class="sc">\\</span> 43 &amp; 50 \end{bmatrix}</span>
-<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>::: {#exm-matrix-multiplication-dimensions}</span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrix Multiplication with Different Dimensions</span></span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = \begin{bmatrix} 1 &amp; 2 &amp; 3 <span class="sc">\\</span> 4 &amp; 5 &amp; 6 \end{bmatrix} \in M_{2 \times 3}(\nR) <span class="sc">\)</span> and <span class="sc">\(</span> \B = \begin{bmatrix} 1 <span class="sc">\\</span> 0 <span class="sc">\\</span> -1 \end{bmatrix} \in M_{3 \times 1}(\nR) <span class="sc">\)</span>. The product <span class="sc">\(</span> \A\B \in M_{2 \times 1}(\nR) <span class="sc">\)</span>:</span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>    \A\B = \begin{bmatrix} 1 &amp; 2 &amp; 3 <span class="sc">\\</span> 4 &amp; 5 &amp; 6 \end{bmatrix} \begin{bmatrix} 1 <span class="sc">\\</span> 0 <span class="sc">\\</span> -1 \end{bmatrix}</span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>    = \begin{bmatrix} (1)(1) + (2)(0) + (3)(-1) <span class="sc">\\</span> (4)(1) + (5)(0) + (6)(-1) \end{bmatrix}</span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>    = \begin{bmatrix} 1 + 0 - 3 <span class="sc">\\</span> 4 + 0 - 6 \end{bmatrix}</span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>    = \begin{bmatrix} -2 <span class="sc">\\</span> -2 \end{bmatrix}</span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>Note that <span class="sc">\(</span> \B\A <span class="sc">\)</span> is **not defined** since the number of columns of <span class="sc">\(</span> \B <span class="sc">\)</span> (which is 1) does not equal the number of rows of <span class="sc">\(</span> \A <span class="sc">\)</span> (which is 2).</span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>::: {#thm-matrix-multiplication-properties}</span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties of Matrix Multiplication</span></span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A, \B, \C <span class="sc">\)</span> be matrices of compatible dimensions. Then:</span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="sc">\(</span> (\A\B)\C = \A(\B\C) <span class="sc">\)</span> (Associativity)</span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="sc">\(</span> \A(\B + \C) = \A\B + \A\C <span class="sc">\)</span> (Left distributivity)</span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="sc">\(</span> (\A + \B)\C = \A\C + \B\C <span class="sc">\)</span> (Right distributivity)</span>
-<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="sc">\(</span> \A\I = \I\A = \A <span class="sc">\)</span> (Multiplicative identity)</span>
-<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
-<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>We prove associativity. Let <span class="sc">\(</span> \A <span class="sc">\)</span> be <span class="sc">\(</span> m \times n <span class="sc">\)</span>, <span class="sc">\(</span> \B <span class="sc">\)</span> be <span class="sc">\(</span> n \times p <span class="sc">\)</span>, and <span class="sc">\(</span> \C <span class="sc">\)</span> be <span class="sc">\(</span> p \times q <span class="sc">\)</span>. For any entry <span class="sc">\(</span> (i, \ell) <span class="sc">\)</span>:</span>
-<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>    ((\A\B)\C)_{i\ell} &amp;= \sum_{k=1}^{p} (\A\B)_{ik} c_{k\ell} = \sum_{k=1}^{p} \left( \sum_{j=1}^{n} a_{ij} b_{jk} \right) c_{k\ell} <span class="sc">\\</span></span>
-<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>    &amp;= \sum_{k=1}^{p} \sum_{j=1}^{n} a_{ij} b_{jk} c_{k\ell} = \sum_{j=1}^{n} \sum_{k=1}^{p} a_{ij} b_{jk} c_{k\ell} <span class="sc">\\</span></span>
-<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>    &amp;= \sum_{j=1}^{n} a_{ij} \left( \sum_{k=1}^{p} b_{jk} c_{k\ell} \right) = \sum_{j=1}^{n} a_{ij} (\B\C)_{j\ell} <span class="sc">\\</span></span>
-<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>    &amp;= (\A(\B\C))_{i\ell}</span>
-<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
-<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>::: {.remark}</span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a>Matrix multiplication is **not** commutative in general. That is, <span class="sc">\(</span> \A\B \neq \B\A <span class="sc">\)</span> even when both products are defined.</span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scalar Multiplication</span></span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>::: {#def-scalar-multiplication}</span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scalar Multiplication</span></span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = (a_{ij}) \in M_{m \times n}(F) <span class="sc">\)</span> and <span class="sc">\(</span> c \in F <span class="sc">\)</span> be a scalar. The **scalar multiple** <span class="sc">\(</span> c\A <span class="sc">\)</span> is the matrix in <span class="sc">\(</span> M_{m \times n}(F) <span class="sc">\)</span> with entries <span class="sc">\(</span> (ca_{ij}) <span class="sc">\)</span>.</span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a><span class="fu">## Trace of a Matrix</span></span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>::: {#def-trace}</span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## Trace</span></span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = (a_{ij}) \in M_n(F) <span class="sc">\)</span> be a square matrix. The **trace** of <span class="sc">\(</span> \A <span class="sc">\)</span>, denoted <span class="sc">\(</span> \tr(\A) <span class="sc">\)</span>, is the sum of the entries on its main diagonal:</span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>    \tr(\A) = \sum_{i=1}^n a_{ii} = a_{11} + a_{22} + \cdots + a_{nn}.</span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a>::: {#exm-trace}</span>
-<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a><span class="fu">## Trace</span></span>
-<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A = \begin{bmatrix} 1 &amp; 2 &amp; 3 <span class="sc">\\</span> 4 &amp; 5 &amp; 6 <span class="sc">\\</span> 7 &amp; 8 &amp; 9 \end{bmatrix} <span class="sc">\)</span>. Then <span class="sc">\(</span> \tr(\A) = 1 + 5 + 9 = 15 <span class="sc">\)</span>.</span>
-<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties of Transpose and Trace</span></span>
-<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a>::: {#thm-transpose-properties}</span>
-<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties of Transpose</span></span>
-<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A, \B <span class="sc">\)</span> be matrices of compatible sizes and <span class="sc">\(</span> c \in F <span class="sc">\)</span>. Then:</span>
-<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="sc">\(</span> (\A\T)\T = \A <span class="sc">\)</span></span>
-<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="sc">\(</span> (\A + \B)\T = \A\T + \B\T <span class="sc">\)</span></span>
-<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="sc">\(</span> (c\A)\T = c\A\T <span class="sc">\)</span></span>
-<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="sc">\(</span> (\A\B)\T = \B\T\A\T <span class="sc">\)</span> (Reversal rule)</span>
-<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
-<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>We prove the reversal rule <span class="sc">\(</span> (\A\B)\T = \B\T\A\T <span class="sc">\)</span>. Let <span class="sc">\(</span> \A \in M_{m \times n}(F) <span class="sc">\)</span> and <span class="sc">\(</span> \B \in M_{n \times p}(F) <span class="sc">\)</span>.</span>
-<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a>    ((\A\B)\T)_{ij} = (\A\B)_{ji} = \sum_{k=1}^n a_{jk} b_{ki}</span>
-<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a>Now consider <span class="sc">\(</span> \B\T\A\T <span class="sc">\)</span>. Its <span class="sc">\(</span> (i, j) <span class="sc">\)</span>-entry is:</span>
-<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a>    (\B\T\A\T)_{ij} = \sum_{k=1}^n (\B\T)_{ik} (\A\T)_{kj} = \sum_{k=1}^n b_{ki} a_{jk} = \sum_{k=1}^n a_{jk} b_{ki}</span>
-<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a>Since the entries are equal for all <span class="sc">\(</span> i, j <span class="sc">\)</span>, we have <span class="sc">\(</span> (\A\B)\T = \B\T\A\T <span class="sc">\)</span>.</span>
-<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>::: {#thm-trace-properties}</span>
-<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a><span class="fu">## Properties of Trace</span></span>
-<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> \A, \B \in M_n(F) <span class="sc">\)</span> and <span class="sc">\(</span> c \in F <span class="sc">\)</span>. Then:</span>
-<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="sc">\(</span> \tr(\A + \B) = \tr(\A) + \tr(\B) <span class="sc">\)</span></span>
-<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="sc">\(</span> \tr(c\A) = c\tr(\A) <span class="sc">\)</span></span>
-<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="sc">\(</span> \tr(\A\T) = \tr(\A) <span class="sc">\)</span></span>
-<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="sc">\(</span> \tr(\A\B) = \tr(\B\A) <span class="sc">\)</span> (Cyclic property)</span>
-<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
-<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a>We prove <span class="sc">\(</span> \tr(\A\B) = \tr(\B\A) <span class="sc">\)</span>.</span>
-<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a>    \tr(\A\B) = \sum_{i=1}^n (\A\B)_{ii} = \sum_{i=1}^n \left( \sum_{j=1}^n a_{ij} b_{ji} \right)</span>
-<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a>Rearranging the summation:</span>
-<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a>    \tr(\A\B) = \sum_{j=1}^n \sum_{i=1}^n b_{ji} a_{ij} = \sum_{j=1}^n (\B\A)_{jj} = \tr(\B\A).</span>
-<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1846,38 +1512,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // ==========================================
       // 4. Fix tooltip (hover preview) numbering
       // ==========================================
-      // Use MutationObserver to watch for tooltip elements
-      var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              // Check if this is a tippy tooltip container
-              var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-              if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-                tippyContent = node;
-              }
-              if (tippyContent) {
-                fixTooltipContent(tippyContent);
-              }
-              // Also check children for tippy-content
-              if (node.querySelectorAll) {
-                node.querySelectorAll('.tippy-content').forEach(function(tc) {
-                  fixTooltipContent(tc);
-                });
-              }
-            }
-          });
-        });
-      });
+      // (Moved to global scope below to handle outside of fetch and with safety checks)
       
-      observer.observe(document.body, { childList: true, subtree: true });
-    
-      // Fallback: Aggressive poll to fix existing tooltips
-      setInterval(function() {
-        document.querySelectorAll('.tippy-content').forEach(function(tc) {
-           fixTooltipContent(tc);
-        });
-      }, 100);
     })
     .catch(function(err) {
       console.log('Could not load theorem map:', err);
@@ -1889,18 +1525,33 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // MOVED OUTSIDE FETCH:
   // Use MutationObserver for robust tooltip handling
+  
+  // Track modal state
+  var isModalOpen = false;
+  
+  // Bootstrap 5 modal events
+  document.addEventListener('show.bs.modal', function () { isModalOpen = true; });
+  document.addEventListener('hidden.bs.modal', function () { isModalOpen = false; });
+  
   var observer = new MutationObserver(function(mutations) {
+     // Optimization: Don't run if a modal is open (prevents freezing code-tools)
+     if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+     
      mutations.forEach(function(mutation) {
        mutation.addedNodes.forEach(function(node) {
          if (node.nodeType === Node.ELEMENT_NODE) {
-           var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-           if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-             tippyContent = node;
-           }
-           if (tippyContent) fixTooltipContent(tippyContent);
-           
-           if (node.querySelectorAll) {
-             node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+           // Targeted check: is this a tippy tooltip or does it contain one?
+           if (node.classList && node.classList.contains('tippy-box')) {
+             var tc = node.querySelector('.tippy-content');
+             if (tc) fixTooltipContent(tc);
+           } else if (node.classList && node.classList.contains('tippy-content')) {
+             fixTooltipContent(node);
+           } else if (node.querySelectorAll) {
+             // Only query if the node is a likely container for tooltips
+             // This avoids scanning massive blocks of code/text
+             if (node.classList && (node.classList.contains('tippy-box') || node.id === 'quarto-ref-popover')) {
+               node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+             }
            }
          }
        });
@@ -1908,22 +1559,32 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   observer.observe(document.body, { childList: true, subtree: true });
     
-  // Aggressive Fallback
+  // Fallback - Pause during modals
   setInterval(function() {
-     document.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
-  }, 100);
+     if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+     
+     document.querySelectorAll('.tippy-content:not([data-numbering-fixed])').forEach(function(tc) { 
+       fixTooltipContent(tc); 
+     });
+  }, 500);
 
   // Function to fix numbering in tooltip content
   function fixTooltipContent(tooltipContent) {
-    // Remove dataset check aka FORCE FIX every time
-    // tooltipContent.dataset.numberingFixed = 'true'; 
+    if (!tooltipContent || tooltipContent.dataset.numberingFixed) return;
+    
+    // Mark as fixed BEFORE modifying to prevent infinite mutation loops
+    tooltipContent.dataset.numberingFixed = 'true'; 
     
     // Find theorem-title elements in tooltip
     var titles = tooltipContent.querySelectorAll('.theorem-title strong, .theorem-title');
     titles.forEach(function(title) {
       // Just strip the number entirely: "Theorem 9.1 (Name)" -> "Theorem (Name)"
       // Regex matches space + number pattern (e.g. " 9.1", " 1.2.3")
-      title.innerHTML = title.innerHTML.replace(/\s+\d+(\.\d+)*/, '');
+      var originalHTML = title.innerHTML;
+      var newHTML = originalHTML.replace(/\s+\d+(\.\d+)*/, '');
+      if (newHTML !== originalHTML) {
+        title.innerHTML = newHTML;
+      }
     });
   }
 });

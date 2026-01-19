@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tzu-You Lin">
-<meta name="dcterms.date" content="2026-01-19">
+<meta name="dcterms.date" content="2026-01-20">
 
 <title>Linear Algebra</title>
 <style>
@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -254,10 +219,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
-  <li><a href="#about-this-book" id="toc-about-this-book" class="nav-link" data-scroll-target="#about-this-book">About This Book</a></li>
-  <li><a href="#how-to-use-this-book" id="toc-how-to-use-this-book" class="nav-link" data-scroll-target="#how-to-use-this-book">How to Use This Book</a></li>
+  <li><a href="#the-philosophy-of-this-book" id="toc-the-philosophy-of-this-book" class="nav-link" data-scroll-target="#the-philosophy-of-this-book">The Philosophy of this Book</a></li>
+  <li><a href="#how-to-use-these-notes" id="toc-how-to-use-these-notes" class="nav-link" data-scroll-target="#how-to-use-these-notes">How to Use These Notes</a></li>
   <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -267,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Linear Algebra</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<h1 class="title">Linear Algebra</h1>
 <p class="subtitle lead">Proof-based Introduction</p>
 </div>
 
@@ -285,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 19, 2026</p>
+      <p class="date">January 20, 2026</p>
     </div>
   </div>
   
@@ -299,41 +263,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1>
-<p>Welcome to <strong>Advanced Linear Algebra Notes</strong>, a comprehensive guide to spectral theory and optimization techniques in linear algebra.</p>
-<section id="about-this-book" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-book">About This Book</h2>
-<p>This book provides a rigorous yet accessible introduction to advanced topics in linear algebra, with a focus on:</p>
-<ul>
-<li><strong>Spectral Theory</strong>: Eigenvalues, eigenvectors, and matrix decompositions</li>
-<li><strong>Optimization</strong>: Convex optimization and its applications</li>
-<li><strong>Computational Methods</strong>: Algorithms for numerical linear algebra</li>
-</ul>
+<p>Linear Algebra is often the first place where a student encounters the true power of mathematical abstraction. In an introductory course, one learns to manipulate matrices, solve systems of linear equations, and perhaps calculate eigenvalues. But <em>Advanced</em> Linear Algebra is about something deeper: it is the study of structures.</p>
+<section id="the-philosophy-of-this-book" class="level2">
+<h2 class="anchored" data-anchor-id="the-philosophy-of-this-book">The Philosophy of this Book</h2>
+<p>The central theme of these notes is the transition from concrete calculation to abstract reasoning. We begin not with numbers, but with axioms. By choosing to define mathematical objects—be they vectors, linear transformations, or inner products—entirely by how they behave rather than what they are, we unlock a universal language.</p>
+<p>A theorem proved for an abstract vector space is a theorem proved simultaneously for geometric arrows, for polynomials, for continuous functions, and for quantum states. This “solve once, apply everywhere” philosophy is the heartbeat of modern mathematics.</p>
 </section>
-<section id="how-to-use-this-book" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use-this-book">How to Use This Book</h2>
-<p>Each chapter contains:</p>
+<section id="how-to-use-these-notes" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-these-notes">How to Use These Notes</h2>
+<p>This book is designed to be a rigorous companion for a second course in linear algebra. Each chapter is structured to build a solid theoretical foundation:</p>
 <ul>
-<li><strong>Definitions</strong> with precise mathematical statements</li>
-<li><strong>Theorems</strong> with complete proofs</li>
-<li><strong>Examples</strong> illustrating key concepts</li>
-<li><strong>Exercises</strong> for practice</li>
+<li><strong>Rigorous Definitions</strong>: We start with precise mathematical statements to ensure no ambiguity in our logic.</li>
+<li><strong>Complete Proofs</strong>: Every major result is accompanied by a full proof. Mathematics is not a spectator sport; I encourage you to attempt the proofs yourself before reading the solutions.</li>
+<li><strong>Illustrative Examples</strong>: Abstract theory is balanced with concrete examples to build intuition.</li>
+<li><strong>Exercises</strong>: Practice problems are provided at the end of sections to test your understanding.</li>
 </ul>
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p>Readers should be familiar with:</p>
+<p>To get the most out of these notes, you should have a solid grasp of:</p>
 <ul>
-<li>Basic linear algebra (vectors, matrices, linear transformations)</li>
-<li>Calculus (derivatives, integrals)</li>
-<li>Basic proof techniques</li>
+<li><strong>Introductory Linear Algebra</strong>: You should be comfortable with matrix multiplication, determinants, and Gaussian elimination.</li>
+<li><strong>Calculus</strong>: Familiarity with derivatives and integrals is assumed for some of our more advanced examples.</li>
+<li><strong>Mathematical Maturity</strong>: A basic understanding of logic and proof techniques (induction, contradiction, contrapositive) is essential. These are reviewed briefly in Chapter 0.</li>
 </ul>
-</section>
-<section id="acknowledgments" class="level2">
-<h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
-<p>This book was created using <a href="https://quarto.org/">Quarto</a> with a custom LaTeX template for beautiful mathematical typesetting.</p>
+<hr>
+<p>Welcome to the world of abstract linear algebra. I hope you find as much beauty in these structures as I do.</p>
 
-
-<!-- -->
 
 </section>
 </section>
@@ -409,57 +365,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -798,40 +703,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <span class="nav-page-text">Preliminary</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preface {.unnumbered}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Welcome to **Advanced Linear Algebra Notes**, a comprehensive guide to spectral theory and optimization techniques in linear algebra.</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## About This Book</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>This book provides a rigorous yet accessible introduction to advanced topics in linear algebra, with a focus on:</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Spectral Theory**: Eigenvalues, eigenvectors, and matrix decompositions</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Optimization**: Convex optimization and its applications</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Computational Methods**: Algorithms for numerical linear algebra</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Use This Book</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Each chapter contains:</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Definitions** with precise mathematical statements</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Theorems** with complete proofs</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Examples** illustrating key concepts</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Exercises** for practice</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prerequisites</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Readers should be familiar with:</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Basic linear algebra (vectors, matrices, linear transformations)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Calculus (derivatives, integrals)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Basic proof techniques</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Acknowledgments</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>This book was created using <span class="co">[</span><span class="ot">Quarto</span><span class="co">](https://quarto.org/)</span> with a custom LaTeX template for beautiful mathematical typesetting.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1038,38 +910,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // ==========================================
       // 4. Fix tooltip (hover preview) numbering
       // ==========================================
-      // Use MutationObserver to watch for tooltip elements
-      var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              // Check if this is a tippy tooltip container
-              var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-              if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-                tippyContent = node;
-              }
-              if (tippyContent) {
-                fixTooltipContent(tippyContent);
-              }
-              // Also check children for tippy-content
-              if (node.querySelectorAll) {
-                node.querySelectorAll('.tippy-content').forEach(function(tc) {
-                  fixTooltipContent(tc);
-                });
-              }
-            }
-          });
-        });
-      });
+      // (Moved to global scope below to handle outside of fetch and with safety checks)
       
-      observer.observe(document.body, { childList: true, subtree: true });
-    
-      // Fallback: Aggressive poll to fix existing tooltips
-      setInterval(function() {
-        document.querySelectorAll('.tippy-content').forEach(function(tc) {
-           fixTooltipContent(tc);
-        });
-      }, 100);
     })
     .catch(function(err) {
       console.log('Could not load theorem map:', err);
@@ -1081,18 +923,33 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // MOVED OUTSIDE FETCH:
   // Use MutationObserver for robust tooltip handling
+  
+  // Track modal state
+  var isModalOpen = false;
+  
+  // Bootstrap 5 modal events
+  document.addEventListener('show.bs.modal', function () { isModalOpen = true; });
+  document.addEventListener('hidden.bs.modal', function () { isModalOpen = false; });
+  
   var observer = new MutationObserver(function(mutations) {
+     // Optimization: Don't run if a modal is open (prevents freezing code-tools)
+     if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+     
      mutations.forEach(function(mutation) {
        mutation.addedNodes.forEach(function(node) {
          if (node.nodeType === Node.ELEMENT_NODE) {
-           var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-           if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-             tippyContent = node;
-           }
-           if (tippyContent) fixTooltipContent(tippyContent);
-           
-           if (node.querySelectorAll) {
-             node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+           // Targeted check: is this a tippy tooltip or does it contain one?
+           if (node.classList && node.classList.contains('tippy-box')) {
+             var tc = node.querySelector('.tippy-content');
+             if (tc) fixTooltipContent(tc);
+           } else if (node.classList && node.classList.contains('tippy-content')) {
+             fixTooltipContent(node);
+           } else if (node.querySelectorAll) {
+             // Only query if the node is a likely container for tooltips
+             // This avoids scanning massive blocks of code/text
+             if (node.classList && (node.classList.contains('tippy-box') || node.id === 'quarto-ref-popover')) {
+               node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+             }
            }
          }
        });
@@ -1100,22 +957,32 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   observer.observe(document.body, { childList: true, subtree: true });
     
-  // Aggressive Fallback
+  // Fallback - Pause during modals
   setInterval(function() {
-     document.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
-  }, 100);
+     if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+     
+     document.querySelectorAll('.tippy-content:not([data-numbering-fixed])').forEach(function(tc) { 
+       fixTooltipContent(tc); 
+     });
+  }, 500);
 
   // Function to fix numbering in tooltip content
   function fixTooltipContent(tooltipContent) {
-    // Remove dataset check aka FORCE FIX every time
-    // tooltipContent.dataset.numberingFixed = 'true'; 
+    if (!tooltipContent || tooltipContent.dataset.numberingFixed) return;
+    
+    // Mark as fixed BEFORE modifying to prevent infinite mutation loops
+    tooltipContent.dataset.numberingFixed = 'true'; 
     
     // Find theorem-title elements in tooltip
     var titles = tooltipContent.querySelectorAll('.theorem-title strong, .theorem-title');
     titles.forEach(function(title) {
       // Just strip the number entirely: "Theorem 9.1 (Name)" -> "Theorem (Name)"
       // Regex matches space + number pattern (e.g. " 9.1", " 1.2.3")
-      title.innerHTML = title.innerHTML.replace(/\s+\d+(\.\d+)*/, '');
+      var originalHTML = title.innerHTML;
+      var newHTML = originalHTML.replace(/\s+\d+(\.\d+)*/, '');
+      if (newHTML !== originalHTML) {
+        title.innerHTML = newHTML;
+      }
     });
   }
 });

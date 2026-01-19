@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -283,7 +248,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/ch00-foundations/index.html">Preliminary</a></li><li class="breadcrumb-item"><a href="../../src/ch00-foundations/02-functions.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Functions</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Functions</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Functions</span></h1>
 </div>
 
 
@@ -302,177 +267,176 @@ window.Quarto = {
 
 <div style="display:none">
 $$
-\def\nR{\mathbb{R}}
-\def\nC{\mathbb{C}}
-\def\nN{\mathbb{N}}
-\def\nZ{\mathbb{Z}}
-\def\nQ{\mathbb{Q}}
-\def\nF{\mathbb{F}}
-\def\nP{\mathbb{P}}
-\def\nE{\mathbb{E}}
-\def\sA{\mathcal{A}}
-\def\sB{\mathcal{B}}
-\def\sC{\mathcal{C}}
-\def\sD{\mathcal{D}}
-\def\sE{\mathcal{E}}
-\def\sF{\mathcal{F}}
-\def\sG{\mathcal{G}}
-\def\sH{\mathcal{H}}
-\def\sL{\mathcal{L}}
-\def\sM{\mathcal{M}}
-\def\sN{\mathcal{N}}
-\def\sO{\mathcal{O}}
-\def\sP{\mathcal{P}}
-\def\sS{\mathcal{S}}
-\def\sT{\mathcal{T}}
-\def\sX{\mathcal{X}}
-\def\sY{\mathcal{Y}}
-\def\va{\mathbf{a}}
-\def\vb{\mathbf{b}}
-\def\vc{\mathbf{c}}
-\def\vd{\mathbf{d}}
-\def\ve{\mathbf{e}}
-\def\vf{\mathbf{f}}
-\def\vg{\mathbf{g}}
-\def\vh{\mathbf{h}}
-\def\vi{\mathbf{i}}
-\def\vj{\mathbf{j}}
-\def\vk{\mathbf{k}}
-\def\vl{\mathbf{l}}
-\def\vm{\mathbf{m}}
-\def\vn{\mathbf{n}}
-\def\vo{\mathbf{o}}
-\def\vp{\mathbf{p}}
-\def\vq{\mathbf{q}}
-\def\vr{\mathbf{r}}
-\def\vs{\mathbf{s}}
-\def\vt{\mathbf{t}}
-\def\vu{\mathbf{u}}
-\def\vv{\mathbf{v}}
-\def\vw{\mathbf{w}}
-\def\vx{\mathbf{x}}
-\def\vy{\mathbf{y}}
-\def\vz{\mathbf{z}}
-\def\mA{\mathbf{A}}
-\def\mB{\mathbf{B}}
-\def\mC{\mathbf{C}}
-\def\mD{\mathbf{D}}
-\def\mE{\mathbf{E}}
-\def\mF{\mathbf{F}}
-\def\mG{\mathbf{G}}
-\def\mH{\mathbf{H}}
-\def\mI{\mathbf{I}}
-\def\mJ{\mathbf{J}}
-\def\mK{\mathbf{K}}
-\def\mL{\mathbf{L}}
-\def\mM{\mathbf{M}}
-\def\mN{\mathbf{N}}
-\def\mO{\mathbf{O}}
-\def\mP{\mathbf{P}}
-\def\mQ{\mathbf{Q}}
-\def\mR{\mathbf{R}}
-\def\mS{\mathbf{S}}
-\def\mT{\mathbf{T}}
-\def\mU{\mathbf{U}}
-\def\mV{\mathbf{V}}
-\def\mW{\mathbf{W}}
-\def\mX{\mathbf{X}}
-\def\mY{\mathbf{Y}}
-\def\mZ{\mathbf{Z}}
-\def\A{\mathbf{A}}
-\def\B{\mathbf{B}}
-\def\C{\mathbf{C}}
-\def\D{\mathbf{D}}
-\def\E{\mathbf{E}}
-\def\F{\mathbf{F}}
-\def\G{\mathbf{G}}
-\def\H{\mathbf{H}}
-\def\I{\mathbf{I}}
-\def\J{\mathbf{J}}
-\def\K{\mathbf{K}}
-\def\L{\mathbf{L}}
-\def\M{\mathbf{M}}
-\def\N{\mathbf{N}}
-\def\O{\mathbf{O}}
-\def\P{\mathbf{P}}
-\def\Q{\mathbf{Q}}
-\def\R{\mathbf{R}}
-\def\S{\mathbf{S}}
-\def\T{^\top}
-\def\U{\mathbf{U}}
-\def\V{\mathbf{V}}
-\def\W{\mathbf{W}}
-\def\X{\mathbf{X}}
-\def\Y{\mathbf{Y}}
-\def\Z{\mathbf{Z}}
-\def\valpha{\boldsymbol{\alpha}}
-\def\vbeta{\boldsymbol{\beta}}
-\def\vgamma{\boldsymbol{\gamma}}
-\def\vdelta{\boldsymbol{\delta}}
-\def\vepsilon{\boldsymbol{\epsilon}}
-\def\vzeta{\boldsymbol{\zeta}}
-\def\veta{\boldsymbol{\eta}}
-\def\vtheta{\boldsymbol{\theta}}
-\def\viota{\boldsymbol{\iota}}
-\def\vkappa{\boldsymbol{\kappa}}
-\def\vlambda{\boldsymbol{\lambda}}
-\def\vmu{\boldsymbol{\mu}}
-\def\vnu{\boldsymbol{\nu}}
-\def\vxi{\boldsymbol{\xi}}
-\def\vpi{\boldsymbol{\pi}}
-\def\vrho{\boldsymbol{\rho}}
-\def\vsigma{\boldsymbol{\sigma}}
-\def\vtau{\boldsymbol{\tau}}
-\def\vupsilon{\boldsymbol{\upsilon}}
-\def\vphi{\boldsymbol{\phi}}
-\def\vchi{\boldsymbol{\chi}}
-\def\vpsi{\boldsymbol{\psi}}
-\def\vomega{\boldsymbol{\omega}}
-\def\vGamma{\boldsymbol{\Gamma}}
-\def\vDelta{\boldsymbol{\Delta}}
-\def\vTheta{\boldsymbol{\Theta}}
-\def\vLambda{\boldsymbol{\Lambda}}
-\def\vXi{\boldsymbol{\Xi}}
-\def\vPi{\boldsymbol{\Pi}}
-\def\vSigma{\boldsymbol{\Sigma}}
-\def\vUpsilon{\boldsymbol{\Upsilon}}
-\def\vPhi{\boldsymbol{\Phi}}
-\def\vPsi{\boldsymbol{\Psi}}
-\def\vOmega{\boldsymbol{\Omega}}
-\def\ra{\mathbf{a}}
-\def\rb{\mathbf{b}}
-\def\rc{\mathbf{c}}
-\def\rd{\mathbf{d}}
-\def\re{\mathbf{e}}
-\def\rf{\mathbf{f}}
-\def\rg{\mathbf{g}}
-\def\rh{\mathbf{h}}
-\def\ri{\mathbf{i}}
-\def\rj{\mathbf{j}}
-\def\rk{\mathbf{k}}
-\def\rl{\mathbf{l}}
-\def\rm{\mathbf{m}}
-\def\rn{\mathbf{n}}
-\def\ro{\mathbf{o}}
-\def\rp{\mathbf{p}}
-\def\rq{\mathbf{q}}
-\def\rr{\mathbf{r}}
-\def\rs{\mathbf{s}}
-\def\rt{\mathbf{t}}
-\def\ru{\mathbf{u}}
-\def\rv{\mathbf{v}}
-\def\rw{\mathbf{w}}
-\def\rx{\mathbf{x}}
-\def\ry{\mathbf{y}}
-\def\rz{\mathbf{z}}
-\def\vzero{\mathbf{0}}
-\def\vone{\mathbf{1}}
-\def\Ev{\mathbb{E}}
+% ======================================================================================
+% MATHEMATICAL NOTATION SHORTCUTS
+% ======================================================================================
+% This file contains convenient mathematical notation shortcuts for academic documents
+% Author: Tzu-You Lin
+% ======================================================================================
+
+% General sets
+\def \sA {\mathcal{A}}
+\def \sB {\mathcal{B}}
+\def \sC {\mathcal{C}}
+\def \sD {\mathcal{D}}
+\def \sE {\mathcal{E}}
+\def \sF {\mathcal{F}}
+\def \sG {\mathcal{G}}
+\def \sH {\mathcal{H}}
+\def \sI {\mathcal{I}}
+\def \sJ {\mathcal{J}}
+\def \sK {\mathcal{K}}
+\def \sL {\mathcal{L}}
+\def \sM {\mathcal{M}}
+\def \sN {\mathcal{N}}
+\def \sO {\mathcal{O}}
+\def \sP {\mathcal{P}}
+\def \sQ {\mathcal{Q}}
+\def \sR {\mathcal{R}}
+\def \sS {\mathcal{S}}
+\def \sT {\mathcal{T}}
+\def \sU {\mathcal{U}}
+\def \sV {\mathcal{V}}
+\def \sW {\mathcal{W}}
+\def \sX {\mathcal{X}}
+\def \sY {\mathcal{Y}}
+\def \sZ {\mathcal{Z}}
+
+% Number sets
+\def \nA {\mathbb{A}}
+\def \nB {\mathbb{B}}
+\def \nC {\mathbb{C}}
+\def \nD {\mathbb{D}}
+\def \nE {\mathbb{E}}
+\def \nF {\mathbb{F}}
+\def \nG {\mathbb{G}}
+\def \nH {\mathbb{H}}
+\def \nI {\mathbb{I}}
+\def \nJ {\mathbb{J}}
+\def \nK {\mathbb{K}}
+\def \nL {\mathbb{L}}
+\def \nM {\mathbb{M}}
+\def \nN {\mathbb{N}}
+\def \nO {\mathbb{O}}
+\def \nP {\mathbb{P}}
+\def \nQ {\mathbb{Q}}
+\def \nR {\mathbb{R}}
+\def \nS {\mathbb{S}}
+\def \nT {\mathbb{T}}
+\def \nU {\mathbb{U}}
+\def \nV {\mathbb{V}}
+\def \nW {\mathbb{W}}
+\def \nX {\mathbb{X}}
+\def \nY {\mathbb{Y}}
+\def \nZ {\mathbb{Z}}
+
+\def \a {\mathbf{a}}
+\def \b {\mathbf{b}}
+\def \c {\mathbf{c}}
+\def \d {\mathbf{d}}
+\def \e {\mathbf{e}}
+\def \f {\mathbf{f}}
+\def \g {\mathbf{g}}
+\def \h {\mathbf{h}}
+\def \i {\mathbf{i}}
+\def \j {\mathbf{j}}
+\def \k {\mathbf{k}}
+\def \l {\mathbf{l}}
+\def \m {\mathbf{m}}
+\def \n {\mathbf{n}}
+\def \o {\mathbf{o}}
+\def \p {\mathbf{p}}
+\def \q {\mathbf{q}}
+\def \r {\mathbf{r}}
+\def \s {\mathbf{s}}
+\def \t {\mathbf{t}}
+\def \u {\mathbf{u}}
+\def \v {\mathbf{v}}
+\def \w {\mathbf{w}}
+\def \x {\mathbf{x}}
+\def \y {\mathbf{y}}
+\def \z {\mathbf{z}}
+\def \A {\mathbf{A}}
+\def \B {\mathbf{B}}
+\def \C {\mathbf{C}}
+\def \D {\mathbf{D}}
+\def \E {\mathbf{E}}
+\def \F {\mathbf{F}}
+\def \G {\mathbf{G}}
+\def \H {\mathbf{H}}
+\def \I {\mathbf{I}}
+\def \J {\mathbf{J}}
+\def \K {\mathbf{K}}
+\def \L {\mathbf{L}}
+\def \M {\mathbf{M}}
+\def \N {\mathbf{N}}
+\def \O {\mathbf{O}}
+\def \P {\mathbf{P}}
+\def \Q {\mathbf{Q}}
+\def \R {\mathbf{R}}
+\def \S {\mathbf{S}}
+\def \T {\mathbf{T}}
+\def \U {\mathbf{U}}
+\def \V {\mathbf{V}}
+\def \W {\mathbf{W}}
+\def \X {\mathbf{X}}
+\def \Y {\mathbf{Y}}
+\def \Z {\mathbf{Z}}
+
+\def \0 {\mathbf{0}}
+\def \1 {\mathbf{1}}
+
+% vector and matrix notation
+\def \valpha {\bm{\upalpha}}
+\def \vbeta {\bm{\upbeta}}
+\def \vgamma {\bm{\upgamma}}
+\def \vdelta {\bm{\updelta}}
+\def \vepsilon {\bm{\upepsilon}}
+\def \vzeta {\bm{\upzeta}}
+\def \veta {\bm{\upeta}}
+\def \vtheta {\bm{\uptheta}}
+\def \viota {\bm{\upiota}}
+\def \vkappa {\bm{\upkappa}}
+\def \vlambda {\bm{\uplambda}}
+\def \vmu {\bm{\upmu}}
+\def \vnu {\bm{\upnu}}
+\def \vxi {\bm{\upxi}}
+\def \vpi {\bm{\uppi}}
+\def \vrho {\bm{\uprho}}
+\def \vsigma {\bm{\upsigma}}
+\def \vtau {\bm{\uptau}}
+\def \vupsilon {\bm{\upupsilon}}
+\def \vphi {\bm{\upphi}}
+\def \vchi {\bm{\upchi}}
+\def \vpsi {\bm{\uppsi}}
+\def \vomega {\bm{\upomega}}
+\def \vvarepsilon {\bm{\upvarepsilon}}
+\def \vvartheta {\bm{\upvartheta}}
+\def \vvarpi {\bm{\upvarpi}}
+\def \vvarrho {\bm{\upvarrho}}
+\def \vvarsigma {\bm{\upvarsigma}}
+\def \vvarphi {\bm{\upvarphi}}
+\def \vGamma {\bm{\Gamma}}
+\def \vDelta {\bm{\Delta}}
+\def \vTheta {\bm{\Theta}}
+\def \vLambda {\bm{\Lambda}}
+\def \vXi {\bm{\Xi}}
+\def \vPi {\bm{\Pi}}
+\def \vSigma {\bm{\Sigma}}
+\def \vUpsilon {\bm{\Upsilon}}
+\def \vPhi {\bm{\Phi}}
+\def \vPsi {\bm{\Psi}}
+\def \vOmega {\bm{\Omega}}
+
+% Probability
+\def\Ev{\operatorname*{\mathbb{E}}}
 \def\Pr{\operatorname{Pr}}
-\def\Var{\operatorname{Var}}
-\def\Cov{\operatorname{Cov}}
-\def\Cor{\operatorname{Cor}}
-\def\Corr{\operatorname{Corr}}
+\def\Var{\operatorname*{Var}}
+\def\Cov{\operatorname*{Cov}}
+\def\Cor{\operatorname*{Cor}}
+\def\Corr{\operatorname*{Corr}}
+
+% Distributions
 \def\distBern{\operatorname{Ber}}
 \def\distBin{\operatorname{Bin}}
 \def\distGeom{\operatorname{Geo}}
@@ -482,98 +446,209 @@ $$
 \def\distUnif{\operatorname{Unif}}
 \def\distExp{\operatorname{Exp}}
 \def\distGamma{\operatorname{Gamma}}
-\def\distN{\mathcal{N}}
+\def\distN{\operatorname{\mathcal{N}}}
 \def\distBeta{\operatorname{Beta}}
 \def\distCauchy{\operatorname{Cauchy}}
+\def\distLognormal{\operatorname{Lognormal}}
+\def\distWeibull{\operatorname{Weibull}}
+\def\distPareto{\operatorname{Pareto}}
 \def\distDir{\operatorname{Dir}}
 \def\distMult{\operatorname{Mult}}
 \def\distWishart{\operatorname{Wishart}}
+\def\distInvWishart{\operatorname{InvWishart}}
+
+% Linear algebra
 \def\tr{\operatorname{tr}}
-\def\trace{\operatorname{tr}}
 \def\rank{\operatorname{rank}}
 \def\nullity{\operatorname{nullity}}
-\def\Span{\operatorname{span}}
 \def\spn{\operatorname{span}}
+\def\Span{\operatorname{span}}
 \def\col{\operatorname{col}}
 \def\row{\operatorname{row}}
 \def\nul{\operatorname{nul}}
+\def\ker{\operatorname{ker}}
 \def\img{\operatorname{img}}
+\def\adj{\operatorname{adj}}
 \def\diag{\operatorname{diag}}
-\def\dd{\mathrm{d}}
-\def\transpose{^\top}
-\def\inv{^{-1}}
-\def\abs#1{\left\lvert#1\right\rvert}
-\def\norm#1{\left\lVert#1\right\rVert}
-\def\floor#1{\left\lfloor#1\right\rfloor}
-\def\ceil#1{\left\lceil#1\right\rceil}
-\def\inner#1#2{\langle #1, #2 \rangle}
-\def\lcm{\operatorname{lcm}}
-\def\im{\operatorname{im}}
-\def\sgn{\operatorname{sgn}}
-\def\argmax{\operatorname{argmax}}
-\def\argmin{\operatorname{argmin}}
-\def\softmax{\operatorname{softmax}}
-\def\x{\vx}
-\def\y{\vy}
-\def\z{\vz}
-\def\w{\vw}
-\def\u{\vu}
-\def\e{\ve}
-\def\ba{\mathbf{a}}
-\def\bb{\mathbf{b}}
-\def\bc{\mathbf{c}}
-\def\bd{\mathbf{d}}
-\def\be{\mathbf{e}}
-\def\bff{\mathbf{f}}
-\def\bg{\mathbf{g}}
-\def\bh{\mathbf{h}}
-\def\bi{\mathbf{i}}
-\def\bj{\mathbf{j}}
-\def\bk{\mathbf{k}}
-\def\bl{\mathbf{l}}
-\def\bm{\mathbf{m}}
-\def\bn{\mathbf{n}}
-\def\bo{\mathbf{o}}
-\def\bp{\mathbf{p}}
-\def\bq{\mathbf{q}}
-\def\br{\mathbf{r}}
-\def\bs{\mathbf{s}}
-\def\bt{\mathbf{t}}
-\def\bu{\mathbf{u}}
-\def\bv{\mathbf{v}}
-\def\bw{\mathbf{w}}
-\def\bx{\mathbf{x}}
-\def\by{\mathbf{y}}
-\def\bz{\mathbf{z}}
-\def\bA{\mathbf{A}}
-\def\bB{\mathbf{B}}
-\def\bC{\mathbf{C}}
-\def\bD{\mathbf{D}}
-\def\bE{\mathbf{E}}
-\def\bF{\mathbf{F}}
-\def\bG{\mathbf{G}}
-\def\bH{\mathbf{H}}
-\def\bI{\mathbf{I}}
-\def\bJ{\mathbf{J}}
-\def\bK{\mathbf{K}}
-\def\bL{\mathbf{L}}
-\def\bM{\mathbf{M}}
-\def\bN{\mathbf{N}}
-\def\bO{\mathbf{O}}
-\def\bP{\mathbf{P}}
-\def\bQ{\mathbf{Q}}
-\def\bR{\mathbf{R}}
-\def\bS{\mathbf{S}}
-\def\bT{\mathbf{T}}
-\def\bU{\mathbf{U}}
-\def\bV{\mathbf{V}}
-\def\bW{\mathbf{W}}
-\def\bX{\mathbf{X}}
-\def\bY{\mathbf{Y}}
-\def\bZ{\mathbf{Z}}
-\def\bSigma{\mathbf{\Sigma}}
-\def\bLambda{\mathbf{\Lambda}}
-\def\bOmega{\mathbf{\Omega}}
+
+\def \dd {\mathrm{d}}
+
+% ======================================================================================
+% NUMBER SETS
+% ======================================================================================
+
+% ======================================================================================
+% VECTOR NOTATION
+% ======================================================================================
+
+% Bold lowercase vectors
+\def\a{\mathbf{a}}
+\def\b{\mathbf{b}}
+\def\c{\mathbf{c}}
+\def\d{\mathbf{d}}
+\def\e{\mathbf{e}}
+\def\f{\mathbf{f}}
+\def\g{\mathbf{g}}
+\def\h{\mathbf{h}}
+\def\i{\mathbf{i}}
+\def\j{\mathbf{j}}
+\def\k{\mathbf{k}}
+\def\l{\mathbf{l}}
+\def\m{\mathbf{m}}
+\def\n{\mathbf{n}}
+\def\p{\mathbf{p}}
+\def\q{\mathbf{q}}
+\def\r{\mathbf{r}}
+\def\s{\mathbf{s}}
+\def\t{\mathbf{t}}
+\def\u{\mathbf{u}}
+\def\v{\mathbf{v}}
+\def\w{\mathbf{w}}
+\def\x{\mathbf{x}}
+\def\y{\mathbf{y}}
+\def\z{\mathbf{z}}
+
+% ======================================================================================
+% CALLIGRAPHIC NOTATION
+% ======================================================================================
+
+% Calligraphic letters for sets, spaces, etc.
+\def\cA{\mathcal{A}}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cE{\mathcal{E}}
+\def\cF{\mathcal{F}}
+\def\cG{\mathcal{G}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cJ{\mathcal{J}}
+\def\cK{\mathcal{K}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cQ{\mathcal{Q}}
+\def\cR{\mathcal{R}}
+\def\cS{\mathcal{S}}
+\def\cT{\mathcal{T}}
+\def\cU{\mathcal{U}}
+\def\cV{\mathcal{V}}
+\def\cW{\mathcal{W}}
+\def\cX{\mathcal{X}}
+\def\cY{\mathcal{Y}}
+\def\cZ{\mathcal{Z}}
+
+% ======================================================================================
+% SPECIAL MATHEMATICAL OPERATORS
+% ======================================================================================
+
+% Differential operator
+\newcommand*{\diff}{\mathop{}\:\!\mathrm d}
+
+% Inner product notation
+\newcommand\ip[2]{\ensuremath{\langle#1,#2\rangle}}
+
+% Definition equals
+\newcommand{\defeq}{\stackrel{\smash{\textnormal{\tiny def}}}{=}}
+
+% ======================================================================================
+% QUANTUM MECHANICS NOTATION
+% ======================================================================================
+
+% Dirac notation
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\braket}[2]{\langle #1 | #2 \rangle}
+\newcommand{\ketbra}[2]{| #1 \rangle\langle #2 |}
+
+% Expectation value
+\newcommand{\expect}[1]{\langle #1 \rangle}
+
+% ======================================================================================
+% ANALYSIS AND CALCULUS
+% ======================================================================================
+
+% Partial derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+% Total derivatives
+\newcommand{\td}[2]{\frac{d #1}{d #2}}
+\newcommand{\tdd}[2]{\frac{d^2 #1}{d #2^2}}
+
+% Limits
+\newcommand{\limi}[1]{\lim_{#1 \to \infty}}
+\newcommand{\limz}[1]{\lim_{#1 \to 0}}
+
+% ======================================================================================
+% LINEAR ALGEBRA
+% ======================================================================================
+
+% Matrix operations
+\newcommand{\tr}{\text{tr}}              % Trace
+\newcommand{\rank}{\text{rank}}          % Rank
+\newcommand{\nullity}{\text{nullity}}    % Nullity
+\newcommand{\spn}{\text{span}}           % Span (renamed to avoid conflict)
+\newcommand{\col}{\text{col}}            % Column space
+\newcommand{\row}{\text{row}}            % Row space
+\newcommand{\nul}{\text{nul}}            % Null space
+
+% Vector operations
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+% ======================================================================================
+% PROBABILITY AND STATISTICS
+% ======================================================================================
+
+% Probability notation
+\newcommand{\Prob}[1]{\mathbb{P}\left( #1 \right)}
+\newcommand{\Exp}[1]{\mathbb{E}\left[ #1 \right]}
+\newcommand{\Var}[1]{\text{Var}\left( #1 \right)}
+\newcommand{\Cov}[2]{\text{Cov}\left( #1, #2 \right)}
+
+% Distributions
+\newcommand{\Normal}[2]{\mathcal{N}\left( #1, #2 \right)}
+\newcommand{\Uniform}[2]{\text{Uniform}\left( #1, #2 \right)}
+
+% ======================================================================================
+% SET THEORY
+% ======================================================================================
+
+% Set operations
+\newcommand{\powerset}[1]{\mathcal{P}\left( #1 \right)}
+\newcommand{\card}[1]{\left| #1 \right|}
+
+% ======================================================================================
+% TOPOLOGY
+% ======================================================================================
+
+% Topology notation
+\newcommand{\interior}[1]{\text{int}\left( #1 \right)}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\boundary}[1]{\partial #1}
+
+% ======================================================================================
+% CONVENIENCE SHORTCUTS
+% ======================================================================================
+
+% Blackboard bold shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}
+
+% Calligraphic shortcuts
+\newcommand{\cl}[1]{\mathcal{#1}}
+
+% Bold shortcuts
+\newcommand{\bm}[1]{\mathbf{#1}}
+
+% Roman (upright) text in math mode
+\newcommand{\rom}[1]{\mathrm{#1}}
+
+% ======================================================================================
+% COMMON MATHEMATICAL CONSTANTS
+% ======================================================================================
 $$
 </div>
 <div id="def-function" class="theorem definition">
@@ -613,8 +688,6 @@ $$
 </ol>
 </div>
 
-
-<!-- -->
 
 
 </main> <!-- /main -->
@@ -688,57 +761,6 @@ $$
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -1080,81 +1102,7 @@ $$
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Polynomials</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">from:</span><span class="co"> markdown+tex_math_single_backslash</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">chapter-number:</span><span class="co"> 0</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">section-number:</span><span class="co"> 2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - latex-environment</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - chapter-number</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - theorem-numbering</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    documentclass: extbook</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    classoption: [13.5pt, a4paper, oneside, openany]</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    colorlinks: true</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    linkcolor: "blue"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    urlcolor: "blue"</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    pdf-engine: lualatex</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    linestretch: 1.1</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry: [margin=1.2in]</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">      text: |</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage[quartoenv]{../../config/latex-template}</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">        \directlua{require("../../config/strip-numbers")}</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{enumitem}</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">        \setlist{itemsep=1.2em, parsep=0pt}</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{../../config/chapter-style}</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../../config/macros.qmd &gt;}}</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># Functions</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>::: {#def-function}</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Function</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>A **function** \( f \) from a set \( A \) to a set \( B \), denoted \( f: A \to B \), is a rule that assigns to each element \( a \in A \) exactly one element \( f(a) \in B \). The set \( A \) is called the **domain** and \( B \) is called the **codomain**.</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>::: {#def-injective-surjective-bijective}</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Injective, Surjective, Bijective</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>Let <span class="sc">\(</span> f: A \to B <span class="sc">\)</span> be a function.</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span> f <span class="sc">\)</span> is **injective** (one-to-one) if <span class="sc">\(</span> f(a_1) = f(a_2) <span class="sc">\)</span> implies <span class="sc">\(</span> a_1 = a_2 <span class="sc">\)</span>.</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span> f <span class="sc">\)</span> is **surjective** (onto) if for every <span class="sc">\(</span> b \in B <span class="sc">\)</span>, there exists <span class="sc">\(</span> a \in A <span class="sc">\)</span> such that <span class="sc">\(</span> f(a) = b <span class="sc">\)</span>.</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span> f <span class="sc">\)</span> is **bijective** if it is both injective and surjective</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>::: {#exm-injective-surjective-bijective}</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Injective, Surjective, and Bijective Functions</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>Consider the following functions:</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="sc">\(</span> f: \nR \to \nR <span class="sc">\)</span>, <span class="sc">\(</span> f(x) = 2x + 1 <span class="sc">\)</span> is **bijective**.</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Injective: If <span class="sc">\(</span> 2x_1 + 1 = 2x_2 + 1 <span class="sc">\)</span>, then <span class="sc">\(</span> x_1 = x_2 <span class="sc">\)</span>.</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Surjective: For any <span class="sc">\(</span> y \in \nR <span class="sc">\)</span>, we have <span class="sc">\(</span> f\left(\frac{y-1}{2}\right) = y <span class="sc">\)</span>.</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="sc">\(</span> g: \nR \to \nR <span class="sc">\)</span>, <span class="sc">\(</span> g(x) = x^2 <span class="sc">\)</span> is **neither injective nor surjective**.</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Not injective: <span class="sc">\(</span> g(1) = g(-1) = 1 <span class="sc">\)</span>, but <span class="sc">\(</span> 1 \neq -1 <span class="sc">\)</span>.</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Not surjective: There is no <span class="sc">\(</span> x \in \nR <span class="sc">\)</span> such that <span class="sc">\(</span> g(x) = -1 <span class="sc">\)</span>.</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="sc">\(</span> h: \nR \to [0, \infty) <span class="sc">\)</span>, <span class="sc">\(</span> h(x) = x^2 <span class="sc">\)</span> is **surjective but not injective**.</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Not injective: <span class="sc">\(</span> h(1) = h(-1) = 1 <span class="sc">\)</span>.</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Surjective: For any <span class="sc">\(</span> y \geq 0 <span class="sc">\)</span>, we have <span class="sc">\(</span> h(\sqrt{y}) = y <span class="sc">\)</span>.</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="sc">\(</span> k: [0, \infty) \to \nR <span class="sc">\)</span>, <span class="sc">\(</span> k(x) = x^2 <span class="sc">\)</span> is **injective but not surjective**.</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Injective: If <span class="sc">\(</span> x_1^2 = x_2^2 <span class="sc">\)</span> with <span class="sc">\(</span> x_1, x_2 \geq 0 <span class="sc">\)</span>, then <span class="sc">\(</span> x_1 = x_2 <span class="sc">\)</span>.</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Not surjective: There is no <span class="sc">\(</span> x \geq 0 <span class="sc">\)</span> such that <span class="sc">\(</span> k(x) = -1 <span class="sc">\)</span>.</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1361,38 +1309,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // ==========================================
       // 4. Fix tooltip (hover preview) numbering
       // ==========================================
-      // Use MutationObserver to watch for tooltip elements
-      var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              // Check if this is a tippy tooltip container
-              var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-              if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-                tippyContent = node;
-              }
-              if (tippyContent) {
-                fixTooltipContent(tippyContent);
-              }
-              // Also check children for tippy-content
-              if (node.querySelectorAll) {
-                node.querySelectorAll('.tippy-content').forEach(function(tc) {
-                  fixTooltipContent(tc);
-                });
-              }
-            }
-          });
-        });
-      });
+      // (Moved to global scope below to handle outside of fetch and with safety checks)
       
-      observer.observe(document.body, { childList: true, subtree: true });
-    
-      // Fallback: Aggressive poll to fix existing tooltips
-      setInterval(function() {
-        document.querySelectorAll('.tippy-content').forEach(function(tc) {
-           fixTooltipContent(tc);
-        });
-      }, 100);
     })
     .catch(function(err) {
       console.log('Could not load theorem map:', err);
@@ -1404,18 +1322,33 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // MOVED OUTSIDE FETCH:
   // Use MutationObserver for robust tooltip handling
+  
+  // Track modal state
+  var isModalOpen = false;
+  
+  // Bootstrap 5 modal events
+  document.addEventListener('show.bs.modal', function () { isModalOpen = true; });
+  document.addEventListener('hidden.bs.modal', function () { isModalOpen = false; });
+  
   var observer = new MutationObserver(function(mutations) {
+     // Optimization: Don't run if a modal is open (prevents freezing code-tools)
+     if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+     
      mutations.forEach(function(mutation) {
        mutation.addedNodes.forEach(function(node) {
          if (node.nodeType === Node.ELEMENT_NODE) {
-           var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
-           if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
-             tippyContent = node;
-           }
-           if (tippyContent) fixTooltipContent(tippyContent);
-           
-           if (node.querySelectorAll) {
-             node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+           // Targeted check: is this a tippy tooltip or does it contain one?
+           if (node.classList && node.classList.contains('tippy-box')) {
+             var tc = node.querySelector('.tippy-content');
+             if (tc) fixTooltipContent(tc);
+           } else if (node.classList && node.classList.contains('tippy-content')) {
+             fixTooltipContent(node);
+           } else if (node.querySelectorAll) {
+             // Only query if the node is a likely container for tooltips
+             // This avoids scanning massive blocks of code/text
+             if (node.classList && (node.classList.contains('tippy-box') || node.id === 'quarto-ref-popover')) {
+               node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+             }
            }
          }
        });
@@ -1423,22 +1356,32 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   observer.observe(document.body, { childList: true, subtree: true });
     
-  // Aggressive Fallback
+  // Fallback - Pause during modals
   setInterval(function() {
-     document.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
-  }, 100);
+     if (isModalOpen || document.body.classList.contains('modal-open') || document.querySelector('.modal-backdrop')) return;
+     
+     document.querySelectorAll('.tippy-content:not([data-numbering-fixed])').forEach(function(tc) { 
+       fixTooltipContent(tc); 
+     });
+  }, 500);
 
   // Function to fix numbering in tooltip content
   function fixTooltipContent(tooltipContent) {
-    // Remove dataset check aka FORCE FIX every time
-    // tooltipContent.dataset.numberingFixed = 'true'; 
+    if (!tooltipContent || tooltipContent.dataset.numberingFixed) return;
+    
+    // Mark as fixed BEFORE modifying to prevent infinite mutation loops
+    tooltipContent.dataset.numberingFixed = 'true'; 
     
     // Find theorem-title elements in tooltip
     var titles = tooltipContent.querySelectorAll('.theorem-title strong, .theorem-title');
     titles.forEach(function(title) {
       // Just strip the number entirely: "Theorem 9.1 (Name)" -> "Theorem (Name)"
       // Regex matches space + number pattern (e.g. " 9.1", " 1.2.3")
-      title.innerHTML = title.innerHTML.replace(/\s+\d+(\.\d+)*/, '');
+      var originalHTML = title.innerHTML;
+      var newHTML = originalHTML.replace(/\s+\d+(\.\d+)*/, '');
+      if (newHTML !== originalHTML) {
+        title.innerHTML = newHTML;
+      }
     });
   }
 });

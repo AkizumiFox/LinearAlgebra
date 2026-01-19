@@ -48,7 +48,7 @@ Let \( (V, +, \cdot) \) be a vector space over \( F \), and \( W \subseteq V \).
 Given a vector space \( V \), then
 
 - \( V \) is a subspace of \( V \) itself;
-- \( \left\{ \vzero \right\} \) is a subspace of \( V \) (also known as the "zero subspace");
+- \( \left\{ \mathbf{0} \right\} \) is a subspace of \( V \) (also known as the "zero subspace");
 - \( \varnothing \) is **not** a subspace of \( V \).
 :::
 
@@ -58,8 +58,8 @@ Given a vector space \( V \), then
 Let \( V \) be a vector space over \( F \) and \( W \subseteq V \). Then \( W \) is a subspace of \( V \) if and only if the following are satisfied:
 
 - \( W \) is non-empty;
-- \( W \) is closed under addition: \( \vw_1 + \vw_2 \in W \) for all \( \vw_1, \vw_2 \in W \);
-- \( W \) is closed under scalar multiplication: \( \alpha \vw \in W \) for all \( \alpha \in F \) and \( \vw \in W \).
+- \( W \) is closed under addition: \( \w_1 + \w_2 \in W \) for all \( \w_1, \w_2 \in W \);
+- \( W \) is closed under scalar multiplication: \( \alpha \w \in W \) for all \( \alpha \in F \) and \( \w \in W \).
 :::
 
 ::: {.proof}
@@ -67,8 +67,8 @@ Let \( V \) be a vector space over \( F \) and \( W \subseteq V \). Then \( W \)
 
 \( (\Leftarrow) \) Assume the three conditions hold. Since \( W \subseteq V \), the operations on \( W \) are inherited from \( V \), so associativity, commutativity, and distributivity are automatically satisfied. It remains to verify the existence of identity elements and inverses.
 
-- **Zero vector:** Since \( W \neq \varnothing \), there exists \( \vw \in W \). By closure under scalar multiplication, \( 0 \cdot \vw = \vzero \in W \).
-- **Additive inverse:** For any \( \vw \in W \), closure under scalar multiplication gives \( (-1) \cdot \vw = -\vw \in W \).
+- **Zero vector:** Since \( W \neq \varnothing \), there exists \( \w \in W \). By closure under scalar multiplication, \( 0 \cdot \w = \mathbf{0} \in W \).
+- **Additive inverse:** For any \( \w \in W \), closure under scalar multiplication gives \( (-1) \cdot \w = -\w \in W \).
 
 Thus \( W \) is a vector space under the inherited operations, i.e., a subspace of \( V \).
 :::
@@ -127,7 +127,7 @@ Let \( C(\nR) = \{f : \nR \to \nR \mid f \text{ is continuous}\} \) be the set o
 To verify that \( D(\nR) \) is a subspace of \( C(\nR) \):
 
 - **Subset:** Since differentiability implies continuity, we have \( D(\nR) \subseteq C(\nR) \).
-- **Zero vector:** The zero function \( f(x) = 0 \) is differentiable, so \( \vzero \in D(\nR) \).
+- **Zero vector:** The zero function \( f(x) = 0 \) is differentiable, so \( \mathbf{0} \in D(\nR) \).
 - **Closure under addition:** If \( f, g \in D(\nR) \), then \( f+g \) is differentiable with \( (f+g)' = f' + g' \), so \( f+g \in D(\nR) \).
 - **Closure under scalar multiplication:** If \( f \in D(\nR) \) and \( c \in \nR \), then \( cf \) is differentiable with \( (cf)' = c f' \), so \( cf \in D(\nR) \).
 
@@ -137,21 +137,21 @@ Thus, \( D(\nR) \) is a subspace of \( C(\nR) \).
 ::: {#exm-symmetric-matrices}
 ## Symmetric Matrices
 
-The set of all symmetric matrices in \( M_n(F) \), denoted by \( S_n(F) = \{ \mA \in M_n(F) : \mA = \mA\T \} \), is a subspace of \( M_n(F) \).
+The set of all symmetric matrices in \( M_n(F) \), denoted by \( S_n(F) = \{ \A \in M_n(F) : \A = \A\T \} \), is a subspace of \( M_n(F) \).
 
-- **Zero vector:** The zero matrix \( \mO \) is symmetric since \( \mO\T = \mO \), so \( \mO \in S_n(F) \).
-- **Addition:** If \( \mA, \mB \in S_n(F) \), then \( (\mA+\mB)\T = \mA\T + \mB\T = \mA + \mB \), so \( \mA+\mB \in S_n(F) \).
-- **Scalar multiplication:** If \( \mA \in S_n(F) \) and \( c \in F \), then \( (c\mA)\T = c\mA\T = c\mA \), so \( c\mA \in S_n(F) \).
+- **Zero vector:** The zero matrix \( \O \) is symmetric since \( \O\T = \O \), so \( \O \in S_n(F) \).
+- **Addition:** If \( \A, \B \in S_n(F) \), then \( (\A+\B)\T = \A\T + \B\T = \A + \B \), so \( \A+\B \in S_n(F) \).
+- **Scalar multiplication:** If \( \A \in S_n(F) \) and \( c \in F \), then \( (c\A)\T = c\A\T = c\A \), so \( c\A \in S_n(F) \).
 :::
 
 ::: {#exm-trace-free-matrices}
 ## Trace-free Matrices
 
-The set of all trace-free matrices in \( M_n(F) \), denoted by \( W = \{ \mA \in M_n(F) : \tr(\mA) = 0 \} \), is a subspace of \( M_n(F) \).
+The set of all trace-free matrices in \( M_n(F) \), denoted by \( W = \{ \A \in M_n(F) : \tr(\A) = 0 \} \), is a subspace of \( M_n(F) \).
 
-- **Zero vector:** \( \tr(\mO) = 0 + 0 + \cdots + 0 = 0 \), so \( \mO \in W \).
-- **Addition:** If \( \mA, \mB \in W \), then \( \tr(\mA+\mB) = \tr(\mA) + \tr(\mB) = 0 + 0 = 0 \), so \( \mA+\mB \in W \).
-- **Scalar multiplication:** If \( \mA \in W \) and \( c \in F \), then \( \tr(c\mA) = c \tr(\mA) = c(0) = 0 \), so \( c\mA \in W \).
+- **Zero vector:** \( \tr(\O) = 0 + 0 + \cdots + 0 = 0 \), so \( \O \in W \).
+- **Addition:** If \( \A, \B \in W \), then \( \tr(\A+\B) = \tr(\A) + \tr(\B) = 0 + 0 = 0 \), so \( \A+\B \in W \).
+- **Scalar multiplication:** If \( \A \in W \) and \( c \in F \), then \( \tr(c\A) = c \tr(\A) = c(0) = 0 \), so \( c\A \in W \).
 :::
 
 ::: {#thm-intersection-subspaces}
@@ -163,9 +163,9 @@ Let \( W_1 \) and \( W_2 \) be subspaces of a vector space \( V \). Then the int
 ::: {.proof}
 We use the Subspace Test on \( W = W_1 \cap W_2 \):
 
-- **Zero vector:** Since \( W_1 \) and \( W_2 \) are subspaces, \( \vzero \in W_1 \) and \( \vzero \in W_2 \). Thus \( \vzero \in W_1 \cap W_2 \).
-- **Closure under addition:** Let \( \vw, \vz \in W_1 \cap W_2 \). Then \( \vw, \vz \in W_1 \) and \( \vw, \vz \in W_2 \). Since \( W_1 \) and \( W_2 \) are subspaces, they are closed under addition, so \( \vw + \vz \in W_1 \) and \( \vw + \vz \in W_2 \). Hence \( \vw + \vz \in W_1 \cap W_2 \).
-- **Closure under scalar multiplication:** Let \( \vw \in W_1 \cap W_2 \) and \( c \in F \). Then \( \vw \in W_1 \) and \( \vw \in W_2 \). Since \( W_1 \) and \( W_2 \) are closed under scalar multiplication, \( c\vw \in W_1 \) and \( c\vw \in W_2 \). Hence \( c\vw \in W_1 \cap W_2 \).
+- **Zero vector:** Since \( W_1 \) and \( W_2 \) are subspaces, \( \mathbf{0} \in W_1 \) and \( \mathbf{0} \in W_2 \). Thus \( \mathbf{0} \in W_1 \cap W_2 \).
+- **Closure under addition:** Let \( \w, \z \in W_1 \cap W_2 \). Then \( \w, \z \in W_1 \) and \( \w, \z \in W_2 \). Since \( W_1 \) and \( W_2 \) are subspaces, they are closed under addition, so \( \w + \z \in W_1 \) and \( \w + \z \in W_2 \). Hence \( \w + \z \in W_1 \cap W_2 \).
+- **Closure under scalar multiplication:** Let \( \w \in W_1 \cap W_2 \) and \( c \in F \). Then \( \w \in W_1 \) and \( \w \in W_2 \). Since \( W_1 \) and \( W_2 \) are closed under scalar multiplication, \( c\w \in W_1 \) and \( c\w \in W_2 \). Hence \( c\w \in W_1 \cap W_2 \).
 
 Since all three conditions of the Subspace Test are satisfied, \( W_1 \cap W_2 \) is a subspace of \( V \).
 :::
@@ -201,13 +201,13 @@ Let \( W_1, W_2 \) be subspaces of \( V \). Then \( W_1 \cup W_2 \) is a subspac
 
 \( (\Rightarrow) \) We prove the contrapositive: if neither is contained in the other, then the union is not a subspace. Assume \( W_1 \not\subseteq W_2 \) and \( W_2 \not\subseteq W_1 \).
 
-- Since \( W_1 \not\subseteq W_2 \), there exists a vector \( \vu \in W_1 \) such that \( \vu \notin W_2 \).
-- Since \( W_2 \not\subseteq W_1 \), there exists a vector \( \vv \in W_2 \) such that \( \vv \notin W_1 \).
+- Since \( W_1 \not\subseteq W_2 \), there exists a vector \( \u \in W_1 \) such that \( \u \notin W_2 \).
+- Since \( W_2 \not\subseteq W_1 \), there exists a vector \( \v \in W_2 \) such that \( \v \notin W_1 \).
 
-Consider the sum \( \vw = \vu + \vv \). We show that \( \vw \notin W_1 \cup W_2 \):
+Consider the sum \( \w = \u + \v \). We show that \( \w \notin W_1 \cup W_2 \):
 
-- If \( \vw \in W_1 \), then \( \vv = \vw - \vu \). Since \( \vw \in W_1 \) and \( \vu \in W_1 \), their difference \( \vv \) must be in \( W_1 \) (by closure). But we chose \( \vv \notin W_1 \), which is a contradiction.
-- If \( \vw \in W_2 \), then \( \vu = \vw - \vv \). Since \( \vw \in W_2 \) and \( \vv \in W_2 \), their difference \( \vu \) must be in \( W_2 \). But we chose \( \vu \notin W_2 \), which is a contradiction.
+- If \( \w \in W_1 \), then \( \v = \w - \u \). Since \( \w \in W_1 \) and \( \u \in W_1 \), their difference \( \v \) must be in \( W_1 \) (by closure). But we chose \( \v \notin W_1 \), which is a contradiction.
+- If \( \w \in W_2 \), then \( \u = \w - \v \). Since \( \w \in W_2 \) and \( \v \in W_2 \), their difference \( \u \) must be in \( W_2 \). But we chose \( \u \notin W_2 \), which is a contradiction.
 
-Therefore, \( \vu + \vv \) is in neither \( W_1 \) nor \( W_2 \), so it is not in \( W_1 \cup W_2 \). Thus, the union is not closed under addition and is therefore not a subspace.
+Therefore, \( \u + \v \) is in neither \( W_1 \) nor \( W_2 \), so it is not in \( W_1 \cup W_2 \). Thus, the union is not closed under addition and is therefore not a subspace.
 :::

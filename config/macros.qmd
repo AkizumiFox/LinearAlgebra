@@ -2,177 +2,176 @@
 ```{=html}
 <div style="display:none">
 $$
-\def\nR{\mathbb{R}}
-\def\nC{\mathbb{C}}
-\def\nN{\mathbb{N}}
-\def\nZ{\mathbb{Z}}
-\def\nQ{\mathbb{Q}}
-\def\nF{\mathbb{F}}
-\def\nP{\mathbb{P}}
-\def\nE{\mathbb{E}}
-\def\sA{\mathcal{A}}
-\def\sB{\mathcal{B}}
-\def\sC{\mathcal{C}}
-\def\sD{\mathcal{D}}
-\def\sE{\mathcal{E}}
-\def\sF{\mathcal{F}}
-\def\sG{\mathcal{G}}
-\def\sH{\mathcal{H}}
-\def\sL{\mathcal{L}}
-\def\sM{\mathcal{M}}
-\def\sN{\mathcal{N}}
-\def\sO{\mathcal{O}}
-\def\sP{\mathcal{P}}
-\def\sS{\mathcal{S}}
-\def\sT{\mathcal{T}}
-\def\sX{\mathcal{X}}
-\def\sY{\mathcal{Y}}
-\def\va{\mathbf{a}}
-\def\vb{\mathbf{b}}
-\def\vc{\mathbf{c}}
-\def\vd{\mathbf{d}}
-\def\ve{\mathbf{e}}
-\def\vf{\mathbf{f}}
-\def\vg{\mathbf{g}}
-\def\vh{\mathbf{h}}
-\def\vi{\mathbf{i}}
-\def\vj{\mathbf{j}}
-\def\vk{\mathbf{k}}
-\def\vl{\mathbf{l}}
-\def\vm{\mathbf{m}}
-\def\vn{\mathbf{n}}
-\def\vo{\mathbf{o}}
-\def\vp{\mathbf{p}}
-\def\vq{\mathbf{q}}
-\def\vr{\mathbf{r}}
-\def\vs{\mathbf{s}}
-\def\vt{\mathbf{t}}
-\def\vu{\mathbf{u}}
-\def\vv{\mathbf{v}}
-\def\vw{\mathbf{w}}
-\def\vx{\mathbf{x}}
-\def\vy{\mathbf{y}}
-\def\vz{\mathbf{z}}
-\def\mA{\mathbf{A}}
-\def\mB{\mathbf{B}}
-\def\mC{\mathbf{C}}
-\def\mD{\mathbf{D}}
-\def\mE{\mathbf{E}}
-\def\mF{\mathbf{F}}
-\def\mG{\mathbf{G}}
-\def\mH{\mathbf{H}}
-\def\mI{\mathbf{I}}
-\def\mJ{\mathbf{J}}
-\def\mK{\mathbf{K}}
-\def\mL{\mathbf{L}}
-\def\mM{\mathbf{M}}
-\def\mN{\mathbf{N}}
-\def\mO{\mathbf{O}}
-\def\mP{\mathbf{P}}
-\def\mQ{\mathbf{Q}}
-\def\mR{\mathbf{R}}
-\def\mS{\mathbf{S}}
-\def\mT{\mathbf{T}}
-\def\mU{\mathbf{U}}
-\def\mV{\mathbf{V}}
-\def\mW{\mathbf{W}}
-\def\mX{\mathbf{X}}
-\def\mY{\mathbf{Y}}
-\def\mZ{\mathbf{Z}}
-\def\A{\mathbf{A}}
-\def\B{\mathbf{B}}
-\def\C{\mathbf{C}}
-\def\D{\mathbf{D}}
-\def\E{\mathbf{E}}
-\def\F{\mathbf{F}}
-\def\G{\mathbf{G}}
-\def\H{\mathbf{H}}
-\def\I{\mathbf{I}}
-\def\J{\mathbf{J}}
-\def\K{\mathbf{K}}
-\def\L{\mathbf{L}}
-\def\M{\mathbf{M}}
-\def\N{\mathbf{N}}
-\def\O{\mathbf{O}}
-\def\P{\mathbf{P}}
-\def\Q{\mathbf{Q}}
-\def\R{\mathbf{R}}
-\def\S{\mathbf{S}}
-\def\T{^\top}
-\def\U{\mathbf{U}}
-\def\V{\mathbf{V}}
-\def\W{\mathbf{W}}
-\def\X{\mathbf{X}}
-\def\Y{\mathbf{Y}}
-\def\Z{\mathbf{Z}}
-\def\valpha{\boldsymbol{\alpha}}
-\def\vbeta{\boldsymbol{\beta}}
-\def\vgamma{\boldsymbol{\gamma}}
-\def\vdelta{\boldsymbol{\delta}}
-\def\vepsilon{\boldsymbol{\epsilon}}
-\def\vzeta{\boldsymbol{\zeta}}
-\def\veta{\boldsymbol{\eta}}
-\def\vtheta{\boldsymbol{\theta}}
-\def\viota{\boldsymbol{\iota}}
-\def\vkappa{\boldsymbol{\kappa}}
-\def\vlambda{\boldsymbol{\lambda}}
-\def\vmu{\boldsymbol{\mu}}
-\def\vnu{\boldsymbol{\nu}}
-\def\vxi{\boldsymbol{\xi}}
-\def\vpi{\boldsymbol{\pi}}
-\def\vrho{\boldsymbol{\rho}}
-\def\vsigma{\boldsymbol{\sigma}}
-\def\vtau{\boldsymbol{\tau}}
-\def\vupsilon{\boldsymbol{\upsilon}}
-\def\vphi{\boldsymbol{\phi}}
-\def\vchi{\boldsymbol{\chi}}
-\def\vpsi{\boldsymbol{\psi}}
-\def\vomega{\boldsymbol{\omega}}
-\def\vGamma{\boldsymbol{\Gamma}}
-\def\vDelta{\boldsymbol{\Delta}}
-\def\vTheta{\boldsymbol{\Theta}}
-\def\vLambda{\boldsymbol{\Lambda}}
-\def\vXi{\boldsymbol{\Xi}}
-\def\vPi{\boldsymbol{\Pi}}
-\def\vSigma{\boldsymbol{\Sigma}}
-\def\vUpsilon{\boldsymbol{\Upsilon}}
-\def\vPhi{\boldsymbol{\Phi}}
-\def\vPsi{\boldsymbol{\Psi}}
-\def\vOmega{\boldsymbol{\Omega}}
-\def\ra{\mathbf{a}}
-\def\rb{\mathbf{b}}
-\def\rc{\mathbf{c}}
-\def\rd{\mathbf{d}}
-\def\re{\mathbf{e}}
-\def\rf{\mathbf{f}}
-\def\rg{\mathbf{g}}
-\def\rh{\mathbf{h}}
-\def\ri{\mathbf{i}}
-\def\rj{\mathbf{j}}
-\def\rk{\mathbf{k}}
-\def\rl{\mathbf{l}}
-\def\rm{\mathbf{m}}
-\def\rn{\mathbf{n}}
-\def\ro{\mathbf{o}}
-\def\rp{\mathbf{p}}
-\def\rq{\mathbf{q}}
-\def\rr{\mathbf{r}}
-\def\rs{\mathbf{s}}
-\def\rt{\mathbf{t}}
-\def\ru{\mathbf{u}}
-\def\rv{\mathbf{v}}
-\def\rw{\mathbf{w}}
-\def\rx{\mathbf{x}}
-\def\ry{\mathbf{y}}
-\def\rz{\mathbf{z}}
-\def\vzero{\mathbf{0}}
-\def\vone{\mathbf{1}}
-\def\Ev{\mathbb{E}}
+% ======================================================================================
+% MATHEMATICAL NOTATION SHORTCUTS
+% ======================================================================================
+% This file contains convenient mathematical notation shortcuts for academic documents
+% Author: Tzu-You Lin
+% ======================================================================================
+
+% General sets
+\def \sA {\mathcal{A}}
+\def \sB {\mathcal{B}}
+\def \sC {\mathcal{C}}
+\def \sD {\mathcal{D}}
+\def \sE {\mathcal{E}}
+\def \sF {\mathcal{F}}
+\def \sG {\mathcal{G}}
+\def \sH {\mathcal{H}}
+\def \sI {\mathcal{I}}
+\def \sJ {\mathcal{J}}
+\def \sK {\mathcal{K}}
+\def \sL {\mathcal{L}}
+\def \sM {\mathcal{M}}
+\def \sN {\mathcal{N}}
+\def \sO {\mathcal{O}}
+\def \sP {\mathcal{P}}
+\def \sQ {\mathcal{Q}}
+\def \sR {\mathcal{R}}
+\def \sS {\mathcal{S}}
+\def \sT {\mathcal{T}}
+\def \sU {\mathcal{U}}
+\def \sV {\mathcal{V}}
+\def \sW {\mathcal{W}}
+\def \sX {\mathcal{X}}
+\def \sY {\mathcal{Y}}
+\def \sZ {\mathcal{Z}}
+
+% Number sets
+\def \nA {\mathbb{A}}
+\def \nB {\mathbb{B}}
+\def \nC {\mathbb{C}}
+\def \nD {\mathbb{D}}
+\def \nE {\mathbb{E}}
+\def \nF {\mathbb{F}}
+\def \nG {\mathbb{G}}
+\def \nH {\mathbb{H}}
+\def \nI {\mathbb{I}}
+\def \nJ {\mathbb{J}}
+\def \nK {\mathbb{K}}
+\def \nL {\mathbb{L}}
+\def \nM {\mathbb{M}}
+\def \nN {\mathbb{N}}
+\def \nO {\mathbb{O}}
+\def \nP {\mathbb{P}}
+\def \nQ {\mathbb{Q}}
+\def \nR {\mathbb{R}}
+\def \nS {\mathbb{S}}
+\def \nT {\mathbb{T}}
+\def \nU {\mathbb{U}}
+\def \nV {\mathbb{V}}
+\def \nW {\mathbb{W}}
+\def \nX {\mathbb{X}}
+\def \nY {\mathbb{Y}}
+\def \nZ {\mathbb{Z}}
+
+\def \a {\mathbf{a}}
+\def \b {\mathbf{b}}
+\def \c {\mathbf{c}}
+\def \d {\mathbf{d}}
+\def \e {\mathbf{e}}
+\def \f {\mathbf{f}}
+\def \g {\mathbf{g}}
+\def \h {\mathbf{h}}
+\def \i {\mathbf{i}}
+\def \j {\mathbf{j}}
+\def \k {\mathbf{k}}
+\def \l {\mathbf{l}}
+\def \m {\mathbf{m}}
+\def \n {\mathbf{n}}
+\def \o {\mathbf{o}}
+\def \p {\mathbf{p}}
+\def \q {\mathbf{q}}
+\def \r {\mathbf{r}}
+\def \s {\mathbf{s}}
+\def \t {\mathbf{t}}
+\def \u {\mathbf{u}}
+\def \v {\mathbf{v}}
+\def \w {\mathbf{w}}
+\def \x {\mathbf{x}}
+\def \y {\mathbf{y}}
+\def \z {\mathbf{z}}
+\def \A {\mathbf{A}}
+\def \B {\mathbf{B}}
+\def \C {\mathbf{C}}
+\def \D {\mathbf{D}}
+\def \E {\mathbf{E}}
+\def \F {\mathbf{F}}
+\def \G {\mathbf{G}}
+\def \H {\mathbf{H}}
+\def \I {\mathbf{I}}
+\def \J {\mathbf{J}}
+\def \K {\mathbf{K}}
+\def \L {\mathbf{L}}
+\def \M {\mathbf{M}}
+\def \N {\mathbf{N}}
+\def \O {\mathbf{O}}
+\def \P {\mathbf{P}}
+\def \Q {\mathbf{Q}}
+\def \R {\mathbf{R}}
+\def \S {\mathbf{S}}
+\def \T {\mathbf{T}}
+\def \U {\mathbf{U}}
+\def \V {\mathbf{V}}
+\def \W {\mathbf{W}}
+\def \X {\mathbf{X}}
+\def \Y {\mathbf{Y}}
+\def \Z {\mathbf{Z}}
+
+\def \0 {\mathbf{0}}
+\def \1 {\mathbf{1}}
+
+% vector and matrix notation
+\def \valpha {\bm{\upalpha}}
+\def \vbeta {\bm{\upbeta}}
+\def \vgamma {\bm{\upgamma}}
+\def \vdelta {\bm{\updelta}}
+\def \vepsilon {\bm{\upepsilon}}
+\def \vzeta {\bm{\upzeta}}
+\def \veta {\bm{\upeta}}
+\def \vtheta {\bm{\uptheta}}
+\def \viota {\bm{\upiota}}
+\def \vkappa {\bm{\upkappa}}
+\def \vlambda {\bm{\uplambda}}
+\def \vmu {\bm{\upmu}}
+\def \vnu {\bm{\upnu}}
+\def \vxi {\bm{\upxi}}
+\def \vpi {\bm{\uppi}}
+\def \vrho {\bm{\uprho}}
+\def \vsigma {\bm{\upsigma}}
+\def \vtau {\bm{\uptau}}
+\def \vupsilon {\bm{\upupsilon}}
+\def \vphi {\bm{\upphi}}
+\def \vchi {\bm{\upchi}}
+\def \vpsi {\bm{\uppsi}}
+\def \vomega {\bm{\upomega}}
+\def \vvarepsilon {\bm{\upvarepsilon}}
+\def \vvartheta {\bm{\upvartheta}}
+\def \vvarpi {\bm{\upvarpi}}
+\def \vvarrho {\bm{\upvarrho}}
+\def \vvarsigma {\bm{\upvarsigma}}
+\def \vvarphi {\bm{\upvarphi}}
+\def \vGamma {\bm{\Gamma}}
+\def \vDelta {\bm{\Delta}}
+\def \vTheta {\bm{\Theta}}
+\def \vLambda {\bm{\Lambda}}
+\def \vXi {\bm{\Xi}}
+\def \vPi {\bm{\Pi}}
+\def \vSigma {\bm{\Sigma}}
+\def \vUpsilon {\bm{\Upsilon}}
+\def \vPhi {\bm{\Phi}}
+\def \vPsi {\bm{\Psi}}
+\def \vOmega {\bm{\Omega}}
+
+% Probability
+\def\Ev{\operatorname*{\mathbb{E}}}
 \def\Pr{\operatorname{Pr}}
-\def\Var{\operatorname{Var}}
-\def\Cov{\operatorname{Cov}}
-\def\Cor{\operatorname{Cor}}
-\def\Corr{\operatorname{Corr}}
+\def\Var{\operatorname*{Var}}
+\def\Cov{\operatorname*{Cov}}
+\def\Cor{\operatorname*{Cor}}
+\def\Corr{\operatorname*{Corr}}
+
+% Distributions
 \def\distBern{\operatorname{Ber}}
 \def\distBin{\operatorname{Bin}}
 \def\distGeom{\operatorname{Geo}}
@@ -182,98 +181,209 @@ $$
 \def\distUnif{\operatorname{Unif}}
 \def\distExp{\operatorname{Exp}}
 \def\distGamma{\operatorname{Gamma}}
-\def\distN{\mathcal{N}}
+\def\distN{\operatorname{\mathcal{N}}}
 \def\distBeta{\operatorname{Beta}}
 \def\distCauchy{\operatorname{Cauchy}}
+\def\distLognormal{\operatorname{Lognormal}}
+\def\distWeibull{\operatorname{Weibull}}
+\def\distPareto{\operatorname{Pareto}}
 \def\distDir{\operatorname{Dir}}
 \def\distMult{\operatorname{Mult}}
 \def\distWishart{\operatorname{Wishart}}
+\def\distInvWishart{\operatorname{InvWishart}}
+
+% Linear algebra
 \def\tr{\operatorname{tr}}
-\def\trace{\operatorname{tr}}
 \def\rank{\operatorname{rank}}
 \def\nullity{\operatorname{nullity}}
-\def\Span{\operatorname{span}}
 \def\spn{\operatorname{span}}
+\def\Span{\operatorname{span}}
 \def\col{\operatorname{col}}
 \def\row{\operatorname{row}}
 \def\nul{\operatorname{nul}}
+\def\ker{\operatorname{ker}}
 \def\img{\operatorname{img}}
+\def\adj{\operatorname{adj}}
 \def\diag{\operatorname{diag}}
-\def\dd{\mathrm{d}}
-\def\transpose{^\top}
-\def\inv{^{-1}}
-\def\abs#1{\left\lvert#1\right\rvert}
-\def\norm#1{\left\lVert#1\right\rVert}
-\def\floor#1{\left\lfloor#1\right\rfloor}
-\def\ceil#1{\left\lceil#1\right\rceil}
-\def\inner#1#2{\langle #1, #2 \rangle}
-\def\lcm{\operatorname{lcm}}
-\def\im{\operatorname{im}}
-\def\sgn{\operatorname{sgn}}
-\def\argmax{\operatorname{argmax}}
-\def\argmin{\operatorname{argmin}}
-\def\softmax{\operatorname{softmax}}
-\def\x{\vx}
-\def\y{\vy}
-\def\z{\vz}
-\def\w{\vw}
-\def\u{\vu}
-\def\e{\ve}
-\def\ba{\mathbf{a}}
-\def\bb{\mathbf{b}}
-\def\bc{\mathbf{c}}
-\def\bd{\mathbf{d}}
-\def\be{\mathbf{e}}
-\def\bff{\mathbf{f}}
-\def\bg{\mathbf{g}}
-\def\bh{\mathbf{h}}
-\def\bi{\mathbf{i}}
-\def\bj{\mathbf{j}}
-\def\bk{\mathbf{k}}
-\def\bl{\mathbf{l}}
-\def\bm{\mathbf{m}}
-\def\bn{\mathbf{n}}
-\def\bo{\mathbf{o}}
-\def\bp{\mathbf{p}}
-\def\bq{\mathbf{q}}
-\def\br{\mathbf{r}}
-\def\bs{\mathbf{s}}
-\def\bt{\mathbf{t}}
-\def\bu{\mathbf{u}}
-\def\bv{\mathbf{v}}
-\def\bw{\mathbf{w}}
-\def\bx{\mathbf{x}}
-\def\by{\mathbf{y}}
-\def\bz{\mathbf{z}}
-\def\bA{\mathbf{A}}
-\def\bB{\mathbf{B}}
-\def\bC{\mathbf{C}}
-\def\bD{\mathbf{D}}
-\def\bE{\mathbf{E}}
-\def\bF{\mathbf{F}}
-\def\bG{\mathbf{G}}
-\def\bH{\mathbf{H}}
-\def\bI{\mathbf{I}}
-\def\bJ{\mathbf{J}}
-\def\bK{\mathbf{K}}
-\def\bL{\mathbf{L}}
-\def\bM{\mathbf{M}}
-\def\bN{\mathbf{N}}
-\def\bO{\mathbf{O}}
-\def\bP{\mathbf{P}}
-\def\bQ{\mathbf{Q}}
-\def\bR{\mathbf{R}}
-\def\bS{\mathbf{S}}
-\def\bT{\mathbf{T}}
-\def\bU{\mathbf{U}}
-\def\bV{\mathbf{V}}
-\def\bW{\mathbf{W}}
-\def\bX{\mathbf{X}}
-\def\bY{\mathbf{Y}}
-\def\bZ{\mathbf{Z}}
-\def\bSigma{\mathbf{\Sigma}}
-\def\bLambda{\mathbf{\Lambda}}
-\def\bOmega{\mathbf{\Omega}}
+
+\def \dd {\mathrm{d}}
+
+% ======================================================================================
+% NUMBER SETS
+% ======================================================================================
+
+% ======================================================================================
+% VECTOR NOTATION
+% ======================================================================================
+
+% Bold lowercase vectors
+\def\a{\mathbf{a}}
+\def\b{\mathbf{b}}
+\def\c{\mathbf{c}}
+\def\d{\mathbf{d}}
+\def\e{\mathbf{e}}
+\def\f{\mathbf{f}}
+\def\g{\mathbf{g}}
+\def\h{\mathbf{h}}
+\def\i{\mathbf{i}}
+\def\j{\mathbf{j}}
+\def\k{\mathbf{k}}
+\def\l{\mathbf{l}}
+\def\m{\mathbf{m}}
+\def\n{\mathbf{n}}
+\def\p{\mathbf{p}}
+\def\q{\mathbf{q}}
+\def\r{\mathbf{r}}
+\def\s{\mathbf{s}}
+\def\t{\mathbf{t}}
+\def\u{\mathbf{u}}
+\def\v{\mathbf{v}}
+\def\w{\mathbf{w}}
+\def\x{\mathbf{x}}
+\def\y{\mathbf{y}}
+\def\z{\mathbf{z}}
+
+% ======================================================================================
+% CALLIGRAPHIC NOTATION
+% ======================================================================================
+
+% Calligraphic letters for sets, spaces, etc.
+\def\cA{\mathcal{A}}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cE{\mathcal{E}}
+\def\cF{\mathcal{F}}
+\def\cG{\mathcal{G}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cJ{\mathcal{J}}
+\def\cK{\mathcal{K}}
+\def\cL{\mathcal{L}}
+\def\cM{\mathcal{M}}
+\def\cN{\mathcal{N}}
+\def\cO{\mathcal{O}}
+\def\cP{\mathcal{P}}
+\def\cQ{\mathcal{Q}}
+\def\cR{\mathcal{R}}
+\def\cS{\mathcal{S}}
+\def\cT{\mathcal{T}}
+\def\cU{\mathcal{U}}
+\def\cV{\mathcal{V}}
+\def\cW{\mathcal{W}}
+\def\cX{\mathcal{X}}
+\def\cY{\mathcal{Y}}
+\def\cZ{\mathcal{Z}}
+
+% ======================================================================================
+% SPECIAL MATHEMATICAL OPERATORS
+% ======================================================================================
+
+% Differential operator
+\newcommand*{\diff}{\mathop{}\:\!\mathrm d}
+
+% Inner product notation
+\newcommand\ip[2]{\ensuremath{\langle#1,#2\rangle}}
+
+% Definition equals
+\newcommand{\defeq}{\stackrel{\smash{\textnormal{\tiny def}}}{=}}
+
+% ======================================================================================
+% QUANTUM MECHANICS NOTATION
+% ======================================================================================
+
+% Dirac notation
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\braket}[2]{\langle #1 | #2 \rangle}
+\newcommand{\ketbra}[2]{| #1 \rangle\langle #2 |}
+
+% Expectation value
+\newcommand{\expect}[1]{\langle #1 \rangle}
+
+% ======================================================================================
+% ANALYSIS AND CALCULUS
+% ======================================================================================
+
+% Partial derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+% Total derivatives
+\newcommand{\td}[2]{\frac{d #1}{d #2}}
+\newcommand{\tdd}[2]{\frac{d^2 #1}{d #2^2}}
+
+% Limits
+\newcommand{\limi}[1]{\lim_{#1 \to \infty}}
+\newcommand{\limz}[1]{\lim_{#1 \to 0}}
+
+% ======================================================================================
+% LINEAR ALGEBRA
+% ======================================================================================
+
+% Matrix operations
+\newcommand{\tr}{\text{tr}}              % Trace
+\newcommand{\rank}{\text{rank}}          % Rank
+\newcommand{\nullity}{\text{nullity}}    % Nullity
+\newcommand{\spn}{\text{span}}           % Span (renamed to avoid conflict)
+\newcommand{\col}{\text{col}}            % Column space
+\newcommand{\row}{\text{row}}            % Row space
+\newcommand{\nul}{\text{nul}}            % Null space
+
+% Vector operations
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+% ======================================================================================
+% PROBABILITY AND STATISTICS
+% ======================================================================================
+
+% Probability notation
+\newcommand{\Prob}[1]{\mathbb{P}\left( #1 \right)}
+\newcommand{\Exp}[1]{\mathbb{E}\left[ #1 \right]}
+\newcommand{\Var}[1]{\text{Var}\left( #1 \right)}
+\newcommand{\Cov}[2]{\text{Cov}\left( #1, #2 \right)}
+
+% Distributions
+\newcommand{\Normal}[2]{\mathcal{N}\left( #1, #2 \right)}
+\newcommand{\Uniform}[2]{\text{Uniform}\left( #1, #2 \right)}
+
+% ======================================================================================
+% SET THEORY
+% ======================================================================================
+
+% Set operations
+\newcommand{\powerset}[1]{\mathcal{P}\left( #1 \right)}
+\newcommand{\card}[1]{\left| #1 \right|}
+
+% ======================================================================================
+% TOPOLOGY
+% ======================================================================================
+
+% Topology notation
+\newcommand{\interior}[1]{\text{int}\left( #1 \right)}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\boundary}[1]{\partial #1}
+
+% ======================================================================================
+% CONVENIENCE SHORTCUTS
+% ======================================================================================
+
+% Blackboard bold shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}
+
+% Calligraphic shortcuts
+\newcommand{\cl}[1]{\mathcal{#1}}
+
+% Bold shortcuts
+\newcommand{\bm}[1]{\mathbf{#1}}
+
+% Roman (upright) text in math mode
+\newcommand{\rom}[1]{\mathrm{#1}}
+
+% ======================================================================================
+% COMMON MATHEMATICAL CONSTANTS
+% ======================================================================================
 $$
 </div>
 ```

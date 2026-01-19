@@ -48,9 +48,9 @@ A subset \( B \) of a vector space \( V \) is called a **basis** for \( V \) if:
 ::: {#exm-standard-bases}
 ## Standard Bases
 
-- The **standard basis** for \( F^n \) is \( \{ \ve_1, \ve_2, \dots, \ve_n \} \), where \( \ve_i \) has a 1 in the \( i \)-th position and 0 elsewhere.
+- The **standard basis** for \( F^n \) is \( \{ \e_1, \e_2, \dots, \e_n \} \), where \( \e_i \) has a 1 in the \( i \)-th position and 0 elsewhere.
 - The standard basis for \( F[x]_{\leq n} \) is \( \{ 1, x, x^2, \dots, x^n \} \).
-- The standard basis for \( M_{m \times n}(F) \) is the set of matrices \( \mE_{ij} \) having a 1 at entry \( (i,j) \) and 0 elsewhere.
+- The standard basis for \( M_{m \times n}(F) \) is the set of matrices \( \E_{ij} \) having a 1 at entry \( (i,j) \) and 0 elsewhere.
 :::
 
 ## Unique Representation and Coordinates
@@ -60,13 +60,13 @@ The most important property of a basis is that every vector in the space has a u
 ::: {#thm-unique-representation}
 ## Unique Representation
 
-Let \( B = \{ \vv_1, \dots, \vv_n \} \) be a basis for \( V \). Then every vector \( \vv \in V \) can be written as a linear combination of elements in \( B \) in **exactly one way**.
+Let \( B = \{ \v_1, \dots, \v_n \} \) be a basis for \( V \). Then every vector \( \v \in V \) can be written as a linear combination of elements in \( B \) in **exactly one way**.
 :::
 
 ::: {.proof}
-Since \( B \) spans \( V \), there exist scalars \( a_i \) such that \( \vv = \sum a_i \vv_i \). Suppose there is another representation \( \vv = \sum b_i \vv_i \). Then:
+Since \( B \) spans \( V \), there exist scalars \( a_i \) such that \( \v = \sum a_i \v_i \). Suppose there is another representation \( \v = \sum b_i \v_i \). Then:
 \[
-	\vzero = \vv - \vv = \sum a_i \vv_i - \sum b_i \vv_i = \sum (a_i - b_i) \vv_i.
+	\mathbf{0} = \v - \v = \sum a_i \v_i - \sum b_i \v_i = \sum (a_i - b_i) \v_i.
 \]
 Since \( B \) is linearly independent, we must have \( a_i - b_i = 0 \) for all \( i \), meaning \( a_i = b_i \).
 :::
@@ -74,12 +74,12 @@ Since \( B \) is linearly independent, we must have \( a_i - b_i = 0 \) for all 
 ::: {#def-coordinates}
 ## Coordinates
 
-Let \( B = \{ \vv_1, \dots, \vv_n \} \) be an **ordered** basis for \( V \). For any \( \vv \in V \), the unique scalars \( c_1, \dots, c_n \) such that \( \vv = \sum c_i \vv_i \) are called the **coordinates** of \( \vv \) with respect to \( B \). We write this as a column vector:
+Let \( B = \{ \v_1, \dots, \v_n \} \) be an **ordered** basis for \( V \). For any \( \v \in V \), the unique scalars \( c_1, \dots, c_n \) such that \( \v = \sum c_i \v_i \) are called the **coordinates** of \( \v \) with respect to \( B \). We write this as a column vector:
 \[
-	[\vv]_B = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}.
+	[\v]_B = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}.
 \]
 :::
 
 ::: {.remark}
-The map \( \vv \mapsto [\vv]_B \) provides a way to treat any abstract \( n \)-dimensional vector space as if it were simply \( F^n \). This is the power of a basis.
+The map \( \v \mapsto [\v]_B \) provides a way to treat any abstract \( n \)-dimensional vector space as if it were simply \( F^n \). This is the power of a basis.
 :::
