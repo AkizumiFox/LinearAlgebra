@@ -1,44 +1,44 @@
 {
   "index.qmd": {
-    "index.html": "ac10fde6"
+    "index.html": "68968775"
   },
   "src/ch00-foundations/index.qmd": {
-    "index.html": "56d9ce06"
+    "index.html": "9b12ed0c"
   },
   "src/ch00-foundations/01-sets-and-notation.qmd": {
-    "01-sets-and-notation.html": "674362e9"
+    "01-sets-and-notation.html": "2a55e422"
   },
   "src/ch00-foundations/02-functions.qmd": {
-    "02-functions.html": "17c6fd72"
+    "02-functions.html": "15ccda81"
   },
   "src/ch00-foundations/03-polynomials.qmd": {
-    "03-polynomials.html": "cd6b8c6a"
+    "03-polynomials.html": "9a6a7422"
   },
   "src/ch00-foundations/04-fields.qmd": {
-    "04-fields.html": "ac019c63"
+    "04-fields.html": "d2a971bf"
   },
   "src/ch00-foundations/05-matrices.qmd": {
-    "05-matrices.html": "8b1457c0"
+    "05-matrices.html": "ca2e055c"
   },
   "src/ch01-vector-spaces/index.qmd": {
-    "index.html": "781a9bf2"
+    "index.html": "d7a9a660"
   },
   "src/ch01-vector-spaces/01-vector-spaces.qmd": {
-    "01-vector-spaces.html": "65be9f38"
+    "01-vector-spaces.html": "f4d0b997"
   },
   "src/ch01-vector-spaces/02-subspaces.qmd": {
-    "02-subspaces.html": "a7625e14"
+    "02-subspaces.html": "479d6258"
   },
   "src/ch01-vector-spaces/03-span.qmd": {
-    "03-span.html": "133df233"
+    "03-span.html": "79cfb442"
   },
   "src/ch01-vector-spaces/04-independence.qmd": {
-    "04-independence.html": "90325158"
+    "04-independence.html": "24a516f6"
   },
   "src/ch01-vector-spaces/05-basis.qmd": {
-    "05-basis.html": "cd1c68e0"
+    "05-basis.html": "b3c487d0"
   },
   "src/ch01-vector-spaces/06-dimension.qmd": {
-    "06-dimension.html": "e534ee6d"
+    "06-dimension.html": "9c998a83"
   }
 }

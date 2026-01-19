@@ -1,0 +1,322 @@
+project:
+  type: book
+  output-dir: _book
+
+# Enable \( \) and \[ \] math delimiters
+from: markdown+tex_math_single_backslash
+
+# Don't re-execute code in CI - use frozen results
+execute:
+  freeze: true
+
+# Use pre-compiled mermaid SVGs in CI
+filters:
+  - mermaid-static
+  - theorem-numbering
+  - resolve-crossrefs
+
+book:
+  title: "Linear Algebra"
+  subtitle: "Proof-based Introduction"
+  author: "Tzu-You Lin"
+  date: last-modified
+  downloads: [pdf]
+  # AUTO-GENERATED CHAPTERS - Do not edit manually
+  # Run 'make update' to regenerate from src/ directory
+  chapters:
+    - index.qmd
+
+    - part: src/ch00-foundations/index.qmd
+      chapters:
+        - src/ch00-foundations/01-sets-and-notation.qmd
+        - src/ch00-foundations/02-functions.qmd
+        - src/ch00-foundations/03-polynomials.qmd
+        - src/ch00-foundations/04-fields.qmd
+        - src/ch00-foundations/05-matrices.qmd
+
+    - part: src/ch01-vector-spaces/index.qmd
+      chapters:
+        - src/ch01-vector-spaces/01-vector-spaces.qmd
+        - src/ch01-vector-spaces/02-subspaces.qmd
+        - src/ch01-vector-spaces/03-span.qmd
+        - src/ch01-vector-spaces/04-independence.qmd
+        - src/ch01-vector-spaces/05-basis.qmd
+        - src/ch01-vector-spaces/06-dimension.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    code-tools: true
+    html-math-method: mathjax
+    css: config/html-styles.css
+    include-after-body:
+      text: |
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // ==========================================
+          // 0. Fix sidebar/TOC numbering to chapter.section format
+          // ==========================================
+          // Fix part (chapter) titles: "Preliminary" -> "0 Preliminary"
+          document.querySelectorAll('.sidebar-item-section .sidebar-item-text').forEach(function(item) {
+            var link = item.closest('a');
+            if (!link) return;
+            var href = link.getAttribute('href') || '';
+            var match = href.match(/ch(\d+)-[^\/]+\/index\.html/);
+            if (match) {
+              var chNum = parseInt(match[1], 10);
+              // Remove ALL leading numbers/whitespace and add correct chapter number
+              var text = item.textContent.replace(/^[\d\.\s]+/, '').trim();
+              item.textContent = chNum + ' ' + text;
+            }
+          });
+          
+          // Fix section titles: "1 Sets and Notation" -> "0.1 Sets and Notation"
+          document.querySelectorAll('.sidebar-item .sidebar-item-text').forEach(function(item) {
+            var link = item.closest('a');
+            if (!link) return;
+            var href = link.getAttribute('href') || '';
+            var match = href.match(/ch(\d+)-[^\/]+\/(\d+)-[^\/]+\.html/);
+            if (match) {
+              var chNum = parseInt(match[1], 10);
+              var secNum = parseInt(match[2], 10);
+              // Remove ALL leading numbers/whitespace and add correct section number
+              var text = item.textContent.replace(/^[\d\.\s]+/, '').trim();
+              item.textContent = chNum + '.' + secNum + ' ' + text;
+            }
+          });
+          
+          // Also fix the page title/breadcrumb section numbers
+          var pageTitle = document.querySelector('.content h1.title .chapter-number, .content h1 .chapter-number');
+          if (pageTitle) {
+            var pathMatch = window.location.pathname.match(/ch(\d+)-[^\/]+\/(\d+)-/);
+            if (pathMatch) {
+              pageTitle.textContent = parseInt(pathMatch[1], 10) + '.' + parseInt(pathMatch[2], 10);
+            }
+          }
+          
+          // Fix prev/next navigation arrows at bottom of page
+          document.querySelectorAll('.nav-page-next .nav-page-text, .nav-page-previous .nav-page-text').forEach(function(navText) {
+            var link = navText.closest('a');
+            if (!link) return;
+            var href = link.getAttribute('href') || '';
+            var match = href.match(/ch(\d+)-[^\/]+\/(\d+)-[^\/]+\.html/);
+            if (match) {
+              var chNum = parseInt(match[1], 10);
+              var secNum = parseInt(match[2], 10);
+              // Remove old number and add correct chapter.section number
+              var text = navText.textContent.replace(/^[\d\.\s]+/, '').trim();
+              navText.textContent = chNum + '.' + secNum + ' ' + text;
+            }
+          });
+          
+          // ==========================================
+          // 1. Add PDF download link to right TOC sidebar
+          // ==========================================
+          var path = window.location.pathname;
+          
+          if (!path.endsWith('/') && !path.endsWith('/index.html') && path !== '/index.html') {
+            var pdfPath = path.replace(/\.html$/, '.pdf');
+            var section = document.createElement('div');
+            section.style.cssText = 'margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dee2e6;';
+            section.innerHTML = 
+              '<h6 style="font-size:0.875rem;font-weight:600;margin-bottom:0.5rem;">Other Formats</h6>' +
+              '<a href="' + pdfPath + '" style="display:flex;align-items:center;gap:0.5rem;color:inherit;text-decoration:none;font-size:0.875rem;">' +
+              '<i class="bi bi-file-pdf" style="color:#dc3545;"></i> PDF</a>';
+            
+            var tocSidebar = document.querySelector('#quarto-margin-sidebar') ||
+                             document.querySelector('.toc-active') ||
+                             document.querySelector('#TOC');
+            if (tocSidebar) {
+              tocSidebar.appendChild(section);
+            }
+          }
+          
+          // ==========================================
+          // 2. Fix theorem numbering to chapter.section.counter format
+          // ==========================================
+          // Extract chapter and section from path: /src/chXX-.../YY-name.html
+          var pathMatch = path.match(/ch(\d+)-[^\/]+\/(\d+)-/);
+          if (pathMatch) {
+            var chapterNum = parseInt(pathMatch[1], 10);
+            var sectionNum = parseInt(pathMatch[2], 10);
+            
+            // Counter for theorems (all types share one counter for sequential numbering)
+            var theoremCounter = 0;
+            
+            // Find all theorem-like divs using Quarto's ID pattern
+            var prefixes = ['def-', 'thm-', 'lem-', 'cor-', 'prp-', 'exm-', 'exr-', 'cnj-', 'alg-'];
+            var selector = prefixes.map(function(p) { return '[id^="' + p + '"]'; }).join(', ');
+            var theoremDivs = document.querySelectorAll(selector);
+            
+            theoremDivs.forEach(function(div) {
+              theoremCounter++;
+              var newNumber = chapterNum + '.' + sectionNum + '.' + theoremCounter;
+              
+              // Update the theorem-title strong element (primary method)
+              var titleStrong = div.querySelector('.theorem-title strong');
+              if (titleStrong) {
+                titleStrong.innerHTML = titleStrong.innerHTML.replace(/\d+\.\d+/, newNumber);
+              }
+              
+              // Also update definition-title if present
+              var defTitle = div.querySelector('.definition-title');
+              if (defTitle) {
+                defTitle.innerHTML = defTitle.innerHTML.replace(/\d+\.\d+/, newNumber);
+              }
+              
+              // Update data-number attributes
+              var numbered = div.querySelectorAll('[data-number]');
+              numbered.forEach(function(el) {
+                el.setAttribute('data-number', newNumber);
+              });
+              
+              // Update figcaption text
+              var caption = div.querySelector('figcaption');
+              if (caption) {
+                caption.innerHTML = caption.innerHTML.replace(/\d+\.\d+/, newNumber);
+              }
+              
+              // Update headings
+              var headings = div.querySelectorAll('h2, h3, h4, h5, h6');
+              headings.forEach(function(h) {
+                var numSpan = h.querySelector('.header-section-number');
+                if (numSpan) {
+                  numSpan.textContent = newNumber;
+                }
+                if (h.hasAttribute('data-number')) {
+                  h.setAttribute('data-number', newNumber);
+                }
+              });
+            });
+          }
+          
+          // ==========================================
+          // 3. Fix ALL cross-references using global theorem map
+          // ==========================================
+          var globalTheoremMap = null;
+          
+          fetch('/theorem-map.json')
+            .then(function(response) { return response.json(); })
+            .then(function(theoremMap) {
+              globalTheoremMap = theoremMap;
+              
+              // Find all cross-reference links to theorem-like elements
+              var refLinks = document.querySelectorAll('a[href*="def-"], a[href*="thm-"], a[href*="lem-"], a[href*="cor-"], a[href*="prp-"], a[href*="exm-"], a[href*="exr-"], a[href*="cnj-"], a[href*="alg-"]');
+              refLinks.forEach(function(link) {
+                var href = link.getAttribute('href');
+                // Extract the ID from href (could be #id or path#id)
+                var hashIndex = href.indexOf('#');
+                if (hashIndex !== -1) {
+                  var targetId = href.substring(hashIndex + 1);
+                  if (theoremMap[targetId]) {
+                    // Replace the number in the link text
+                    link.innerHTML = link.innerHTML.replace(/\d+\.\d+/, theoremMap[targetId]);
+                  }
+                }
+              });
+              
+              // ==========================================
+              // 4. Fix tooltip (hover preview) numbering
+              // ==========================================
+              // Use MutationObserver to watch for tooltip elements
+              var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                  mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                      // Check if this is a tippy tooltip container
+                      var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
+                      if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
+                        tippyContent = node;
+                      }
+                      if (tippyContent) {
+                        fixTooltipContent(tippyContent, globalTheoremMap);
+                      }
+                      // Also check children for tippy-content
+                      if (node.querySelectorAll) {
+                        node.querySelectorAll('.tippy-content').forEach(function(tc) {
+                          fixTooltipContent(tc, globalTheoremMap);
+                        });
+                      }
+                    }
+                  });
+                });
+              });
+              
+              observer.observe(document.body, { childList: true, subtree: true });
+            })
+            .catch(function(err) {
+              console.log('Could not load theorem map:', err);
+            });
+          
+          // Function to fix numbering in tooltip content
+          function fixTooltipContent(tooltipContent, theoremMap) {
+            if (!theoremMap) return;
+            
+            // Skip if already processed
+            if (tooltipContent.dataset.numberingFixed) return;
+            tooltipContent.dataset.numberingFixed = 'true';
+            
+            // Build a lookup: "Theorem X.Y (Name)" pattern -> new number
+            // We need to match based on the theorem name since that's consistent
+            var nameToNewNumber = {};
+            Object.keys(theoremMap).forEach(function(id) {
+              // Convert id like "thm-linear-dependence-lemma" to "Linear Dependence Lemma"
+              var name = id.replace(/^(def|thm|lem|cor|prp|exm|exr|cnj|alg)-/, '')
+                           .replace(/-/g, ' ')
+                           .split(' ')
+                           .map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); })
+                           .join(' ');
+              nameToNewNumber[name.toLowerCase()] = theoremMap[id];
+            });
+            
+            // Find theorem-title elements in tooltip
+            var titles = tooltipContent.querySelectorAll('.theorem-title strong');
+            titles.forEach(function(title) {
+              // Skip if already has 3-level numbering (X.Y.Z pattern)
+              if (/\d+\.\d+\.\d+/.test(title.textContent)) return;
+              
+              var text = title.textContent;
+              // Extract name from "Theorem X.Y (Name)" pattern
+              var nameMatch = text.match(/\(([^)]+)\)/);
+              if (nameMatch) {
+                var name = nameMatch[1].toLowerCase();
+                if (nameToNewNumber[name]) {
+                  // Use regex that only matches 2-level numbers (not followed by another dot+digit)
+                  title.innerHTML = title.innerHTML.replace(/(\d+\.\d+)(?!\.\d)/, nameToNewNumber[name]);
+                }
+              }
+            });
+          }
+        });
+        </script>
+    
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    fig-width: 6
+    fig-pos: "H"
+    include-in-header:
+      - text: |
+          \usepackage[quartoenv]{./config/latex-template}
+          % Strip numbers from unnumbered theorem environments
+          \directlua{require("config/strip-numbers")}
+          % Suppress title page
+          \AtBeginDocument{\let\maketitle\relax}
+          % List spacing (1.3x)
+          \usepackage{enumitem}
+          \setlist{itemsep=1.2em, parsep=0pt}
+          % Custom enumeration with prefix: \begin{customenum}{VS} gives VS1, VS2, ...
+          \newlist{customenum}{enumerate}{1}
+          \setlist[customenum,1]{label=\customenumprefix\arabic*, itemsep=1.2em}
+          \newcommand{\customenumprefix}{}
+          \usepackage[bookmode]{./config/chapter-style}
+    geometry:
+      - margin=1.2in

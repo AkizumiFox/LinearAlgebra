@@ -103,42 +103,103 @@ update:
 pdfs:
 	@echo "Building individual chapter PDFs (parallel: $(MAX_JOBS) jobs)..."
 	@# Create temp directory for isolated rendering
-	@RENDER_TMPDIR=$$(mktemp -d); \
-	trap 'rm -rf "$$RENDER_TMPDIR"' EXIT; \
+	@# Create template directory with full project structure
+	@TEMPLATE_DIR=$$(mktemp -d); \
+	trap 'rm -rf "$$TEMPLATE_DIR"' EXIT; \
 	\
-	cp -r config "$$RENDER_TMPDIR/"; \
+	echo "project:" > "$$TEMPLATE_DIR/_quarto.yml"; \
+	echo "  type: default" >> "$$TEMPLATE_DIR/_quarto.yml"; \
+	echo "latex-auto-install: true" >> "$$TEMPLATE_DIR/_quarto.yml"; \
+	echo "keep-tex: true" >> "$$TEMPLATE_DIR/_quarto.yml"; \
 	\
-	for dir in src/ch*-*/; do \
-		dir_name="$${dir%/}"; \
-		mkdir -p "_book/$$dir_name"; \
-		mkdir -p "$$RENDER_TMPDIR/$$dir_name"; \
-		cp "$$dir_name"/*.qmd "$$RENDER_TMPDIR/$$dir_name/" 2>/dev/null || true; \
-		cp -r "$$dir_name/images" "$$RENDER_TMPDIR/$$dir_name/images" 2>/dev/null || true; \
-		cp -r _extensions "$$RENDER_TMPDIR/$$dir_name/_extensions" 2>/dev/null || true; \
-	done; \
+	printf '%s\n' "filters:" > "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "  - latex-environment" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "  - theorem-numbering" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "  - resolve-crossrefs" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "  - chapter-number" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "format:" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "  latex:" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "    documentclass: extbook" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "    classoption: [13.5pt, a4paper, oneside, openany]" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "    number-sections: true" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "    geometry:" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "      - margin=1.2in" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "    pdf-engine: lualatex" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "    include-in-header:" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' "      - text: |" >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \usepackage[quartoenv]{../../config/latex-template}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \directlua{require("../../config/strip-numbers")}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \AtBeginDocument{\let\maketitle\relax}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \usepackage{enumitem}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \setlist{itemsep=1.2em, parsep=0pt}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \newlist{customenum}{enumerate}{1}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \setlist[customenum,1]{label=\customenumprefix\arabic*, itemsep=1.2em}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \newcommand{\customenumprefix}{}' >> "$$TEMPLATE_DIR/config.yml"; \
+	printf '%s\n' '          \usepackage{../../config/chapter-style}' >> "$$TEMPLATE_DIR/config.yml"; \
 	\
-	QMD_FILES=$$(find src/ch*-* -name '[0-9][0-9]-*.qmd' 2>/dev/null | sort); \
+	\
+	cp -r config "$$TEMPLATE_DIR/"; \
+	cp index.qmd "$$TEMPLATE_DIR/"; \
+	cp -r _extensions "$$TEMPLATE_DIR/"; \
+	mkdir -p "$$TEMPLATE_DIR/_book"; \
+	cp "_book/theorem-map.json" "$$TEMPLATE_DIR/_book/" 2>/dev/null || true; \
+	\
+	rsync -a --exclude .quarto --exclude _freeze --exclude _book src/ "$$TEMPLATE_DIR/src/"; \
+	find "$$TEMPLATE_DIR/src" -name "_quarto.yml" -delete; \
+	\
+	if [ -n "$$TARGET_FILES" ]; then \
+		QMD_FILES="$$TARGET_FILES"; \
+	else \
+		QMD_FILES=$$(find src/ch*-* -name '[0-9][0-9]-*.qmd' 2>/dev/null | sort); \
+	fi; \
 	echo "Found $$(echo "$$QMD_FILES" | wc -l | tr -d ' ') chapter files"; \
 	\
 	render_one() { \
 		qmd_file="$$1"; \
-		tmpdir="$$2"; \
+		template_dir="$$2"; \
+		\
+		if [ -z "$$template_dir" ] || [ ! -d "$$template_dir" ]; then \
+			echo "Error: Invalid template_dir: $$template_dir"; \
+			exit 1; \
+		fi; \
+		\
+		job_tmp=$$(mktemp -d); \
+		cp -R "$$template_dir/"* "$$job_tmp/"; \
+		\
 		output_dir=$$(dirname "$$qmd_file"); \
 		base=$$(basename "$$qmd_file" .qmd); \
+		echo "  [DEBUG] Job tmp: $$job_tmp"; \
 		echo "  [START] $$qmd_file"; \
-		if (cd "$$tmpdir/$$output_dir" && quarto render "$$base.qmd" --to pdf --metadata standalone-pdf:true 2>/dev/null); then \
-			if [ -f "$$tmpdir/$$output_dir/$$base.pdf" ]; then \
-				mv "$$tmpdir/$$output_dir/$$base.pdf" "_book/$$output_dir/$$base.pdf"; \
-				echo "  [DONE]  $$qmd_file -> _book/$$output_dir/$$base.pdf"; \
+		\
+		log_file="$$job_tmp/render.log"; \
+		if (cd "$$job_tmp/$$output_dir" && quarto render "$$base.qmd" --to latex --metadata standalone-pdf:true --metadata-file ../../config.yml > "$$log_file" 2>&1); then \
+			if [ -f "$$job_tmp/$$output_dir/$$base.tex" ]; then \
+				sed -i '' 's/\\begin{document}/\\begin{document}\\mainmatter/g' "$$job_tmp/$$output_dir/$$base.tex"; \
+				(cd "$$job_tmp/$$output_dir" && lualatex -interaction=nonstopmode "$$base.tex" >> "$$log_file" 2>&1 || true); \
+				(cd "$$job_tmp/$$output_dir" && lualatex -interaction=nonstopmode "$$base.tex" >> "$$log_file" 2>&1 || true); \
+				if [ -f "$$job_tmp/$$output_dir/$$base.pdf" ]; then \
+					mkdir -p "_book/$$output_dir"; \
+					mv "$$job_tmp/$$output_dir/$$base.pdf" "_book/$$output_dir/$$base.pdf"; \
+					echo "  [DONE]  $$qmd_file -> _book/$$output_dir/$$base.pdf"; \
+					if [ -f "$$log_file" ]; then grep "DEBUG (resolve-crossrefs)" "$$log_file" || true; fi; \
+				else \
+					echo "  [FAIL]  $$qmd_file (No PDF produced)"; \
+					echo "    Error log:"; \
+					tail -n 20 "$$log_file"; \
+				fi; \
 			fi; \
 		else \
-			echo "  [FAIL]  $$qmd_file"; \
+			echo "  [FAIL]  $$qmd_file (Quarto failed)"; \
+			echo "    Error log:"; \
+			tail -n 20 "$$log_file"; \
 		fi; \
+		true; \
 	}; \
 	export -f render_one 2>/dev/null || true; \
 	\
 	for qmd in $$QMD_FILES; do \
-		render_one "$$qmd" "$$RENDER_TMPDIR" & \
+		render_one "$$qmd" "$$TEMPLATE_DIR" & \
 		if [ $$(jobs -r | wc -l) -ge $(MAX_JOBS) ]; then wait -n 2>/dev/null || wait; fi; \
 	done; \
 	wait
@@ -270,8 +331,8 @@ endif
 	echo "    geometry: [top=30mm, left=25mm, right=25mm, bottom=30mm]" >> "$$FILE_NAME"; \
 	echo "    include-in-header:" >> "$$FILE_NAME"; \
 	echo "      text: |" >> "$$FILE_NAME"; \
-	echo "        \\usepackage[quartoenv]{../../config/latex-template}" >> "$$FILE_NAME"; \
-	echo "        \\directlua{require(\"../../config/strip-numbers\")}" >> "$$FILE_NAME"; \
+	echo "        \usepackage[quartoenv]{../../config/latex-template}" >> "$$FILE_NAME"; \
+	echo "        \directlua{require(\"../../config/strip-numbers\")}" >> "$$FILE_NAME"; \
 	echo "---" >> "$$FILE_NAME"; \
 	echo "" >> "$$FILE_NAME"; \
 	echo '{{< include ../../config/macros.qmd >}}' >> "$$FILE_NAME"; \

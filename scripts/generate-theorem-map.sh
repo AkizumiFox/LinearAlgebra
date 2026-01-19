@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Generate a JSON mapping file of all theorem IDs to their chapter.section.counter numbers
 
 OUTPUT_FILE="_book/theorem-map.json"
@@ -25,18 +25,72 @@ for html_file in $(find "$BOOK_DIR/src" -name "*.html" | sort); do
         
         # Extract theorem IDs from HTML in order
         # Looking for id="def-..." or id="thm-..." etc.
-        counter=0
+        
+        # Initialize separate counters
+        count_thm=0
+        count_lem=0
+        count_cor=0
+        count_prp=0
+        count_def=0
+        count_exr=0
+        count_alg=0
+        
+        # We need to process IDs sequentially to respect file order
         while IFS= read -r id; do
-            counter=$((counter + 1))
-            full_number="${chapter}.${section}.${counter}"
+            prefix=$(echo "$id" | cut -d'-' -f1)
             
-            if [ "$first_entry" = true ]; then
-                first_entry=false
-            else
-                echo "," >> "$OUTPUT_FILE"
+            should_map=false
+            current_count=0
+            
+            case "$prefix" in
+                "thm")
+                    count_thm=$((count_thm + 1))
+                    current_count=$count_thm
+                    should_map=true
+                    ;;
+                "lem")
+                    count_lem=$((count_lem + 1))
+                    current_count=$count_lem
+                    should_map=true
+                    ;;
+                "cor")
+                    count_cor=$((count_cor + 1))
+                    current_count=$count_cor
+                    should_map=true
+                    ;;
+                "prp")
+                    count_prp=$((count_prp + 1))
+                    current_count=$count_prp
+                    should_map=true
+                    ;;
+                "def")
+                    count_def=$((count_def + 1))
+                    current_count=$count_def
+                    should_map=true
+                    ;;
+                "exr")
+                    count_exr=$((count_exr + 1))
+                    current_count=$count_exr
+                    should_map=true
+                    ;;
+                "alg")
+                    count_alg=$((count_alg + 1))
+                    current_count=$count_alg
+                    should_map=true
+                    ;;
+            esac
+            
+            if [ "$should_map" = true ]; then
+                full_number="${chapter}.${section}.${current_count}"
+                
+                if [ "$first_entry" = true ]; then
+                    first_entry=false
+                else
+                    echo "," >> "$OUTPUT_FILE"
+                fi
+                
+                echo -n "  \"${id}\": \"${full_number}\"" >> "$OUTPUT_FILE"
             fi
-            
-            echo -n "  \"${id}\": \"${full_number}\"" >> "$OUTPUT_FILE"
         done < <(grep -oE 'id="(def|thm|lem|cor|prp|exm|exr|cnj|alg)-[^"]+"' "$html_file" | sed 's/id="//;s/"$//')
     fi
 done

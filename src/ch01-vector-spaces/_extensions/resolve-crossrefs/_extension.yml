@@ -1,0 +1,6 @@
+title: Resolve Cross-References
+author: Custom
+version: 1.0.0
+contributes:
+  filters:
+    - resolve-crossrefs.lua

@@ -1540,53 +1540,91 @@ document.addEventListener('DOMContentLoaded', function() {
     var chapterNum = parseInt(pathMatch[1], 10);
     var sectionNum = parseInt(pathMatch[2], 10);
     
-    // Counter for theorems (all types share one counter for sequential numbering)
-    var theoremCounter = 0;
+    // Separate counters for each type
+    var counters = {
+      'thm': 0, 'lem': 0, 'cor': 0, 'prp': 0, 
+      'def': 0, 'exr': 0, 'alg': 0
+    };
     
-    // Find all theorem-like divs using Quarto's ID pattern
-    var prefixes = ['def-', 'thm-', 'lem-', 'cor-', 'prp-', 'exm-', 'exr-', 'cnj-', 'alg-'];
-    var selector = prefixes.map(function(p) { return '[id^="' + p + '"]'; }).join(', ');
+    // Define types
+    var numberedTypes = Object.keys(counters);
+    var unnumberedTypes = ['exm', 'cnj'];
+    
+    var allTypes = numberedTypes.concat(unnumberedTypes);
+    var selector = allTypes.map(function(t) { return '[id^="' + t + '-"]'; }).join(', ');
     var theoremDivs = document.querySelectorAll(selector);
     
     theoremDivs.forEach(function(div) {
-      theoremCounter++;
-      var newNumber = chapterNum + '.' + sectionNum + '.' + theoremCounter;
+      var id = div.getAttribute('id') || '';
+      var type = id.split('-')[0];
       
-      // Update the theorem-title strong element (primary method)
-      var titleStrong = div.querySelector('.theorem-title strong');
-      if (titleStrong) {
-        titleStrong.innerHTML = titleStrong.innerHTML.replace(/\d+\.\d+/, newNumber);
-      }
-      
-      // Also update definition-title if present
-      var defTitle = div.querySelector('.definition-title');
-      if (defTitle) {
-        defTitle.innerHTML = defTitle.innerHTML.replace(/\d+\.\d+/, newNumber);
-      }
-      
-      // Update data-number attributes
-      var numbered = div.querySelectorAll('[data-number]');
-      numbered.forEach(function(el) {
-        el.setAttribute('data-number', newNumber);
-      });
-      
-      // Update figcaption text
-      var caption = div.querySelector('figcaption');
-      if (caption) {
-        caption.innerHTML = caption.innerHTML.replace(/\d+\.\d+/, newNumber);
-      }
-      
-      // Update headings
-      var headings = div.querySelectorAll('h2, h3, h4, h5, h6');
-      headings.forEach(function(h) {
-        var numSpan = h.querySelector('.header-section-number');
-        if (numSpan) {
-          numSpan.textContent = newNumber;
+      if (unnumberedTypes.includes(type)) {
+        // UNNUMBERED: Remove numbers from title/header
+        
+        // 1. Update theorem-title strong: "Example 1.2.1" -> "Example"
+        var titleStrong = div.querySelector('.theorem-title strong');
+        if (titleStrong) {
+          // Keep only the text part (e.g. "Example")
+          titleStrong.innerHTML = titleStrong.innerHTML.replace(/\s+\d+(\.\d+)*/, '');
         }
-        if (h.hasAttribute('data-number')) {
-          h.setAttribute('data-number', newNumber);
+        
+        // 2. Update definition-title if present
+        var defTitle = div.querySelector('.definition-title');
+        if (defTitle) {
+          defTitle.innerHTML = defTitle.innerHTML.replace(/\s+\d+(\.\d+)*/, '');
         }
-      });
+        
+        // 3. Clear data-number
+        div.querySelectorAll('[data-number]').forEach(function(el) {
+          el.removeAttribute('data-number');
+        });
+        
+        // 4. Clear header sections
+        div.querySelectorAll('.header-section-number').forEach(function(el) {
+          el.textContent = '';
+        });
+        
+      } else if (counters.hasOwnProperty(type)) {
+        // NUMBERED: Apply separate counters
+        counters[type]++;
+        var newNumber = chapterNum + '.' + sectionNum + '.' + counters[type];
+        
+        // Update the theorem-title strong element
+        var titleStrong = div.querySelector('.theorem-title strong');
+        if (titleStrong) {
+          titleStrong.innerHTML = titleStrong.innerHTML.replace(/\d+(\.\d+)+/, newNumber);
+        }
+        
+        // Also update definition-title if present
+        var defTitle = div.querySelector('.definition-title');
+        if (defTitle) {
+          defTitle.innerHTML = defTitle.innerHTML.replace(/\d+(\.\d+)+/, newNumber);
+        }
+        
+        // Update data-number attributes
+        var numbered = div.querySelectorAll('[data-number]');
+        numbered.forEach(function(el) {
+          el.setAttribute('data-number', newNumber);
+        });
+        
+        // Update figcaption text
+        var caption = div.querySelector('figcaption');
+        if (caption) {
+          caption.innerHTML = caption.innerHTML.replace(/\d+(\.\d+)+/, newNumber);
+        }
+        
+        // Update headings
+        var headings = div.querySelectorAll('h2, h3, h4, h5, h6');
+        headings.forEach(function(h) {
+          var numSpan = h.querySelector('.header-section-number');
+          if (numSpan) {
+            numSpan.textContent = newNumber;
+          }
+          if (h.hasAttribute('data-number')) {
+            h.setAttribute('data-number', newNumber);
+          }
+        });
+      }
     });
   }
   
@@ -1629,12 +1667,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 tippyContent = node;
               }
               if (tippyContent) {
-                fixTooltipContent(tippyContent, globalTheoremMap);
+                fixTooltipContent(tippyContent);
               }
               // Also check children for tippy-content
               if (node.querySelectorAll) {
                 node.querySelectorAll('.tippy-content').forEach(function(tc) {
-                  fixTooltipContent(tc, globalTheoremMap);
+                  fixTooltipContent(tc);
                 });
               }
             }
@@ -1643,48 +1681,59 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
       observer.observe(document.body, { childList: true, subtree: true });
+    
+      // Fallback: Aggressive poll to fix existing tooltips
+      setInterval(function() {
+        document.querySelectorAll('.tippy-content').forEach(function(tc) {
+           fixTooltipContent(tc);
+        });
+      }, 100);
     })
     .catch(function(err) {
       console.log('Could not load theorem map:', err);
+      // Still run observer even if map fails (though logic is now duplicated/moved, 
+      // better to just fail map and rely on global observer if we moved it out.
+      // Actually, wait, I can just copy the observer code out or leave it here?
+      // The instructions said "Move it OUT". So I should close the fetch chain EARLIER.
     });
   
+  // MOVED OUTSIDE FETCH:
+  // Use MutationObserver for robust tooltip handling
+  var observer = new MutationObserver(function(mutations) {
+     mutations.forEach(function(mutation) {
+       mutation.addedNodes.forEach(function(node) {
+         if (node.nodeType === Node.ELEMENT_NODE) {
+           var tippyContent = node.querySelector ? node.querySelector('.tippy-content') : null;
+           if (!tippyContent && node.classList && node.classList.contains('tippy-content')) {
+             tippyContent = node;
+           }
+           if (tippyContent) fixTooltipContent(tippyContent);
+           
+           if (node.querySelectorAll) {
+             node.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+           }
+         }
+       });
+     });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+    
+  // Aggressive Fallback
+  setInterval(function() {
+     document.querySelectorAll('.tippy-content').forEach(function(tc) { fixTooltipContent(tc); });
+  }, 100);
+
   // Function to fix numbering in tooltip content
-  function fixTooltipContent(tooltipContent, theoremMap) {
-    if (!theoremMap) return;
-    
-    // Skip if already processed
-    if (tooltipContent.dataset.numberingFixed) return;
-    tooltipContent.dataset.numberingFixed = 'true';
-    
-    // Build a lookup: "Theorem X.Y (Name)" pattern -> new number
-    // We need to match based on the theorem name since that's consistent
-    var nameToNewNumber = {};
-    Object.keys(theoremMap).forEach(function(id) {
-      // Convert id like "thm-linear-dependence-lemma" to "Linear Dependence Lemma"
-      var name = id.replace(/^(def|thm|lem|cor|prp|exm|exr|cnj|alg)-/, '')
-                   .replace(/-/g, ' ')
-                   .split(' ')
-                   .map(function(w) { return w.charAt(0).toUpperCase() + w.slice(1); })
-                   .join(' ');
-      nameToNewNumber[name.toLowerCase()] = theoremMap[id];
-    });
+  function fixTooltipContent(tooltipContent) {
+    // Remove dataset check aka FORCE FIX every time
+    // tooltipContent.dataset.numberingFixed = 'true'; 
     
     // Find theorem-title elements in tooltip
-    var titles = tooltipContent.querySelectorAll('.theorem-title strong');
+    var titles = tooltipContent.querySelectorAll('.theorem-title strong, .theorem-title');
     titles.forEach(function(title) {
-      // Skip if already has 3-level numbering (X.Y.Z pattern)
-      if (/\d+\.\d+\.\d+/.test(title.textContent)) return;
-      
-      var text = title.textContent;
-      // Extract name from "Theorem X.Y (Name)" pattern
-      var nameMatch = text.match(/\(([^)]+)\)/);
-      if (nameMatch) {
-        var name = nameMatch[1].toLowerCase();
-        if (nameToNewNumber[name]) {
-          // Use regex that only matches 2-level numbers (not followed by another dot+digit)
-          title.innerHTML = title.innerHTML.replace(/(\d+\.\d+)(?!\.\d)/, nameToNewNumber[name]);
-        }
-      }
+      // Just strip the number entirely: "Theorem 9.1 (Name)" -> "Theorem (Name)"
+      // Regex matches space + number pattern (e.g. " 9.1", " 1.2.3")
+      title.innerHTML = title.innerHTML.replace(/\s+\d+(\.\d+)*/, '');
     });
   }
 });

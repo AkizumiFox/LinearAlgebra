@@ -8,6 +8,7 @@ filters:
   - theorem-numbering
 format:
   pdf:
+    keep-tex: true
     documentclass: extbook
     classoption: [13.5pt, a4paper, oneside, openany]
     number-sections: true
