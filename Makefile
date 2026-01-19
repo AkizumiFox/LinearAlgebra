@@ -155,54 +155,7 @@ pdfs:
 	fi; \
 	echo "Found $$(echo "$$QMD_FILES" | wc -l | tr -d ' ') chapter files"; \
 	\
-	render_one() { \
-		qmd_file="$$1"; \
-		template_dir="$$2"; \
-		\
-		if [ -z "$$template_dir" ] || [ ! -d "$$template_dir" ]; then \
-			echo "Error: Invalid template_dir: $$template_dir"; \
-			exit 1; \
-		fi; \
-		\
-		job_tmp=$$(mktemp -d); \
-		cp -R "$$template_dir/"* "$$job_tmp/"; \
-		\
-		output_dir=$$(dirname "$$qmd_file"); \
-		base=$$(basename "$$qmd_file" .qmd); \
-		echo "  [DEBUG] Job tmp: $$job_tmp"; \
-		echo "  [START] $$qmd_file"; \
-		\
-		log_file="$$job_tmp/render.log"; \
-		if (cd "$$job_tmp/$$output_dir" && quarto render "$$base.qmd" --to latex --metadata standalone-pdf:true --metadata-file ../../config.yml > "$$log_file" 2>&1); then \
-			if [ -f "$$job_tmp/$$output_dir/$$base.tex" ]; then \
-				sed -i '' 's/\\begin{document}/\\begin{document}\\mainmatter/g' "$$job_tmp/$$output_dir/$$base.tex"; \
-				(cd "$$job_tmp/$$output_dir" && lualatex -interaction=nonstopmode "$$base.tex" >> "$$log_file" 2>&1 || true); \
-				(cd "$$job_tmp/$$output_dir" && lualatex -interaction=nonstopmode "$$base.tex" >> "$$log_file" 2>&1 || true); \
-				if [ -f "$$job_tmp/$$output_dir/$$base.pdf" ]; then \
-					mkdir -p "_book/$$output_dir"; \
-					mv "$$job_tmp/$$output_dir/$$base.pdf" "_book/$$output_dir/$$base.pdf"; \
-					echo "  [DONE]  $$qmd_file -> _book/$$output_dir/$$base.pdf"; \
-					if [ -f "$$log_file" ]; then grep "DEBUG (resolve-crossrefs)" "$$log_file" || true; fi; \
-				else \
-					echo "  [FAIL]  $$qmd_file (No PDF produced)"; \
-					echo "    Error log:"; \
-					tail -n 20 "$$log_file"; \
-				fi; \
-			fi; \
-		else \
-			echo "  [FAIL]  $$qmd_file (Quarto failed)"; \
-			echo "    Error log:"; \
-			tail -n 20 "$$log_file"; \
-		fi; \
-		true; \
-	}; \
-	export -f render_one 2>/dev/null || true; \
-	\
-	for qmd in $$QMD_FILES; do \
-		render_one "$$qmd" "$$TEMPLATE_DIR" & \
-		if [ $$(jobs -r | wc -l) -ge $(MAX_JOBS) ]; then wait -n 2>/dev/null || wait; fi; \
-	done; \
-	wait
+	echo "$$QMD_FILES" | xargs -P $(MAX_JOBS) -I {} ./scripts/render-chapter.sh "{}" "$$TEMPLATE_DIR"
 	@echo "Cleaning up auxiliary files..."
 	@find . -maxdepth 4 \( -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.toc" \) -delete 2>/dev/null || true
 	@echo "Done! PDFs are in _book/"
