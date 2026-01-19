@@ -24,8 +24,6 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          # Use specific version if needed, or 'latest'
-          version: latest
           tinytex: true 
 
       - name: Install system dependencies
