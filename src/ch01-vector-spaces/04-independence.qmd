@@ -55,6 +55,8 @@ Geometrically, in \( \nR^2 \), two vectors are linearly dependent if and only if
 ::: {#exm-linear-independence}
 ## Examples of Linear Independence
 
+The following examples illustrate how to check for linear independence in various settings:
+
 1. Let \( S_1 = \{(1, 2, 3), (4, 5, 6)\} \subseteq \nR^3 \). To check linear independence, suppose
    \[
 	a(1, 2, 3) + b(4, 5, 6) = (0, 0, 0) \implies \begin{cases} a + 4b = 0 \\ 2a + 5b = 0 \\ 3a + 6b = 0 \end{cases}

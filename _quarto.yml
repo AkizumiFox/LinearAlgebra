@@ -12,6 +12,7 @@ execute:
 # Use pre-compiled mermaid SVGs in CI
 filters:
   - mermaid-static
+  - scripts/list-env.lua
   - theorem-numbering
   - resolve-crossrefs
 
@@ -51,23 +52,6 @@ format:
     code-tools: false
     html-math-method: mathjax
     css: config/html-styles.css
-    include-in-header:
-      - text: |
-          <script src="/theorem-map.js"></script>
-          <script>
-          window.MathJax = {
-            tex: {
-              macros: {
-                qref: [function(parser, name) {
-                  const id = parser.GetArgument(name);
-                  const num = (window.theoremMap && window.theoremMap[id]) ? window.theoremMap[id] : "??";
-                  parser.string = num + parser.string.slice(parser.i);
-                  parser.i = 0;
-                }, 1]
-              }
-            }
-          };
-          </script>
     include-after-body:
       text: |
         <script>

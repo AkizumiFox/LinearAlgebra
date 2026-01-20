@@ -45,21 +45,16 @@ A set \( V \) over a field \( F \) with two operations: addition \( + \) and sca
 \]
 such that satisfy the following axioms for all \( \v_1, \v_2, \v_3 \in V \) and \( \alpha, \beta \in F \):
 
-(VS1) \( \v_1 + \v_2 = \v_2 + \v_1 \)
-
-(VS2) \( (\v_1 + \v_2) + \v_3 = \v_1 + (\v_2 + \v_3) \)
-
-(VS3) There exists \( \mathbf{0} \in V \) such that \( \v_1 + \mathbf{0} = \v_1 \)
-
-(VS4) There exists \( \v_1' \in V \) such that \( \v_1 + \v_1' = \mathbf{0} \)
-
-(VS5) \( \alpha(\v_1 + \v_2) = \alpha\v_1 + \alpha\v_2 \)
-
-(VS6) \( (\alpha+\beta)\v_1 = \alpha\v_1 + \beta\v_1 \)
-
-(VS7) \( \alpha(\beta\v_1) = (\alpha\beta)\v_1 \)
-
-(VS8) \( 1\v_1 = \v_1 \)
+::: {.enumerate options="label=(VS\arabic*)"}
+1. \( \v_1 + \v_2 = \v_2 + \v_1 \)
+2. \( (\v_1 + \v_2) + \v_3 = \v_1 + (\v_2 + \v_3) \)
+3. There exists \( \mathbf{0} \in V \) such that \( \v_1 + \mathbf{0} = \v_1 \)
+4. There exists \( \v_1' \in V \) such that \( \v_1 + \v_1' = \mathbf{0} \)
+5. \( \alpha(\v_1 + \v_2) = \alpha\v_1 + \alpha\v_2 \)
+6. \( (\alpha+\beta)\v_1 = \alpha\v_1 + \beta\v_1 \)
+7. \( \alpha(\beta\v_1) = (\alpha\beta)\v_1 \)
+8. \( 1\v_1 = \v_1 \)
+:::
 :::
 
 ::: {.remark}
@@ -72,6 +67,8 @@ We sometimes will abuse the name and refer to \( \mathbf{0} = \mathbf{0}_V \in V
 
 ::: {#exm-vector-spaces}
 ## Examples of Vector Spaces
+
+The following are classic examples of vector spaces:
 
 1. Most defaultly, \( F^n \) with the usual operations of \( + \) and \( \cdot \) is a vector space over \( F \).
 
@@ -99,21 +96,16 @@ You can check if addition and scalar multiplication make sense and follow all ax
 
 We verify that \( \nQ(\sqrt{2}) \coloneqq \left\{  a + b \sqrt{2} : a, b \in \nQ  \right\} \) is a vector space over \( \nQ \) by checking all eight axioms. Let \( \v_1 = a_1 + b_1\sqrt{2} \), \( \v_2 = a_2 + b_2\sqrt{2} \), \( \v_3 = a_3 + b_3\sqrt{2} \in \nQ(\sqrt{2}) \) and \( \alpha, \beta \in \nQ \).
 
-(VS1) \( \v_1 + \v_2 = (a_1 + a_2) + (b_1 + b_2)\sqrt{2} = (a_2 + a_1) + (b_2 + b_1)\sqrt{2} = \v_2 + \v_1 \).
-
-(VS2) \( (\v_1 + \v_2) + \v_3 = (a_1 + a_2 + a_3) + (b_1 + b_2 + b_3)\sqrt{2} = \v_1 + (\v_2 + \v_3) \).
-
-(VS3) The element \( \mathbf{0} = 0 + 0\sqrt{2} = 0 \in \nQ(\sqrt{2}) \) satisfies \( \v_1 + \mathbf{0} = (a_1 + 0) + (b_1 + 0)\sqrt{2} = \v_1 \).
-
-(VS4) For \( \v_1 = a_1 + b_1\sqrt{2} \), define \( -\v_1 \coloneqq (-a_1) + (-b_1)\sqrt{2} \in \nQ(\sqrt{2}) \). Then \( \v_1 + (-\v_1) = (a_1 - a_1) + (b_1 - b_1)\sqrt{2} = \mathbf{0} \).
-
-(VS5) \( \alpha(\v_1 + \v_2) = \alpha(a_1 + a_2) + \alpha(b_1 + b_2)\sqrt{2} = (\alpha a_1 + \alpha a_2) + (\alpha b_1 + \alpha b_2)\sqrt{2} = \alpha\v_1 + \alpha\v_2 \).
-
-(VS6) \( (\alpha + \beta)\v_1 = (\alpha + \beta)a_1 + (\alpha + \beta)b_1\sqrt{2} = (\alpha a_1 + \beta a_1) + (\alpha b_1 + \beta b_1)\sqrt{2} = \alpha\v_1 + \beta\v_1 \).
-
-(VS7) \( \alpha(\beta\v_1) = \alpha(\beta a_1 + \beta b_1\sqrt{2}) = \alpha\beta a_1 + \alpha\beta b_1\sqrt{2} = (\alpha\beta)\v_1 \).
-
-(VS8) \( 1 \cdot \v_1 = 1 \cdot a_1 + 1 \cdot b_1\sqrt{2} = a_1 + b_1\sqrt{2} = \v_1 \).
+::: {.enumerate options="label=(VS\arabic*)"}
+1. \( \v_1 + \v_2 = (a_1 + a_2) + (b_1 + b_2)\sqrt{2} = (a_2 + a_1) + (b_2 + b_1)\sqrt{2} = \v_2 + \v_1 \).
+2. \( (\v_1 + \v_2) + \v_3 = (a_1 + a_2 + a_3) + (b_1 + b_2 + b_3)\sqrt{2} = \v_1 + (\v_2 + \v_3) \).
+3. The element \( \mathbf{0} = 0 + 0\sqrt{2} = 0 \in \nQ(\sqrt{2}) \) satisfies \( \v_1 + \mathbf{0} = (a_1 + 0) + (b_1 + 0)\sqrt{2} = \v_1 \).
+4. For \( \v_1 = a_1 + b_1\sqrt{2} \), define \( -\v_1 \coloneqq (-a_1) + (-b_1)\sqrt{2} \in \nQ(\sqrt{2}) \). Then \( \v_1 + (-\v_1) = (a_1 - a_1) + (b_1 - b_1)\sqrt{2} = \mathbf{0} \).
+5. \( \alpha(\v_1 + \v_2) = \alpha(a_1 + a_2) + \alpha(b_1 + b_2)\sqrt{2} = (\alpha a_1 + \alpha a_2) + (\alpha b_1 + \alpha b_2)\sqrt{2} = \alpha\v_1 + \alpha\v_2 \).
+6. \( (\alpha + \beta)\v_1 = (\alpha + \beta)a_1 + (\alpha + \beta)b_1\sqrt{2} = (\alpha a_1 + \beta a_1) + (\alpha b_1 + \beta b_1)\sqrt{2} = \alpha\v_1 + \beta\v_1 \).
+7. \( \alpha(\beta\v_1) = \alpha(\beta a_1 + \beta b_1\sqrt{2}) = \alpha\beta a_1 + \alpha\beta b_1\sqrt{2} = (\alpha\beta)\v_1 \).
+8. \( 1 \cdot \v_1 = 1 \cdot a_1 + 1 \cdot b_1\sqrt{2} = a_1 + b_1\sqrt{2} = \v_1 \).
+:::
 
 Thus \( \nQ(\sqrt{2}) \) is a vector space over \( \nQ \).
 :::
@@ -222,8 +214,10 @@ We show that \( (-1) \cdot \v \) is an additive inverse of \( \v \):
 \v + (-1) \cdot \v &= 1 \cdot \v + (-1) \cdot \v & \text{(by VS8)} \\
 &= (1 + (-1)) \cdot \v & \text{(by VS6)} \\
 &= 0 \cdot \v & \text{(arithmetic in } F \text{)} \\
-&= \mathbf{0} & \text{(by \qref{thm-zero-scalar-mult})}
+&= \mathbf{0} & \text{(*)}
 \end{align*}
+By (*), we use @thm-zero-scalar-mult.
+
 Since \( (-1) \cdot \v \) is an additive inverse of \( \v \), by uniqueness we have \( -\v = (-1) \cdot \v \).
 :::
 
@@ -238,8 +232,10 @@ We show that \( (-\alpha)\v \) is an additive inverse of \( \alpha\v \):
 \begin{align*}
 \alpha\v + (-\alpha)\v &= (\alpha + (-\alpha))\v & \text{(by VS6)} \\
 &= 0 \cdot \v & \text{(arithmetic in } F \text{)} \\
-&= \mathbf{0} & \text{(by @thm-zero-scalar-mult)}
+&= \mathbf{0} & \text{(*)}
 \end{align*}
+By (*), we use @thm-zero-scalar-mult.
+
 Since \( (-\alpha)\v \) is an additive inverse of \( \alpha\v \), by uniqueness we have \( (-\alpha)\v = -(\alpha\v) \).
 :::
 

@@ -39,23 +39,17 @@ A set \( F \) is called a **field** if we can define two binary operations addit
 \]
 such that:
 
-(F1) \( a + b = b + a \)
-
-(F2) \( (a + b) + c = a + (b + c) \)
-
-(F3) There exists \( 0 \in F \) such that \( a + 0 = a \).
-
-(F4) For every \( a \in F \), there exists \( -a \in F \) such that \( a + (-a) = 0 \).
-
-(F5) \( (a \cdot b) \cdot c = a \cdot (b \cdot c) \)
-
-(F6) \( a \cdot b = b \cdot a \)
-
-(F7) There exists \( 1 \in F \) such that \( 1 \neq 0 \) and \( a \cdot 1 = a \).
-
-(F8) For every \( a \in F \setminus \{0\} \), there exists \( a^{-1} \in F \) such that \( a \cdot a^{-1} = 1 \).
-
-(F9) \( a \cdot (b + c) = (a \cdot b) + (a \cdot c) \)
+::: {.enumerate options="label=(F\arabic*)"}
+1. \( a + b = b + a \)
+2. \( (a + b) + c = a + (b + c) \)
+3. There exists \( 0 \in F \) such that \( a + 0 = a \).
+4. For every \( a \in F \), there exists \( -a \in F \) such that \( a + (-a) = 0 \).
+5. \( (a \cdot b) \cdot c = a \cdot (b \cdot c) \)
+6. \( a \cdot b = b \cdot a \)
+7. There exists \( 1 \in F \) such that \( 1 \neq 0 \) and \( a \cdot 1 = a \).
+8. For every \( a \in F \setminus \{0\} \), there exists \( a^{-1} \in F \) such that \( a \cdot a^{-1} = 1 \).
+9. \( a \cdot (b + c) = (a \cdot b) + (a \cdot c) \)
+:::
 :::
 
 ::: {.remark}
@@ -64,6 +58,8 @@ We can shorten "\( F \) is a field with operations \( + \) and \( \cdot \)" to "
 
 ::: {#exm-fields}
 ## Examples of Fields
+
+The following sets are examples (and non-examples) of fields:
 
 1. \( \nR \) is a field.
 

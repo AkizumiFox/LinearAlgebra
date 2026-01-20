@@ -48,6 +48,8 @@ A subset \( B \) of a vector space \( V \) is called a **basis** for \( V \) if:
 ::: {#exm-standard-bases}
 ## Standard Bases
 
+Commonly used standard bases for familiar vector spaces are listed below:
+
 - The **standard basis** for \( F^n \) is \( \{ \e_1, \e_2, \dots, \e_n \} \), where \( \e_i \) has a 1 in the \( i \)-th position and 0 elsewhere.
 - The standard basis for \( F[x]_{\leq n} \) is \( \{ 1, x, x^2, \dots, x^n \} \).
 - The standard basis for \( M_{m \times n}(F) \) is the set of matrices \( \E_{ij} \) having a 1 at entry \( (i,j) \) and 0 elsewhere.

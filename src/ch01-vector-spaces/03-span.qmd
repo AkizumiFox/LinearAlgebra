@@ -46,6 +46,8 @@ The scalars \( a_i \) are called the **coefficients** of the linear combination.
 ::: {#exm-linear-combinations}
 ## Examples of Linear Combinations
 
+Below are some examples of linear combinations in different vector spaces:
+
 1. The vector \( (2, 1, 0) \) in \( \nR^3 \) is a linear combination of \( S = \{(1, 2, 3), (4, 5, 6)\} \) because
    \[
 	(2, 1, 0) = -2 \cdot (1, 2, 3) + 1 \cdot (4, 5, 6).

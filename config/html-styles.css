@@ -219,6 +219,43 @@ ol ol ol {
   list-style-type: lower-roman;
 }
 
+/* --- Custom Enumerate Labels (matched via scripts/list-env.lua) --- */
+.enumerate-f ol {
+  list-style-type: none;
+  counter-reset: item;
+  padding-left: 0.5em;
+}
+.enumerate-f ol > li {
+  position: relative;
+  padding-left: 2.5em;
+}
+.enumerate-f ol > li:before {
+  content: "(F" counter(item) ")";
+  counter-increment: item;
+  font-weight: 600;
+  position: absolute;
+  left: 0;
+  color: var(--heading-color);
+}
+
+.enumerate-vs ol {
+  list-style-type: none;
+  counter-reset: item;
+  padding-left: 0.5em;
+}
+.enumerate-vs ol > li {
+  position: relative;
+  padding-left: 3.5em;
+}
+.enumerate-vs ol > li:before {
+  content: "(VS" counter(item) ")";
+  counter-increment: item;
+  font-weight: 600;
+  position: absolute;
+  left: 0;
+  color: var(--heading-color);
+}
+
 /* ==========================================================================
    Mathematics - Better Integration
    ========================================================================== */

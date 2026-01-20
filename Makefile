@@ -174,7 +174,7 @@ MSG ?= "Update notes - $$(date '+%Y-%m-%d %H:%M')"
 deploy: all
 	@echo "Deploying to GitHub..."
 	@git add -A
-	@git commit -m $(MSG) || echo "Nothing to commit"
+	@git commit -m "$(MSG)" || echo "Nothing to commit"
 	@git push
 	@echo "Deployed successfully!"
 
@@ -182,7 +182,7 @@ deploy: all
 push:
 	@echo "Pushing to GitHub..."
 	@git add -A
-	@git commit -m $(MSG) || echo "Nothing to commit"
+	@git commit -m "$(MSG)" || echo "Nothing to commit"
 	@git push
 	@echo "Pushed successfully!"
 

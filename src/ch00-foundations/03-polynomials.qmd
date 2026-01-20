@@ -120,6 +120,8 @@ Thus \( F[x]_{\leq n} \supsetneq F[x]_{=n} \), and in fact \( F[x]_{\leq n} = F[
 ::: {#exm-comparing-notations}
 ## Comparing Notations
 
+The following examples highlight the difference between the notations introduced above:
+
 - \( \nR[x]_{\leq 2} = \{ ax^2 + bx + c : a, b, c \in \nR \} \) includes \( x^2 + 1 \), \( 3x - 2 \), and \( 5 \)
 - \( \nR[x]_{=2} = \{ ax^2 + bx + c : a \neq 0, \, a, b, c \in \nR \} \) includes \( x^2 + 1 \) but **not** \( 3x - 2 \) or \( 5 \)
 :::

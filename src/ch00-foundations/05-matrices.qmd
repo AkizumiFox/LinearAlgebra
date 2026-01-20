@@ -161,6 +161,8 @@ A square matrix \( \A \in M_n(F) \) is **upper triangular** if all entries below
 ::: {#exm-special-matrices}
 ## Examples of Special Matrices
 
+Here are concrete examples illustrating the special types of matrices defined above:
+
 - **Transpose:** \( \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}\T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix} \).
 - **Symmetric:** \( \begin{bmatrix} 1 & 2 & 3 \\ 2 & 4 & 5 \\ 3 & 5 & 6 \end{bmatrix} \) is symmetric since \( a_{ij} = a_{ji} \).
 - **Diagonal:** \( \diag(3, -1, 0) = \begin{bmatrix} 3 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{bmatrix} \).
