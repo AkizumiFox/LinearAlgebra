@@ -168,7 +168,7 @@ pdfs:
 # =============================================================================
 
 # Commit message - can be overridden: make deploy MSG="your message"
-MSG ?= "Update notes - $$(date '+%Y-%m-%d %H:%M')"
+MSG ?= Update notes - $$(date '+%Y-%m-%d %H:%M')
 
 # Build everything, commit, and push
 deploy: all
