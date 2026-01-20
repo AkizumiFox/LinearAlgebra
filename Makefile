@@ -25,7 +25,7 @@ MAX_JOBS ?= 4
 # GitHub URLs
 GITHUB_REPO := AkizumiFox/test-notes
 DEPLOY_URL := https://github.com/$(GITHUB_REPO)/deployments
-PAGES_URL := https://test.akizumifox.com/
+PAGES_URL := https://linear-algebra.akizumifox.com/
 
 # =============================================================================
 # Main targets
