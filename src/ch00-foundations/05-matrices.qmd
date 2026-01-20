@@ -95,20 +95,20 @@ When the size is clear from context, we simply write \( \I \).
 ::: {#def-transpose}
 ## Transpose
 
-Let \( \A = (a_{ij}) \in M_{m \times n}(F) \). The **transpose** of \( \A \), denoted \( \A\T \), is the \( n \times m \) matrix obtained by swapping rows and columns:
+Let \( \A = (a_{ij}) \in M_{m \times n}(F) \). The **transpose** of \( \A \), denoted \( \A^\top \), is the \( n \times m \) matrix obtained by swapping rows and columns:
 \[
-	(\A\T)_{ij} = a_{ji}.
+	(\A^\top)_{ij} = a_{ji}.
 \]
-Visually, the rows of \( \A \) become the columns of \( \A\T \):
+Visually, the rows of \( \A \) become the columns of \( \A^\top \):
 \[
-	\begin{bmatrix} a & b & c \\ d & e & f \end{bmatrix}\T = \begin{bmatrix} a & d \\ b & e \\ c & f \end{bmatrix}.
+	\begin{bmatrix} a & b & c \\ d & e & f \end{bmatrix}^\top = \begin{bmatrix} a & d \\ b & e \\ c & f \end{bmatrix}.
 \]
 :::
 
 ::: {#def-symmetric-matrix}
 ## Symmetric Matrix
 
-A square matrix \( \A \in M_n(F) \) is **symmetric** if \( \A = \A\T \). This means it is symmetric across its main diagonal:
+A square matrix \( \A \in M_n(F) \) is **symmetric** if \( \A = \A^\top \). This means it is symmetric across its main diagonal:
 \[
 	\A = \begin{bmatrix}
 	    a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -163,7 +163,7 @@ A square matrix \( \A \in M_n(F) \) is **upper triangular** if all entries below
 
 Here are concrete examples illustrating the special types of matrices defined above:
 
-- **Transpose:** \( \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}\T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix} \).
+- **Transpose:** \( \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}^\top = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix} \).
 - **Symmetric:** \( \begin{bmatrix} 1 & 2 & 3 \\ 2 & 4 & 5 \\ 3 & 5 & 6 \end{bmatrix} \) is symmetric since \( a_{ij} = a_{ji} \).
 - **Diagonal:** \( \diag(3, -1, 0) = \begin{bmatrix} 3 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 0 \end{bmatrix} \).
 - **Upper Triangular:** \( \begin{bmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{bmatrix} \).
@@ -316,22 +316,22 @@ Let \( \A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \)
 
 Let \( \A, \B \) be matrices of compatible sizes and \( c \in F \). Then:
 
-1. \( (\A\T)\T = \A \)
-2. \( (\A + \B)\T = \A\T + \B\T \)
-3. \( (c\A)\T = c\A\T \)
-4. \( (\A\B)\T = \B\T\A\T \) (Reversal rule)
+1. \( (\A^\top)^\top = \A \)
+2. \( (\A + \B)^\top = \A^\top + \B^\top \)
+3. \( (c\A)^\top = c\A^\top \)
+4. \( (\A\B)^\top = \B^\top\A^\top \) (Reversal rule)
 :::
 
 ::: {.proof}
-We prove the reversal rule \( (\A\B)\T = \B\T\A\T \). Let \( \A \in M_{m \times n}(F) \) and \( \B \in M_{n \times p}(F) \).
+We prove the reversal rule \( (\A\B)^\top = \B^\top\A^\top \). Let \( \A \in M_{m \times n}(F) \) and \( \B \in M_{n \times p}(F) \).
 \[
-	((\A\B)\T)_{ij} = (\A\B)_{ji} = \sum_{k=1}^n a_{jk} b_{ki}
+	((\A\B)^\top)_{ij} = (\A\B)_{ji} = \sum_{k=1}^n a_{jk} b_{ki}
 \]
-Now consider \( \B\T\A\T \). Its \( (i, j) \)-entry is:
+Now consider \( \B^\top\A^\top \). Its \( (i, j) \)-entry is:
 \[
-	(\B\T\A\T)_{ij} = \sum_{k=1}^n (\B\T)_{ik} (\A\T)_{kj} = \sum_{k=1}^n b_{ki} a_{jk} = \sum_{k=1}^n a_{jk} b_{ki}
+	(\B^\top\A^\top)_{ij} = \sum_{k=1}^n (\B^\top)_{ik} (\A^\top)_{kj} = \sum_{k=1}^n b_{ki} a_{jk} = \sum_{k=1}^n a_{jk} b_{ki}
 \]
-Since the entries are equal for all \( i, j \), we have \( (\A\B)\T = \B\T\A\T \).
+Since the entries are equal for all \( i, j \), we have \( (\A\B)^\top = \B^\top\A^\top \).
 :::
 
 ::: {#thm-trace-properties}
@@ -341,7 +341,7 @@ Let \( \A, \B \in M_n(F) \) and \( c \in F \). Then:
 
 1. \( \tr(\A + \B) = \tr(\A) + \tr(\B) \)
 2. \( \tr(c\A) = c\tr(\A) \)
-3. \( \tr(\A\T) = \tr(\A) \)
+3. \( \tr(\A^\top) = \tr(\A) \)
 4. \( \tr(\A\B) = \tr(\B\A) \) (Cyclic property)
 :::
 

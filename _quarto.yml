@@ -24,7 +24,7 @@ book:
   author: "Tzu-You Lin"
   description: "A rigorous, proof-based introduction to Advanced Linear Algebra. Covers vector spaces, bases, dimension, and matrix theory with a focus on abstract reasoning and structural beauty."
   site-url: "https://linear-algebra.akizumifox.com/"
-  repo-url: "https://github.com/AkizumiFox/test-notes"
+  repo-url: "https://github.com/AkizumiFox/LinearAlgebra"
   date: last-modified
   downloads: [pdf]
   # AUTO-GENERATED CHAPTERS - Do not edit manually
