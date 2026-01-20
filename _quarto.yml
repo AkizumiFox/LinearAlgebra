@@ -328,8 +328,8 @@ format:
               if (newHTML !== originalHTML) {
                 title.innerHTML = newHTML;
               }
-              // Force visibility after fix (prevents FOUC via CSS)
-              title.style.visibility = 'visible';
+              // Mark as resolved to toggle CSS visibility
+              title.classList.add('theorem-title-resolved');
             });
           }
         });

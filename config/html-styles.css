@@ -636,11 +636,42 @@ blockquote p:last-child {
   }
 }
 /* ==========================================================================
-   Start of dynamic tooltip fix support
+   Dynamic Tooltip Loading Animation
    ========================================================================== */
 
-/* Prevent FOUC: Initially hide the theorem title in tooltips.
-   It will be revealed by Javascript after the number is stripped. */
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Default state: Hide text, show spinner */
 .tippy-box .theorem-title {
   visibility: hidden;
+  position: relative;
+  display: inline-block; /* Ensure positioning works */
+  min-width: 20px;       /* Reserve space for spinner */
+}
+
+.tippy-box .theorem-title::after {
+  content: "";
+  visibility: visible;   /* Visible even if parent is hidden */
+  position: absolute;
+  left: 0;
+  top: 50%;              /* Center vertically */
+  /* transform is handled in keyframes to combine with rotation */
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ddd;
+  border-top-color: #555; /* Darker accent */
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* Resolved state: Show text, hide spinner */
+.tippy-box .theorem-title.theorem-title-resolved {
+  visibility: visible;
+}
+
+.tippy-box .theorem-title.theorem-title-resolved::after {
+  display: none;
 }
