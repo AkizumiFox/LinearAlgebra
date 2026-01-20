@@ -316,10 +316,7 @@ format:
 
           // Function to fix numbering in tooltip content
           function fixTooltipContent(tooltipContent) {
-            if (!tooltipContent || tooltipContent.dataset.numberingFixed) return;
-            
-            // Mark as fixed BEFORE modifying to prevent infinite mutation loops
-            tooltipContent.dataset.numberingFixed = 'true'; 
+            if (!tooltipContent) return;
             
             // Find theorem-title elements in tooltip
             var titles = tooltipContent.querySelectorAll('.theorem-title strong, .theorem-title');
