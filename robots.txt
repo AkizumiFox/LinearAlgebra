@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://linear-algebra.akizumifox.com/sitemap.xml

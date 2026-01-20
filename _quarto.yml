@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: _book
+  resources:
+    - robots.txt
 
 # Enable \( \) and \[ \] math delimiters
 from: markdown+tex_math_single_backslash
@@ -20,6 +22,9 @@ book:
   title: "Linear Algebra"
   subtitle: "Proof-based Introduction"
   author: "Tzu-You Lin"
+  description: "A rigorous, proof-based introduction to Advanced Linear Algebra. Covers vector spaces, bases, dimension, and matrix theory with a focus on abstract reasoning and structural beauty."
+  site-url: "https://linear-algebra.akizumifox.com/"
+  repo-url: "https://github.com/AkizumiFox/test-notes"
   date: last-modified
   downloads: [pdf]
   # AUTO-GENERATED CHAPTERS - Do not edit manually
@@ -52,6 +57,13 @@ format:
     code-tools: false
     html-math-method: mathjax
     css: config/html-styles.css
+    # SEO Improvements
+    open-graph: true
+    twitter-card: true
+    # Generate sitemap and robots.txt
+    include-in-header:
+      text: |
+        <meta name="keywords" content="Linear Algebra, Vector Spaces, Basis, Dimension, Matrix Theory, Proof-based, Mathematics, Abstract Algebra">
     include-after-body:
       text: |
         <script>
