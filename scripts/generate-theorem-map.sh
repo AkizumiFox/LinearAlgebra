@@ -99,3 +99,10 @@ echo "" >> "$OUTPUT_FILE"
 echo "}" >> "$OUTPUT_FILE"
 
 echo "Generated theorem mapping at $OUTPUT_FILE"
+
+# Also generate JS file for client-side MathJax access
+JS_OUTPUT_FILE="_book/theorem-map.js"
+echo "window.theoremMap = " > "$JS_OUTPUT_FILE"
+cat "$OUTPUT_FILE" >> "$JS_OUTPUT_FILE"
+echo ";" >> "$JS_OUTPUT_FILE"
+echo "Generated JS mapping at $JS_OUTPUT_FILE"

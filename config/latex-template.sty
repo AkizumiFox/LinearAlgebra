@@ -932,6 +932,18 @@
 
 % --- 2. Latin Matrices ---
 \gdef\A{\mathbf{A}}
+
+% ... (existing content) ...
+
+% ======================================================================================
+% [4] CROSS-REFERENCE HELPERS
+% ======================================================================================
+% Helper for cross-references inside math environments (align, etc.)
+% Usage: \text{(by \qref{label})}
+% PDF: Maps to standard \ref
+% HTML: Mapped to MathJax macro using parsed theorem map
+\newcommand{\qref}[1]{\ref{#1}}
+
 \gdef\mA{\mathbf{A}}
 \gdef\B{\mathbf{B}}
 \gdef\mB{\mathbf{B}}

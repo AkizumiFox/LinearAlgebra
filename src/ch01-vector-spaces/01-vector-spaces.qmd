@@ -222,7 +222,7 @@ We show that \( (-1) \cdot \v \) is an additive inverse of \( \v \):
 \v + (-1) \cdot \v &= 1 \cdot \v + (-1) \cdot \v & \text{(by VS8)} \\
 &= (1 + (-1)) \cdot \v & \text{(by VS6)} \\
 &= 0 \cdot \v & \text{(arithmetic in } F \text{)} \\
-&= \mathbf{0} & \text{(by @thm-zero-scalar-mult)}
+&= \mathbf{0} & \text{(by \qref{thm-zero-scalar-mult})}
 \end{align*}
 Since \( (-1) \cdot \v \) is an additive inverse of \( \v \), by uniqueness we have \( -\v = (-1) \cdot \v \).
 :::
