@@ -173,6 +173,26 @@ li>ol {
   margin-bottom: 0.5em;
 }
 
+/* Remove gap when list immediately follows the environment title */
+.theorem-title+ul,
+.theorem-title+ol,
+.lemma-title+ul,
+.lemma-title+ol,
+.corollary-title+ul,
+.corollary-title+ol,
+.proposition-title+ul,
+.proposition-title+ol,
+.conjecture-title+ul,
+.conjecture-title+ol,
+.definition-title+ul,
+.definition-title+ol,
+.example-title+ul,
+.example-title+ol,
+.exercise-title+ul,
+.exercise-title+ol {
+  margin-top: 0;
+}
+
 /* Custom bullet styling */
 ul {
   list-style-type: disc;
