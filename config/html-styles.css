@@ -635,36 +635,49 @@ blockquote p:last-child {
     hyphens: none;
   }
 }
+
 /* ==========================================================================
    Dynamic Tooltip Loading Animation
    ========================================================================== */
 
 @keyframes spin {
-  0% { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(360deg); }
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 /* Default state: Hide text, show spinner */
 .tippy-box .theorem-title {
   visibility: hidden;
   position: relative;
-  display: inline-block; /* Ensure positioning works */
-  min-width: 20px;       /* Reserve space for spinner */
+  display: block;
+  /* Force new line */
+  min-width: 20px;
+  /* Reserve space for spinner */
+  margin-bottom: 0.5em;
+  /* Space between title and content */
 }
 
 .tippy-box .theorem-title::after {
   content: "";
-  visibility: visible;   /* Visible even if parent is hidden */
+  visibility: visible;
+  /* Visible even if parent is hidden */
   position: absolute;
   left: 0;
-  top: 50%;              /* Center vertically */
-  /* transform is handled in keyframes to combine with rotation */
-  width: 16px;
-  height: 16px;
-  border: 2px solid #ddd;
-  border-top-color: #555; /* Darker accent */
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+  top: 50%;
+  /* Center vertically */
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-image: url('spinner.svg');
+  /* Path relative to this CSS file */
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* Removed border spinner styles */
 }
 
 /* Resolved state: Show text, hide spinner */
