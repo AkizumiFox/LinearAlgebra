@@ -635,3 +635,12 @@ blockquote p:last-child {
     hyphens: none;
   }
 }
+/* ==========================================================================
+   Start of dynamic tooltip fix support
+   ========================================================================== */
+
+/* Prevent FOUC: Initially hide the theorem title in tooltips.
+   It will be revealed by Javascript after the number is stripped. */
+.tippy-box .theorem-title {
+  visibility: hidden;
+}
