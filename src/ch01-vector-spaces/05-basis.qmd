@@ -83,5 +83,9 @@ Let \( B = \{ \v_1, \dots, \v_n \} \) be an **ordered** basis for \( V \). For a
 :::
 
 ::: {.remark}
+Notice the subtle but important distinction: a **basis as a set** determines which vectors can be built (i.e., it determines the space), but to define **coordinates** we need an **ordered basis**—a basis with a fixed ordering of its elements. For example, if \( B = \{ \v_1, \v_2 \} \), then the coordinate vector \( [\v]_B = \begin{bmatrix} 3 \\ 5 \end{bmatrix} \) means \( \v = 3\v_1 + 5\v_2 \). If we had listed the basis in the opposite order \( B' = \{ \v_2, \v_1 \} \), the same vector \( \v \) would have coordinates \( [\v]_{B'} = \begin{bmatrix} 5 \\ 3 \end{bmatrix} \). The underlying space is the same, but the coordinate representation depends on the ordering.
+:::
+
+::: {.remark}
 The map \( \v \mapsto [\v]_B \) provides a way to treat any abstract \( n \)-dimensional vector space as if it were simply \( F^n \). This is the power of a basis.
 :::

@@ -1,0 +1,177 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 0
+section-number: 1
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Logic and Quantifiers
+
+Mathematical statements in linear algebra often involve claims about "all" vectors or the "existence" of a solution. For instance, saying a matrix equation \( \A\x = \mathbf{b} \) has a solution means *there exists* a vector \( \x \) satisfying the equation; saying a set is linearly independent means *for all* nontrivial linear combinations, the result is nonzero. To work with these statements precisely—especially when proving or disproving them—we need the language of **quantifiers**.
+
+## Quantifiers
+
+::: {#def-quantifiers}
+## Quantifiers
+
+Let \( P(x) \) be a statement (predicate) that depends on a variable \( x \) ranging over some set \( S \).
+
+- The **universal quantifier** \( \forall \) means "for all" or "for every." The statement
+  \[
+      \forall x \in S : P(x)
+  \]
+  asserts that \( P(x) \) is true for *every* element \( x \) in \( S \).
+
+- The **existential quantifier** \( \exists \) means "there exists" or "for some." The statement
+  \[
+      \exists x \in S : P(x)
+  \]
+  asserts that \( P(x) \) is true for *at least one* element \( x \) in \( S \).
+:::
+
+::: {.remark}
+We sometimes write \( \forall x \in S, P(x) \) or \( (\forall x \in S)\, P(x) \) instead of \( \forall x \in S : P(x) \). The notation \( \exists! x \in S : P(x) \) means "there exists a **unique** \( x \) in \( S \) such that \( P(x) \)."
+:::
+
+::: {#exm-quantifiers}
+## Quantified Statements
+
+Consider the following statements:
+
+1. \( \forall x \in \nR : x^2 \geq 0 \).
+
+   This says "every real number squared is nonnegative." This is **true**.
+
+2. \( \exists x \in \nR : x^2 = -1 \).
+
+   This says "there exists a real number whose square is \( -1 \)." This is **false** in \( \nR \), but becomes true if we replace \( \nR \) with \( \nC \).
+
+3. \( \forall x \in \nR : x < x + 1 \).
+
+   This is **true** for all real numbers.
+
+4. \( \exists n \in \nZ : n^2 = 2 \).
+
+   This is **false**—there is no integer whose square is 2.
+:::
+
+Quantifiers can be **nested**: statements may involve multiple quantifiers in sequence. The **order matters**.
+
+::: {#exm-nested-quantifiers}
+## Nested Quantifiers
+
+Consider these two statements about real numbers:
+
+1. \( \forall x \in \nR, \exists y \in \nR : y > x \).
+
+   "For every real number \( x \), there exists a real number \( y \) greater than \( x \)."
+   This is **true**—given any \( x \), we can take \( y = x + 1 \).
+
+2. \( \exists y \in \nR, \forall x \in \nR : y > x \).
+
+   "There exists a real number \( y \) that is greater than all real numbers."
+   This is **false**—no such largest real number exists.
+
+The order of quantifiers changes the meaning entirely.
+:::
+
+## Negating Quantified Statements
+
+The key to proof by contradiction is knowing how to **negate** a statement. When negating quantified statements, there is a systematic rule: the universal quantifier becomes existential, and vice versa, while the predicate gets negated.
+
+::: {#def-negation-of-quantifiers}
+## Negation of Quantifiers
+
+The negation of a quantified statement follows these rules:
+\[
+    \neg(\forall x \in S : P(x)) \equiv \exists x \in S : \neg P(x)
+\]
+\[
+    \neg(\exists x \in S : P(x)) \equiv \forall x \in S : \neg P(x)
+\]
+
+In words:
+
+- "Not all \( x \) satisfy \( P \)" is equivalent to "there exists an \( x \) that does not satisfy \( P \)."
+- "There does not exist an \( x \) satisfying \( P \)" is equivalent to "all \( x \) fail to satisfy \( P \)."
+:::
+
+::: {#exm-negation-basic}
+## Basic Negation Examples
+
+Here are two simple examples of negating quantified statements:
+
+1. The negation of "\( \forall x \in \nR : x^2 \geq 0 \)" is "\( \exists x \in \nR : x^2 < 0 \)."
+
+   The original is true; the negation is false.
+
+2. The negation of "\( \exists n \in \nN : n \) is even" is "\( \forall n \in \nN : n \) is odd."
+
+   The original is true (take \( n = 2 \)); the negation is false.
+:::
+
+The following examples demonstrate how to negate definitions that you will encounter repeatedly in linear algebra.
+
+::: {#exm-negation-injectivity}
+## Negating the Definition of Injectivity
+
+Recall that a function \( f: A \to B \) is **injective** if:
+\[
+    \forall a_1, a_2 \in A : f(a_1) = f(a_2) \Rightarrow a_1 = a_2
+\]
+
+To prove \( f \) is **not** injective, we negate this statement. Since \( P \Rightarrow Q \) is equivalent to \( \neg P \lor Q \), its negation is \( P \land \neg Q \). Thus:
+\[
+    \exists a_1, a_2 \in A : f(a_1) = f(a_2) \land a_1 \neq a_2
+\]
+
+To show a function is not injective, find two **distinct** elements that map to the same value.
+:::
+
+::: {#exm-negation-surjectivity}
+## Negating the Definition of Surjectivity
+
+A function \( f: A \to B \) is **surjective** if:
+\[
+    \forall b \in B, \exists a \in A : f(a) = b
+\]
+
+The negation is:
+\[
+    \exists b \in B, \forall a \in A : f(a) \neq b
+\]
+
+To prove \( f \) is **not** surjective, find a single element in the codomain that no element of the domain maps to.
+:::
+
+::: {.remark}
+Mastering quantifier negation is essential for proof-based mathematics. Many proofs in linear algebra fall into one of the following patterns:
+
+- Showing something holds for "all" vectors: use a direct proof starting with "let \( v \) be an arbitrary vector..."
+- Showing something "exists": construct it explicitly, or use contradiction by assuming nothing exists.
+- Disproving a "for all" statement: find a single counterexample.
+- Disproving an "exists" statement: show that every candidate fails.
+:::

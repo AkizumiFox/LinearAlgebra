@@ -1,7 +1,7 @@
 ---
 from: markdown+tex_math_single_backslash
 chapter-number: 0
-section-number: 5
+section-number: 7
 filters:
   - latex-environment
   - chapter-number

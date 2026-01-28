@@ -148,6 +148,10 @@ A vector space \( V \) over \( F \) is called **finite-dimensional** if it has a
 :::
 
 ::: {.remark}
+The convention \( \dim(\{\mathbf{0}\}) = 0 \) is consistent with the fact that the **only basis for the zero space is the empty set** \( \varnothing \). Indeed, \( \varnothing \) is vacuously linearly independent (there is no nontrivial linear combination to consider), and \( \Span(\varnothing) = \{\mathbf{0}\} \) by our earlier convention. Since \( |\varnothing| = 0 \), we have \( \dim(\{\mathbf{0}\}) = 0 \).
+:::
+
+::: {.remark}
 When the underlying field is clear, we abuse the notation of \( \dim_F \) and write it as \( \dim \).
 :::
 
@@ -155,6 +159,12 @@ When the underlying field is clear, we abuse the notation of \( \dim_F \) and wr
 ## Examples of Dimensions
 
 \( \dim(F^n) = n \), \( \dim(F[x]_{\leq n}) = n+1 \), and \( \dim(M_{m \times n}(F)) = mn \).
+:::
+
+::: {.remark}
+The notation \( \dim_F(V) \) reminds us that **dimension depends on the choice of field**. For instance, recall from @exm-q-adjoin-sqrt2 that \( \nQ(\sqrt{2}) = \{ a + b\sqrt{2} : a, b \in \nQ \} \) is a vector space over \( \nQ \) with basis \( \{ 1, \sqrt{2} \} \), so \( \dim_{\nQ}(\nQ(\sqrt{2})) = 2 \).
+
+As a more striking example, consider the complex numbers \( \nC \). As a vector space over itself, \( \nC \) has basis \( \{ 1 \} \), so \( \dim_{\nC}(\nC) = 1 \). However, as a vector space over \( \nR \), \( \nC \) has basis \( \{ 1, i \} \), so \( \dim_{\nR}(\nC) = 2 \). The same set can have different dimensions depending on which field we use for scalar multiplication!
 :::
 
 ::: {#thm-size-bounds}
@@ -168,13 +178,13 @@ Let \( V \) be a vector space of dimension \( n \) over \( F \), and \( S \subse
 
 ::: {.proof}
 1. Given \( |S| > n \), and suppose for the sake of contradiction that \( S \) is linearly independent. Let \( B \) be a basis of \( V \), then we have \( |B| = n \) and \( B \) is a spanning set of \( V \). By Replacement Theorem, we have
-   \[
+\[
 	\underbrace{|S|}_{\text{size of lin. indep. set}} \leq \underbrace{|B|}_{\text{size of spanning set}} = n.
 \]
    Giving a contradiction, hence \( S \) cannot be linearly independent.
 
 2. Given \( |S| < n \), and suppose for the sake of contradiction that \( S \) spans \( V \). Let \( B \) be a basis of \( V \), then we have \( |B| = n \) and \( B \) is linearly independent. By Replacement Theorem, we have
-   \[
+\[
 	n = \underbrace{|B|}_{\text{size of lin. indep. set}} \leq \underbrace{|S|}_{\text{size of spanning set}}.
 \]
    This implies \( n \leq |S| \), which contradicts the assumption that \( |S| < n \). Hence \( S \) cannot span \( V \).

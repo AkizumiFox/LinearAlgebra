@@ -3,6 +3,8 @@ project:
   output-dir: _book
   resources:
     - robots.txt
+    - theorem-map.json
+    - theorem-map.js
 
 # Enable \( \) and \[ \] math delimiters
 from: markdown+tex_math_single_backslash
@@ -17,6 +19,7 @@ filters:
   - scripts/list-env.lua
   - theorem-numbering
   - resolve-crossrefs
+
 
 book:
   title: "Linear Algebra"
@@ -34,11 +37,13 @@ book:
 
     - part: src/ch00-foundations/index.qmd
       chapters:
-        - src/ch00-foundations/01-sets-and-notation.qmd
-        - src/ch00-foundations/02-functions.qmd
-        - src/ch00-foundations/03-polynomials.qmd
-        - src/ch00-foundations/04-fields.qmd
-        - src/ch00-foundations/05-matrices.qmd
+        - src/ch00-foundations/01-logic.qmd
+        - src/ch00-foundations/02-sets-and-notation.qmd
+        - src/ch00-foundations/03-functions.qmd
+        - src/ch00-foundations/04-relations.qmd
+        - src/ch00-foundations/05-polynomials.qmd
+        - src/ch00-foundations/06-fields.qmd
+        - src/ch00-foundations/07-matrices.qmd
 
     - part: src/ch01-vector-spaces/index.qmd
       chapters:
@@ -48,6 +53,7 @@ book:
         - src/ch01-vector-spaces/04-independence.qmd
         - src/ch01-vector-spaces/05-basis.qmd
         - src/ch01-vector-spaces/06-dimension.qmd
+        - src/ch01-vector-spaces/07-sums-and-direct-sums.qmd
 
 format:
   html:
@@ -66,6 +72,7 @@ format:
         <meta name="keywords" content="Linear Algebra, Vector Spaces, Basis, Dimension, Matrix Theory, Proof-based, Mathematics, Abstract Algebra">
     include-after-body:
       text: |
+        <script src="/theorem-map.js"></script>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
           // ==========================================
@@ -101,11 +108,22 @@ format:
           });
           
           // Also fix the page title/breadcrumb section numbers
-          var pageTitle = document.querySelector('.content h1.title .chapter-number, .content h1 .chapter-number');
-          if (pageTitle) {
-            var pathMatch = window.location.pathname.match(/ch(\d+)-[^\/]+\/(\d+)-/);
-            if (pathMatch) {
-              pageTitle.textContent = parseInt(pathMatch[1], 10) + '.' + parseInt(pathMatch[2], 10);
+          var pathMatch = window.location.pathname.match(/ch(\d+)-[^\/]+\/(\d+)-/);
+          if (pathMatch) {
+            var chNum = parseInt(pathMatch[1], 10);
+            var secNum = parseInt(pathMatch[2], 10);
+            var correctNumber = chNum + '.' + secNum;
+            
+            // Fix page title
+            var pageTitle = document.querySelector('.content h1.title .chapter-number, .content h1 .chapter-number');
+            if (pageTitle) {
+              pageTitle.textContent = correctNumber;
+            }
+            
+            // Fix breadcrumb navigation (title-block-header)
+            var breadcrumbNumber = document.querySelector('#title-block-header nav ol li:nth-child(2) a span.chapter-number');
+            if (breadcrumbNumber) {
+              breadcrumbNumber.textContent = correctNumber;
             }
           }
           
@@ -123,6 +141,38 @@ format:
               navText.textContent = chNum + '.' + secNum + ' ' + text;
             }
           });
+          
+          // Fix right-side page TOC and content subsection numbering: 14.1 -> 1.7.1
+          var rightTocPathMatch = window.location.pathname.match(/ch(\d+)-[^\/]+\/(\d+)-/);
+          if (rightTocPathMatch) {
+            var chapterNum = parseInt(rightTocPathMatch[1], 10);
+            var sectionNum = parseInt(rightTocPathMatch[2], 10);
+            
+            // Find right-side TOC items (in #TOC or #quarto-margin-sidebar)
+            document.querySelectorAll('#TOC a, #quarto-margin-sidebar .nav-link, .toc-actions ~ nav a').forEach(function(link) {
+              var text = link.textContent;
+              // Match patterns like "14.1 Title" or "14.1  Title"
+              var numMatch = text.match(/^(\d+)\.(\d+)\s+(.*)$/);
+              if (numMatch) {
+                var subsecNum = parseInt(numMatch[2], 10);
+                var title = numMatch[3];
+                // Replace with chapter.section.subsection format
+                link.textContent = chapterNum + '.' + sectionNum + '.' + subsecNum + ' ' + title;
+              }
+            });
+            
+            // Fix subsection headers in the main content area (h2 elements with .header-section-number)
+            document.querySelectorAll('h2 .header-section-number, h3 .header-section-number, h4 .header-section-number').forEach(function(numSpan) {
+              var text = numSpan.textContent;
+              // Match patterns like "14.1" or "14.2"
+              var numMatch = text.match(/^(\d+)\.(\d+)$/);
+              if (numMatch) {
+                var subsecNum = parseInt(numMatch[2], 10);
+                // Replace with chapter.section.subsection format
+                numSpan.textContent = chapterNum + '.' + sectionNum + '.' + subsecNum;
+              }
+            });
+          }
           
           // ==========================================
           // 1. Add PDF download link to right TOC sidebar
@@ -246,41 +296,34 @@ format:
           // ==========================================
           // 3. Fix ALL cross-references using global theorem map
           // ==========================================
-          var globalTheoremMap = null;
+          var theoremMap = window.theoremMap || null;
           
-          fetch('/theorem-map.json')
-            .then(function(response) { return response.json(); })
-            .then(function(theoremMap) {
-              globalTheoremMap = theoremMap;
-              
-              // Find all cross-reference links to theorem-like elements
-              var refLinks = document.querySelectorAll('a[href*="def-"], a[href*="thm-"], a[href*="lem-"], a[href*="cor-"], a[href*="prp-"], a[href*="exm-"], a[href*="exr-"], a[href*="cnj-"], a[href*="alg-"]');
-              refLinks.forEach(function(link) {
-                var href = link.getAttribute('href');
-                // Extract the ID from href (could be #id or path#id)
-                var hashIndex = href.indexOf('#');
-                if (hashIndex !== -1) {
-                  var targetId = href.substring(hashIndex + 1);
-                  if (theoremMap[targetId]) {
-                    // Replace the number in the link text
-                    link.innerHTML = link.innerHTML.replace(/\d+\.\d+/, theoremMap[targetId]);
-                  }
+          function applyTheoremMap(map) {
+            if (!map) return;
+            var refLinks = document.querySelectorAll('a[href*="def-"], a[href*="thm-"], a[href*="lem-"], a[href*="cor-"], a[href*="prp-"], a[href*="exm-"], a[href*="exr-"], a[href*="cnj-"], a[href*="alg-"]');
+            refLinks.forEach(function(link) {
+              var href = link.getAttribute('href');
+              var hashIndex = href.indexOf('#');
+              if (hashIndex !== -1) {
+                var targetId = href.substring(hashIndex + 1);
+                if (map[targetId]) {
+                  link.innerHTML = link.innerHTML.replace(/\d+\.\d+/, map[targetId]);
                 }
-              });
-              
-              // ==========================================
-              // 4. Fix tooltip (hover preview) numbering
-              // ==========================================
-              // (Moved to global scope below to handle outside of fetch and with safety checks)
-              
-            })
-            .catch(function(err) {
-              console.log('Could not load theorem map:', err);
-              // Still run observer even if map fails (though logic is now duplicated/moved, 
-              // better to just fail map and rely on global observer if we moved it out.
-              // Actually, wait, I can just copy the observer code out or leave it here?
-              // The instructions said "Move it OUT". So I should close the fetch chain EARLIER.
+              }
             });
+          }
+
+          if (theoremMap) {
+            applyTheoremMap(theoremMap);
+          } else {
+            fetch('/theorem-map.json')
+              .then(function(response) { return response.json(); })
+              .then(function(map) { 
+                theoremMap = map;
+                applyTheoremMap(map); 
+              })
+              .catch(function(err) { console.log('Could not load theorem map:', err); });
+          }
           
           // MOVED OUTSIDE FETCH:
           // Use MutationObserver for robust tooltip handling
@@ -362,10 +405,11 @@ format:
     include-in-header:
       - text: |
           \usepackage[quartoenv]{./config/latex-template}
-          % Strip numbers from unnumbered theorem environments
-          \directlua{require("config/strip-numbers")}
-          % Suppress title page
-          \AtBeginDocument{\let\maketitle\relax}
+          % Strip numbers from unnumbered theorem environments + suppress title page
+          \AtBeginDocument{%
+            \directlua{require("config/strip-numbers")}%
+            \let\maketitle\relax%
+          }
           % List spacing (1.3x)
           \usepackage{enumitem}
           \setlist{itemsep=1.2em, parsep=0pt}

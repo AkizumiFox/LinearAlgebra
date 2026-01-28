@@ -1,0 +1,124 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 1
+section-number: 7
+engine: knitr
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Sums of Subspaces
+
+descriptive text TBA
+
+## Sums of Subspace
+
+::: {#def-sum-of-subspaces}
+
+## Sum of Subspaces
+
+Let \( W_1 \), \( W_2 \) be subspaces of a vector space \( V \). Then we define
+\[
+W_1 + W_2 \coloneqq \left\{ \w_1 + \w_2 : \w_1 \in W_1 \text{ and } \w_2 \in W_2 \right\}.
+\]
+:::
+
+::: {#thm-subapce-sum-theorem}
+
+## Sum of Subspaces Theorem
+
+\( W_1 + W_2 \) is a subspace of \( V \). Furthermore, this is the smallest subspace containing both \( W_1 \) and \( W_2 \).
+
+:::
+
+::: {.proof}
+To prove that \( W_1 + W_2 \) is a subspace \( V \). We prove that three conditions of the subspace test:
+
+- Non-emptiness: As \( W_1 \), \( W_2 \) are subspaces, they both contains \( \mathbf{0} \). And since \( \mathbf{0} = \mathbf{0}_{W_1} + \mathbf{0}_{W_2} \), therefore \( W_1 + W_2 \) is non-empty.
+
+- Closed under addition: Let \( \a, \b \in W_1 + W_2 \). Then we have
+\[
+    \begin{dcases}
+    \a = \w_1 + \w_2, & \text{ for some } \w_1 \in W_1, \w_2 \in W_2 \\
+    \b = \w_1' + \w_2', & \text{ for some } \w_1' \in W_1, \w_2' \in W_2 \\
+    \end{dcases}
+\]
+Then \( \a + \b = \underbrace{(\w_1 + \w_1')}_{\in W_1} + \underbrace{(\w_2 + \w_2')}_{W_2} \in W_1 + W_2 \). So \( W_1 + W_2 \) is closed under addition.
+
+- Closed under scalar multiplication: Let \( \a \in W_1 + W_2 \), and \( \lambda \in F \). Then we have \( \a = \w_1 + \w_2 \) for some \( \w_1 \in W_1, \w_2 \in W_2 \). Then \( \lambda \a = \underbrace{\lambda \w_1}_{\in W_1} + \underbrace{\lambda \w_2}_{\in W_2} \in W_1 + W_2 \). So \( W_1 + W_2 \) is closed under scalar multiplication. 
+
+This concludes that \( W_1 + W_2 \) is a subspace.
+
+To prove that \( W_1 + W_2 \) is the smallest subspace containing both \( W_1 \) and \( W_2 \), we first prove that it actually contains \( W_1 \) and \( W_2 \), then we prove that it is the smallest subspace of \( V \) containing so.
+
+- Containment: Since \( W_1 \) and \( W_2 \) are subspaces, they both contain the zero vector \( \mathbf{0} \). Since for any \( \w_1 \in W_1 \), we can write \( \w_1 = \w_1 + \mathbf{0} \), by \( \mathbf{0} \in W_2 \), we have \( \w_1 \in W_1 + W_2 \). Thus \( W_1 \subseteq W_1 + W_2 \). The same logic applies to \( W_2 \) therefore \( W_2 \subseteq W_1 + W_2 \).
+
+- Minimality: Let \( U \) be any subspace of \( V \) such that \( W_1 \subseteq  U \) and \( W_2 \subseteq U \). We want to show that \( W_1 + W_2 \subseteq U \). Take any element \( W_1 + W_2 \). By definition \( \v = \w_1 + \w_2 \) for some \( \w_1 \in W_1 \) and \( \w_2 \in W_2 \). Because \( W_1 \subseteq U \), then \( \w_1 \in U \). Similarly, because \( W_2 \subseteq U \), then \( \w_2 \in U \). At last, since \( U \) is a subspace, it is closed under addition. Therefore
+  \[
+    \w_1 + \w_2 \in U \implies \v \in U.
+  \]
+  
+  This concludes that \( W_1 + W_2 \) is the smallest subspace of \( V \) containing \( W_1 \) and \( W_2 \).
+:::
+
+## Dimension of \( W_1 + W_2 \)
+
+::: {#thm-dimension-formula-subspace-dim}
+
+## Dimension Formula of Subspace Sum
+
+Let \( V \) be a finite-dimensional vector space, and let \( W_1 \), \( W_2 \) subspaces of \( V \). Then 
+\[
+    \dim(W_1 + W_2) = \dim (W_1) + \dim (W_2) - \dim(W_1 \cap W_2).
+\]
+:::
+
+```{tikz}
+%| label: fig-subspace
+%| fig-cap: "Inclusion diagram for subspaces $W_1$ and $W_2$"
+%| echo: false
+%| fig-ext: png
+%| out-width: "70%"
+
+\begin{tikzpicture}[
+    box/.style={draw=red!80!black, fill=red!5, thick, inner sep=6pt}
+]
+    \node[box] (inter) at (0,0) {$W_1 \cap W_2$};
+    \node[box] (w1) at (3,0.8) {$W_1$};
+    \node[box] (w2) at (3,-0.8) {$W_2$};
+    \node[box] (sum) at (6,0) {$W_1 + W_2$};
+
+    \path (inter) -- (w1) node[midway, sloped] {$\subseteq$};
+    \path (inter) -- (w2) node[midway, sloped] {$\subseteq$};
+    \path (w1) -- (sum) node[midway, sloped] {$\subseteq$};
+    \path (w2) -- (sum) node[midway, sloped] {$\subseteq$};
+\end{tikzpicture}
+```
+
+::: {.proof}
+(Proof to be completed)
+:::
+
+## Direct Sum of Two Subspaces

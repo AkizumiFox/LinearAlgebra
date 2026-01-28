@@ -23,9 +23,9 @@
 MAX_JOBS ?= 4
 
 # GitHub URLs
-GITHUB_REPO := AkizumiFox/LinearAlgebra
+GITHUB_REPO := AkizumiFox/test-notes
 DEPLOY_URL := https://github.com/$(GITHUB_REPO)/deployments
-PAGES_URL := https://linear-algebra.akizumifox.com/
+PAGES_URL := https://test.akizumifox.com/
 
 # =============================================================================
 # Main targets
@@ -94,6 +94,7 @@ update:
 	' _quarto.yml > _quarto.yml.tmp
 	@mv _quarto.yml.tmp _quarto.yml
 	@rm -f .chapters.yml.tmp
+	@./scripts/generate-theorem-map.sh
 	@echo "Updated _quarto.yml with $$(find src/ch*-*/ -name '[0-9][0-9]-*.qmd' 2>/dev/null | wc -l | tr -d ' ') chapter files"
 
 # =============================================================================

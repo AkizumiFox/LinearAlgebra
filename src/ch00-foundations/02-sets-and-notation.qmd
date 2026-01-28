@@ -1,0 +1,235 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 0
+section-number: 2
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    keep-tex: true
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Sets and Notation
+
+Sets are the foundation of modern mathematics. In linear algebra, we study *vector spaces*, which are sets equipped with operations; *subspaces*, which are subsets with special properties; and *linear maps*, which are functions between sets. This section establishes the notation and operations we will use throughout.
+
+## Number Sets
+
+We begin by defining the standard sets of numbers used throughout this book.
+
+::: {#def-common-number-sets}
+## Common Number Sets
+
+We use the following notation for common sets of numbers:
+
+- \( \nN \): The set of natural numbers \( \{1, 2, 3, \ldots\} \).
+- \( \nZ \): The set of integers \( \{\ldots, -2, -1, 0, 1, 2, \ldots\} \).
+- \( \nQ \): The set of rational numbers.
+- \( \nR \): The set of real numbers.
+- \( \nC \): The set of complex numbers.
+:::
+
+::: {#def-cartesian-product}
+## Cartesian Product
+
+Let \( A \) and \( B \) be sets. The **Cartesian product** of \( A \) and \( B \), denoted \( A \times B \), is the set of all ordered pairs:
+\[
+	A \times B = \{(a, b) : a \in A, b \in B\}
+\]
+More generally, for sets \( A_1, A_2, \ldots, A_n \), the Cartesian product is:
+\[
+	A_1 \times A_2 \times \cdots \times A_n = \{(a_1, a_2, \ldots, a_n) : a_i \in A_i \text{ for } i = 1, 2, \ldots, n\}
+\]
+:::
+
+::: {#def-n-tuple}
+## \( n \)-Tuple
+
+An **\( n \)-tuple** is an ordered list of \( n \) elements. For a set \( A \), the set of all \( n \)-tuples with entries from \( A \) is denoted:
+\[
+	A^n = \underbrace{A \times A \times \cdots \times A}_{n \text{ times}} = \{(a_1, a_2, \ldots, a_n) : a_i \in A \text{ for } i = 1, 2, \ldots, n\}
+\]
+:::
+
+::: {#exm-n-tuples}
+## \( n \)-Tuples
+
+Here are examples of \( n \)-tuples from various sets:
+
+1. \( \nR^2 \): The Cartesian plane. Elements include \( (0, 0) \), \( (1, 2) \), \( (-3, \pi) \), \( (\sqrt{2}, -5.7) \).
+
+2. \( \nR^3 \): 3-dimensional space. Elements include \( (1, 0, 0) \), \( (1, 2, 3) \), \( (-1, \pi, e) \).
+
+3. \( \nZ^2 \): Pairs of integers. Elements include \( (0, 0) \), \( (1, -2) \), \( (5, 7) \). Note that \( (\frac{1}{2}, 3) \notin \nZ^2 \).
+
+4. \( \nC^2 \): Pairs of complex numbers. Elements include \( (1+i, 2-3i) \), \( (i, 0) \), \( (3, 4) \).
+
+5. \( \{0, 1\}^3 \): Binary 3-tuples. This set has exactly 8 elements:
+   \[
+	\{0,1\}^3 = \{(0,0,0), (0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0), (1,1,1)\}
+\]
+
+In general, if \( A \) is a finite set with \( |A| = k \) elements, then \( A^n \) has \( k^n \) elements.
+:::
+
+## Set-Builder Notation and the Empty Set
+
+When defining sets, we often describe them by specifying a property that their elements must satisfy.
+
+::: {#def-set-builder}
+## Set-Builder Notation
+
+Let \( S \) be a set and \( P(x) \) a predicate. The **set-builder notation**
+\[
+    \{ x \in S : P(x) \}
+\]
+denotes the set of all elements \( x \) in \( S \) for which \( P(x) \) is true. Variants include \( \{ x \in S \mid P(x) \} \) and \( \{ x \in S \,;\, P(x) \} \).
+:::
+
+::: {#exm-set-builder}
+## Set-Builder Examples
+
+The following sets are defined using set-builder notation:
+
+1. \( \{ x \in \nR : x^2 < 4 \} = (-2, 2) \), the open interval from \( -2 \) to \( 2 \).
+
+2. \( \{ n \in \nZ : n \text{ is even} \} = \{ \ldots, -4, -2, 0, 2, 4, \ldots \} \).
+
+3. \( \{ (x, y) \in \nR^2 : x + y = 1 \} \) is the line through \( (1, 0) \) and \( (0, 1) \).
+:::
+
+::: {#def-empty-set}
+## Empty Set
+
+The **empty set**, denoted \( \varnothing \) or \( \{\} \), is the set containing no elements:
+\[
+    \varnothing = \{ x : x \neq x \}
+\]
+For any element \( a \), we have \( a \notin \varnothing \).
+:::
+
+::: {.remark}
+Statements of the form "\( \forall x \in \varnothing : P(x) \)" are **vacuously true**—there are no elements to check. This technicality appears when discussing trivial subspaces or the span of an empty collection.
+:::
+
+## Subsets
+
+The concept of a *subset* is central to linear algebra. When we define a subspace, we first verify it is a subset of the ambient space.
+
+::: {#def-subset}
+## Subset
+
+Let \( A \) and \( B \) be sets. We say \( A \) is a **subset** of \( B \), written \( A \subseteq B \), if every element of \( A \) is also an element of \( B \):
+\[
+    A \subseteq B \iff \forall x : (x \in A \Rightarrow x \in B)
+\]
+
+If \( A \subseteq B \) and \( A \neq B \), we say \( A \) is a **proper subset** of \( B \), written \( A \subsetneq B \) or \( A \subset B \).
+:::
+
+::: {#exm-subsets}
+## Subset Examples
+
+The following illustrate subset relationships:
+
+1. \( \nN \subsetneq \nZ \subsetneq \nQ \subsetneq \nR \subsetneq \nC \).
+
+2. \( \{ 1, 2 \} \subseteq \{ 1, 2, 3 \} \), and \( \{ 1, 2 \} \subsetneq \{ 1, 2, 3 \} \).
+
+3. For any set \( A \): \( \varnothing \subseteq A \) and \( A \subseteq A \).
+
+4. \( \{ x \in \nR : x^2 = 1 \} = \{ -1, 1 \} \subseteq \nZ \).
+:::
+
+::: {#def-set-equality}
+## Set Equality
+
+Two sets \( A \) and \( B \) are **equal**, written \( A = B \), if they contain exactly the same elements:
+\[
+    A = B \iff (A \subseteq B \text{ and } B \subseteq A)
+\]
+:::
+
+::: {.remark}
+To prove two sets are equal, we typically prove **two subset inclusions**: first show \( A \subseteq B \), then show \( B \subseteq A \). This technique appears constantly when proving that two subspaces or spans are equal.
+:::
+
+## Set Operations
+
+Sets can be combined using union, intersection, and difference. These operations appear when discussing sums of subspaces and their intersections.
+
+::: {#def-union}
+## Union
+
+The **union** of sets \( A \) and \( B \) is the set of elements in \( A \) or \( B \) (or both):
+\[
+    A \cup B = \{ x : x \in A \text{ or } x \in B \}
+\]
+:::
+
+::: {#def-intersection}
+## Intersection
+
+The **intersection** of sets \( A \) and \( B \) is the set of elements in both \( A \) and \( B \):
+\[
+    A \cap B = \{ x : x \in A \text{ and } x \in B \}
+\]
+
+Two sets are **disjoint** if \( A \cap B = \varnothing \).
+:::
+
+::: {#def-set-difference}
+## Set Difference
+
+The **set difference** (or **relative complement**) of \( B \) in \( A \) is:
+\[
+    A \setminus B = \{ x \in A : x \notin B \}
+\]
+
+When \( B \subseteq U \) for some universal set \( U \), the **complement** of \( B \) in \( U \) is \( B^c = U \setminus B \).
+:::
+
+::: {#exm-set-operations}
+## Set Operations
+
+Let \( A = \{ 1, 2, 3, 4 \} \) and \( B = \{ 3, 4, 5, 6 \} \). Then:
+
+- \( A \cup B = \{ 1, 2, 3, 4, 5, 6 \} \)
+- \( A \cap B = \{ 3, 4 \} \)
+- \( A \setminus B = \{ 1, 2 \} \)
+- \( B \setminus A = \{ 5, 6 \} \)
+:::
+
+::: {#exm-set-operations-intervals}
+## Set Operations with Intervals
+
+Let \( A = [0, 2] \) and \( B = [1, 3] \) be intervals in \( \nR \). Then:
+
+- \( A \cup B = [0, 3] \)
+- \( A \cap B = [1, 2] \)
+- \( A \setminus B = [0, 1) \)
+:::
+
+::: {.remark}
+In linear algebra, we will see that the **intersection** of two subspaces is always a subspace, but the **union** of two subspaces is generally *not* a subspace (this is a common exam question!). Instead of union, we use the **sum** of subspaces: \( U + W = \{ u + w : u \in U, w \in W \} \).
+:::

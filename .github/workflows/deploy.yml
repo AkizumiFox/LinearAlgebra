@@ -25,8 +25,6 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           tinytex: true 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install system dependencies
         run: |
@@ -43,8 +41,6 @@ jobs:
 
       - name: Build Project (Book + Chapter PDFs)
         timeout-minutes: 40
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Use the Makefile to ensure robust and consistent builds
           # 'make all' runs:

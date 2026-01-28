@@ -6,3 +6,5 @@
 /_book/
 /index.tex
 /index.log
+/theorem-map.json
+/theorem-map.js

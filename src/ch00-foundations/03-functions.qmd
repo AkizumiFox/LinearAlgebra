@@ -1,0 +1,239 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 0
+section-number: 3
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Functions
+
+Functions are the mathematical way to describe *processes* or *transformations*—rules that take an input and produce an output. In linear algebra, the central objects of study are **linear maps** (also called linear transformations), which are functions between vector spaces that respect the vector space structure. Understanding functions in general—especially their composition and inverses—is crucial because:
+
+- **Matrix multiplication** corresponds to **composition** of linear maps.
+- An **invertible matrix** corresponds to a **bijective** linear map.
+- Many proofs involve showing a linear map is injective, surjective, or bijective.
+
+## Definition and Basic Properties
+
+::: {#def-function}
+## Function
+
+A **function** \( f \) from a set \( A \) to a set \( B \), denoted \( f: A \to B \), is a rule that assigns to each element \( a \in A \) exactly one element \( f(a) \in B \). The set \( A \) is called the **domain** and \( B \) is called the **codomain**.
+:::
+
+::: {#def-injective-surjective-bijective}
+## Injective, Surjective, Bijective
+
+Let \( f: A \to B \) be a function.
+
+- \( f \) is **injective** (one-to-one) if \( f(a_1) = f(a_2) \) implies \( a_1 = a_2 \).
+- \( f \) is **surjective** (onto) if for every \( b \in B \), there exists \( a \in A \) such that \( f(a) = b \).
+- \( f \) is **bijective** if it is both injective and surjective
+:::
+
+::: {#exm-injective-surjective-bijective}
+## Injective, Surjective, and Bijective Functions
+
+Consider the following functions:
+
+1. \( f: \nR \to \nR \), \( f(x) = 2x + 1 \) is **bijective**.
+
+    - Injective: If \( 2x_1 + 1 = 2x_2 + 1 \), then \( x_1 = x_2 \).
+    - Surjective: For any \( y \in \nR \), we have \( f\left(\frac{y-1}{2}\right) = y \).
+
+2. \( g: \nR \to \nR \), \( g(x) = x^2 \) is **neither injective nor surjective**.
+
+    - Not injective: \( g(1) = g(-1) = 1 \), but \( 1 \neq -1 \).
+    - Not surjective: There is no \( x \in \nR \) such that \( g(x) = -1 \).
+
+3. \( h: \nR \to [0, \infty) \), \( h(x) = x^2 \) is **surjective but not injective**.
+
+    - Not injective: \( h(1) = h(-1) = 1 \).
+    - Surjective: For any \( y \geq 0 \), we have \( h(\sqrt{y}) = y \).
+
+4. \( k: [0, \infty) \to \nR \), \( k(x) = x^2 \) is **injective but not surjective**.
+
+    - Injective: If \( x_1^2 = x_2^2 \) with \( x_1, x_2 \geq 0 \), then \( x_1 = x_2 \).
+    - Not surjective: There is no \( x \geq 0 \) such that \( k(x) = -1 \).
+:::
+
+## Function Composition
+
+When we apply one function after another, we obtain a **composition**. This concept is fundamental: matrix multiplication is precisely the composition of the corresponding linear maps.
+
+::: {#def-composition}
+## Function Composition
+
+Let \( f: A \to B \) and \( g: B \to C \) be functions. The **composition** of \( g \) with \( f \), denoted \( g \circ f \), is the function \( g \circ f : A \to C \) defined by:
+\[
+    (g \circ f)(a) = g(f(a)) \quad \text{for all } a \in A
+\]
+We read \( g \circ f \) as "\( g \) composed with \( f \)" or "\( g \) after \( f \)."
+:::
+
+::: {.remark}
+The notation \( g \circ f \) means "first apply \( f \), then apply \( g \)." The order matters and can be confusing—the function written on the right is applied first. This mirrors how matrix multiplication works: in \( \A\B\x \), we first multiply \( \B\x \), then multiply by \( \A \).
+:::
+
+::: {#exm-composition}
+## Function Composition
+
+Let \( f: \nR \to \nR \) be defined by \( f(x) = x^2 \) and \( g: \nR \to \nR \) by \( g(x) = x + 1 \). We compute both compositions:
+
+- \( (g \circ f)(x) = g(f(x)) = g(x^2) = x^2 + 1 \)
+- \( (f \circ g)(x) = f(g(x)) = f(x + 1) = (x + 1)^2 \)
+
+Note that \( g \circ f \neq f \circ g \) in general—composition is **not commutative**.
+:::
+
+::: {#thm-composition-associative}
+## Associativity of Composition
+
+Let \( f: A \to B \), \( g: B \to C \), and \( h: C \to D \) be functions. Then:
+\[
+    (h \circ g) \circ f = h \circ (g \circ f)
+\]
+That is, function composition is **associative**.
+:::
+
+::: {.proof}
+For any \( a \in A \):
+\[
+    ((h \circ g) \circ f)(a) = (h \circ g)(f(a)) = h(g(f(a)))
+\]
+and
+\[
+    (h \circ (g \circ f))(a) = h((g \circ f)(a)) = h(g(f(a)))
+\]
+Since both expressions equal \( h(g(f(a))) \) for all \( a \in A \), the compositions are equal.
+:::
+
+::: {#thm-composition-preserves}
+## Composition Preserves Injectivity and Surjectivity
+
+Let \( f: A \to B \) and \( g: B \to C \) be functions.
+
+1. If \( f \) and \( g \) are both injective, then \( g \circ f \) is injective.
+2. If \( f \) and \( g \) are both surjective, then \( g \circ f \) is surjective.
+3. If \( f \) and \( g \) are both bijective, then \( g \circ f \) is bijective.
+:::
+
+::: {.proof}
+We prove (1). Suppose \( f \) and \( g \) are injective and \( (g \circ f)(a_1) = (g \circ f)(a_2) \). Then \( g(f(a_1)) = g(f(a_2)) \). Since \( g \) is injective, \( f(a_1) = f(a_2) \). Since \( f \) is injective, \( a_1 = a_2 \). Thus \( g \circ f \) is injective.
+
+The proof of (2) and (3) are similar exercises.
+:::
+
+## Identity Function
+
+::: {#def-identity-function}
+## Identity Function
+
+For any set \( A \), the **identity function** \( \id_A : A \to A \) is defined by:
+\[
+    \id_A(a) = a \quad \text{for all } a \in A
+\]
+:::
+
+::: {.remark}
+The identity function satisfies \( f \circ \id_A = f \) for any \( f: A \to B \), and \( \id_B \circ f = f \). It is the "do nothing" function. In matrix terms, the identity matrix \( \I_n \) represents the identity function on \( F^n \).
+:::
+
+## Inverse Functions
+
+A bijective function can be "undone"—this leads to the concept of an inverse function. Understanding inverses is essential because **invertible matrices** are precisely those representing bijective linear maps.
+
+::: {#def-inverse-function}
+## Inverse Function
+
+Let \( f: A \to B \) be a function. A function \( g: B \to A \) is called an **inverse** of \( f \) if:
+\[
+    g \circ f = \id_A \quad \text{and} \quad f \circ g = \id_B
+\]
+If such a \( g \) exists, we say \( f \) is **invertible** and write \( g = f^{-1} \).
+:::
+
+::: {#thm-bijective-iff-invertible}
+## Bijective if and only if Invertible
+
+A function \( f: A \to B \) is bijective if and only if it has an inverse \( f^{-1}: B \to A \).
+
+Moreover, if the inverse exists, it is unique.
+:::
+
+::: {.proof}
+(\( \Rightarrow \)) Suppose \( f \) is bijective. For each \( b \in B \), since \( f \) is surjective, there exists some \( a \in A \) with \( f(a) = b \). Since \( f \) is injective, this \( a \) is unique. Define \( g(b) = a \). We verify that \( g \) is an inverse:
+
+- \( (g \circ f)(a) = g(f(a)) = a \), so \( g \circ f = \id_A \).
+- \( (f \circ g)(b) = f(g(b)) = f(a) = b \), so \( f \circ g = \id_B \).
+
+Thus \( g = f^{-1} \) is an inverse of \( f \).
+
+(\( \Leftarrow \)) Suppose \( f \) has an inverse \( g \). We show \( f \) is bijective:
+
+- *Injective:* If \( f(a_1) = f(a_2) \), then \( a_1 = g(f(a_1)) = g(f(a_2)) = a_2 \).
+- *Surjective:* For any \( b \in B \), we have \( f(g(b)) = b \), so \( b \) is in the image of \( f \).
+
+**Uniqueness:** If \( g \) and \( h \) are both inverses of \( f \), then:
+\[
+    g = g \circ \id_B = g \circ (f \circ h) = (g \circ f) \circ h = \id_A \circ h = h
+\]
+:::
+
+::: {#exm-inverse-function}
+## Inverse Functions
+
+The following examples illustrate inverse functions and when they do or do not exist:
+
+1. Let \( f: \nR \to \nR \) be defined by \( f(x) = 2x + 3 \). This is bijective, and its inverse is \( f^{-1}(y) = \frac{y - 3}{2} \).
+
+   Verification: \( f(f^{-1}(y)) = 2 \cdot \frac{y-3}{2} + 3 = y \) and \( f^{-1}(f(x)) = \frac{(2x+3) - 3}{2} = x \).
+
+2. Let \( g: \nR \to \nR \) be defined by \( g(x) = x^2 \). This is not bijective (not injective), so \( g^{-1} \) does not exist as a function \( \nR \to \nR \).
+
+3. Let \( h: [0, \infty) \to [0, \infty) \) be defined by \( h(x) = x^2 \). With restricted domain and codomain, \( h \) is bijective, and \( h^{-1}(y) = \sqrt{y} \).
+:::
+
+::: {#thm-inverse-of-composition}
+## Inverse of a Composition
+
+If \( f: A \to B \) and \( g: B \to C \) are both bijective, then \( g \circ f \) is bijective and:
+\[
+    (g \circ f)^{-1} = f^{-1} \circ g^{-1}
+\]
+:::
+
+::: {.proof}
+We verify the inverse property:
+\[
+    (f^{-1} \circ g^{-1}) \circ (g \circ f) = f^{-1} \circ (g^{-1} \circ g) \circ f = f^{-1} \circ \id_B \circ f = f^{-1} \circ f = \id_A
+\]
+Similarly, \( (g \circ f) \circ (f^{-1} \circ g^{-1}) = \id_C \).
+:::
+
+::: {.remark}
+Compare this to the matrix identity \( (\A\B)^{-1} = \B^{-1}\A^{-1} \) for invertible matrices. The reversal of order is the same phenomenon: to undo "first \( f \), then \( g \)," you must "first undo \( g \), then undo \( f \)."
+:::

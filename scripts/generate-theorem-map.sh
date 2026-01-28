@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Generate a JSON mapping file of all theorem IDs to their chapter.section.counter numbers
 
-OUTPUT_FILE="_book/theorem-map.json"
+OUTPUT_FILE="theorem-map.json"
 BOOK_DIR="_book"
 
 echo "Generating theorem mapping..."
@@ -12,7 +12,17 @@ echo "{" > "$OUTPUT_FILE"
 first_entry=true
 
 # Find all HTML files in the book
-for html_file in $(find "$BOOK_DIR/src" -name "*.html" | sort); do
+# During preview, Quarto might serve from a temp dir, but let's check _book first
+HTML_FILES=$(find "$BOOK_DIR/src" -name "*.html" 2>/dev/null | sort)
+
+if [ -z "$HTML_FILES" ]; then
+    echo "Warning: No HTML files found in $BOOK_DIR/src. Creating empty mapping."
+    echo "{}" > "$OUTPUT_FILE"
+    echo "window.theoremMap = {};" > "$JS_OUTPUT_FILE"
+    exit 0
+fi
+
+for html_file in $HTML_FILES; do
     # Extract chapter and section from path
     # Pattern: _book/src/chXX-name/YY-name.html
     if [[ $html_file =~ ch([0-9]+)-[^/]+/([0-9]+)-[^/]+\.html$ ]]; then
@@ -101,7 +111,7 @@ echo "}" >> "$OUTPUT_FILE"
 echo "Generated theorem mapping at $OUTPUT_FILE"
 
 # Also generate JS file for client-side MathJax access
-JS_OUTPUT_FILE="_book/theorem-map.js"
+JS_OUTPUT_FILE="theorem-map.js"
 echo "window.theoremMap = " > "$JS_OUTPUT_FILE"
 cat "$OUTPUT_FILE" >> "$JS_OUTPUT_FILE"
 echo ";" >> "$JS_OUTPUT_FILE"

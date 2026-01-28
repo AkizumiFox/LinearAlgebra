@@ -1,44 +1,53 @@
 {
   "index.qmd": {
-    "index.html": "02c6a59a"
+    "index.html": "6e70a1ad"
   },
   "src/ch00-foundations/index.qmd": {
-    "index.html": "f56ec7f6"
+    "index.html": "9661a13d"
   },
-  "src/ch00-foundations/01-sets-and-notation.qmd": {
-    "01-sets-and-notation.html": "562df548"
+  "src/ch00-foundations/01-logic.qmd": {
+    "01-logic.html": "5f477b06"
   },
-  "src/ch00-foundations/02-functions.qmd": {
-    "02-functions.html": "e01a1bb0"
+  "src/ch00-foundations/02-sets-and-notation.qmd": {
+    "02-sets-and-notation.html": "cb0df7b5"
   },
-  "src/ch00-foundations/03-polynomials.qmd": {
-    "03-polynomials.html": "1ace19a2"
+  "src/ch00-foundations/03-functions.qmd": {
+    "03-functions.html": "5aa397e2"
   },
-  "src/ch00-foundations/04-fields.qmd": {
-    "04-fields.html": "254ce575"
+  "src/ch00-foundations/04-relations.qmd": {
+    "04-relations.html": "4a1119e3"
   },
-  "src/ch00-foundations/05-matrices.qmd": {
-    "05-matrices.html": "092ece7f"
+  "src/ch00-foundations/05-polynomials.qmd": {
+    "05-polynomials.html": "dfd2c34c"
+  },
+  "src/ch00-foundations/06-fields.qmd": {
+    "06-fields.html": "b8b0b0dd"
+  },
+  "src/ch00-foundations/07-matrices.qmd": {
+    "07-matrices.html": "b6edfb2c"
   },
   "src/ch01-vector-spaces/index.qmd": {
-    "index.html": "02fff041"
+    "index.html": "f06f9841"
   },
   "src/ch01-vector-spaces/01-vector-spaces.qmd": {
-    "01-vector-spaces.html": "a273019e"
+    "01-vector-spaces.html": "1c385c1d"
   },
   "src/ch01-vector-spaces/02-subspaces.qmd": {
-    "02-subspaces.html": "f78a6acd"
+    "02-subspaces.html": "fdcf33ee"
   },
   "src/ch01-vector-spaces/03-span.qmd": {
-    "03-span.html": "d5a69759"
+    "03-span.html": "cba03cce"
   },
   "src/ch01-vector-spaces/04-independence.qmd": {
-    "04-independence.html": "f7c897b1"
+    "04-independence.html": "7c253078"
   },
   "src/ch01-vector-spaces/05-basis.qmd": {
-    "05-basis.html": "09b43f31"
+    "05-basis.html": "b5107114"
   },
   "src/ch01-vector-spaces/06-dimension.qmd": {
-    "06-dimension.html": "ac42746c"
+    "06-dimension.html": "c895fc2b"
+  },
+  "src/ch01-vector-spaces/07-sums-and-direct-sums.qmd": {
+    "07-sums-and-direct-sums.html": "3538ef47"
   }
 }

@@ -1,0 +1,213 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 0
+section-number: 4
+filters:
+  - latex-environment
+  - chapter-number
+  - theorem-numbering
+format:
+  pdf:
+    documentclass: extbook
+    classoption: [13.5pt, a4paper, oneside, openany]
+    number-sections: true
+    colorlinks: true
+    linkcolor: "blue"
+    urlcolor: "blue"
+    pdf-engine: lualatex
+    linestretch: 1.1
+    geometry: [margin=1.2in]
+    include-in-header:
+      text: |
+        \usepackage[quartoenv]{../../config/latex-template}
+        \directlua{require("../../config/strip-numbers")}
+        \usepackage{enumitem}
+        \setlist{itemsep=1.2em, parsep=0pt}
+        \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Equivalence Relations
+
+In mathematics, we often want to say that two objects are "the same" in some sense, even if they are not identical. For instance:
+
+- Two fractions \( \frac{1}{2} \) and \( \frac{2}{4} \) represent the same rational number.
+- Two matrices \( \A \) and \( \B \) are **similar** if \( \B = \P^{-1}\A\P \) for some invertible \( \P \)—they represent the same linear transformation in different bases.
+- Two vector spaces are **isomorphic** if there exists a bijective linear map between them—they have the same "structure."
+
+Each of these notions of "sameness" is captured by an **equivalence relation**. Understanding equivalence relations helps us recognize when different-looking objects are fundamentally alike.
+
+## Relations
+
+::: {#def-relation}
+## Relation
+
+A **(binary) relation** on a set \( A \) is a subset \( R \subseteq A \times A \). If \( (a, b) \in R \), we write \( a \sim b \) (or \( a \mathrel{R} b \)) and say "\( a \) is related to \( b \)."
+:::
+
+::: {#exm-relations}
+## Examples of Relations
+
+Here are some common examples of relations:
+
+1. On \( \nZ \), define \( a \sim b \) if \( a \leq b \). This is the "less than or equal to" relation.
+
+2. On \( \nR \), define \( a \sim b \) if \( |a - b| < 1 \). This says \( a \) and \( b \) are "close."
+
+3. On the set of all people, define \( a \sim b \) if \( a \) and \( b \) have the same birthday.
+:::
+
+## Equivalence Relations
+
+Not all relations behave like "sameness." An **equivalence relation** is one that satisfies three natural properties that any notion of sameness should have.
+
+::: {#def-equivalence-relation}
+## Equivalence Relation
+
+A relation \( \sim \) on a set \( A \) is an **equivalence relation** if it satisfies:
+
+1. **Reflexivity:** \( \forall a \in A : a \sim a \).
+
+   (Every element is related to itself.)
+
+2. **Symmetry:** \( \forall a, b \in A : a \sim b \Rightarrow b \sim a \).
+
+   (If \( a \) is related to \( b \), then \( b \) is related to \( a \).)
+
+3. **Transitivity:** \( \forall a, b, c \in A : (a \sim b \land b \sim c) \Rightarrow a \sim c \).
+
+   (If \( a \) is related to \( b \) and \( b \) is related to \( c \), then \( a \) is related to \( c \).)
+:::
+
+::: {#exm-equivalence-relations}
+## Examples of Equivalence Relations
+
+The following are all equivalence relations:
+
+1. **Equality:** On any set \( A \), the relation \( a \sim b \iff a = b \) is an equivalence relation (the finest one possible).
+
+2. **Congruence modulo \( n \):** On \( \nZ \), define \( a \equiv b \pmod{n} \) if \( n \mid (a - b) \).
+
+   - Reflexive: \( n \mid 0 \), so \( a \equiv a \).
+   - Symmetric: If \( n \mid (a - b) \), then \( n \mid (b - a) \).
+   - Transitive: If \( n \mid (a - b) \) and \( n \mid (b - c) \), then \( n \mid ((a - b) + (b - c)) = (a - c) \).
+
+3. **Same birthday:** On the set of people, "\( a \) has the same birthday as \( b \)" is an equivalence relation.
+
+4. **Same absolute value:** On \( \nR \), define \( a \sim b \iff |a| = |b| \). This is an equivalence relation.
+:::
+
+::: {#exm-non-equivalence}
+## Non-Examples
+
+The following relations fail to be equivalence relations:
+
+1. On \( \nZ \), the relation \( a \leq b \) is **not** an equivalence relation:
+
+   - Reflexive: Yes, \( a \leq a \).
+   - Symmetric: **No.** \( 1 \leq 2 \) but \( 2 \not\leq 1 \).
+
+2. On \( \nR \), the relation \( |a - b| < 1 \) is **not** an equivalence relation:
+
+   - Reflexive: Yes, \( |a - a| = 0 < 1 \).
+   - Symmetric: Yes.
+   - Transitive: **No.** We have \( |0 - 0.6| < 1 \) and \( |0.6 - 1.2| < 1 \), but \( |0 - 1.2| = 1.2 \not< 1 \).
+:::
+
+## Equivalence Classes
+
+An equivalence relation partitions a set into disjoint groups of "equivalent" elements. Each such group is called an **equivalence class**.
+
+::: {#def-equivalence-class}
+## Equivalence Class
+
+Let \( \sim \) be an equivalence relation on \( A \). The **equivalence class** of an element \( a \in A \) is the set of all elements equivalent to \( a \):
+\[
+    [a] = \{ b \in A : b \sim a \}
+\]
+The element \( a \) is called a **representative** of the class \( [a] \).
+:::
+
+::: {#exm-equivalence-classes}
+## Examples of Equivalence Classes
+
+We illustrate equivalence classes with two examples:
+
+1. **Congruence modulo 3:** The equivalence classes of \( \nZ \) under \( \equiv \pmod{3} \) are:
+   \begin{align*}
+       [0] &= \{ \ldots, -6, -3, 0, 3, 6, 9, \ldots \} \\
+       [1] &= \{ \ldots, -5, -2, 1, 4, 7, 10, \ldots \} \\
+       [2] &= \{ \ldots, -4, -1, 2, 5, 8, 11, \ldots \}
+   \end{align*}
+   Note that \( [0] = [3] = [6] = \cdots \) and \( [1] = [4] = [7] = \cdots \). Different representatives can name the same class.
+
+2. **Same absolute value on \( \nR \):** The equivalence class of \( 2 \) is \( [2] = \{ -2, 2 \} \). The equivalence class of \( 0 \) is \( [0] = \{ 0 \} \).
+:::
+
+::: {#thm-partition}
+## Equivalence Classes Partition the Set
+
+Let \( \sim \) be an equivalence relation on \( A \). Then:
+
+1. Every element belongs to some equivalence class: \( a \in [a] \).
+2. Two equivalence classes are either equal or disjoint: \( [a] = [b] \) or \( [a] \cap [b] = \varnothing \).
+3. The union of all equivalence classes is \( A \).
+
+In other words, the equivalence classes form a **partition** of \( A \).
+:::
+
+::: {.proof}
+(1) By reflexivity, \( a \sim a \), so \( a \in [a] \).
+
+(2) Suppose \( [a] \cap [b] \neq \varnothing \), and let \( c \in [a] \cap [b] \). Then \( c \sim a \) and \( c \sim b \). By symmetry, \( a \sim c \). By transitivity, \( a \sim b \).
+
+Now we show \( [a] = [b] \). Let \( x \in [a] \), so \( x \sim a \). Since \( a \sim b \), by transitivity \( x \sim b \), so \( x \in [b] \). Thus \( [a] \subseteq [b] \). By symmetry, \( [b] \subseteq [a] \), so \( [a] = [b] \).
+
+(3) Follows from (1): every element \( a \) is in \( [a] \).
+:::
+
+::: {#def-quotient-set}
+## Quotient Set
+
+Let \( \sim \) be an equivalence relation on \( A \). The **quotient set** (or **quotient of \( A \) by \( \sim \)**) is the set of all equivalence classes:
+\[
+    A / {\sim} = \{ [a] : a \in A \}
+\]
+:::
+
+::: {#exm-quotient-set}
+## Quotient Sets
+
+The following are examples of quotient sets:
+
+1. \( \nZ / {\equiv_3} = \{ [0], [1], [2] \} \) has three elements. This is often written \( \nZ / 3\nZ \) or \( \nZ_3 \).
+
+2. The quotient of \( \nR \) by "same absolute value" is in bijection with \( [0, \infty) \)—each equivalence class is determined by its absolute value.
+:::
+
+## Equivalence Relations in Linear Algebra
+
+The following equivalence relations will appear throughout your study of linear algebra:
+
+::: {#exm-similarity}
+## Matrix Similarity
+
+On \( M_n(F) \), define \( \A \sim \B \) if there exists an invertible matrix \( \P \in M_n(F) \) such that \( \B = \P^{-1}\A\P \). This is called **similarity**.
+
+- Reflexive: \( \A = \I^{-1}\A\I \), so \( \A \sim \A \).
+- Symmetric: If \( \B = \P^{-1}\A\P \), then \( \A = \P\B\P^{-1} = (\P^{-1})^{-1}\B(\P^{-1}) \), so \( \B \sim \A \).
+- Transitive: If \( \B = \P^{-1}\A\P \) and \( \C = \Q^{-1}\B\Q \), then \( \C = \Q^{-1}\P^{-1}\A\P\Q = (\P\Q)^{-1}\A(\P\Q) \).
+
+Similar matrices represent the same linear transformation in different bases. They share many properties: determinant, trace, eigenvalues, and characteristic polynomial.
+:::
+
+::: {#exm-row-equivalence}
+## Row Equivalence
+
+Two matrices are **row equivalent** if one can be obtained from the other by a sequence of elementary row operations. This is an equivalence relation on \( M_{m \times n}(F) \).
+:::
+
+::: {.remark}
+When you encounter a new equivalence relation, ask: "What properties do equivalent objects share?" For similarity, the answer includes eigenvalues and determinant. These shared properties are called **invariants** of the equivalence relation.
+:::
