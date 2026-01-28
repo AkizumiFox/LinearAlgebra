@@ -94,9 +94,16 @@ Let \( V \) be a finite-dimensional vector space, and let \( W_1 \), \( W_2 \) s
 \]
 :::
 
+::: {.content-visible when-format="pdf"}
 ![Inclusion diagram for subspaces $W_1$ and $W_2$](fig-subspace-1.png){#fig-subspace width="70%"}
+:::
 
 ::: {.proof}
+
+::: {.content-visible when-format="html"}
+![Inclusion diagram for subspaces $W_1$ and $W_2$](fig-subspace-1.png){width="70%"}
+:::
+
 (Proof to be completed)
 :::
 
