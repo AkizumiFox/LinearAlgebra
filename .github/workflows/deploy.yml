@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Disable font database auto-generation during builds
+      TEXMFVAR: /tmp/texmf-var
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,7 +27,61 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          tinytex: true 
+          tinytex: true
+
+      - name: Cache TinyTeX and font database
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/bin
+            ~/.TinyTeX
+            /tmp/texmf-var
+          key: tinytex-luatex-${{ runner.os }}-${{ hashFiles('.github/workflows/deploy.yml') }}
+          restore-keys: |
+            tinytex-luatex-${{ runner.os }}-
+
+      - name: Install LaTeX packages and setup LuaTeX
+        run: |
+          # Install required LaTeX packages
+          tlmgr install \
+            collection-luatex \
+            collection-fontsrecommended \
+            luaotfload \
+            fontspec \
+            unicode-math \
+            lualatex-math \
+            selnolig \
+            memoir \
+            extbook \
+            mdframed \
+            tcolorbox \
+            enumitem \
+            tikz-cd \
+            pgfplots \
+            cancel \
+            mathtools \
+            amsthm \
+            thmtools \
+            etoolbox \
+            xparse \
+            environ \
+            trimspaces \
+            zref \
+            needspace \
+            xargs \
+            multirow \
+            caption \
+            subcaption \
+            anyfontsize \
+            upgreek || true
+          
+          # Create texmf-var directory
+          mkdir -p /tmp/texmf-var
+          
+          # Pre-generate the font database (critical for LuaLaTeX)
+          echo "Generating LuaTeX font database..."
+          luaotfload-tool --update --force 2>/dev/null || true
+          echo "Font database generation complete."
 
       - name: Install system dependencies
         run: |
