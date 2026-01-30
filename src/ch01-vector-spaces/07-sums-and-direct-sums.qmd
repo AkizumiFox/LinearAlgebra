@@ -220,5 +220,5 @@ We can derive that \( V = W_1 \oplus W_2 \).
 \]
 where the first term is symmetric and the second term is skew-symmetric. Therefore, any square matrix is a sum of a symmetric matrix and a skew-symmetric matrix.
 
-Next, we show that \( W_1 \cap W_2 = \{ \O \} \). Let \( \A \in W_1 \cap W_2 \). That implies that \( \A \in W_1 \) and \( \A \in W_2 \). That means we have the identites \( \A = \A^{\top} \) and \( \A = - \A^{\top} \). Therefore, \( \A = - \A \), which implies that \( \A = \O \).
+To establish that \( W_1 \cap W_2 = \{ \O \} \), let \( \A \in W_1 \cap W_2 \). By definition, this implies \( \A \in W_1 \) and \( \A \in W_2 \). Consequently, the identities \( \A = \A^{\top} \) and \( \A = - \A^{\top} \) must hold simultaneously. Substituting the former into the latter yields \( \A = - \A \). This implies \( 2\A = \O \), and thus \( \A = \O \).
 :::
