@@ -36,6 +36,8 @@ If one of the vectors in your spanning set can already be built using the others
 
 In this section, we search for the "cleanest" possible sets. We want to know: "Is every vector in this collection actually contributing something unique, or is someone just coasting on the work of the others?"
 
+## Definition and Examples
+
 ::: {#def-linear-independence}
 ## Linear Independence
 

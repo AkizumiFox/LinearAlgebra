@@ -36,6 +36,8 @@ If a set is too small, it won't span the whole space—you'll be left with point
 
 Because a basis has no redundancy, it gives us something incredible: a **unique address system**. In an abstract vector space, it's hard to tell someone where a vector is. But once we pick a basis, every vector can be described by a unique list of numbers—its coordinates. A basis is the bridge that allows us to turn abstract geometry into concrete arithmetic.
 
+## Definition and Standard Bases
+
 ::: {#def-basis}
 ## Basis
 

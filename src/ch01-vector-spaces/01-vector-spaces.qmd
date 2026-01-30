@@ -36,6 +36,8 @@ In our preliminary chapter, we saw three very different worlds: the world of geo
 
 By defining a **Vector Space** through these axioms, we are choosing to ignore what the objects *are* and focus entirely on how they *act*. If we prove a theorem using only these eight axioms, that theorem becomes a "universal law" that applies to arrows, functions, and matrices all at once. This is the power of abstraction: solve the problem once, and you solve it for every universe that obeys these rules.
 
+## Vector Spaces and Vectors
+
 ::: {#def-vector-space}
 ## Vector Space
 
@@ -94,7 +96,12 @@ You can check if addition and scalar multiplication make sense and follow all ax
 ::: {#exm-q-adjoin-sqrt2}
 ## \( \nQ \) Adjoin \( \sqrt{2} \)
 
-We verify that \( \nQ(\sqrt{2}) \coloneqq \left\{  a + b \sqrt{2} : a, b \in \nQ  \right\} \) is a vector space over \( \nQ \) by checking all eight axioms. Let \( \v_1 = a_1 + b_1\sqrt{2} \), \( \v_2 = a_2 + b_2\sqrt{2} \), \( \v_3 = a_3 + b_3\sqrt{2} \in \nQ(\sqrt{2}) \) and \( \alpha, \beta \in \nQ \).
+Show that \( \nQ(\sqrt{2}) \coloneqq \left\{  a + b \sqrt{2} : a, b \in \nQ  \right\} \) is a vector space over \( \nQ \) by checking all eight axioms.
+:::
+
+::: {.solution}
+Let \( \v_1 = a_1 + b_1\sqrt{2} \), \( \v_2 = a_2 + b_2\sqrt{2} \), \( \v_3 = a_3 + b_3\sqrt{2} \in \nQ(\sqrt{2}) \) and \( \alpha, \beta \in \nQ \).
+
 
 ::: {.enumerate options="label=(VS\arabic*)"}
 1. \begin{align*}
@@ -148,6 +155,7 @@ We verify that \( \nQ(\sqrt{2}) \coloneqq \left\{  a + b \sqrt{2} : a, b \in \nQ
 Thus \( \nQ(\sqrt{2}) \) is a vector space over \( \nQ \).
 :::
 
+
 ::: {#def-vectors-scalars}
 ## Vectors and Scalars
 
@@ -155,6 +163,8 @@ Let \( V \) be a vector space over \( F \). Then the elements of \( V \) are cal
 
 Additionally, \( \mathbf{0} \in V \) is called the **zero vector**, and \( (\v_1') \) in **(VS4)** is called the **inverse element** of \( \v_1 \).
 :::
+
+## Vector Space Theorems
 
 ::: {#thm-left-cancellation}
 ## Left Cancellation Law

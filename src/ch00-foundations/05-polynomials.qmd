@@ -68,8 +68,6 @@ The following are elements of \( \nR[x] \):
 Note that constant polynomials (including \( 0 \)) are also polynomials.
 :::
 
-## Polynomial Spaces
-
 In linear algebra, we often work with polynomials of bounded degree.
 
 ::: {#def-polynomials-bounded-degree}

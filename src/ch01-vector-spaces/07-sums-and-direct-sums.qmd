@@ -30,9 +30,13 @@ format:
 
 # Sums of Subspaces
 
-descriptive text TBA
+In the previous sections, we studied intersections and unions of subspaces. While the intersection of two subspaces is always a subspace, the union typically is not. This raises a natural question: what is the "right" way to combine two subspaces into a larger one?
 
-## Sums of Subspace
+The answer is the **sum** of subspaces. Given two subspaces \( W_1 \) and \( W_2 \), their sum \( W_1 + W_2 \) consists of all vectors that can be written as \( \w_1 + \w_2 \) for some \( \w_1 \in W_1 \) and \( \w_2 \in W_2 \). This construction always yields a subspace—in fact, it is the smallest subspace containing both \( W_1 \) and \( W_2 \).
+
+A particularly nice situation occurs when \( W_1 \) and \( W_2 \) have only the zero vector in common. In this case, their sum is called a **direct sum**, and every vector in the sum can be decomposed uniquely into a piece from \( W_1 \) and a piece from \( W_2 \). Direct sums are fundamental in decomposing vector spaces into simpler, independent components.
+
+## Definition and Properties
 
 ::: {#def-sum-of-subspaces}
 
@@ -109,11 +113,11 @@ Let \( V \) be a finite-dimensional vector space, and let \( W_1 \), \( W_2 \) s
 
 We use the above diagram to build intuition for the proof.
 
-1. Setup and Basis Extension:
+1. **Setup and Basis Extension**:
 
     Let \( n = \dim(W_1 \cap W_2) \). Let \( B = \{ \b_1, \dots, \b_n \} \) be a basis of the intersection \( W_1 \cap W_2 \).
 
-    Since \( B \) is a linearly independent subset of both \( W_1 \) and \( W_2 \), by the **Basis Extension Theorem**, we can extend it to form bases for both subspaces:
+    Since \( B \) is a linearly independent subset of both \( W_1 \) and \( W_2 \), by the Basis Extension Theorem (@thm-basis-extension), we can extend it to form bases for both subspaces:
 
     1. **For \( W_1 \)**: Extend \( B \) with \( \{ \s_1, \dots, \s_p \} \) such that \( B_1 = \{ \b_1, \dots, \b_n, \s_1, \dots, \s_p \} \) is a basis of \( W_1 \). Note that \( \dim(W_1) = n + p \).
 
@@ -121,7 +125,7 @@ We use the above diagram to build intuition for the proof.
 
     *Claim*: The set \( S = \{ \b_1, \dots, \b_n, \s_1, \dots, \s_p, \t_1, \dots, \t_q \} \) is a basis of \( W_1 + W_2 \).
 
-2. Proof of Claim:
+2. **Proof of Claim**:
 
     - \( S \) spans \( W_1 + W_2 \)
 
@@ -152,25 +156,25 @@ We use the above diagram to build intuition for the proof.
           \sum_{i=1}^n \delta_i \b_i = - \sum_{k=1}^q \gamma_k \t_k \implies \sum_{i=1}^n \delta_i \b_i + \sum_{k=1}^q \gamma_k \t_k = \mathbf{0}
         \]
 
-        The set \( B_2 = \{ \b_1, \dots, \b_n, \t_1, \dots, \t_q \} \) is a basis of \( W_2 \) and is therefore linearly independent. This forces all coefficients to be zero. Specifically, **all \( \gamma_k = 0 \)**.
+        The set \( B_2 = \{ \b_1, \dots, \b_n, \t_1, \dots, \t_q \} \) is a basis of \( W_2 \) and is therefore linearly independent. This forces all coefficients to be zero. Specifically, all \( \gamma_k = 0 \).
 
         Substitute \( \gamma_k = 0 \) back into @eq-linear-combo:
         \[
           \sum_{i=1}^n \alpha_i \b_i + \sum_{j=1}^p \beta_j \s_j = \mathbf{0}
         \]
 
-        Since \( B_1 = \{ \b_1, \dots, \b_n, \s_1, \dots, \s_p \} \) is a basis of \( W_1 \), it is linearly independent. This forces **all \( \alpha_i = 0 \) and all \( \beta_j = 0 \)**.
+        Since \( B_1 = \{ \b_1, \dots, \b_n, \s_1, \dots, \s_p \} \) is a basis of \( W_1 \), it is linearly independent. This forces all \( \alpha_i = 0 \) and all \( \beta_j = 0 \).
 
         Since all \( \alpha, \beta, \gamma \) are zero, \( S \) is linearly independent.
 
-3. Dimension Counting:
+3. **Dimension Counting**:
 
     Since \( S \) is a basis for \( W_1 + W_2 \):
     \begin{align*}
       \dim (W_1 + W_2) &= |S| \\
                       &= n + p + q \\
                       &= (n + p) + (n + q) - n \\
-                      &= \dim(W_1) + \dim(W_2) - \dim(W_1 \cap W_2)
+                      &= \dim(W_1) + \dim(W_2) - \dim(W_1 \cap W_2).
     \end{align*}
 :::
 

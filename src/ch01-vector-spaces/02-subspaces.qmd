@@ -32,6 +32,8 @@ format:
 
 Some vector spaces might be "too big" and be unwieldy to deal with. Therefore, it is often convenient to look at "smaller vector spaces" inside a given vector space. These are called **subspaces**.
 
+## Definition and the Subspace Test
+
 ::: {#def-subspace}
 ## Subspace
 
@@ -81,6 +83,8 @@ Note that from the proof, the first condition of the Subspace Test can be replac
 In practice, to test whether a given subset of a vector space is a subspace, we use @thm-subspace-test instead of checking all eight vector space axioms from scratch, which is much less tedious.
 Moreover, some introductory textbooks use @thm-subspace-test as the definition of a subspace. While this is logically equivalent, it can be somewhat less intuitive than defining a subspace as a subset that is itself a vector space.
 :::
+
+## Examples of Subspaces
 
 ::: {#exm-line-subspace}
 ## Line as Subspace
@@ -153,6 +157,8 @@ The set of all trace-free matrices in \( M_n(F) \), denoted by \( W = \{ \A \in 
 - **Addition:** If \( \A, \B \in W \), then \( \tr(\A+\B) = \tr(\A) + \tr(\B) = 0 + 0 = 0 \), so \( \A+\B \in W \).
 - **Scalar multiplication:** If \( \A \in W \) and \( c \in F \), then \( \tr(c\A) = c \tr(\A) = c(0) = 0 \), so \( c\A \in W \).
 :::
+
+## Intersections and Unions
 
 ::: {#thm-intersection-subspaces}
 ## Intersection of Subspaces

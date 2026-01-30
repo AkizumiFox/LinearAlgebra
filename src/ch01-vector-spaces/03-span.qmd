@@ -32,6 +32,8 @@ format:
 
 In the previous section, we studied subspaces. A natural question arises: given a set of vectors, how can we describe the "smallest" subspace that contains them? This leads us to the concept of linear combinations and the span.
 
+## Linear Combinations
+
 ::: {#def-linear-combination}
 ## Linear Combination
 
@@ -58,6 +60,8 @@ Below are some examples of linear combinations in different vector spaces:
 	f(x) = 1 \cdot 1 + 2 \cdot x + 0 \cdot x^2 + 1 \cdot x^3.
 \]
 :::
+
+## Span and Spanning Sets
 
 ::: {#def-span}
 ## Span

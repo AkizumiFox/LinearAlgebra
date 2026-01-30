@@ -36,6 +36,8 @@ The answer lies in the number of vectors in a basis. But there's a potential pro
 
 In this section, we prove the most important technical result of the chapter: the **Steinitz Replacement Theorem**. This theorem is the "engine" that guarantees every basis of a space has the exact same number of vectors. Once we have this, we can finally define the **Dimension** of a space—a single number that captures its fundamental complexity.
 
+## The Sifting Method
+
 ::: {#thm-sift}
 ## Sifting Method
 
@@ -80,6 +82,8 @@ We apply the sifting method:
 
 The sifted set is \( S' = \{ \v_1, \v_3, \v_5 \} = \{ (1, 1, 1), (1, 0, 0), (1, 1, 0) \} \), which is linearly independent and spans the same space as \( S \).
 :::
+
+## The Steinitz Replacement Theorem
 
 ::: {#thm-steinitz}
 ## Steinitz Exchange/Replacement Theorem
