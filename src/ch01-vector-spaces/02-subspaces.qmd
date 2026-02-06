@@ -3,27 +3,27 @@ from: markdown+tex_math_single_backslash
 chapter-number: 1
 section-number: 2
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -141,11 +141,11 @@ Thus, \( D(\nR) \) is a subspace of \( C(\nR) \).
 ::: {#exm-symmetric-matrices}
 ## Symmetric Matrices
 
-The set of all symmetric matrices in \( M_n(F) \), denoted by \( S_n(F) = \{ \A \in M_n(F) : \A = \A\T \} \), is a subspace of \( M_n(F) \).
+The set of all symmetric matrices in \( M_n(F) \), denoted by \( S_n(F) = \{ \A \in M_n(F) : \A = \A^{\top} \} \), is a subspace of \( M_n(F) \).
 
-- **Zero vector:** The zero matrix \( \O \) is symmetric since \( \O\T = \O \), so \( \O \in S_n(F) \).
-- **Addition:** If \( \A, \B \in S_n(F) \), then \( (\A+\B)\T = \A\T + \B\T = \A + \B \), so \( \A+\B \in S_n(F) \).
-- **Scalar multiplication:** If \( \A \in S_n(F) \) and \( c \in F \), then \( (c\A)\T = c\A\T = c\A \), so \( c\A \in S_n(F) \).
+- **Zero vector:** The zero matrix \( \O \) is symmetric since \( \O^{\top} = \O \), so \( \O \in S_n(F) \).
+- **Addition:** If \( \A, \B \in S_n(F) \), then \( (\A+\B)^{\top} = \A^{\top} + \B^{\top} = \A + \B \), so \( \A+\B \in S_n(F) \).
+- **Scalar multiplication:** If \( \A \in S_n(F) \) and \( c \in F \), then \( (c\A)^{\top} = c\A^{\top} = c\A \), so \( c\A \in S_n(F) \).
 :::
 
 ::: {#exm-trace-free-matrices}

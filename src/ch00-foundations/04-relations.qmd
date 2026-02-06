@@ -3,27 +3,27 @@ from: markdown+tex_math_single_backslash
 chapter-number: 0
 section-number: 4
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -69,15 +69,15 @@ A relation \( \sim \) on a set \( A \) is an **equivalence relation** if it sati
 
 1. **Reflexivity:** \( \forall a \in A : a \sim a \).
 
-   (Every element is related to itself.)
+     (Every element is related to itself.)
 
 2. **Symmetry:** \( \forall a, b \in A : a \sim b \Rightarrow b \sim a \).
 
-   (If \( a \) is related to \( b \), then \( b \) is related to \( a \).)
+     (If \( a \) is related to \( b \), then \( b \) is related to \( a \).)
 
 3. **Transitivity:** \( \forall a, b, c \in A : (a \sim b \land b \sim c) \Rightarrow a \sim c \).
 
-   (If \( a \) is related to \( b \) and \( b \) is related to \( c \), then \( a \) is related to \( c \).)
+     (If \( a \) is related to \( b \) and \( b \) is related to \( c \), then \( a \) is related to \( c \).)
 :::
 
 ::: {#exm-equivalence-relations}
@@ -89,9 +89,9 @@ The following are all equivalence relations:
 
 2. **Congruence modulo \( n \):** On \( \nZ \), define \( a \equiv b \pmod{n} \) if \( n \mid (a - b) \).
 
-   - Reflexive: \( n \mid 0 \), so \( a \equiv a \).
-   - Symmetric: If \( n \mid (a - b) \), then \( n \mid (b - a) \).
-   - Transitive: If \( n \mid (a - b) \) and \( n \mid (b - c) \), then \( n \mid ((a - b) + (b - c)) = (a - c) \).
+     - Reflexive: \( n \mid 0 \), so \( a \equiv a \).
+     - Symmetric: If \( n \mid (a - b) \), then \( n \mid (b - a) \).
+     - Transitive: If \( n \mid (a - b) \) and \( n \mid (b - c) \), then \( n \mid ((a - b) + (b - c)) = (a - c) \).
 
 3. **Same birthday:** On the set of people, "\( a \) has the same birthday as \( b \)" is an equivalence relation.
 
@@ -105,14 +105,14 @@ The following relations fail to be equivalence relations:
 
 1. On \( \nZ \), the relation \( a \leq b \) is **not** an equivalence relation:
 
-   - Reflexive: Yes, \( a \leq a \).
-   - Symmetric: **No.** \( 1 \leq 2 \) but \( 2 \not\leq 1 \).
+     - Reflexive: Yes, \( a \leq a \).
+     - Symmetric: **No.** \( 1 \leq 2 \) but \( 2 \not\leq 1 \).
 
 2. On \( \nR \), the relation \( |a - b| < 1 \) is **not** an equivalence relation:
 
-   - Reflexive: Yes, \( |a - a| = 0 < 1 \).
-   - Symmetric: Yes.
-   - Transitive: **No.** We have \( |0 - 0.6| < 1 \) and \( |0.6 - 1.2| < 1 \), but \( |0 - 1.2| = 1.2 \not< 1 \).
+     - Reflexive: Yes, \( |a - a| = 0 < 1 \).
+     - Symmetric: Yes.
+     - Transitive: **No.** We have \( |0 - 0.6| < 1 \) and \( |0.6 - 1.2| < 1 \), but \( |0 - 1.2| = 1.2 \not< 1 \).
 :::
 
 ## Equivalence Classes
@@ -124,7 +124,7 @@ An equivalence relation partitions a set into disjoint groups of "equivalent" el
 
 Let \( \sim \) be an equivalence relation on \( A \). The **equivalence class** of an element \( a \in A \) is the set of all elements equivalent to \( a \):
 \[
-    [a] = \{ b \in A : b \sim a \}
+        [a] = \{ b \in A : b \sim a \}
 \]
 The element \( a \) is called a **representative** of the class \( [a] \).
 :::
@@ -135,12 +135,12 @@ The element \( a \) is called a **representative** of the class \( [a] \).
 We illustrate equivalence classes with two examples:
 
 1. **Congruence modulo 3:** The equivalence classes of \( \nZ \) under \( \equiv \pmod{3} \) are:
-   \begin{align*}
-       [0] &= \{ \ldots, -6, -3, 0, 3, 6, 9, \ldots \} \\
-       [1] &= \{ \ldots, -5, -2, 1, 4, 7, 10, \ldots \} \\
-       [2] &= \{ \ldots, -4, -1, 2, 5, 8, 11, \ldots \}
-   \end{align*}
-   Note that \( [0] = [3] = [6] = \cdots \) and \( [1] = [4] = [7] = \cdots \). Different representatives can name the same class.
+     \begin{align*}
+             [0] &= \{ \ldots, -6, -3, 0, 3, 6, 9, \ldots \} \\
+             [1] &= \{ \ldots, -5, -2, 1, 4, 7, 10, \ldots \} \\
+             [2] &= \{ \ldots, -4, -1, 2, 5, 8, 11, \ldots \}
+     \end{align*}
+     Note that \( [0] = [3] = [6] = \cdots \) and \( [1] = [4] = [7] = \cdots \). Different representatives can name the same class.
 
 2. **Same absolute value on \( \nR \):** The equivalence class of \( 2 \) is \( [2] = \{ -2, 2 \} \). The equivalence class of \( 0 \) is \( [0] = \{ 0 \} \).
 :::
@@ -172,7 +172,7 @@ Now we show \( [a] = [b] \). Let \( x \in [a] \), so \( x \sim a \). Since \( a 
 
 Let \( \sim \) be an equivalence relation on \( A \). The **quotient set** (or **quotient of \( A \) by \( \sim \)**) is the set of all equivalence classes:
 \[
-    A / {\sim} = \{ [a] : a \in A \}
+        A / {\sim} = \{ [a] : a \in A \}
 \]
 :::
 

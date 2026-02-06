@@ -1,0 +1,533 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 2
+section-number: 1
+filters:
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
+format:
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Linear Transformations
+
+In Chapter 1, we studied vector spaces as static objects—sets equipped with addition and scalar multiplication. Now we turn to the study of **structure-preserving maps** between vector spaces. Just as group theory studies homomorphisms and topology studies continuous functions, linear algebra studies **linear transformations**.
+
+A linear transformation is a function that "respects" the vector space structure: it preserves addition and scalar multiplication. This simple requirement has profound consequences. Linear transformations are the morphisms in the category of vector spaces, and understanding them is central to all of linear algebra.
+
+## Definition and Basic Properties
+
+::: {#def-linear-transformation}
+## Linear Transformation
+
+Let \( V, W \) be vector spaces over \( F \). A function \( T : V \to W \) is called a **linear transformation** (or **linear map**), if
+
+::: {.enumerate options="label=(LT\arabic*)"}
+1. \( T(\v_1 + \v_2) = T(\v_1) + T(\v_2) \), for all \( \v_1, \v_2 \in V \);
+2. \( T(\lambda \v) = \lambda T(\v) \), for all \( \lambda \in F \) and \( \v \in V \).
+:::
+:::
+
+## Examples of Linear Transformations
+
+We now present a rich collection of examples. For each, we determine whether the given function is a linear transformation by verifying the two axioms (LT1) and (LT2).
+
+### Geometric Transformations
+
+::: {#exm-projection}
+## Projection onto a Coordinate Axis
+
+Determine whether \( T : \nR^2 \to \nR^2 \) defined by \( T(a_1, a_2) = (a_1, 0) \) is a linear transformation.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[->] (-2,0) -- (2,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,2) node[above] {$y$};
+    \draw[thick,red,->] (0,0) -- (1,1.5) node[above right] {$(a_1,a_2)$};
+    \draw[thick,blue,->] (0,0) -- (1,0) node[below right] {$T(a_1,a_2)=(a_1,0)$};
+    \draw[dashed] (1,1.5) -- (1,0);
+\end{tikzpicture}
+\end{center}
+:::
+
+::: {.solution}
+Let \( \v = (a_1, a_2) \) and \( \w = (b_1, b_2) \) be vectors in \( \nR^2 \), and let \( \lambda \in \nR \).
+
+- **Additivity:** \( T(\v + \w) = T(a_1 + b_1, a_2 + b_2) = (a_1 + b_1, 0) = (a_1, 0) + (b_1, 0) = T(\v) + T(\w) \).
+- **Homogeneity:** \( T(\lambda \v) = T(\lambda a_1, \lambda a_2) = (\lambda a_1, 0) = \lambda (a_1, 0) = \lambda T(\v) \).
+
+Thus \( T \) is a linear transformation.
+:::
+
+::: {#exm-rotation}
+## Rotation in the Plane
+
+Determine whether rotation by angle \( \theta \) (counterclockwise) in the plane is a linear transformation. That is, let \( T_\theta : \nR^2 \to \nR^2 \) be the rotation map.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2) node[above] {$y$};
+    \draw[thick,red,->] (0,0) -- (1.5,0.5) node[right] {$(a_1,a_2)$};
+    \draw[thick,blue,->] (0,0) -- (0.5,1.5) node[above right] {$T_\theta(a_1,a_2)$};
+    \draw[dashed] (0.8,0.27) arc (18.43:71.57:0.84);
+    \node at (0.55,0.55) {$\theta$};
+\end{tikzpicture}
+\end{center}
+:::
+
+::: {.solution}
+Write \( (a_1, a_2) \) in polar coordinates: \( a_1 = r\cos\phi \) and \( a_2 = r\sin\phi \). Then:
+\begin{align*}
+    T_\theta(a_1, a_2) &= (r\cos(\theta + \phi), r\sin(\theta + \phi)) \\
+    &= (r\cos\theta\cos\phi - r\sin\theta\sin\phi, \; r\sin\theta\cos\phi + r\cos\theta\sin\phi) \\
+    &= \cos\theta(r\cos\phi, r\sin\phi) + \sin\theta(-r\sin\phi, r\cos\phi) \\
+    &= \cos\theta(a_1, a_2) + \sin\theta(-a_2, a_1).
+\end{align*}
+
+Thus \( T_\theta(a_1, a_2) = (a_1\cos\theta - a_2\sin\theta, \; a_1\sin\theta + a_2\cos\theta) \).
+
+Linearity follows from this explicit formula: for \( \v, \w \in \nR^2 \) and \( \lambda \in \nR \),
+\begin{align*}
+    T_\theta(\v + \w) &= \cos\theta(\v + \w) + \sin\theta \cdot J(\v + \w) = T_\theta(\v) + T_\theta(\w), \\
+    T_\theta(\lambda\v) &= \cos\theta(\lambda\v) + \sin\theta \cdot J(\lambda\v) = \lambda T_\theta(\v),
+\end{align*}
+where \( J(a_1, a_2) = (-a_2, a_1) \) is itself linear.
+:::
+
+### Matrix-Induced Transformations
+
+::: {#exm-matrix-transformation}
+## Left Multiplication by a Matrix
+
+Let \( \A \in M_{m \times n}(F) \) be an \( m \times n \) matrix. Determine whether \( f_\A : F^n \to F^m \) defined by \( f_\A(\v) = \A\v \) (where \( \v \) is viewed as a column vector) is a linear transformation.
+:::
+
+::: {.solution}
+For \( \v, \w \in F^n \) and \( \lambda \in F \):
+
+- **Additivity:** \( f_\A(\v + \w) = \A(\v + \w) = \A\v + \A\w = f_\A(\v) + f_\A(\w) \).
+- **Homogeneity:** \( f_\A(\lambda\v) = \A(\lambda\v) = \lambda(\A\v) = \lambda f_\A(\v) \).
+
+These follow from the distributive and scalar properties of matrix multiplication.
+:::
+
+::: {#exm-coordinate-transformation}
+## A Specific Matrix Transformation
+
+Determine whether \( T : F^3 \to F^2 \) defined by \( T(a_1, a_2, a_3) = (2a_1 + a_3, \; a_2 - a_1) \) is a linear transformation.
+:::
+
+::: {.solution}
+This is the matrix transformation induced by \( \A = \begin{bmatrix} 2 & 0 & 1 \\ -1 & 1 & 0 \end{bmatrix} \), since
+\[
+    \begin{bmatrix} 2 & 0 & 1 \\ -1 & 1 & 0 \end{bmatrix} \begin{bmatrix} a_1 \\ a_2 \\ a_3 \end{bmatrix} = \begin{bmatrix} 2a_1 + a_3 \\ a_2 - a_1 \end{bmatrix}.
+\]
+By the previous example, \( T \) is linear.
+:::
+
+::: {#exm-trace}
+## Trace
+
+Determine whether the **trace** function \( \tr : M_n(F) \to F \) defined by \( \tr(\A) = \sum_{i=1}^n a_{ii} \) is a linear transformation.
+:::
+
+::: {.solution}
+For matrices \( \A, \B \in M_n(F) \) and \( \lambda \in F \):
+
+- **Additivity:** \( \tr(\A + \B) = \sum_{i=1}^n (a_{ii} + b_{ii}) = \sum_{i=1}^n a_{ii} + \sum_{i=1}^n b_{ii} = \tr(\A) + \tr(\B) \).
+- **Homogeneity:** \( \tr(\lambda\A) = \sum_{i=1}^n \lambda a_{ii} = \lambda \sum_{i=1}^n a_{ii} = \lambda\tr(\A) \).
+
+Thus trace is a linear transformation from the vector space of matrices to the scalar field.
+:::
+
+### Polynomial and Function Space Transformations
+
+::: {#exm-multiplication-by-x}
+## Multiplication by \( x \)
+
+Determine whether \( T : F[x] \to F[x] \) defined by \( T(f(x)) = x \cdot f(x) \) is a linear transformation.
+:::
+
+::: {.solution}
+For polynomials \( f, g \in F[x] \) and \( \lambda \in F \):
+
+- **Additivity:** \( T(f + g) = x(f + g) = xf + xg = T(f) + T(g) \).
+- **Homogeneity:** \( T(\lambda f) = x(\lambda f) = \lambda(xf) = \lambda T(f) \).
+
+Thus multiplication by \( x \) is a linear transformation.
+:::
+
+::: {#exm-differentiation}
+## Differentiation
+
+Determine whether \( D : \nR[x] \to \nR[x] \) defined by \( D(f(x)) = f'(x) \) (the derivative) is a linear transformation.
+:::
+
+::: {.solution}
+For polynomials \( f, g \in \nR[x] \) and \( \lambda \in \nR \):
+
+- **Additivity:** \( D(f + g) = (f + g)' = f' + g' = D(f) + D(g) \).
+- **Homogeneity:** \( D(\lambda f) = (\lambda f)' = \lambda f' = \lambda D(f) \).
+
+These are the standard sum rule and constant multiple rule from calculus.
+:::
+
+::: {.remark}
+More precisely, \( D : \nR[x]_{\leq n} \to \nR[x]_{\leq n-1} \) maps polynomials of degree at most \( n \) to polynomials of degree at most \( n-1 \).
+:::
+
+::: {#exm-integration}
+## Integration
+
+Determine whether \( T : \nR[x] \to \nR[x] \) defined by \( T(f(x)) = \int_0^x f(t) \, \dd t \) is a linear transformation.
+:::
+
+::: {.solution}
+For polynomials \( f, g \in \nR[x] \) and \( \lambda \in \nR \):
+
+- **Additivity:** \( T(f + g) = \int_0^x (f(t) + g(t)) \, \dd t = \int_0^x f(t) \, \dd t + \int_0^x g(t) \, \dd t = T(f) + T(g) \).
+- **Homogeneity:** \( T(\lambda f) = \int_0^x \lambda f(t) \, \dd t = \lambda \int_0^x f(t) \, \dd t = \lambda T(f) \).
+
+These follow from the linearity of the integral.
+:::
+
+::: {#exm-shift}
+## Shift Operator
+
+Fix \( \theta \in \nR \). Determine whether the **shift operator** \( S_\theta : C(\nR) \to C(\nR) \) defined by \( S_\theta(f)(x) = f(x - \theta) \) is a linear transformation. (This operator translates the graph of \( f \) by \( \theta \) units to the right.)
+:::
+
+::: {.solution}
+For \( f, g \in C(\nR) \) and \( \lambda \in \nR \):
+
+- **Additivity:** \( S_\theta(f + g)(x) = (f + g)(x - \theta) = f(x - \theta) + g(x - \theta) = S_\theta(f)(x) + S_\theta(g)(x) \).
+- **Homogeneity:** \( S_\theta(\lambda f)(x) = (\lambda f)(x - \theta) = \lambda f(x - \theta) = \lambda S_\theta(f)(x) \).
+
+Thus the shift operator is linear.
+:::
+
+::: {#exm-composition}
+## Composition Operator
+
+Fix a continuous function \( g : \nR \to \nR \). Determine whether the **composition operator** \( C_g : C(\nR) \to C(\nR) \) defined by \( C_g(f) = f \circ g \), i.e., \( C_g(f)(x) = f(g(x)) \), is a linear transformation.
+:::
+
+::: {.solution}
+For \( f, h \in C(\nR) \) and \( \lambda \in \nR \):
+
+- **Additivity:** \( C_g(f + h)(x) = (f + h)(g(x)) = f(g(x)) + h(g(x)) = C_g(f)(x) + C_g(h)(x) \).
+- **Homogeneity:** \( C_g(\lambda f)(x) = (\lambda f)(g(x)) = \lambda f(g(x)) = \lambda C_g(f)(x) \).
+
+The shift operator is the special case where \( g(x) = x - \theta \).
+:::
+
+### Identity and Inclusion Maps
+
+::: {#exm-identity}
+## Identity Map
+
+Let \( V \) be a vector space. Determine whether the **identity map** \( \id_V : V \to V \) defined by \( \id_V(\v) = \v \) is a linear transformation.
+:::
+
+::: {.solution}
+For \( \v, \w \in V \) and \( \lambda \in F \):
+
+- **Additivity:** \( \id_V(\v + \w) = \v + \w = \id_V(\v) + \id_V(\w) \).
+- **Homogeneity:** \( \id_V(\lambda\v) = \lambda\v = \lambda\id_V(\v) \).
+
+The identity map is trivially linear.
+:::
+
+::: {#exm-inclusion}
+## Inclusion Map
+
+Let \( W \subseteq V \) be a subspace. Determine whether the **inclusion map** \( \iota : W \hookrightarrow V \) defined by \( \iota(\w) = \w \) is a linear transformation.
+:::
+
+::: {.solution}
+The inclusion map is simply the identity map restricted to \( W \), viewed as a map into \( V \). The verification is identical to the identity map.
+:::
+
+::: {#exm-zero-map}
+## Zero Map
+
+For any vector spaces \( V \) and \( W \), determine whether the **zero map** \( 0 : V \to W \) defined by \( 0(\v) = \mathbf{0}_W \) for all \( \v \in V \) is a linear transformation.
+:::
+
+::: {.solution}
+For \( \v_1, \v_2 \in V \) and \( \lambda \in F \):
+
+- **Additivity:** \( 0(\v_1 + \v_2) = \mathbf{0}_W = \mathbf{0}_W + \mathbf{0}_W = 0(\v_1) + 0(\v_2) \).
+- **Homogeneity:** \( 0(\lambda\v_1) = \mathbf{0}_W = \lambda\mathbf{0}_W = \lambda \cdot 0(\v_1) \).
+
+The zero map is linear.
+:::
+
+### Field-Dependent Examples
+
+::: {#exm-complex-conjugation}
+## Complex Conjugation
+
+Determine whether complex conjugation \( T : \nC \to \nC \) defined by \( T(z) = \overline{z} \), where \( \overline{a + bi} = a - bi \), is a linear transformation.
+:::
+
+::: {.solution}
+**As a map of \( \nC \)-vector spaces:** \( T \) is **not** linear over \( \nC \).
+
+Consider \( z = 1 \) and \( \alpha = i \). Then:
+\[
+    T(\alpha z) = T(i) = -i, \quad \text{but} \quad \alpha T(z) = i \cdot \overline{1} = i.
+\]
+Since \( T(i \cdot 1) = -i \neq i = i \cdot T(1) \), the homogeneity condition fails.
+
+**As a map of \( \nR \)-vector spaces:** \( T \) **is** linear over \( \nR \).
+
+For \( z = a + bi \) and \( w = c + di \) with \( a, b, c, d \in \nR \), and \( \lambda \in \nR \):
+
+- **Additivity:** \( T(z + w) = \overline{(a+c) + (b+d)i} = (a+c) - (b+d)i = (a - bi) + (c - di) = T(z) + T(w) \).
+- **Homogeneity:** \( T(\lambda z) = \overline{\lambda a + \lambda bi} = \lambda a - \lambda bi = \lambda(a - bi) = \lambda T(z) \).
+
+This example illustrates that **linearity depends on the choice of scalar field**.
+:::
+
+## Non-Examples of Linear Transformations
+
+It is equally important to recognize functions that are **not** linear transformations. We verify non-linearity by finding a counterexample to either (LT1) or (LT2).
+
+::: {#exm-squaring}
+## Squaring
+
+Determine whether \( T : F^2 \to F^2 \) defined by \( T(a_1, a_2) = (a_1^2, 0) \) is a linear transformation.
+:::
+
+::: {.solution}
+We show that \( T \) fails additivity. Consider \( \v = (1, 0) \):
+\[
+    T(\v) + T(\v) = (1, 0) + (1, 0) = (2, 0),
+\]
+but
+\[
+    T(\v + \v) = T(2, 0) = (4, 0).
+\]
+Since \( (2, 0) \neq (4, 0) \), additivity fails and \( T \) is not linear.
+
+Alternatively, homogeneity fails: \( T(2\v) = T(2, 0) = (4, 0) \neq 2 \cdot (1, 0) = (2, 0) = 2T(\v) \).
+:::
+
+::: {#exm-norm}
+## Norm
+
+Determine whether \( T : \nR^n \to \nR \) defined by \( T(\v) = \|\v\| \) (the Euclidean norm) is a linear transformation.
+:::
+
+::: {.solution}
+Homogeneity fails for negative scalars. Consider \( \v = (1, 0, \ldots, 0) \) and \( \lambda = -1 \):
+\[
+    T(\lambda\v) = T(-1, 0, \ldots, 0) = \|(-1, 0, \ldots, 0)\| = 1,
+\]
+but
+\[
+    \lambda T(\v) = (-1) \cdot \|(1, 0, \ldots, 0)\| = -1.
+\]
+Since \( 1 \neq -1 \), homogeneity fails and \( T \) is not a linear transformation.
+
+(The norm does satisfy \( \|c\v\| = |c| \|\v\| \), but this is not the same as \( c\|\v\| \) when \( c < 0 \).)
+:::
+
+## Basic Theorems
+
+::: {#thm-zero-maps-to-zero}
+## Zero Maps to Zero
+
+Let \( T: V \to W \) be a linear transformation. Then \( T(\mathbf{0}_V) = \mathbf{0}_W \).
+:::
+
+::: {.proof}
+Using additivity with \( \v = \mathbf{0}_V \):
+\[
+    T(\mathbf{0}_V) = T(\mathbf{0}_V + \mathbf{0}_V) = T(\mathbf{0}_V) + T(\mathbf{0}_V).
+\]
+Adding \( -T(\mathbf{0}_V) \) to both sides gives \( \mathbf{0}_W = T(\mathbf{0}_V) \).
+:::
+
+::: {.remark}
+This theorem provides a quick test for non-linearity: if \( T(\mathbf{0}) \neq \mathbf{0} \), then \( T \) is not linear.
+:::
+
+::: {#exm-constant-function}
+## Constant Function
+
+Determine whether \( T : \nR \to \nR \) defined by \( T(x) = 5 \) for all \( x \in \nR \) is a linear transformation.
+:::
+
+::: {.solution}
+We use @thm-zero-maps-to-zero: any linear transformation must map zero to zero.
+
+Here, \( T(0) = 5 \neq 0 \).
+
+Therefore, \( T \) is not a linear transformation.
+:::
+
+::: {#exm-translation}
+## Translation
+
+Determine whether \( T : \nR^2 \to \nR^2 \) defined by \( T(\v) = \v + \mathbf{c} \) for some fixed nonzero \( \mathbf{c} \in \nR^2 \) is a linear transformation.
+:::
+
+::: {.solution}
+Using @thm-zero-maps-to-zero: \( T(\mathbf{0}) = \mathbf{0} + \mathbf{c} = \mathbf{c} \neq \mathbf{0} \).
+
+Therefore, translation by a nonzero vector is not linear.
+
+Maps of the form \( \v \mapsto \A\v + \mathbf{c} \) are called **affine transformations**. They are linear if and only if \( \mathbf{c} = \mathbf{0} \).
+:::
+
+::: {#thm-preserves-negation}
+## Linear Maps Preserve Negation
+
+Let \( T: V \to W \) be a linear transformation. Then \( T(-\v) = -T(\v) \) for all \( \v \in V \).
+:::
+
+::: {.proof}
+Using homogeneity with \( \lambda = -1 \):
+\[
+    T(-\v) = T((-1)\v) = (-1)T(\v) = -T(\v).
+\]
+:::
+
+::: {#thm-equivalent-condition}
+## Equivalent Characterization of Linearity
+
+Let \( V, W \) be vector spaces over \( F \) and \( T: V \to W \) be a function. Then \( T \) is a linear transformation if and only if
+\[
+    T(\alpha \v_1 + \beta \v_2) = \alpha T(\v_1) + \beta T(\v_2)
+\]
+for all \( \alpha, \beta \in F \) and \( \v_1, \v_2 \in V \).
+:::
+
+::: {.proof}
+\( (\Rightarrow) \) Suppose \( T \) is linear. Then for any \( \alpha, \beta \in F \) and \( \v_1, \v_2 \in V \):
+\begin{align*}
+    T(\alpha \v_1 + \beta \v_2) &= T(\alpha \v_1) + T(\beta \v_2) & \text{(by LT1)} \\
+    &= \alpha T(\v_1) + \beta T(\v_2) & \text{(by LT2)}
+\end{align*}
+
+\( (\Leftarrow) \) Suppose \( T(\alpha \v_1 + \beta \v_2) = \alpha T(\v_1) + \beta T(\v_2) \) for all \( \alpha, \beta \in F \) and \( \v_1, \v_2 \in V \).
+
+- **Additivity (LT1):** Setting \( \alpha = \beta = 1 \), we get \( T(\v_1 + \v_2) = T(\v_1) + T(\v_2) \).
+- **Homogeneity (LT2):** Setting \( \beta = 0 \), we get \( T(\alpha \v_1 + \mathbf{0}) = \alpha T(\v_1) + 0 \cdot T(\v_2) \), i.e., \( T(\alpha \v_1) = \alpha T(\v_1) \).
+
+Thus \( T \) satisfies both (LT1) and (LT2), so \( T \) is linear.
+:::
+
+::: {#thm-linear-combination}
+## Linear Maps Preserve Linear Combinations
+
+Let \( T: V \to W \) be a linear transformation. Then for any vectors \( \v_1, \ldots, \v_n \in V \) and scalars \( a_1, \ldots, a_n \in F \):
+\[
+    T\left( \sum_{i=1}^n a_i \v_i \right) = \sum_{i=1}^n a_i T(\v_i).
+\]
+:::
+
+::: {.proof}
+By induction on \( n \). The base case \( n = 1 \) is homogeneity. For the inductive step:
+\begin{align*}
+    T\left( \sum_{i=1}^{n+1} a_i \v_i \right) &= T\left( \sum_{i=1}^n a_i \v_i + a_{n+1}\v_{n+1} \right) \\
+    &= T\left( \sum_{i=1}^n a_i \v_i \right) + T(a_{n+1}\v_{n+1}) & \text{(additivity)} \\
+    &= \sum_{i=1}^n a_i T(\v_i) + a_{n+1}T(\v_{n+1}) & \text{(induction + homogeneity)} \\
+    &= \sum_{i=1}^{n+1} a_i T(\v_i).
+\end{align*}
+:::
+
+## Linear Transformation Determined by Basis
+
+Another useful fact of a linear transformation is that once we know how it acts on a basis, then we know how it acts on every vector in the domain.
+
+::: {#thm-linear-transform-basis}
+## Linear Transformations are Determined by Their Action on a Basis
+
+Let \( T: V \to W \) be a linear transformation and \( V \) is finite dimensional, and \( B = \{ \v_1, \dots, \v_n \} \) be a basis for \( V \). Then we have:
+
+1. For every \( \v \in V \), \( f(\v) \) is a linear combination of \( f(\v_1), f(\v_2), \dots, f(\v_n)  \).
+2. Suppose the linear transformation \( g : V \to W \) satisfies \( g(\v_i) = f(\v_i) \) for all \( i \). Then \( g = f \).
+
+We say '\( f \) is determined by \( f(\v_1), \dots, f(\v_n) \)' in this case.
+:::
+
+::: {.proof}
+Let \( \v \in V \). Since \( B \) is a basis of \( V \), we can write \( \v = \alpha_1 \v_1 + \dots + \alpha_n \v_n \). Then
+\begin{align*}
+f(\v) &= f(\alpha_1 \v_1 + \cdots + \alpha_n \v_n) \\
+&=  \alpha_1 f (\v_1) + \cdots + \alpha_n f (\v_n) .
+\end{align*}
+This proves the first condition.
+
+Moreover, if \( g : V \to W \) satisfies \( g(\v_i) = f(\v_i) \), then:
+\begin{align*}
+g(\v) &= g(\alpha_1 \v_1 + \cdots + \alpha_n \v_n) \\
+&= \alpha_1 g(\v_1) + \cdots + \alpha_n g(\v_n) \\
+&= a_1 f(\v_1) + \cdots + \alpha_n f(\v_n) \\
+&= f(\alpha_1 \v_1 + \cdots + \alpha_n \v_n) \\
+&= f(\v).
+\end{align*}
+
+Since \( g(\v) = f(\v) \) for all \( \v \in V \), we have \( f = g \). This finishes the second condition.
+:::
+
+::: {#exm-deter}
+Is it possible to have a linear map \( f: \nR^2 \to \nR^3 \) such that
+\[
+f(1, 0) = (2, 3, 4), \quad f(1, 1) = (3, 4, 5), \quad f(2, 3) = (4, 5 6)?
+\]
+:::
+
+::: {.solution}
+Idea: Since \( \left\{ (1, 0), (1, 1) \right\} \) forms a basis of \( \nR^2 \), these two function value would determine \( f \) completely.
+
+Suppose such a linear transformation \( f \) exists. Observe that
+\[
+(2, 3) = -1 (1, 0) + 3 (1, 1).
+\]
+
+Apply \( f \) then we have:
+\begin{align*}
+f(2, 3) &= f(-1(1, 0) + 3(1, 1)) \\
+&= -1 f (1, 0) + 3 f(1, 1) \\
+&= -1 (2, 3, 4) + 3 (3, 4 ,5) \\
+&= (7, 8 , 11) \\
+&\neq (4, 5 6).
+\end{align*}
+
+Which is inconsistent with the third equation, therefore no such transformation exists.
+:::
+
+::: {#exm-deter-two}
+Suppose we are give a linear transformation \( f: \nR[x]_{\leq 3} \to \nR[x]_{\leq 2} \). And it is also know that
+\[
+f(x^3) = 3x^2, \quad f(x^2) = 2x, \quad f(x) = 1, \quad f(1)= 0.
+\]
+:::
+
+::: {.solution}
+As \( \left\{ 1, x, x^2, x^3 \right\} \) forms a basis of \( \nR[x]_{\leq 3} \). And \( D(x^k) = f(x^k) \), for \( k = 0, 1, 2, 3 \), as \( D \) is differentiation. We have that \( D \equiv f \) is the same linear transformation.
+:::

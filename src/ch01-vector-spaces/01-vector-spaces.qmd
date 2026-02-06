@@ -3,27 +3,27 @@ from: markdown+tex_math_single_backslash
 chapter-number: 1
 section-number: 1
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -77,18 +77,18 @@ The following are classic examples of vector spaces:
 2. Working with polynomials is common too: \( F[x] \) with the usual operations of \( + \) and \( \cdot \) is a vector space over \( F \).
 
 3. Let \( \sD \) be any open interval. Let
-   \[
+     \[
 	C(\sD) \coloneqq \left\{ f: \sD \to \nR: f \text{ is continuous} \right\}.
 \]
-   Then \( C(\sD) \) is a vector space over \( \nR \). The zero vector of this vector space is given by the zero polynomial \( (x \mapsto 0) \).
+     Then \( C(\sD) \) is a vector space over \( \nR \). The zero vector of this vector space is given by the zero polynomial \( (x \mapsto 0) \).
 
 4. Let \( F \) be any field and fix \( n \in \nN \). Then \( M_n(F) \) is a vector space over \( F \).
 
 5. The set \( V = \mathbb{R}_{>0} \) of positive real numbers forms a vector space over \( F = \mathbb{R} \) under the following operations: for \( x, y \in V \) and \( \alpha \in F \), define
-   \[
+     \[
 	    x \oplus y \coloneqq xy, \quad \alpha \odot x \coloneqq x^\alpha = e^{\alpha \log x}.
-    \]
-   Under these operations, the zero vector is \( \mathbf{0} = 1 \), and the additive inverse of \( x \) is \( x^{-1} \).
+        \]
+     Under these operations, the zero vector is \( \mathbf{0} = 1 \), and the additive inverse of \( x \) is \( x^{-1} \).
 
 You can check if addition and scalar multiplication make sense and follow all axioms of vector spaces.
 :::
@@ -105,51 +105,51 @@ Let \( \v_1 = a_1 + b_1\sqrt{2} \), \( \v_2 = a_2 + b_2\sqrt{2} \), \( \v_3 = a_
 
 ::: {.enumerate options="label=(VS\arabic*)"}
 1. \begin{align*}
-   \v_1 + \v_2 &= (a_1 + a_2) + (b_1 + b_2)\sqrt{2} \\
-   &= (a_2 + a_1) + (b_2 + b_1)\sqrt{2} \\
-   &= \v_2 + \v_1
-   \end{align*}
+     \v_1 + \v_2 &= (a_1 + a_2) + (b_1 + b_2)\sqrt{2} \\
+     &= (a_2 + a_1) + (b_2 + b_1)\sqrt{2} \\
+     &= \v_2 + \v_1
+     \end{align*}
 
 2. \begin{align*}
-   (\v_1 + \v_2) + \v_3 &= (a_1 + a_2 + a_3) + (b_1 + b_2 + b_3)\sqrt{2} \\
-   &= \v_1 + (\v_2 + \v_3)
-   \end{align*}
+     (\v_1 + \v_2) + \v_3 &= (a_1 + a_2 + a_3) + (b_1 + b_2 + b_3)\sqrt{2} \\
+     &= \v_1 + (\v_2 + \v_3)
+     \end{align*}
 
 3. The element \( \mathbf{0} = 0 + 0\sqrt{2} = 0 \in \nQ(\sqrt{2}) \) satisfies
-   \begin{align*}
-   \v_1 + \mathbf{0} &= (a_1 + 0) + (b_1 + 0)\sqrt{2} \\
-   &= \v_1
-   \end{align*}
+     \begin{align*}
+     \v_1 + \mathbf{0} &= (a_1 + 0) + (b_1 + 0)\sqrt{2} \\
+     &= \v_1
+     \end{align*}
 
 4. For \( \v_1 = a_1 + b_1\sqrt{2} \), define \( -\v_1 \coloneqq (-a_1) + (-b_1)\sqrt{2} \in \nQ(\sqrt{2}) \). Then
-   \begin{align*}
-   \v_1 + (-\v_1) &= (a_1 - a_1) + (b_1 - b_1)\sqrt{2} \\
-   &= \mathbf{0}
-   \end{align*}
+     \begin{align*}
+     \v_1 + (-\v_1) &= (a_1 - a_1) + (b_1 - b_1)\sqrt{2} \\
+     &= \mathbf{0}
+     \end{align*}
 
 5. \begin{align*}
-   \alpha(\v_1 + \v_2) &= \alpha(a_1 + a_2) + \alpha(b_1 + b_2)\sqrt{2} \\
-   &= (\alpha a_1 + \alpha a_2) + (\alpha b_1 + \alpha b_2)\sqrt{2} \\
-   &= \alpha\v_1 + \alpha\v_2
-   \end{align*}
+     \alpha(\v_1 + \v_2) &= \alpha(a_1 + a_2) + \alpha(b_1 + b_2)\sqrt{2} \\
+     &= (\alpha a_1 + \alpha a_2) + (\alpha b_1 + \alpha b_2)\sqrt{2} \\
+     &= \alpha\v_1 + \alpha\v_2
+     \end{align*}
 
 6. \begin{align*}
-   (\alpha + \beta)\v_1 &= (\alpha + \beta)a_1 + (\alpha + \beta)b_1\sqrt{2} \\
-   &= (\alpha a_1 + \beta a_1) + (\alpha b_1 + \beta b_1)\sqrt{2} \\
-   &= \alpha\v_1 + \beta\v_1
-   \end{align*}
+     (\alpha + \beta)\v_1 &= (\alpha + \beta)a_1 + (\alpha + \beta)b_1\sqrt{2} \\
+     &= (\alpha a_1 + \beta a_1) + (\alpha b_1 + \beta b_1)\sqrt{2} \\
+     &= \alpha\v_1 + \beta\v_1
+     \end{align*}
 
 7. \begin{align*}
-   \alpha(\beta\v_1) &= \alpha(\beta a_1 + \beta b_1\sqrt{2}) \\
-   &= \alpha\beta a_1 + \alpha\beta b_1\sqrt{2} \\
-   &= (\alpha\beta)\v_1
-   \end{align*}
+     \alpha(\beta\v_1) &= \alpha(\beta a_1 + \beta b_1\sqrt{2}) \\
+     &= \alpha\beta a_1 + \alpha\beta b_1\sqrt{2} \\
+     &= (\alpha\beta)\v_1
+     \end{align*}
 
 8. \begin{align*}
-   1 \cdot \v_1 &= 1 \cdot a_1 + 1 \cdot b_1\sqrt{2} \\
-   &= a_1 + b_1\sqrt{2} \\
-   &= \v_1
-   \end{align*}
+     1 \cdot \v_1 &= 1 \cdot a_1 + 1 \cdot b_1\sqrt{2} \\
+     &= a_1 + b_1\sqrt{2} \\
+     &= \v_1
+     \end{align*}
 :::
 
 Thus \( \nQ(\sqrt{2}) \) is a vector space over \( \nQ \).
@@ -319,12 +319,12 @@ Suppose \( \alpha\v = \mathbf{0} \). We consider two cases:
 - **Case \( \alpha = 0 \):** Then the statement holds.
 
 - **Case \( \alpha \neq 0 \):** Since \( F \) is a field, \( \alpha \) has a multiplicative inverse \( \alpha^{-1} \).
-  \begin{align*}
-  \alpha\v &= \mathbf{0} & \text{(given)} \\
-  \alpha^{-1}(\alpha\v) &= \alpha^{-1}\mathbf{0} & \text{(multiply by } \alpha^{-1} \text{)} \\
-  (\alpha^{-1}\alpha)\v &= \mathbf{0} & \text{(by VS7 and previous Theorem)} \\
-  1 \cdot \v &= \mathbf{0} & \text{(field inverse property)} \\
-  \v &= \mathbf{0} & \text{(by VS8)}
-  \end{align*}
-  Thus, if \( \alpha \neq 0 \), we must have \( \v = \mathbf{0} \).
+    \begin{align*}
+    \alpha\v &= \mathbf{0} & \text{(given)} \\
+    \alpha^{-1}(\alpha\v) &= \alpha^{-1}\mathbf{0} & \text{(multiply by } \alpha^{-1} \text{)} \\
+    (\alpha^{-1}\alpha)\v &= \mathbf{0} & \text{(by VS7 and previous Theorem)} \\
+    1 \cdot \v &= \mathbf{0} & \text{(field inverse property)} \\
+    \v &= \mathbf{0} & \text{(by VS8)}
+    \end{align*}
+    Thus, if \( \alpha \neq 0 \), we must have \( \v = \mathbf{0} \).
 :::

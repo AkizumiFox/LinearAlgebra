@@ -17,9 +17,9 @@ execute:
 filters:
   - mermaid-static
   - scripts/list-env.lua
+  - scripts/claim-env.lua
   - theorem-numbering
   - resolve-crossrefs
-
 
 book:
   title: "Linear Algebra"
@@ -54,6 +54,11 @@ book:
         - src/ch01-vector-spaces/05-basis.qmd
         - src/ch01-vector-spaces/06-dimension.qmd
         - src/ch01-vector-spaces/07-sums-and-direct-sums.qmd
+
+    - part: src/ch02-linear-transformations/index.qmd
+      chapters:
+        - src/ch02-linear-transformations/01-linear-transformations.qmd
+        - src/ch02-linear-transformations/02-rank-nullity.qmd
 
 format:
   html:

@@ -3,28 +3,28 @@ from: markdown+tex_math_single_backslash
 chapter-number: 0
 section-number: 2
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    keep-tex: true
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        keep-tex: true
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -85,7 +85,7 @@ Here are examples of \( n \)-tuples from various sets:
 4. \( \nC^2 \): Pairs of complex numbers. Elements include \( (1+i, 2-3i) \), \( (i, 0) \), \( (3, 4) \).
 
 5. \( \{0, 1\}^3 \): Binary 3-tuples. This set has exactly 8 elements:
-   \[
+     \[
 	\{0,1\}^3 = \{(0,0,0), (0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0), (1,1,1)\}
 \]
 
@@ -101,7 +101,7 @@ When defining sets, we often describe them by specifying a property that their e
 
 Let \( S \) be a set and \( P(x) \) a predicate. The **set-builder notation**
 \[
-    \{ x \in S : P(x) \}
+        \{ x \in S : P(x) \}
 \]
 denotes the set of all elements \( x \) in \( S \) for which \( P(x) \) is true. Variants include \( \{ x \in S \mid P(x) \} \) and \( \{ x \in S \,;\, P(x) \} \).
 :::
@@ -123,7 +123,7 @@ The following sets are defined using set-builder notation:
 
 The **empty set**, denoted \( \varnothing \) or \( \{\} \), is the set containing no elements:
 \[
-    \varnothing = \{ x : x \neq x \}
+        \varnothing = \{ x : x \neq x \}
 \]
 For any element \( a \), we have \( a \notin \varnothing \).
 :::
@@ -141,7 +141,7 @@ The concept of a *subset* is central to linear algebra. When we define a subspac
 
 Let \( A \) and \( B \) be sets. We say \( A \) is a **subset** of \( B \), written \( A \subseteq B \), if every element of \( A \) is also an element of \( B \):
 \[
-    A \subseteq B \iff \forall x : (x \in A \Rightarrow x \in B)
+        A \subseteq B \iff \forall x : (x \in A \Rightarrow x \in B)
 \]
 
 If \( A \subseteq B \) and \( A \neq B \), we say \( A \) is a **proper subset** of \( B \), written \( A \subsetneq B \) or \( A \subset B \).
@@ -166,7 +166,7 @@ The following illustrate subset relationships:
 
 Two sets \( A \) and \( B \) are **equal**, written \( A = B \), if they contain exactly the same elements:
 \[
-    A = B \iff (A \subseteq B \text{ and } B \subseteq A)
+        A = B \iff (A \subseteq B \text{ and } B \subseteq A)
 \]
 :::
 
@@ -183,7 +183,7 @@ Sets can be combined using union, intersection, and difference. These operations
 
 The **union** of sets \( A \) and \( B \) is the set of elements in \( A \) or \( B \) (or both):
 \[
-    A \cup B = \{ x : x \in A \text{ or } x \in B \}
+        A \cup B = \{ x : x \in A \text{ or } x \in B \}
 \]
 :::
 
@@ -192,7 +192,7 @@ The **union** of sets \( A \) and \( B \) is the set of elements in \( A \) or \
 
 The **intersection** of sets \( A \) and \( B \) is the set of elements in both \( A \) and \( B \):
 \[
-    A \cap B = \{ x : x \in A \text{ and } x \in B \}
+        A \cap B = \{ x : x \in A \text{ and } x \in B \}
 \]
 
 Two sets are **disjoint** if \( A \cap B = \varnothing \).
@@ -203,7 +203,7 @@ Two sets are **disjoint** if \( A \cap B = \varnothing \).
 
 The **set difference** (or **relative complement**) of \( B \) in \( A \) is:
 \[
-    A \setminus B = \{ x \in A : x \notin B \}
+        A \setminus B = \{ x \in A : x \notin B \}
 \]
 
 When \( B \subseteq U \) for some universal set \( U \), the **complement** of \( B \) in \( U \) is \( B^c = U \setminus B \).

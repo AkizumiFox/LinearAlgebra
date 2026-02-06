@@ -49,5 +49,20 @@
   },
   "src/ch01-vector-spaces/07-sums-and-direct-sums.qmd": {
     "07-sums-and-direct-sums.html": "3538ef47"
+  },
+  "src/ch02-linear-transformations/index.qmd": {
+    "index.html": "466ddfc4"
+  },
+  "src/ch02-linear-transformations/01-vector-spaces.qmd": {
+    "01-vector-spaces.html": "2f9a1c73"
+  },
+  "src/ch02-linear-transformations/01-linear-transformations.qmd": {
+    "01-linear-transformations.html": "81b62cc0"
+  },
+  "src/ch02-linear-transformations/01-linear-transformations copy.qmd": {
+    "01-linear-transformations copy.html": "5ed93007"
+  },
+  "src/ch02-linear-transformations/02-rank-nullity.qmd": {
+    "02-rank-nullity.html": "42beec10"
   }
 }

@@ -20,6 +20,8 @@ function Div(el)
         el.classes:insert('enumerate-f')
       elseif options:match('label=%(VS') then
         el.classes:insert('enumerate-vs')
+      elseif options:match('label=%(LT') then
+        el.classes:insert('enumerate-lt')
       end
     end
     return el

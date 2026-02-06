@@ -106,8 +106,8 @@ h4 {
 
 p {
   margin-bottom: var(--paragraph-spacing);
-  text-align: justify;
-  hyphens: auto;
+  text-align: left;
+  hyphens: none;
   font-weight: 400;
 }
 
@@ -249,6 +249,24 @@ ol ol ol {
 }
 .enumerate-vs ol > li:before {
   content: "(VS" counter(item) ")";
+  counter-increment: item;
+  font-weight: 600;
+  position: absolute;
+  left: 0;
+  color: var(--heading-color);
+}
+
+.enumerate-lt ol {
+  list-style-type: none;
+  counter-reset: item;
+  padding-left: 0.5em;
+}
+.enumerate-lt ol > li {
+  position: relative;
+  padding-left: 3em;
+}
+.enumerate-lt ol > li:before {
+  content: "(LT" counter(item) ")";
   counter-increment: item;
   font-weight: 600;
   position: absolute;
@@ -419,6 +437,7 @@ mjx-container {
 .solution,
 .remark,
 .proof,
+.claim,
 .algorithm {
   margin: 1.25rem 0;
   padding: 0.75rem 1.25rem;
@@ -431,7 +450,8 @@ mjx-container {
 
 .proof .proof-title,
 .solution .proof-title,
-.remark .proof-title {
+.remark .proof-title,
+.claim .proof-title {
   font-family: var(--font-body);
   font-weight: normal;
   font-style: italic;
@@ -460,6 +480,7 @@ mjx-container {
   font-style: italic;
   visibility: visible;
 }
+
 
 /* ==========================================================================
    Links

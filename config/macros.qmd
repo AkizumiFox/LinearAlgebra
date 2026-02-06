@@ -203,8 +203,10 @@ $$
 \def\nul{\operatorname{nul}}
 \def\ker{\operatorname{ker}}
 \def\img{\operatorname{img}}
+\def\im{\operatorname{im}}
 \def\adj{\operatorname{adj}}
 \def\diag{\operatorname{diag}}
+\def\id{\operatorname{id}}
 
 \def \dd {\mathrm{d}}
 

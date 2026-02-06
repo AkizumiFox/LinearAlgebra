@@ -3,27 +3,27 @@ from: markdown+tex_math_single_backslash
 chapter-number: 0
 section-number: 7
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -235,10 +235,10 @@ In other words, the \( (i, k) \)-entry of \( \A\B \) is the dot product of the \
 
 Let \( \A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \in M_2(\nR) \) and \( \B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} \in M_2(\nR) \). We compute \( \A\B \) entry by entry:
 \begin{align*}
-    (\A\B)_{11} &= (1)(5) + (2)(7) = 5 + 14 = 19 \\
-    (\A\B)_{12} &= (1)(6) + (2)(8) = 6 + 16 = 22 \\
-    (\A\B)_{21} &= (3)(5) + (4)(7) = 15 + 28 = 43 \\
-    (\A\B)_{22} &= (3)(6) + (4)(8) = 18 + 32 = 50
+        (\A\B)_{11} &= (1)(5) + (2)(7) = 5 + 14 = 19 \\
+        (\A\B)_{12} &= (1)(6) + (2)(8) = 6 + 16 = 22 \\
+        (\A\B)_{21} &= (3)(5) + (4)(7) = 15 + 28 = 43 \\
+        (\A\B)_{22} &= (3)(6) + (4)(8) = 18 + 32 = 50
 \end{align*}
 Therefore:
 \[
@@ -273,10 +273,10 @@ Let \( \A, \B, \C \) be matrices of compatible dimensions. Then:
 ::: {.proof}
 We prove associativity. Let \( \A \) be \( m \times n \), \( \B \) be \( n \times p \), and \( \C \) be \( p \times q \). For any entry \( (i, \ell) \):
 \begin{align*}
-    ((\A\B)\C)_{i\ell} &= \sum_{k=1}^{p} (\A\B)_{ik} c_{k\ell} = \sum_{k=1}^{p} \left( \sum_{j=1}^{n} a_{ij} b_{jk} \right) c_{k\ell} \\
-    &= \sum_{k=1}^{p} \sum_{j=1}^{n} a_{ij} b_{jk} c_{k\ell} = \sum_{j=1}^{n} \sum_{k=1}^{p} a_{ij} b_{jk} c_{k\ell} \\
-    &= \sum_{j=1}^{n} a_{ij} \left( \sum_{k=1}^{p} b_{jk} c_{k\ell} \right) = \sum_{j=1}^{n} a_{ij} (\B\C)_{j\ell} \\
-    &= (\A(\B\C))_{i\ell}
+        ((\A\B)\C)_{i\ell} &= \sum_{k=1}^{p} (\A\B)_{ik} c_{k\ell} = \sum_{k=1}^{p} \left( \sum_{j=1}^{n} a_{ij} b_{jk} \right) c_{k\ell} \\
+        &= \sum_{k=1}^{p} \sum_{j=1}^{n} a_{ij} b_{jk} c_{k\ell} = \sum_{j=1}^{n} \sum_{k=1}^{p} a_{ij} b_{jk} c_{k\ell} \\
+        &= \sum_{j=1}^{n} a_{ij} \left( \sum_{k=1}^{p} b_{jk} c_{k\ell} \right) = \sum_{j=1}^{n} a_{ij} (\B\C)_{j\ell} \\
+        &= (\A(\B\C))_{i\ell}
 \end{align*}
 :::
 

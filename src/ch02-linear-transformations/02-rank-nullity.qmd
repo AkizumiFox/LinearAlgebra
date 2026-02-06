@@ -1,0 +1,285 @@
+---
+from: markdown+tex_math_single_backslash
+chapter-number: 2
+section-number: 2
+filters:
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
+format:
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
+---
+
+{{< include ../../config/macros.qmd >}}
+
+# Rank-Nullity Theorem
+
+## Kernel and Image
+
+::: {#def-kernel}
+## Kernel
+
+Let \( f: V \to W \) be a linear transformation. Define the **kernel** of \( f \) by
+\[
+\ker (f) \coloneqq \left\{ \v \in V : f(\v) = \mathbf{0}_W \right\}.
+\]
+
+i.e. The kernel contains everything in the domain that becomes the zero vector under \( f \).
+:::
+
+::: {#def-image}
+## Image
+
+Let \( f: V \to W \) be a linear transformation. Define the **image** of \( f \) by
+\[
+\im (f) \coloneqq \left\{ \w \in W : \w = f(\v) \text{ for some } \v \in V \right\}.
+\]
+
+i.e. The image contains all the possible outputs of the function \( f \).
+:::
+
+::: {.remark}
+The kernel is also known as the nullspace, which you might be familiar from Gilbert Strang's book. And the image is also called the range. Also, we sometimes denote the image as \( f(V) \).
+:::
+
+::: {#exm-differentiation-kernel-image}
+## Differentiation
+
+Let \( D : \nR[x]_{\leq 3} \to \nR[x]_{\leq 2} \) be defined by \( D(f(x)) = f'(x) \). Find the kernel and image of \( D \).
+:::
+
+::: {.solution}
+**Kernel:** We seek all polynomials \( f(x) \in \nR[x]_{\leq 3} \) such that \( D(f(x)) = f'(x) = 0 \).
+
+A polynomial has derivative zero if and only if it is a constant. Thus:
+\[
+    \ker(D) = \{ c : c \in \nR \} = \Span\{1\}.
+\]
+So \( \dim(\ker(D)) = 1 \).
+
+**Image:** We need to determine which polynomials in \( \nR[x]_{\leq 2} \) can be obtained as derivatives.
+
+Let \( f(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 \in \nR[x]_{\leq 3} \). Then:
+\[
+    D(f(x)) = f'(x) = a_1 + 2a_2 x + 3a_3 x^2.
+\]
+As \( a_1, a_2, a_3 \) range over all real numbers, we can obtain any polynomial of degree at most 2. Therefore:
+\[
+    \im(D) = \nR[x]_{\leq 2}.
+\]
+So \( \dim(\im(D)) = 3 \).
+
+Note that \( \dim(\ker(D)) + \dim(\im(D)) = 1 + 3 = 4 = \dim(\nR[x]_{\leq 3}) \).
+:::
+
+::: {#exm-trace-kernel-image}
+## Trace
+
+Let \( \tr : M_2(\nR) \to \nR \) be defined by \( \tr(\A) = a_{11} + a_{22} \). Find the kernel and image of \( \tr \).
+:::
+
+::: {.solution}
+**Kernel:** We seek all matrices \( \A \in M_2(\nR) \) such that \( \tr(\A) = 0 \).
+
+Let \( \A = \begin{bmatrix} a & b \\ c & d \end{bmatrix} \). Then \( \tr(\A) = a + d = 0 \), which means \( d = -a \).
+
+So the kernel consists of all matrices of the form:
+\[
+    \A = \begin{bmatrix} a & b \\ c & -a \end{bmatrix} = a\begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} + b\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} + c\begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}.
+\]
+Therefore:
+\[
+    \ker(\tr) = \Span\left\{ \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \right\}.
+\]
+So \( \dim(\ker(\tr)) = 3 \).
+
+**Image:** For any \( r \in \nR \), we can find a matrix with trace \( r \), for example \( \begin{bmatrix} r & 0 \\ 0 & 0 \end{bmatrix} \).
+
+Therefore:
+\[
+    \im(\tr) = \nR.
+\]
+So \( \dim(\im(\tr)) = 1 \).
+
+Note that \( \dim(\ker(\tr)) + \dim(\im(\tr)) = 3 + 1 = 4 = \dim(M_2(\nR)) \).
+:::
+
+## Basic Theorems of Kernel and image
+
+::: {#thm-prop-kernel}
+## Properties of Kernel
+
+Let \( f: V \to W \) be a linear transformation. Then:
+
+1. \( \ker (f) \) is a subspace of \( V \);
+
+2. \( f \) is injective iff \( \ker (f) = \left\{ \mathbf{0}_V \right\} \).
+:::
+
+::: {.proof}
+1. - Non-emptiness: As \( f \) is linear, \( f(\mathbf{0}_V) = \mathbf{0}_W \), therefore \( \mathbf{0}_V \in \ker (f) \).
+   - Closure under addition: Let \( \v_1, \v_2 \in \ker(f) \), it implies that \( f(\v_1) = \mathbf{0}_W \) and \( f(\v_2) = \mathbf{0}_W \). We have
+     \[ f(\v_1 + \v_2) = f (\v_1) + f(\v_2) = \mathbf{0}_W + \mathbf{0}_W = \mathbf{0}_W. \]
+     Therefore \( \v_1 + \v_2 \in \ker(f) \).
+   - Closure under scalar multiplication: Let \( \v \in \ker(f) \), it implies that \( f(\v) = \mathbf{0}_W \). We have
+\[
+    f(\lambda \v) = \lambda f(\v) = \lambda \mathbf{0}_W = \mathbf{0}_W.
+\]
+    Therefore \( \lambda \v \in \ker(f) \).
+
+2. - (\( \Rightarrow \)) Suppose \( f \) is injective. Let \( \v \in \ker (f) \), we have
+\begin{align*}
+   f(\v) &= \mathbf{0}_W \\
+    &= f(\mathbf{0}_V) && \text{(linearity)}
+\end{align*}
+  By having \( f(\v) = f(\mathbf{0}_V) \) and \( f \) is injective, it implies that \( \v = \mathbf{0}_V \), so \( \ker (f) = \left\{ \mathbf{0}_V \right\} \).
+    - (\( \Leftarrow \)) Suppose \( \ker (f) = \left\{ \mathbf{0}_V \right\} \), and we consider \( f(\v) = f(\w) \). Reordering the terms we get \( f(\v) - f(\w) = \mathbf{0}_W \), and since \( f \) is linear we have \( f (\v - \w) = \mathbf{0}_W \). Therefore \( \v - \w \in \ker (f) = \left\{ \mathbf{0}_V \right\} \), implying that \( \v - \w = \mathbf{0}_V \), hence \( \v = \w \). So \( f \) is injective.
+:::
+
+::: {#thm-prop-image}
+## Properties of Image
+
+Let \( f: V \to W \) be a linear transformation. Then:
+
+1. \( \im (f) \) is a subspace of \( W \);
+
+2. \( f \) is surjective iff \( \im (f) = W \).
+:::
+
+::: {.proof}
+1.  - Non-emptiness: Since \( f \) is linear, \( \mathbf{0}_W = f(\mathbf{0}_V) \), therefore \( \mathbf{0}_W \in \im (f) \).
+    - Closure under addition: Let \( \w_1, \w_2 \in im (f) \). So \( \w_1 = f(\v_1) \), and \( \w_2 = f(\v_2) \) for some \( \v_1, \v_2 \in V \). Notice that
+\[
+\w_1 + \w_2 = f(\v_1) + f(\v_2) = f(\v_1 + \v_2).
+\]
+      Therefore \( \w_1 + \w_2 \in \im (f) \).
+    - Closure under scalar multiplication: Let \( \w \in \im (f) \). So \( \w = \f(\v) \) for some \( \v \in V \). Notice that
+\[
+\lambda \w = \lambda f(\v) = f(\lambda \v).
+\]
+    Therefore \( \lambda \w \in \im (f) \).
+
+2. \( f \) is surjective \( \Leftrightarrow \) \( \forall\w \in W \), we have \( \w \in f(\v) \) for some \( \v \in V \), that is equivalent to say \( W \subseteq \im (f) \), and by the first condition we know that \( \im (f) \subseteq  W \) is always true. Hence we have \( f \) is surjective \( \Leftrightarrow \) \( W = \im (f) \).
+:::
+
+## Nullity and Rank-Nullity
+
+::: {#def-nullity}
+## Nullity
+Let \( f : V \to W \) be a linear transformation. The **nullity** of \( f \) is defined by
+\[
+\nullity(f) \coloneqq \dim (\ker (f)).
+\]
+:::
+
+::: {#def-rank}
+## Rank
+Let \( f : V \to W \) be a linear transformation. The **rank** of \( f \) is defined by
+\[
+\rank(f) \coloneqq \dim (\im (f)).
+\]
+:::
+
+::: {#exm-nullity-rank-diff}
+Recall that for \( D : \nR[x]_{\leq 3} \to \nR[x]_{\leq 2} \) defined by
+\[
+D(f(x)) = f'(x),
+\]
+we have \( \ker(D) = \nR \) and \( \im (D) = \nR[x]_{\leq 2} \). Compute the nullity and image of \( D \).
+:::
+
+::: {.solution}
+\( \nullity (D) \coloneqq \dim_{\nR} (\ker (D)) = \dim_{\nR} (\nR) = 1 \).
+
+\( \rank (D) \coloneqq \dim_{\nR} (\im (D)) = \dim_{\nR} (\nR[x]_{\leq 2}) = 3 \).
+:::
+
+::: {.remark}
+For other examples of nullity and rank, review the examples in 2.1.1, which we have it covered.
+:::
+
+## Rank-Nullity Theorem
+
+::: {#thm-rank-nullity}
+## Rank-Nullity Theorem
+Let \( V \) be a finite dimensional vector space and \( f : V \to W \) be a linear transformation. Then we have
+\[
+\nullity(f) + \rank(f) = \dim (V).
+\]
+:::
+
+::: {.proof}
+Let \( S = \left\{ \v_1, \v_2, \dots, \v_n \right\} \) be a basis of \( \ker (f) \), having \( \nullity(f) = \dim (\ker f) = n \). Since \( \ker (f) \subseteq V \), by Basis Extension Theorem, we can extend \( S \) to \( S' = \left\{ \v_1, \dots, \v_n, \s_1, \dots, s_k \right\} \), a basis of \( V \), having \( \dim (V) = n + k \).
+
+:::{.claim}
+\( S'' = \left\{ f(\s_1), f(\s_2), \dots, f(\s_k) \right\} \) is a basis of \( \im (f) \).
+:::
+:::{.proof}
+- Spanning: Let \( \w \in \im (f) \), we have \( \w = f(\v) \) for some \( \v \in V \) by definition. As \( S' \) is a basis of \( V \), we can write
+  \[
+  \v = \sum_{i = 1}^n \alpha_i \v_i + \sum_{i = 1}^k \beta_i \s_i.
+  \]
+
+  Then we apply \( f \) to both sides, we have:
+  \begin{align*}
+  \w &= f(\v) \\
+  &= f \left( \sum \alpha_i \v_i + \sum \beta_i \s_i   \right) \\
+  &= \sum \alpha_i f(\v_i) + \sum \beta_i f(\s_i) && \text{(linearity)} \\
+  &= \sum \beta_i f(\s_i) && \text{as } \v_i \in \ker (f).
+  \end{align*}
+
+  Since \( \w \) can be expressed by \( \f(\s_i) \)'s, therefore \( S'' \) spans \( \im (f) \).
+
+- Linear independence: Suppose that
+  \[
+  \alpha_1 f(\s_1) + \cdots + \lambda_k f(\s_k) = \mathbf{0}.
+  \]
+
+  By linearity of \( f \), it becomes
+  \[
+  f \left( \alpha_1 \s_1 + \cdots + \alpha_k \s_k \right) = \mathbf{0}.
+  \]
+
+  Therefore we have
+  \[
+  \alpha_1 \s_1 + \cdots = \alpha_k \s_k \in \ker (f).
+  \]
+
+  Moreover, as \( S \) is a basis of \( \ker (f) \), we know that
+  \[
+  \sum \alpha_i \s_i = \sum \b_i \v_i, \quad \text{for some \(  \b_i \in F \)}.
+  \]
+
+  Reordering gives
+  \[
+  \sum \alpha_i \s_i + \sum (- \beta_i) \v_i = \mathbf{0}.
+  \]
+
+  As \( S' \) is linearly independent, this forces that all \( \alpha_i \)'s and \( \beta_i \)'s to \( 0 \). This implies that \( \alpha_i = 0 \).
+:::
+
+Hence,
+\begin{align*}
+\rank (f) &= \dim (\im (f)) \\
+&= k \\
+&= (n + k) - n \\
+&= \dim (V) - \nullity (f).
+\end{align*}
+
+:::

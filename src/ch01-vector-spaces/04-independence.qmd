@@ -3,27 +3,27 @@ from: markdown+tex_math_single_backslash
 chapter-number: 1
 section-number: 4
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -60,28 +60,28 @@ Geometrically, in \( \nR^2 \), two vectors are linearly dependent if and only if
 The following examples illustrate how to check for linear independence in various settings:
 
 1. Let \( S_1 = \{(1, 2, 3), (4, 5, 6)\} \subseteq \nR^3 \). To check linear independence, suppose
-   \[
+     \[
 	a(1, 2, 3) + b(4, 5, 6) = (0, 0, 0) \implies \begin{cases} a + 4b = 0 \\ 2a + 5b = 0 \\ 3a + 6b = 0 \end{cases}
 \]
-   The first two equations give \( a = -4b \) and \( 2(-4b) + 5b = 0 \implies -3b = 0 \). Thus \( a = b = 0 \), so \( S_1 \) is **linearly independent**.
+     The first two equations give \( a = -4b \) and \( 2(-4b) + 5b = 0 \implies -3b = 0 \). Thus \( a = b = 0 \), so \( S_1 \) is **linearly independent**.
 
 2. Let \( S_2 = \{(1, 2, 3), (4, 5, 6), (7, 8, 9)\} \subseteq \nR^3 \). Note that
-   \[
+     \[
 	(1, 2, 3) - 2(4, 5, 6) + (7, 8, 9) = (1-8+7, 2-10+8, 3-12+9) = (0, 0, 0).
 \]
-   Since there exists a non-trivial solution, \( S_2 \) is **linearly dependent**.
+     Since there exists a non-trivial solution, \( S_2 \) is **linearly dependent**.
 
 3. Consider \( \{2x + 1, x^2 + 3\} \) in \( \nR[x]_{\leq 2} \). Suppose
-   \[
+     \[
 	a(2x + 1) + b(x^2 + 3) = 0 \implies bx^2 + 2ax + (a + 3b) = 0.
 \]
-   Comparing coefficients of \( x^2, x, 1 \), we have \( b = 0 \), \( 2a = 0 \), and \( a + 3b = 0 \). This implies \( a = b = 0 \), so the set is **linearly independent**.
+     Comparing coefficients of \( x^2, x, 1 \), we have \( b = 0 \), \( 2a = 0 \), and \( a + 3b = 0 \). This implies \( a = b = 0 \), so the set is **linearly independent**.
 
 4. Consider \( \{ \sin x, \cos x, e^x \} \) in \( D(\nR) \). Suppose for all \( x \in \nR \):
-   \[
+     \[
 	a \sin x + b \cos x + c e^x = 0.
 \]
-   Setting \( x = 0 \) gives \( b + c = 0 \). Setting \( x = \pi \) gives \( -b + c e^\pi = 0 \). Adding these gives \( c(1 + e^\pi) = 0 \), so \( c = 0 \) and hence \( b = 0 \). Finally, setting \( x = \pi/2 \) gives \( a + c e^{\pi/2} = 0 \implies a = 0 \). Thus, the set is **linearly independent**.
+     Setting \( x = 0 \) gives \( b + c = 0 \). Setting \( x = \pi \) gives \( -b + c e^\pi = 0 \). Adding these gives \( c(1 + e^\pi) = 0 \), so \( c = 0 \) and hence \( b = 0 \). Finally, setting \( x = \pi/2 \) gives \( a + c e^{\pi/2} = 0 \implies a = 0 \). Thus, the set is **linearly independent**.
 :::
 
 ::: {#thm-linear-dependence-lemma}
@@ -116,22 +116,22 @@ Hence \( \v_r \) is a linear combination of \( \left\{ \v_1, \dots, \v_{r-1} \ri
 We prove by cases:
 
 - If \( \v_1 = \mathbf{0} \), then
-  \[
+    \[
 	1 \cdot \v_1 + 0 \cdot \v_2 + \cdots + 0 \cdot \v_m = \mathbf{0} ,
 \]
-  with coefficients not all zero, so \( S \) is linearly dependent.
+    with coefficients not all zero, so \( S \) is linearly dependent.
 
 - If for some \( r \) we have \( \v_r \) is a linear combination of \( \left\{ \v_1, \dots, \v_{r-1} \right\} \),
-  then there exist scalars \( c_1, \dots, c_{r-1} \in F \) such that
-  \[
+    then there exist scalars \( c_1, \dots, c_{r-1} \in F \) such that
+    \[
 	\v_r = c_1 \v_1 + \cdots + c_{r-1} \v_{r-1}.
 \]
-  Move everything to one side:
-  \[
+    Move everything to one side:
+    \[
 	c_1 \v_1 + \cdots + c_{r-1} \v_{r-1} - 1 \cdot \v_r = \mathbf{0} .
 \]
-  Extending coefficients by zeros for \( \v_{r+1}, \dots, \v_m \), we get a nontrivial linear combination of
-  \( \v_1, \dots, \v_m \) equal to \( \mathbf{0} \), so \( S \) is linearly dependent.
+    Extending coefficients by zeros for \( \v_{r+1}, \dots, \v_m \), we get a nontrivial linear combination of
+    \( \v_1, \dots, \v_m \) equal to \( \mathbf{0} \), so \( S \) is linearly dependent.
 :::
 
 ::: {.remark}

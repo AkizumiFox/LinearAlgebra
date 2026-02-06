@@ -3,27 +3,27 @@ from: markdown+tex_math_single_backslash
 chapter-number: 1
 section-number: 3
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -51,12 +51,12 @@ The scalars \( a_i \) are called the **coefficients** of the linear combination.
 Below are some examples of linear combinations in different vector spaces:
 
 1. The vector \( (2, 1, 0) \) in \( \nR^3 \) is a linear combination of \( S = \{(1, 2, 3), (4, 5, 6)\} \) because
-   \[
+     \[
 	(2, 1, 0) = -2 \cdot (1, 2, 3) + 1 \cdot (4, 5, 6).
 \]
 
 2. The polynomial \( f(x) = x^3 + 2x + 1 \) in \( \mathbb{R}[x] \) is a linear combination of \( S = \{1, x, x^2, x^3\} \) because
-   \[
+     \[
 	f(x) = 1 \cdot 1 + 2 \cdot x + 0 \cdot x^2 + 1 \cdot x^3.
 \]
 :::

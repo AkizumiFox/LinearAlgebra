@@ -3,27 +3,27 @@ from: markdown+tex_math_single_backslash
 chapter-number: 0
 section-number: 1
 filters:
-  - latex-environment
-  - chapter-number
-  - theorem-numbering
+    - latex-environment
+    - chapter-number
+    - theorem-numbering
 format:
-  pdf:
-    documentclass: extbook
-    classoption: [13.5pt, a4paper, oneside, openany]
-    number-sections: true
-    colorlinks: true
-    linkcolor: "blue"
-    urlcolor: "blue"
-    pdf-engine: lualatex
-    linestretch: 1.1
-    geometry: [margin=1.2in]
-    include-in-header:
-      text: |
-        \usepackage[quartoenv]{../../config/latex-template}
-        \directlua{require("../../config/strip-numbers")}
-        \usepackage{enumitem}
-        \setlist{itemsep=1.2em, parsep=0pt}
-        \usepackage{../../config/chapter-style}
+    pdf:
+        documentclass: extbook
+        classoption: [13.5pt, a4paper, oneside, openany]
+        number-sections: true
+        colorlinks: true
+        linkcolor: "blue"
+        urlcolor: "blue"
+        pdf-engine: lualatex
+        linestretch: 1.1
+        geometry: [margin=1.2in]
+        include-in-header:
+            text: |
+                \usepackage[quartoenv]{../../config/latex-template}
+                \directlua{require("../../config/strip-numbers")}
+                \usepackage{enumitem}
+                \setlist{itemsep=1.2em, parsep=0pt}
+                \usepackage{../../config/chapter-style}
 ---
 
 {{< include ../../config/macros.qmd >}}
@@ -40,16 +40,16 @@ Mathematical statements in linear algebra often involve claims about "all" vecto
 Let \( P(x) \) be a statement (predicate) that depends on a variable \( x \) ranging over some set \( S \).
 
 - The **universal quantifier** \( \forall \) means "for all" or "for every." The statement
-  \[
-      \forall x \in S : P(x)
-  \]
-  asserts that \( P(x) \) is true for *every* element \( x \) in \( S \).
+    \[
+            \forall x \in S : P(x)
+    \]
+    asserts that \( P(x) \) is true for *every* element \( x \) in \( S \).
 
 - The **existential quantifier** \( \exists \) means "there exists" or "for some." The statement
-  \[
-      \exists x \in S : P(x)
-  \]
-  asserts that \( P(x) \) is true for *at least one* element \( x \) in \( S \).
+    \[
+            \exists x \in S : P(x)
+    \]
+    asserts that \( P(x) \) is true for *at least one* element \( x \) in \( S \).
 :::
 
 ::: {.remark}
@@ -63,19 +63,19 @@ Consider the following statements:
 
 1. \( \forall x \in \nR : x^2 \geq 0 \).
 
-   This says "every real number squared is nonnegative." This is **true**.
+     This says "every real number squared is nonnegative." This is **true**.
 
 2. \( \exists x \in \nR : x^2 = -1 \).
 
-   This says "there exists a real number whose square is \( -1 \)." This is **false** in \( \nR \), but becomes true if we replace \( \nR \) with \( \nC \).
+     This says "there exists a real number whose square is \( -1 \)." This is **false** in \( \nR \), but becomes true if we replace \( \nR \) with \( \nC \).
 
 3. \( \forall x \in \nR : x < x + 1 \).
 
-   This is **true** for all real numbers.
+     This is **true** for all real numbers.
 
 4. \( \exists n \in \nZ : n^2 = 2 \).
 
-   This is **false**—there is no integer whose square is 2.
+     This is **false**—there is no integer whose square is 2.
 :::
 
 Quantifiers can be **nested**: statements may involve multiple quantifiers in sequence. The **order matters**.
@@ -87,13 +87,13 @@ Consider these two statements about real numbers:
 
 1. \( \forall x \in \nR, \exists y \in \nR : y > x \).
 
-   "For every real number \( x \), there exists a real number \( y \) greater than \( x \)."
-   This is **true**—given any \( x \), we can take \( y = x + 1 \).
+     "For every real number \( x \), there exists a real number \( y \) greater than \( x \)."
+     This is **true**—given any \( x \), we can take \( y = x + 1 \).
 
 2. \( \exists y \in \nR, \forall x \in \nR : y > x \).
 
-   "There exists a real number \( y \) that is greater than all real numbers."
-   This is **false**—no such largest real number exists.
+     "There exists a real number \( y \) that is greater than all real numbers."
+     This is **false**—no such largest real number exists.
 
 The order of quantifiers changes the meaning entirely.
 :::
@@ -107,10 +107,10 @@ The key to proof by contradiction is knowing how to **negate** a statement. When
 
 The negation of a quantified statement follows these rules:
 \[
-    \neg(\forall x \in S : P(x)) \equiv \exists x \in S : \neg P(x)
+        \neg(\forall x \in S : P(x)) \equiv \exists x \in S : \neg P(x)
 \]
 \[
-    \neg(\exists x \in S : P(x)) \equiv \forall x \in S : \neg P(x)
+        \neg(\exists x \in S : P(x)) \equiv \forall x \in S : \neg P(x)
 \]
 
 In words:
@@ -126,11 +126,11 @@ Here are two simple examples of negating quantified statements:
 
 1. The negation of "\( \forall x \in \nR : x^2 \geq 0 \)" is "\( \exists x \in \nR : x^2 < 0 \)."
 
-   The original is true; the negation is false.
+     The original is true; the negation is false.
 
 2. The negation of "\( \exists n \in \nN : n \) is even" is "\( \forall n \in \nN : n \) is odd."
 
-   The original is true (take \( n = 2 \)); the negation is false.
+     The original is true (take \( n = 2 \)); the negation is false.
 :::
 
 The following examples demonstrate how to negate definitions that you will encounter repeatedly in linear algebra.
@@ -140,12 +140,12 @@ The following examples demonstrate how to negate definitions that you will encou
 
 Recall that a function \( f: A \to B \) is **injective** if:
 \[
-    \forall a_1, a_2 \in A : f(a_1) = f(a_2) \Rightarrow a_1 = a_2
+        \forall a_1, a_2 \in A : f(a_1) = f(a_2) \Rightarrow a_1 = a_2
 \]
 
 To prove \( f \) is **not** injective, we negate this statement. Since \( P \Rightarrow Q \) is equivalent to \( \neg P \lor Q \), its negation is \( P \land \neg Q \). Thus:
 \[
-    \exists a_1, a_2 \in A : f(a_1) = f(a_2) \land a_1 \neq a_2
+        \exists a_1, a_2 \in A : f(a_1) = f(a_2) \land a_1 \neq a_2
 \]
 
 To show a function is not injective, find two **distinct** elements that map to the same value.
@@ -156,12 +156,12 @@ To show a function is not injective, find two **distinct** elements that map to 
 
 A function \( f: A \to B \) is **surjective** if:
 \[
-    \forall b \in B, \exists a \in A : f(a) = b
+        \forall b \in B, \exists a \in A : f(a) = b
 \]
 
 The negation is:
 \[
-    \exists b \in B, \forall a \in A : f(a) \neq b
+        \exists b \in B, \forall a \in A : f(a) \neq b
 \]
 
 To prove \( f \) is **not** surjective, find a single element in the codomain that no element of the domain maps to.
